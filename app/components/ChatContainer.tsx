@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 
-import { getMessages, sendMessage } from "../databasefunctions";
+import { getMessages, sendMessage } from "../utils/databasefunctions";
 import ChatMessage from "./ChatMessage";
 
 const ChatContainer = () => {

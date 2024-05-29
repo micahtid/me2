@@ -6,7 +6,6 @@ import { collection } from "firebase/firestore";
 import { getFirestore } from "firebase/firestore";
 import { RefObject } from "react";
 
-
 export const signIn = () => {
     const auth = getUserAuth(false);
     const provider = new GoogleAuthProvider();
@@ -17,6 +16,15 @@ export const signOut = () => {
     const auth = getUserAuth(false);
     auth.signOut();
 }   
+
+export const getUsers = (alreadyInit: boolean) => {
+  const firestore = getFireStore(false);
+
+  const userRef = collection(firestore, "users");
+  const userQuery = query(userRef);
+  const [users] = useCollectionData(userQuery);
+  return users;
+}
 
 // Do we need to call initializeFirebase() in the code first
 // Then call getUserAuth, or does this work?
@@ -85,3 +93,27 @@ export const sendMessage = async (e: React.FormEvent<HTMLFormElement>, formValue
       }
     }
   };
+
+export const addUser = async(userName: string, age: number, curr: string, location: string, hobbies: string[]) => {
+  const app = initializeFirebase
+  const auth = getUserAuth(true);
+  const firestore = getFireStore(true);
+
+  
+  if (auth.currentUser) {
+    const { uid } = auth.currentUser;
+
+    try {
+      await addDoc(collection(firestore, "users"), {
+        uid,
+        userName,
+        age,
+        curr,
+        location,
+        hobbies
+      });
+      } catch (error) {
+      console.error("Error adding document: ", error);
+    }
+  }
+}
