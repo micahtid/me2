@@ -1,8 +1,8 @@
 import { DocumentData } from "firebase/firestore";
 
-import { getUserAuth } from "../databasefunctions";
+import { getUserAuth } from "../utils/databasefunctions";
 
-const auth = getUserAuth();
+const auth = getUserAuth(false);
 
 interface ChatMessageProps {
   document: DocumentData;
