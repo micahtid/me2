@@ -7,6 +7,8 @@ import { useRouter } from 'next/navigation';
 import { curriculums, locations, hobbies } from '../data';
 import { addUser } from '../utils/databasefunctions';
 
+import { getUserAuth } from '../utils/databasefunctions';
+
 // To Do:
 // Add verification to check for unique username...
 
@@ -17,12 +19,15 @@ const RegisterUser = () => {
     const [userLocation, setUserLocation] = useState('');
     const [userHobbies, setUserHobbies] = useState<string[]>([]);
 
+    const auth = getUserAuth(false);
+
     const router = useRouter();
 
     const handleSubmit = (e:  React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
         if (userName && userAge && userCurriculum && userLocation && userHobbies) {
-            addUser(userName, Number(userAge), userCurriculum, userLocation, userHobbies)
+            addUser(userName, Number(userAge), userCurriculum, userLocation, userHobbies, auth.currentUser?.photoURL)
             router.refresh();
         }
       };

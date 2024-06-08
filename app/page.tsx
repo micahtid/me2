@@ -3,7 +3,6 @@
 import { useAuthState } from "react-firebase-hooks/auth";
 
 import Button from "./components/Button";
-import ChatContainer from "./components/ChatPage/ChatContainer";
 import RegisterUser from "./components/RegisterUser";
 import { useActiveChat } from "@/hooks/useActiveChat";
 
@@ -13,7 +12,7 @@ import { createChat, getChats } from "./utils/databasefunctions";
 import { DocumentData } from "firebase/firestore";
 
 import { PacmanLoader } from "react-spinners";
-import ChatPage from "./components/ChatPage/ChatPage";
+import ChatPage from "./components/ChatPage";
 
 // CHAT ID = USER1ID + USER2ID
 

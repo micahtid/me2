@@ -15,7 +15,7 @@ const MessageForm: React.FC<MessageFormProps> = ({ setSending, targetRef }) => {
   const [formValue, setFormValue] = useState("");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    sendMessage(e, currentChat, formValue, setFormValue, targetRef, setSending);
+    sendMessage(e, currentChat, formValue, setFormValue, setSending);
     setSending(true);
   };
 

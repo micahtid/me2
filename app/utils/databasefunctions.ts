@@ -110,7 +110,7 @@ export const getUsers = (setUsers: (users: DocumentData[]) => void) => {
 //// Writing Functions /////////////////////////////
 ////////////////////////////////////////////////////
 
-export const sendMessage = async (e: React.FormEvent<HTMLFormElement>, chatid: string, formValue: string, setFormValue: Function, dummy: RefObject<any>, setSending: Function) => {
+export const sendMessage = async (e: React.FormEvent<HTMLFormElement>, chatid: string, formValue: string, setFormValue: Function, setSending: Function) => {
   const app = initializeFirebase();
   const auth = getUserAuth(true);
   const firestore = getFireStore(true);
@@ -131,10 +131,7 @@ export const sendMessage = async (e: React.FormEvent<HTMLFormElement>, chatid: s
         uid
       });
       setFormValue('');
-      if (dummy.current) {
-        dummy.current.scrollIntoView({ behavior: "smooth" });
-        setSending(false);
-      }
+      setSending(false);
     } catch (error) {
       console.error("Error adding document: ", error);
     }
@@ -166,7 +163,7 @@ export const createChat = async (chatid: string, uid1: string, uid2: string, alr
 
 }
 
-export const addUser = async (userName: string, age: number, curr: string, location: string, hobbies: string[]) => {
+export const addUser = async (userName: string, age: number, curr: string, location: string, hobbies: string[], pfp: string | null | undefined) => {
   const app = initializeFirebase
   const auth = getUserAuth(true);
   const firestore = getFireStore(true);
@@ -182,7 +179,8 @@ export const addUser = async (userName: string, age: number, curr: string, locat
         age,
         curr,
         location,
-        hobbies
+        hobbies,
+        pfp
       });
     } catch (error) {
       console.error("Error adding document: ", error);

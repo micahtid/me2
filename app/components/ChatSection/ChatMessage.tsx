@@ -1,6 +1,6 @@
 import { DocumentData } from "firebase/firestore";
 
-import { getUserAuth } from "../../utils/databasefunctions";
+import { getUserAuth } from "@/app/utils/databasefunctions";
 import { twMerge } from "tailwind-merge";
 
 const auth = getUserAuth(false);
