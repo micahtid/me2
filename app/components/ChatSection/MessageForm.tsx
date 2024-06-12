@@ -3,7 +3,7 @@
 import { useState } from "react"
 
 import { sendMessage } from "@/app/utils/databasefunctions"
-import { useActiveChat } from "@/hooks/useActiveChat"
+import { useActiveUserChat } from "@/hooks/useActiveUserChat"
 
 interface MessageFormProps {
     setSending: Function,
@@ -11,7 +11,7 @@ interface MessageFormProps {
 }
 
 const MessageForm: React.FC<MessageFormProps> = ({ setSending, targetRef }) => {
-  const { currentChat } = useActiveChat();
+  const { currentChat } = useActiveUserChat();
   const [formValue, setFormValue] = useState("");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

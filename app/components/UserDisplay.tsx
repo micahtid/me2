@@ -1,30 +1,28 @@
 import Button from "./Button";
 
 import { signOut, createChat } from "@/app/utils/databasefunctions";
-import { useActiveChat } from "@/hooks/useActiveChat";
-import { useActiveUser } from "@/hooks/useActiveUser";
 import { checkChat } from "@/app/utils/filterfunctions";
 
 import UserCard from "./UserCard";
 
+import { useActiveUserChat } from "@/hooks/useActiveUserChat";
+
 import { DocumentData } from "firebase/firestore";
-import { Auth } from "firebase/auth";
 
 interface UserDisplayProps {
-  users: DocumentData[] | undefined;
-  auth: Auth;
+  users: DocumentData[] | undefined | null;
+  user: DocumentData | null | undefined;
   chats: DocumentData[] | undefined;
-  setActiveChat: Function;
-  setActiveUser: Function;
 }
 
 const UserDisplay: React.FC<UserDisplayProps> = ({
   users,
-  auth,
-  chats,
-  setActiveChat,
-  setActiveUser,
+  user,
+  chats
 }) => {
+
+  const { onChange } = useActiveUserChat();
+
   return (
     <div
       className="
@@ -35,21 +33,20 @@ const UserDisplay: React.FC<UserDisplayProps> = ({
         users.map((u, index) => (
           <UserCard
             onClick={() => {
-              if (auth.currentUser) {
+              if (user) {
                 const chatid =
-                  auth.currentUser.uid > u.uid
-                    ? auth.currentUser.uid + u.uid
-                    : u.uid + auth.currentUser.uid;
+                  user.uid > u.uid
+                    ? user.uid + u.uid
+                    : u.uid + user.uid;
 
                 if (!checkChat(chatid, chats)) {
-                  createChat(chatid, auth.currentUser.uid, u.uid, true);
+                  createChat(chatid, user.uid, u.uid, true);
                 }
 
-                setActiveChat(chatid);
-                setActiveUser(u);
+                onChange(u, chatid);
               }
             }}
-            className={`${auth.currentUser && u.uid == auth.currentUser.uid ? "hidden" : ""}`}
+            className={`${user && u.uid == user.uid ? "hidden" : ""}`}
             status="24 Hours"
             user={u}
             key={index}

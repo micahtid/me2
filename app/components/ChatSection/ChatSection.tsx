@@ -3,19 +3,25 @@
 import { useState, useRef } from "react"
 
 import ChatContainer from "./ChatContainer"
-import MessageForm from "../MessageForm"
+import MessageForm from "./MessageForm"
 
-import { useActiveChat } from "@/hooks/useActiveChat"
-import { useActiveUser } from "@/hooks/useActiveUser"
+import { useActiveUserChat } from "@/hooks/useActiveUserChat"
 
-const ChatSection = ({  }) => {
-  const { onChange: setActiveChat, currentChat } = useActiveChat();
-  const { onChange: setActiveUser, currentUser } = useActiveUser();
+const ChatSection = () => {
+  const { currentChat, currentUser } = useActiveUserChat();
 
   ////////
   const [sending, setSending] = useState(false);
   const dummy = useRef<HTMLDivElement>(null);
   ///////
+
+  if (!currentChat) {
+    return(
+      <div className="flex justify-center items-center h-full">
+        Please select a chat!
+      </div>
+    )
+  }
 
   return (
     <div

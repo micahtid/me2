@@ -3,7 +3,8 @@ import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { setDoc, addDoc, query, orderBy, serverTimestamp, doc, DocumentData, onSnapshot, collection, Firestore } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { getFirestore } from "firebase/firestore";
-import { RefObject } from "react";
+import { signInWithRedirect } from "firebase/auth";
+import { useRouter } from "next/navigation";
 
 
 ////////////////////////////////////////////////////
@@ -43,7 +44,7 @@ export const getFireStore = (alreadyInit: boolean) => {
 export const signIn = () => {
   const auth = getUserAuth(false);
   const provider = new GoogleAuthProvider();
-  signInWithPopup(auth, provider);
+  signInWithRedirect(auth, provider);
 }
 
 export const signOut = () => {
