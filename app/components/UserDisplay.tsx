@@ -38,9 +38,9 @@ const UserDisplay: React.FC<UserDisplayProps> = ({
                     ? user.uid + u.uid
                     : u.uid + user.uid;
 
-                if (!checkChat(chatid, chats)) {
-                  createChat(chatid, user.uid, u.uid, true);
-                }
+                // if (!checkChat(chatid, chats)) {
+                //   createChat(chatid, user.uid, u.uid, true);
+                // }
 
                 onChange(u, chatid);
                 changePage('chat');

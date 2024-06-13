@@ -35,7 +35,7 @@ const ChatPage: React.FC<ChatPageProps> = ({ users, chats, user }) => {
       <div className="col-span-8 my-5 flex flex-col gap-y-8 bg-gray-200/50 rounded-lg p-4">
         {
           currentPage === "chat" ? 
-          <ChatSection /> : currentPage === "requests" ? <RequestSection /> : <FindSection users={users} user={user} />
+          <ChatSection /> : currentPage === "requests" ? <RequestSection /> : <FindSection />
         }
       </div>
     </section>

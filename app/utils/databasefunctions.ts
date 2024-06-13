@@ -198,10 +198,13 @@ export const createRequest = async (chatid: string, uid1: string, uid2: string) 
 
 import { where } from "firebase/firestore";
 
-export const getRequests = (uid: string | null | undefined, setRequests: (users: DocumentData[]) => void) => {
+// SENT = 0 AND RECEIVED = 1
+export const getRequests = (uid: string | null | undefined, setRequests: (users: DocumentData[]) => void, status: string) => {
   const app = initializeFirebase();
   const auth = getUserAuth(true);
   const firestore = getFireStore(true);
+
+  const index = status === "sent" ? 0 : status === "received" ? 1 : -1;
 
   const q = query(
     collection(firestore, `/chat_data`),
@@ -212,12 +215,34 @@ export const getRequests = (uid: string | null | undefined, setRequests: (users:
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     const requests: DocumentData[] = [];
     querySnapshot.forEach((doc) => {
-      requests.push(doc.data());
+      const data = doc.data();
+      if (data.ids && data.ids[index] === uid) {
+        requests.push(data);
+      }
     });
     setRequests(requests);
   });
 
   return unsubscribe;
+};
+
+import { getDocs } from "firebase/firestore";
+
+export const getUser = async (uid: string): Promise<DocumentData | null> => {
+  const app = initializeFirebase();
+  const auth = getUserAuth(true);
+  const firestore = getFireStore(true);
+
+  const q = query(collection(firestore, `/users`), where("uid", "==", uid));
+
+  const querySnapshot = await getDocs(q);
+  
+  let user: DocumentData | null = null;
+  querySnapshot.forEach((doc) => {
+    user = doc.data();
+  });
+
+  return user;
 };
 
 ///
@@ -246,4 +271,12 @@ export const addUser = async (userName: string, age: number, curr: string, locat
       console.error("Error adding document: ", error);
     }
   }
+}
+
+export const deleteRequest = () => {
+
+}
+
+export const acceptRequest = () => {
+  
 }

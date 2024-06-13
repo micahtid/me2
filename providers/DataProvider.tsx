@@ -10,7 +10,8 @@ type DataContextType = {
   user: null | undefined | DocumentData;
   users: null | undefined | DocumentData[];
   chats: undefined | DocumentData[];
-  requests: undefined | null | DocumentData[];
+  sentRequests: undefined | null | DocumentData[];
+  receivedRequests: undefined | null | DocumentData[];
 };
 
 export const DataContext = createContext<DataContextType | undefined>(
@@ -53,12 +54,12 @@ export const DataContextProvider = (props: Props) => {
   const [users] = getUsersHook();
   const [user] = getUserHook(auth);
 
-  const getRequestHook = () => {
+  const getRequestHook = (status: string) => {
     const [requests, setRequests] = useState<DocumentData[] | undefined  | null>(undefined)
 
     useEffect(() => {
       if (user?.uid) {
-        const unsubscribe = getRequests(user?.uid, setRequests);
+        const unsubscribe = getRequests(user?.uid, setRequests, status);
         return () => unsubscribe();
       } 
     }, [user])
@@ -66,13 +67,15 @@ export const DataContextProvider = (props: Props) => {
     return [requests]
   }
 
-  const [requests] = getRequestHook();
+  const [sentRequests] = getRequestHook('sent');
+  const [receivedRequests] = getRequestHook('received');
 
   const value = {
     user,
     users,
     chats,
-    requests
+    sentRequests,
+    receivedRequests
   };
 
   return <DataContext.Provider value={value} {...props} />;
