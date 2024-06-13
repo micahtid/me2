@@ -27,3 +27,9 @@ export const checkChat = (chatid: string | undefined, activeChats: DocumentData[
 
     return false;
 }
+
+export const toTitleCase = (str : string) => {
+    return str.split(' ').map(word => {
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    }).join(' ');
+}

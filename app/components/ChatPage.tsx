@@ -7,9 +7,9 @@ import { useActivePage } from "@/hooks/useActivePage";
 
 import ChatSection from "./ChatSection/ChatSection";
 import UserDisplay from "./UserDisplay";
-import ChatNav from "./ChatNav";
 import FindSection from "./FindSection/FindSection";
 import RequestSection from "./RequestSection/RequestSection";
+import QuickLinks from "./QuickLinks";
 
 interface ChatPageProps {
   users: DocumentData[] | undefined | null;
@@ -23,14 +23,16 @@ const ChatPage: React.FC<ChatPageProps> = ({ users, chats, user }) => {
 
   return (
     <section
-      className="w-full max-w-[1500px] h-[100vh] mx-auto
-    grid grid-cols-10 gap-x-8"
+      className="w-full h-[100vh] mx-auto
+    grid grid-cols-12 gap-x-8 p-4"
     >
-      <div className="my-5 col-span-3">
+      <div className="my-5 col-span-1 bg-gray-200/50 rounded-lg py-10">
+        <QuickLinks />
+      </div>
+      <div className="my-5 col-span-3 bg-gray-200/50 rounded-lg p-4">
         <UserDisplay user={user} chats={chats} users={users} /> 
       </div>
-      <div className="col-span-7 my-5 flex flex-col gap-y-8">
-        <ChatNav />
+      <div className="col-span-8 my-5 flex flex-col gap-y-8 bg-gray-200/50 rounded-lg p-4">
         {
           currentPage === "chat" ? 
           <ChatSection /> : currentPage === "requests" ? <RequestSection /> : <FindSection users={users} user={user} />

@@ -1,8 +1,16 @@
-import React from 'react'
+import { useData } from "@/providers/DataProvider"
 
 const RequestSection = () => {
+  const {requests} = useData();
+
   return (
-    <div>RequestSection</div>
+    <div>
+      {requests?.map((request) => (
+        <div>
+          {request.chatid}
+        </div>
+      ))}
+    </div>
   )
 }
 

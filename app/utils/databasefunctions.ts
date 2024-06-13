@@ -146,12 +146,16 @@ export const createChat = async (chatid: string, uid1: string, uid2: string, alr
 
   const auth = getUserAuth(true);
   const firestore = getFireStore(true);
+  const activeState = "request";
+  const ids = [uid1, uid2]
 
   const chatDataDocRef = doc(firestore, "chat_data", chatid);
   await setDoc(chatDataDocRef, {
     chatid,
-    uid1,
-    uid2
+    activeState,
+    ids
+    // uid1,
+    // uid2
   });
 
   const messagesCollectionRef = collection(firestore, `chat_data/${chatDataDocRef.id}/messages`);
@@ -163,6 +167,61 @@ export const createChat = async (chatid: string, uid1: string, uid2: string, alr
   });
 
 }
+
+/// Create request
+/// Read requests
+
+export const createRequest = async (chatid: string, uid1: string, uid2: string) => {
+  const app = initializeFirebase;
+  const auth = getUserAuth(true);
+  const firestore = getFireStore(true);
+
+  const activeState = "request";
+  const ids = [uid1, uid2]
+
+  const chatDataDocRef = doc(firestore, "chat_data", chatid);
+  await setDoc(chatDataDocRef, {
+    chatid,
+    activeState,
+    ids
+  });
+
+  const messagesCollectionRef = collection(firestore, `chat_data/${chatDataDocRef.id}/messages`);
+
+  await addDoc(messagesCollectionRef, {
+    text: "Hi there!",
+    createdAt: serverTimestamp(),
+    uid: uid1
+  });
+
+}
+
+import { where } from "firebase/firestore";
+
+export const getRequests = (uid: string | null | undefined, setRequests: (users: DocumentData[]) => void) => {
+  const app = initializeFirebase();
+  const auth = getUserAuth(true);
+  const firestore = getFireStore(true);
+
+  const q = query(
+    collection(firestore, `/chat_data`),
+    where("activeState", "==", "request"),
+    where("ids", "array-contains", uid)
+  );
+
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    const requests: DocumentData[] = [];
+    querySnapshot.forEach((doc) => {
+      requests.push(doc.data());
+    });
+    setRequests(requests);
+  });
+
+  return unsubscribe;
+};
+
+///
+///
 
 export const addUser = async (userName: string, age: number, curr: string, location: string, hobbies: string[], pfp: string | null | undefined) => {
   const app = initializeFirebase

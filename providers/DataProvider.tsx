@@ -3,13 +3,14 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { DocumentData } from "firebase/firestore";
 
-import { initializeFirebase, getUserAuth, getChats, getUsers } from "@/app/utils/databasefunctions";
+import { initializeFirebase, getUserAuth, getChats, getUsers, getRequests } from "@/app/utils/databasefunctions";
 import { Auth, User } from "firebase/auth";
 
 type DataContextType = {
   user: null | undefined | DocumentData;
   users: null | undefined | DocumentData[];
   chats: undefined | DocumentData[];
+  requests: undefined | null | DocumentData[];
 };
 
 export const DataContext = createContext<DataContextType | undefined>(
@@ -52,10 +53,26 @@ export const DataContextProvider = (props: Props) => {
   const [users] = getUsersHook();
   const [user] = getUserHook(auth);
 
+  const getRequestHook = () => {
+    const [requests, setRequests] = useState<DocumentData[] | undefined  | null>(undefined)
+
+    useEffect(() => {
+      if (user?.uid) {
+        const unsubscribe = getRequests(user?.uid, setRequests);
+        return () => unsubscribe();
+      } 
+    }, [user])
+
+    return [requests]
+  }
+
+  const [requests] = getRequestHook();
+
   const value = {
     user,
     users,
-    chats
+    chats,
+    requests
   };
 
   return <DataContext.Provider value={value} {...props} />;

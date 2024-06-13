@@ -1,11 +1,10 @@
-import Button from "./Button";
-
 import { signOut, createChat } from "@/app/utils/databasefunctions";
 import { checkChat } from "@/app/utils/filterfunctions";
 
 import UserCard from "./UserCard";
 
 import { useActiveUserChat } from "@/hooks/useActiveUserChat";
+import { useActivePage } from "@/hooks/useActivePage";
 
 import { DocumentData } from "firebase/firestore";
 
@@ -22,13 +21,13 @@ const UserDisplay: React.FC<UserDisplayProps> = ({
 }) => {
 
   const { onChange } = useActiveUserChat();
+  const { onChange: changePage } = useActivePage();
 
   return (
     <div
       className="
     flex flex-col justify-start items-start gap-y-3"
     >
-      <Button onClick={signOut}>Sign Out</Button>
       {users &&
         users.map((u, index) => (
           <UserCard
@@ -44,6 +43,7 @@ const UserDisplay: React.FC<UserDisplayProps> = ({
                 }
 
                 onChange(u, chatid);
+                changePage('chat');
               }
             }}
             className={`${user && u.uid == user.uid ? "hidden" : ""}`}
