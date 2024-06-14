@@ -18,7 +18,11 @@ const Home = () => {
     null
   );
 
-  const { user, users, chats } = useData();
+  const { user, users, chats, activeUsers } = useData();
+
+  // useEffect(() => {
+  //   console.log(activeUsers)
+  // }, [activeUsers])
 
   useEffect(() => {
     const registerStatus = checkUser(user?.uid, users);

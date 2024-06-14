@@ -8,16 +8,32 @@ import { useData } from "@/providers/DataProvider";
 import { useUserModal } from "@/hooks/useUserModal";
 import { IoPersonAddSharp } from "react-icons/io5";
 
+import { useEffect, useState } from "react";
+
 const FindSection = () => {
   const { onChangeCurrentUser, onModalOpen } = useUserModal();
-  const { user, users, sentRequests, receivedRequests } = useData();
+  const { user, users, sentRequests, receivedRequests, activeUsers } = useData();
+
+  const [filteredUsers, setFilteredUsers] = useState<DocumentData[]>([]);
+
+  useEffect(() => {
+    if (users && activeUsers) {
+      // Filter users to exclude those in activeUsers
+      const filtered = users.filter((u) => {
+        return !activeUsers.some((activeUser) => activeUser.uid === u.uid);
+      });
+
+      setFilteredUsers(filtered);
+    }
+  }, [users, activeUsers]);
+
   return (
     <div
       className="
     flex flex-col justify-start items-start gap-y-3"
     >
-      {users &&
-        users.map((u, index) => {
+      {filteredUsers &&
+        filteredUsers.map((u, index) => {
           if (sentRequests && receivedRequests) {
             const requests = [...sentRequests, ...receivedRequests]
 

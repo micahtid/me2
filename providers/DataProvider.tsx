@@ -3,7 +3,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { DocumentData } from "firebase/firestore";
 
-import { initializeFirebase, getUserAuth, getChats, getUsers, getRequests } from "@/app/utils/databasefunctions";
+import { initializeFirebase, getUserAuth, getChats, getUsers, getRequests, getActiveUsers } from "@/app/utils/databasefunctions";
 import { Auth, User } from "firebase/auth";
 
 type DataContextType = {
@@ -12,6 +12,7 @@ type DataContextType = {
   chats: undefined | DocumentData[];
   sentRequests: undefined | null | DocumentData[];
   receivedRequests: undefined | null | DocumentData[];
+  activeUsers: undefined | DocumentData[]; // Added activeUsers
 };
 
 export const DataContext = createContext<DataContextType | undefined>(
@@ -23,9 +24,9 @@ export interface Props {
 }
 
 export const DataContextProvider = (props: Props) => {
-    const app = initializeFirebase();
-    const auth = getUserAuth(true);
-    const chats = getChats(true);
+  const app = initializeFirebase();
+  const auth = getUserAuth(true);
+  const chats = getChats(true);
 
   const getUserHook = (auth: Auth) => {
     const [user, setUser] = useState<User | undefined | null>(undefined); // Initialize with undefined
@@ -40,7 +41,7 @@ export const DataContextProvider = (props: Props) => {
     return [user];
   };
 
-  const getUsersHook = (): [DocumentData[] | undefined] => {
+  const getUsersHook = () => {
     const [users, setUsers] = useState<DocumentData[] | undefined>(undefined); // Initialize with undefined
 
     useEffect(() => {
@@ -51,31 +52,46 @@ export const DataContextProvider = (props: Props) => {
     return [users];
   };
 
+  const getActiveUsersHook = (uid: string) => {
+    const [activeUsers, setActiveUsers] = useState<DocumentData[] | undefined>(undefined);
+
+    useEffect(() => {
+      if (uid) {
+        const unsubscribe = getActiveUsers(uid, setActiveUsers);
+        return () => unsubscribe();
+      }
+    }, [uid]);
+
+    return [activeUsers];
+  };
+
   const [users] = getUsersHook();
   const [user] = getUserHook(auth);
 
   const getRequestHook = (status: string) => {
-    const [requests, setRequests] = useState<DocumentData[] | undefined  | null>(undefined)
+    const [requests, setRequests] = useState<DocumentData[] | undefined | null>(undefined);
 
     useEffect(() => {
       if (user?.uid) {
         const unsubscribe = getRequests(user?.uid, setRequests, status);
         return () => unsubscribe();
-      } 
-    }, [user])
+      }
+    }, [user]);
 
-    return [requests]
-  }
+    return [requests];
+  };
 
   const [sentRequests] = getRequestHook('sent');
   const [receivedRequests] = getRequestHook('received');
+  const [activeUsers] = getActiveUsersHook(user?.uid || "");
 
   const value = {
     user,
     users,
     chats,
     sentRequests,
-    receivedRequests
+    receivedRequests,
+    activeUsers // Added activeUsers to the value
   };
 
   return <DataContext.Provider value={value} {...props} />;

@@ -106,7 +106,6 @@ export const getUsers = (setUsers: (users: DocumentData[]) => void) => {
   return unsubscribe;
 };
 
-
 ////////////////////////////////////////////////////
 //// Writing Functions /////////////////////////////
 ////////////////////////////////////////////////////
@@ -273,10 +272,80 @@ export const addUser = async (userName: string, age: number, curr: string, locat
   }
 }
 
-export const deleteRequest = () => {
+import { deleteDoc, updateDoc } from "firebase/firestore";
 
-}
+export const deleteRequest = async (chatid: string): Promise<void> => {
+  const app = initializeFirebase();
+  const auth = getUserAuth(true);
+  const firestore = getFireStore(true);
 
-export const acceptRequest = () => {
+  const q = query(collection(firestore, `/chat_data`), where("chatid", "==", chatid));
+
+  const querySnapshot = await getDocs(q);
   
-}
+  querySnapshot.forEach(async (doc) => {
+    await deleteDoc(doc.ref);
+  });
+};
+
+export const acceptRequest = async (chatid: string, uid1: string, uid2: string): Promise<void> => {
+  const app = initializeFirebase();
+  const auth = getUserAuth(true);
+  const firestore = getFireStore(true);
+
+  const q = query(collection(firestore, `/chat_data`), where("chatid", "==", chatid));
+
+  const querySnapshot = await getDocs(q);
+  
+  querySnapshot.forEach(async (doc) => {
+    await updateDoc(doc.ref, { activeState: "active" });
+  });
+
+  addUserToUserChats(uid1, uid2)
+  addUserToUserChats(uid2, uid1)
+};
+
+export const getActiveUsers = (uid: string, setActiveUsers: Function) => {
+  const app = initializeFirebase();
+  const auth = getUserAuth(true);
+  const firestore = getFireStore(true);
+
+  const q = query(collection(firestore, 'users'), where('uid', '==', uid));
+
+  const unsubscribe = onSnapshot(q, async (querySnapshot) => {
+    if (querySnapshot.empty) {
+      console.log(`User with UID ${uid} does not exist.`);
+      setActiveUsers([]);
+      return;
+    }
+
+    const userDoc = querySnapshot.docs[0].data();
+    const activeUsers: string[] = userDoc.activeUsers || [];
+
+    const activeUserDataPromises = activeUsers.map((activeUid) => getUser(activeUid));
+    const activeUserData = await Promise.all(activeUserDataPromises);
+
+    setActiveUsers(activeUserData.filter((user) => user !== null) as DocumentData[]);
+  });
+
+  return unsubscribe;
+};
+import { arrayUnion, getDoc } from "firebase/firestore";
+
+export const addUserToUserChats = async (uid1: string, uid2: string): Promise<void> => {
+  const app = initializeFirebase();
+  const auth = getUserAuth(true);
+  const firestore = getFireStore(true);
+
+  const q = query(collection(firestore, 'users'), where('uid', '==', uid1));
+  const querySnapshot = await getDocs(q);
+
+  if (!querySnapshot.empty) {
+    const userDocRef = querySnapshot.docs[0].ref;
+    await updateDoc(userDocRef, {
+      activeUsers: arrayUnion(uid2)
+    });
+  } else {
+    console.log(`User with UID ${uid1} does not exist.`);
+  }
+};

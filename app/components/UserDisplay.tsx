@@ -2,6 +2,7 @@ import { signOut, createChat } from "@/app/utils/databasefunctions";
 import { checkChat } from "@/app/utils/filterfunctions";
 
 import UserCard from "./UserCard";
+import { useData } from "@/providers/DataProvider";
 
 import { useActiveUserChat } from "@/hooks/useActiveUserChat";
 import { useActivePage } from "@/hooks/useActivePage";
@@ -23,13 +24,15 @@ const UserDisplay: React.FC<UserDisplayProps> = ({
   const { onChange } = useActiveUserChat();
   const { onChange: changePage } = useActivePage();
 
+  const {activeUsers} = useData();
+
   return (
     <div
       className="
     flex flex-col justify-start items-start gap-y-3"
     >
-      {users &&
-        users.map((u, index) => (
+      {activeUsers &&
+        activeUsers.map((u, index) => (
           <UserCard
             onClick={() => {
               if (user) {
