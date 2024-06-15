@@ -1,59 +1,61 @@
-import Button from "./Button";
+// Own Function Imports
+import { useData } from "@/providers/DataProvider";
+import { useActiveUserChat } from "@/hooks/useActiveUserChat";
+import { useActivePage } from "@/hooks/useActivePage";
+import { IoIosClose } from "react-icons/io";
 
-import { signOut, createChat } from "@/app/utils/databasefunctions";
-import { useActiveChat } from "@/hooks/useActiveChat";
-import { useActiveUser } from "@/hooks/useActiveUser";
-import { checkChat } from "@/app/utils/filterfunctions";
+// Own Function Imports
+import { useConfirmationModal } from "@/hooks/useConfirmationModal";
 
+// Component Imports
 import UserCard from "./UserCard";
 
-import { DocumentData } from "firebase/firestore";
-import { Auth } from "firebase/auth";
+const UserDisplay = () => {
+  const { onChange } = useActiveUserChat();
+  const { onChange: changePage } = useActivePage();
 
-interface UserDisplayProps {
-  users: DocumentData[] | undefined;
-  auth: Auth;
-  chats: DocumentData[] | undefined;
-  setActiveChat: Function;
-  setActiveUser: Function;
-}
+  const { user, activeUsers } = useData();
+  const { onModalOpen, setDeleteData } = useConfirmationModal();
 
-const UserDisplay: React.FC<UserDisplayProps> = ({
-  users,
-  auth,
-  chats,
-  setActiveChat,
-  setActiveUser,
-}) => {
   return (
     <div
       className="
-    flex flex-col justify-start items-start gap-y-3"
+    flex flex-col justify-start items-start gap-y-3 min-w-[350px]"
     >
-      <Button onClick={signOut}>Sign Out</Button>
-      {users &&
-        users.map((u, index) => (
-          <UserCard
-            onClick={() => {
-              if (auth.currentUser) {
-                const chatid =
-                  auth.currentUser.uid > u.uid
-                    ? auth.currentUser.uid + u.uid
-                    : u.uid + auth.currentUser.uid;
+      {activeUsers &&
+        activeUsers.map((u, index) => (
+          <div className="flex flex-row justify-between items-center gap-x-2 w-full">
+            <UserCard
+              onClick={() => {
+                if (user) {
+                  const chatid =
+                    user.uid > u.uid ? user.uid + u.uid : u.uid + user.uid;
 
-                if (!checkChat(chatid, chats)) {
-                  createChat(chatid, auth.currentUser.uid, u.uid, true);
+                  onChange(u, chatid);
+                  changePage("chat");
+                }
+              }}
+              className={`${user && u.uid == user.uid ? "hidden" : ""}`}
+              status="24 Hours"
+              user={u}
+              key={index}
+            />
+            <button className="mr-2"
+            onClick={() => {
+              if (user) {
+                const deleteData = {
+                  uid1: user.uid,
+                  uid2: u.uid,
+                  userName: u.userName,
                 }
 
-                setActiveChat(chatid);
-                setActiveUser(u);
+                setDeleteData(deleteData);
+                onModalOpen();
               }
-            }}
-            className={`${auth.currentUser && u.uid == auth.currentUser.uid ? "hidden" : ""}`}
-            status="24 Hours"
-            user={u}
-            key={index}
-          />
+            }}>
+              <IoIosClose size={30} />
+            </button>
+          </div>
         ))}
     </div>
   );

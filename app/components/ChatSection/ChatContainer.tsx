@@ -1,35 +1,29 @@
 "use client";
 
+// Library Imports
 import { useState, useEffect } from "react";
-
-import { getChatData } from "../../utils/databasefunctions";
-import ChatMessage from "./ChatMessage";
-
-import {
-  initializeFirebase,
-  getUserAuth,
-  getFireStore,
-} from "../../utils/databasefunctions";
 import { DocumentData } from "firebase/firestore";
+
+// Own Function Imports
+import { getChatData } from "@/app/utils/chatfunctions";
+import { useActiveUserChat } from "@/hooks/useActiveUserChat";
+
+// Component Imports
+import ChatMessage from "./ChatMessage";
 
 interface ChatContainerProps {
   sending: boolean;
   setSending: Function;
   targetRef: React.RefObject<HTMLDivElement>;
-  currentChat: string;
 }
 
-const ChatContainer: React.FC<ChatContainerProps> = ({ sending, setSending, targetRef, currentChat }) => {
-  const app = initializeFirebase();
-  const auth = getUserAuth(true);
-  const firestore = getFireStore(true);
-
+const ChatContainer: React.FC<ChatContainerProps> = ({ sending, setSending, targetRef }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [messages, setMessages] = useState<DocumentData[]>();
+  const { currentChat } = useActiveUserChat();
 
   useEffect(() => {
     const unsubscribe = getChatData(
-      firestore,
       currentChat,
       setMessages,
       setIsLoaded

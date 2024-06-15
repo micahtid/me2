@@ -1,81 +1,52 @@
 "use client";
 
-import { useAuthState } from "react-firebase-hooks/auth";
-
 import Button from "./components/Button";
 import RegisterUser from "./components/RegisterUser";
-import { useActiveChat } from "@/hooks/useActiveChat";
-
-import { checkChat } from "./utils/filterfunctions";
-import { createChat, getChats } from "./utils/databasefunctions";
-
-import { DocumentData } from "firebase/firestore";
-
-import { PacmanLoader } from "react-spinners";
 import ChatPage from "./components/ChatPage";
 
-// CHAT ID = USER1ID + USER2ID
+import { useData } from "@/providers/DataProvider";
 
-import {
-  getUserAuth,
-  initializeFirebase,
-  getUsers,
-  signIn,
-  signOut,
-} from "./utils/databasefunctions";
-import { checkUser } from "./utils/filterfunctions";
+import { PacmanLoader } from "react-spinners";
+import { signIn } from "./utils/databasefunctions";
+import { checkUser } from "./utils/utilfunctions";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 
 const Home = () => {
-  const app = initializeFirebase();
-  const auth = getUserAuth(true);
-
-  const chats = getChats(true);
-
-  const { onChange } = useActiveChat();
-
   const [isUserLoaded, setIsUserLoaded] = useState<boolean | null>(null);
   const [isUserRegistered, setIsUserRegistered] = useState<boolean | null>(
     null
   );
 
-  const [users, setUsers] = useState<DocumentData[]>();
+  const { user, users } = useData();
 
   useEffect(() => {
-    const unsubscribe = getUsers(setUsers);
-    return () => unsubscribe();
-  }, []);
+    const registerStatus = checkUser(user?.uid, users);
 
-  const [user] = useAuthState(auth);
-
-  useEffect(() => {
-    const registerStatus = checkUser(auth.currentUser?.uid, users);
-
-    if (users && users) {
+    if (user !== undefined && users !== undefined) {
       setIsUserRegistered(registerStatus);
       setIsUserLoaded(Boolean(user));
+    } else if (user === null) {
+      setIsUserRegistered(false);
+      setIsUserLoaded(false);
     }
-
   }, [user, users]);
 
   if (isUserLoaded === null || isUserRegistered === null) {
     return (
-    <div className="h-[100vh] w-full flex justify-center items-center">
-      <PacmanLoader color="#36d7b7" />
-    </div>
-    )
+      <div className="h-[100vh] w-full flex justify-center items-center">
+        <PacmanLoader color="#36d7b7" />
+      </div>
+    );
   }
-
 
   return (
     <div>
       <section>
         {isUserLoaded && isUserRegistered ? (
-          <ChatPage auth={auth} chats={chats} users={users} />
+          <ChatPage />
         ) : isUserLoaded ? (
-            <RegisterUser />
+          <RegisterUser />
         ) : (
           <div className="flex justify-center items-center h-[100vh]">
             <Button onClick={signIn}>Sign Up</Button>{" "}
