@@ -18,7 +18,7 @@ const ChatPage = () => {
   return (
     <section
       className="w-full h-[100vh] mx-auto
-    grid grid-cols-12 gap-x-8 p-4"
+    flex flex-row gap-x-8 p-4"
     >
       <div className="my-5 col-span-1 bg-gray-200/50 rounded-lg py-10">
         <QuickLinks />
@@ -26,7 +26,7 @@ const ChatPage = () => {
       <div className="my-5 col-span-3 bg-gray-200/50 rounded-lg p-4">
         <UserDisplay /> 
       </div>
-      <div className="col-span-8 my-5 flex flex-col gap-y-8 bg-gray-200/50 rounded-lg p-4">
+      <div className="col-span-8 my-5 flex flex-col gap-y-8 bg-gray-200/50 rounded-lg p-4 flex-grow">
         {
           currentPage === "chat" ? 
           <ChatSection /> : currentPage === "requests" ? <RequestSection /> : <FindSection />

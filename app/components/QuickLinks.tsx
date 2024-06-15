@@ -19,15 +19,15 @@ const QuickLinks = () => {
     const {onChange, currentPage} = useActivePage();
 
     const links = [
-        {label: "settings", icon: <IoMdSettings size={35} />, func: () => {router.replace('./settings')}},
-        {label: "chat", icon: <BsChatFill size={35} />, func: () => {onChange("chat")}},
-        {label: "new people", icon: <HiUsers size={35} />, func: () => {onChange("new people")}},
-        {label: "requests", icon: <IoMail size={35} />, func: () => {onChange("requests")}},
-        {label: "sign out", icon: <PiSignOutBold size={35} />, func: () => {signOut()}}
+        {label: "settings", icon: <IoMdSettings size={30} />, func: () => {router.replace('./settings')}},
+        {label: "chat", icon: <BsChatFill size={30} />, func: () => {onChange("chat")}},
+        {label: "new people", icon: <HiUsers size={30} />, func: () => {onChange("new people")}},
+        {label: "requests", icon: <IoMail size={30} />, func: () => {onChange("requests")}},
+        {label: "sign out", icon: <PiSignOutBold size={30} />, func: () => {signOut()}}
     ]
 
   return (
-    <nav className='flex flex-col justify-start items-center gap-y-8'>
+    <nav className='flex flex-col justify-start items-center gap-y-10 px-6'>
         {links.map((link) => (
             <button className="flex flex-col justify-center items-center"
             onClick={link.func}>
@@ -35,10 +35,6 @@ const QuickLinks = () => {
                 tranisiton transition-all duration-75`}>
                     {link.icon}
                 </div>
-                <p className={`${currentPage === link.label ? 'text-blue-800/50' : ''}
-                tranisiton transition-all duration-75`}>
-                    {toTitleCase(link.label)}
-                </p>
             </button>
         ))}
     </nav>

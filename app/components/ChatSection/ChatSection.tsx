@@ -37,7 +37,7 @@ const ChatSection = () => {
         <h3 className="text-2xl font-semibold">{currentUser.userName}</h3>
       </div>
     )}
-    <div className="h-[65vh] overflow-y-scroll px-2">
+    <div className="h-[68vh] overflow-y-scroll px-2">
       <ChatContainer sending={sending} setSending={setSending} targetRef={dummy}  />
     </div>
     <MessageForm setSending={setSending} targetRef={dummy} />

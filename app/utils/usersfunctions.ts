@@ -85,7 +85,7 @@ export const getActiveUsers = (uid: string, setActiveUsers: Function) => {
 };
 
 
-export const addUserToUserChats = async (uid1: string, uid2: string): Promise<void> => {
+export const addUserToUserChats = async (uid1: string, uid2: string) => {
   const app = initializeFirebase();
   const firestore = getFireStore(true);
 
@@ -99,5 +99,24 @@ export const addUserToUserChats = async (uid1: string, uid2: string): Promise<vo
     });
   } else {
     console.log(`User with UID ${uid1} does not exist.`);
+  }
+};
+
+export const removeUserFromUserChats = async (uid1: string, uid2: string) => {
+  const app = initializeFirebase();
+  const firestore = getFireStore(true);
+
+  const q = query(collection(firestore, 'users'), where('uid', '==', uid1));
+  const querySnapshot = await getDocs(q);
+
+  const userDoc = querySnapshot.docs[0];
+  const userData = userDoc.data();
+
+  if (userData.activeUsers && Array.isArray(userData.activeUsers)) {
+    const updatedActiveUsers = userData.activeUsers.filter((userUid: string) => userUid !== uid2);
+
+    await updateDoc(userDoc.ref, { activeUsers: updatedActiveUsers });
+  } else {
+    console.log(`activeUsers property does not exist or is not an array for user with UID ${uid1}.`);
   }
 };

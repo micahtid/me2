@@ -1,4 +1,4 @@
-import { setDoc, addDoc, query, orderBy, serverTimestamp, doc, DocumentData, onSnapshot, collection, Firestore } from "firebase/firestore";
+import { setDoc, addDoc, query, orderBy, serverTimestamp, doc, DocumentData, onSnapshot, collection, where, getDocs, deleteDoc } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { initializeFirebase, getUserAuth, getFireStore } from "./databasefunctions";
 
@@ -87,5 +87,18 @@ export const createChat = async (chatid: string, uid1: string, uid2: string, alr
         createdAt: serverTimestamp(),
         uid: uid1
     });
-
 }
+
+export const deleteChat = async (chatid: string): Promise<void> => {
+    const app = initializeFirebase();
+    const firestore = getFireStore(true);
+  
+    const q = query(collection(firestore, `/chat_data`), where("chatid", "==", chatid));
+  
+    const querySnapshot = await getDocs(q);
+    
+    querySnapshot.forEach(async (doc) => {
+      await deleteDoc(doc.ref);
+    });
+  };
+  

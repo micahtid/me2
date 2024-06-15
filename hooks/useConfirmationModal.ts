@@ -6,7 +6,7 @@ interface DeleteData {
   userName: string;
 }
 
-interface UserModal {
+interface ConfirmationModal {
   isModalOpen: boolean;
   onModalOpen: () => void;
   onModalClose: () => void;
@@ -14,7 +14,7 @@ interface UserModal {
   setDeleteData: (data: DeleteData) => void;
 }
 
-export const useUserModal = create<UserModal>((set) => ({
+export const useConfirmationModal = create<ConfirmationModal>((set) => ({
   isModalOpen: false,
   onModalOpen: () => set({ isModalOpen: true }),
   onModalClose: () => set({ isModalOpen: false }),
