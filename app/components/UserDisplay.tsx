@@ -1,30 +1,18 @@
-import { signOut, createChat } from "@/app/utils/databasefunctions";
-import { checkChat } from "@/app/utils/filterfunctions";
 
-import UserCard from "./UserCard";
+// Own Function Imports
 import { useData } from "@/providers/DataProvider";
-
 import { useActiveUserChat } from "@/hooks/useActiveUserChat";
 import { useActivePage } from "@/hooks/useActivePage";
 
-import { DocumentData } from "firebase/firestore";
+// Component Imports
+import UserCard from "./UserCard";
 
-interface UserDisplayProps {
-  users: DocumentData[] | undefined | null;
-  user: DocumentData | null | undefined;
-  chats: DocumentData[] | undefined;
-}
-
-const UserDisplay: React.FC<UserDisplayProps> = ({
-  users,
-  user,
-  chats
-}) => {
+const UserDisplay = () => {
 
   const { onChange } = useActiveUserChat();
   const { onChange: changePage } = useActivePage();
 
-  const {activeUsers} = useData();
+  const { user, activeUsers } = useData();
 
   return (
     <div
@@ -40,10 +28,6 @@ const UserDisplay: React.FC<UserDisplayProps> = ({
                   user.uid > u.uid
                     ? user.uid + u.uid
                     : u.uid + user.uid;
-
-                // if (!checkChat(chatid, chats)) {
-                //   createChat(chatid, user.uid, u.uid, true);
-                // }
 
                 onChange(u, chatid);
                 changePage('chat');

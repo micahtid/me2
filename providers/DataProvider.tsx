@@ -3,8 +3,12 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { DocumentData } from "firebase/firestore";
 
-import { initializeFirebase, getUserAuth, getChats, getUsers, getRequests, getActiveUsers } from "@/app/utils/databasefunctions";
+import { initializeFirebase, getUserAuth } from "@/app/utils/databasefunctions";
+import { getChats } from "@/app/utils/chatfunctions";
+import { getUsers, getActiveUsers } from "@/app/utils/usersfunctions";
+import { getRequests } from "@/app/utils/requestfunctions";
 import { Auth, User } from "firebase/auth";
+import { FirebaseApp } from "firebase/app";
 
 type DataContextType = {
   user: null | undefined | DocumentData;
@@ -28,6 +32,8 @@ export const DataContextProvider = (props: Props) => {
   const auth = getUserAuth(true);
   const chats = getChats(true);
 
+  ////////////////////////////////////////////
+  ////////////////////////////////////////////
   const getUserHook = (auth: Auth) => {
     const [user, setUser] = useState<User | undefined | null>(undefined); // Initialize with undefined
 
@@ -41,6 +47,8 @@ export const DataContextProvider = (props: Props) => {
     return [user];
   };
 
+  ////////////////////////////////////////////
+  ////////////////////////////////////////////
   const getUsersHook = () => {
     const [users, setUsers] = useState<DocumentData[] | undefined>(undefined); // Initialize with undefined
 
@@ -52,6 +60,8 @@ export const DataContextProvider = (props: Props) => {
     return [users];
   };
 
+  ////////////////////////////////////////////
+  ////////////////////////////////////////////
   const getActiveUsersHook = (uid: string) => {
     const [activeUsers, setActiveUsers] = useState<DocumentData[] | undefined>(undefined);
 
@@ -68,6 +78,8 @@ export const DataContextProvider = (props: Props) => {
   const [users] = getUsersHook();
   const [user] = getUserHook(auth);
 
+  ////////////////////////////////////////////
+  ////////////////////////////////////////////
   const getRequestHook = (status: string) => {
     const [requests, setRequests] = useState<DocumentData[] | undefined | null>(undefined);
 
@@ -80,6 +92,9 @@ export const DataContextProvider = (props: Props) => {
 
     return [requests];
   };
+
+  ////////////////////////////////////////////
+  ////////////////////////////////////////////
 
   const [sentRequests] = getRequestHook('sent');
   const [receivedRequests] = getRequestHook('received');

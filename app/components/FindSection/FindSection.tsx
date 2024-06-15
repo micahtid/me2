@@ -1,14 +1,18 @@
 "use client";
 
-import UserCard from "../UserCard";
-import { DocumentData } from "firebase/firestore";
-import { createRequest } from "@/app/utils/databasefunctions";
-import { useData } from "@/providers/DataProvider";
 
-import { useUserModal } from "@/hooks/useUserModal";
+// Library Imports
+import { useEffect, useState } from "react";
+import { DocumentData } from "firebase/firestore";
 import { IoPersonAddSharp } from "react-icons/io5";
 
-import { useEffect, useState } from "react";
+// Own Function Imports
+import { createRequest } from "@/app/utils/requestfunctions";
+import { useData } from "@/providers/DataProvider";
+import { useUserModal } from "@/hooks/useUserModal";
+
+// Component Imports
+import UserCard from "../UserCard";
 
 const FindSection = () => {
   const { onChangeCurrentUser, onModalOpen } = useUserModal();

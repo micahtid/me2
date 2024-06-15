@@ -1,8 +1,7 @@
 "use client";
 
-import Modal from "./Modal";
 import { useUserModal } from "@/hooks/useUserModal";
-import { useEffect } from "react";
+import Modal from "./Modal";
 
 const AuthModal = () => {
     const { isModalOpen, onModalClose, currentUser} = useUserModal();

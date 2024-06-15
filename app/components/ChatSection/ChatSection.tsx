@@ -1,11 +1,14 @@
 "use client"
 
+// Library Imports
 import { useState, useRef } from "react"
 
+// Own Function Imports
+import { useActiveUserChat } from "@/hooks/useActiveUserChat"
+
+// Component Imports
 import ChatContainer from "./ChatContainer"
 import MessageForm from "./MessageForm"
-
-import { useActiveUserChat } from "@/hooks/useActiveUserChat"
 
 const ChatSection = () => {
   const { currentChat, currentUser } = useActiveUserChat();
@@ -35,7 +38,7 @@ const ChatSection = () => {
       </div>
     )}
     <div className="h-[65vh] overflow-y-scroll px-2">
-      <ChatContainer sending={sending} setSending={setSending} targetRef={dummy} currentChat={currentChat} />
+      <ChatContainer sending={sending} setSending={setSending} targetRef={dummy}  />
     </div>
     <MessageForm setSending={setSending} targetRef={dummy} />
   </div>

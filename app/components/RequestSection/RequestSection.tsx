@@ -1,13 +1,18 @@
 "use client";
 
+// Library Imports
 import { useState, useEffect } from "react";
-import { useData } from "@/providers/DataProvider";
 import { DocumentData } from "firebase/firestore";
-import UserCard from "../UserCard";
-import { getUser } from "@/app/utils/databasefunctions";
 import { IoCloseCircleSharp } from "react-icons/io5";
 import { FaCheckCircle } from "react-icons/fa";
-import { deleteRequest, acceptRequest } from "@/app/utils/databasefunctions";
+
+// Own Function Imports
+import { useData } from "@/providers/DataProvider";
+import { getUser } from "@/app/utils/usersfunctions";
+import { deleteRequest, acceptRequest } from "@/app/utils/requestfunctions";
+
+// Component Imports
+import UserCard from "../UserCard";
 
 const getRequestHook = async (
   requests: DocumentData[] | null | undefined,

@@ -1,8 +1,7 @@
 "use client"
 
 import { useState } from "react"
-
-import { sendMessage } from "@/app/utils/databasefunctions"
+import { sendMessage } from "@/app/utils/chatfunctions";
 import { useActiveUserChat } from "@/hooks/useActiveUserChat"
 
 interface MessageFormProps {

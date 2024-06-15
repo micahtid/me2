@@ -8,7 +8,7 @@ import { useData } from "@/providers/DataProvider";
 
 import { PacmanLoader } from "react-spinners";
 import { signIn } from "./utils/databasefunctions";
-import { checkUser } from "./utils/filterfunctions";
+import { checkUser } from "./utils/utilfunctions";
 
 import { useState, useEffect } from "react";
 
@@ -18,11 +18,7 @@ const Home = () => {
     null
   );
 
-  const { user, users, chats, activeUsers } = useData();
-
-  // useEffect(() => {
-  //   console.log(activeUsers)
-  // }, [activeUsers])
+  const { user, users } = useData();
 
   useEffect(() => {
     const registerStatus = checkUser(user?.uid, users);
@@ -48,7 +44,7 @@ const Home = () => {
     <div>
       <section>
         {isUserLoaded && isUserRegistered ? (
-          <ChatPage user={user} chats={chats} users={users} />
+          <ChatPage />
         ) : isUserLoaded ? (
           <RegisterUser />
         ) : (

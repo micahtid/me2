@@ -1,25 +1,19 @@
 "use client";
 
-import { DocumentData } from "firebase/firestore/lite";
-
-import { useActiveUserChat } from "@/hooks/useActiveUserChat";
+// Own Function Imports
 import { useActivePage } from "@/hooks/useActivePage";
+import { useData } from "@/providers/DataProvider";
 
+// Component Imports
 import ChatSection from "./ChatSection/ChatSection";
 import UserDisplay from "./UserDisplay";
 import FindSection from "./FindSection/FindSection";
 import RequestSection from "./RequestSection/RequestSection";
 import QuickLinks from "./QuickLinks";
 
-interface ChatPageProps {
-  users: DocumentData[] | undefined | null;
-  chats: DocumentData[] | undefined;
-  user: DocumentData | null | undefined;
-}
-
-const ChatPage: React.FC<ChatPageProps> = ({ users, chats, user }) => {
-  const { onChange } = useActiveUserChat();
+const ChatPage = () => {
   const { currentPage } = useActivePage();
+  const { user, users, chats } = useData();
 
   return (
     <section
@@ -30,7 +24,7 @@ const ChatPage: React.FC<ChatPageProps> = ({ users, chats, user }) => {
         <QuickLinks />
       </div>
       <div className="my-5 col-span-3 bg-gray-200/50 rounded-lg p-4">
-        <UserDisplay user={user} chats={chats} users={users} /> 
+        <UserDisplay /> 
       </div>
       <div className="col-span-8 my-5 flex flex-col gap-y-8 bg-gray-200/50 rounded-lg p-4">
         {

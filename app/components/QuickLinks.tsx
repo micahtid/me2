@@ -1,16 +1,18 @@
 "use client";
 
+
+// Library Imports
+import { useRouter } from "next/navigation";
 import { IoMdSettings } from "react-icons/io";
 import { BsChatFill } from "react-icons/bs";
 import { PiSignOutBold } from "react-icons/pi";
 import { HiUsers } from "react-icons/hi";
 import { IoMail } from "react-icons/io5";
 
+// Own Function Imports
 import { signOut } from "../utils/databasefunctions";
-import { toTitleCase } from "../utils/filterfunctions";
-
+import { toTitleCase } from "../utils/utilfunctions";
 import { useActivePage } from "@/hooks/useActivePage";
-import { useRouter } from "next/navigation";
 
 const QuickLinks = () => {
     const router = useRouter();
