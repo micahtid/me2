@@ -1,4 +1,4 @@
-import { addDoc, query, DocumentData, onSnapshot, collection, updateDoc, where, getDocs, arrayUnion } from "firebase/firestore";
+import { addDoc, query, DocumentData, onSnapshot, collection, updateDoc, where, getDocs, arrayUnion, doc } from "firebase/firestore";
 import { initializeFirebase, getUserAuth, getFireStore } from "./databasefunctions";
 
 export const getUsers = (setUsers: (users: DocumentData[]) => void) => {
@@ -84,7 +84,6 @@ export const getActiveUsers = (uid: string, setActiveUsers: Function) => {
   return unsubscribe;
 };
 
-
 export const addUserToUserChats = async (uid1: string, uid2: string) => {
   const app = initializeFirebase();
   const firestore = getFireStore(true);
@@ -118,5 +117,29 @@ export const removeUserFromUserChats = async (uid1: string, uid2: string) => {
     await updateDoc(userDoc.ref, { activeUsers: updatedActiveUsers });
   } else {
     console.log(`activeUsers property does not exist or is not an array for user with UID ${uid1}.`);
+  }
+};
+
+export const editUser = async (uid: string, userName: string, age: number, curr: string, location: string, hobbies: string[]) => {
+  const app = initializeFirebase();
+  const firestore = getFireStore(true);
+
+  const q = query(collection(firestore, 'users'), where('uid', '==', uid));
+  const querySnapshot = await getDocs(q);
+
+  if (!querySnapshot.empty) {
+    const userDocRef = querySnapshot.docs[0].ref;
+
+    await updateDoc(userDocRef, {
+      userName,
+      age,
+      location,
+      curr,
+      hobbies
+    });
+
+    console.log(`User document with UID ${uid} successfully updated.`);
+  } else {
+    console.error(`No user found with UID ${uid}.`);
   }
 };

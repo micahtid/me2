@@ -14,6 +14,8 @@ import { getUserAuth } from '../utils/databasefunctions';
 // Add verification to check for unique username...
 
 const RegisterUser = () => {
+    const [clicked, setClicked] = useState(false);
+
     const [userName, setUserName] = useState('');
     const [userAge, setUserAge] = useState('');
     const [userCurriculum, setUserCurriculum] = useState('');
@@ -28,7 +30,8 @@ const RegisterUser = () => {
         e.preventDefault();
 
         if (userName && userAge && userCurriculum && userLocation && userHobbies) {
-            addUser(userName, Number(userAge), userCurriculum, userLocation, userHobbies, auth.currentUser?.photoURL)
+            addUser(userName, Number(userAge), userCurriculum, userLocation, userHobbies, auth.currentUser?.photoURL);
+            setClicked(true);
             router.refresh();
         }
       };
@@ -80,7 +83,7 @@ const RegisterUser = () => {
                 }}/>
             </div>
             <div className="">
-                <button className='uppercase text-xl font-semibold bg-gray-500/10 py-2 px-2 rounded-md shadow-sm mt-5' type='submit'>
+                <button className='uppercase text-xl font-semibold bg-gray-500/10 py-2 px-2 rounded-md shadow-sm mt-5' type='submit' disabled={clicked}>
                     Submit
                 </button>
             </div>
