@@ -1,12 +1,11 @@
 import { DocumentData } from "firebase/firestore"
 
-export const checkUser = (uid: string | undefined, uidList: DocumentData[] | undefined) => {
+export const checkUser = (uid: string | undefined, uidList: DocumentData[] | null | undefined) => {
     if (!uidList || !uid) {
         return false
     }
 
     for (let i=0; i<uidList.length; i++) {
-        console.log(uid, uidList[i].uid)
         if (uidList[i].uid == uid) {
             return true;
         }
@@ -27,4 +26,10 @@ export const checkChat = (chatid: string | undefined, activeChats: DocumentData[
     }
 
     return false;
+}
+
+export const toTitleCase = (str : string) => {
+    return str.split(' ').map(word => {
+        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    }).join(' ');
 }

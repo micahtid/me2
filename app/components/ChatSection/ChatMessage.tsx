@@ -1,9 +1,7 @@
+
 import { DocumentData } from "firebase/firestore";
-
-import { getUserAuth } from "@/app/utils/databasefunctions";
 import { twMerge } from "tailwind-merge";
-
-const auth = getUserAuth(false);
+import { useData } from "@/providers/DataProvider";
 
 interface ChatMessageProps {
   document: DocumentData;
@@ -11,8 +9,10 @@ interface ChatMessageProps {
 }
 
 const ChatMessage: React.FC<ChatMessageProps> = ({ document, className }) => {
+  const { user } = useData();
+
   const messageClass =
-    document.uid == auth.currentUser?.uid ? "sent" : "recieved";
+    document.uid == user?.uid ? "sent" : "recieved";
 
   return (
     <div

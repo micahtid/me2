@@ -1,12 +1,13 @@
 "use client";
 
+// Library Imports
 import { useState } from 'react';
 import Select from 'react-select'
 import { useRouter } from 'next/navigation';
 
+// Own Function Imports
 import { curriculums, locations, hobbies } from '../data';
-import { addUser } from '../utils/databasefunctions';
-
+import { addUser } from '../utils/usersfunctions';
 import { getUserAuth } from '../utils/databasefunctions';
 
 // To Do:
