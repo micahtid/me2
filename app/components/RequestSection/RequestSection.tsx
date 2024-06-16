@@ -64,7 +64,8 @@ const RequestSection = () => {
   };
 
   return (
-    <div>
+    <div className="ml-2">
+      <h3 className="text-2xl mb-6">Manage Requests</h3>
       <div className="w-full flex flex-row justify-start items-center gap-x-2">
         <button
           onClick={() => setSection("sent")}

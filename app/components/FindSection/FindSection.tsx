@@ -36,6 +36,7 @@ const FindSection = () => {
       className="
     flex flex-col justify-start items-start gap-y-3"
     >
+      <h3 className="text-2xl mb-6 ml-2">Find People</h3>
       {filteredUsers &&
         filteredUsers.map((u, index) => {
           if (sentRequests && receivedRequests) {

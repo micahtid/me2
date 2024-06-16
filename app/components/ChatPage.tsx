@@ -20,13 +20,13 @@ const ChatPage = () => {
       className="w-full h-[100vh] mx-auto
     flex flex-row gap-x-8 p-4"
     >
-      <div className="my-5 col-span-1 bg-gray-200/50 rounded-lg py-10">
+      <div className="my-5 bg-primary rounded-lg py-10 shadow-md">
         <QuickLinks />
       </div>
-      <div className="my-5 col-span-3 bg-gray-200/50 rounded-lg p-4">
+      <div className="my-5 bg-primary rounded-lg px-6 pt-12 shadow-md">
         <UserDisplay /> 
       </div>
-      <div className="col-span-8 my-5 flex flex-col gap-y-8 bg-gray-200/50 rounded-lg p-4 flex-grow">
+      <div className="my-5 flex flex-col gap-y-8 bg-gray-200/10 rounded-lg px-6 pt-12 flex-grow shadow-md">
         {
           currentPage === "chat" ? 
           <ChatSection /> : currentPage === "requests" ? <RequestSection /> : <FindSection />

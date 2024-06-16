@@ -11,8 +11,8 @@ import { useConfirmationModal } from "@/hooks/useConfirmationModal";
 import UserCard from "./UserCard";
 
 const UserDisplay = () => {
-  const { onChange } = useActiveUserChat();
-  const { onChange: changePage } = useActivePage();
+  const { onChange, currentUser } = useActiveUserChat();
+  const { onChange: changePage, currentPage } = useActivePage();
 
   const { user, activeUsers } = useData();
   const { onModalOpen, setDeleteData } = useConfirmationModal();
@@ -22,9 +22,12 @@ const UserDisplay = () => {
       className="
     flex flex-col justify-start items-start gap-y-3 min-w-[350px]"
     >
+      <h3 className="text-2xl mb-6 ml-2">Chats</h3>
       {activeUsers &&
         activeUsers.map((u, index) => (
-          <div className="flex flex-row justify-between items-center gap-x-2 w-full">
+          <div className={`flex flex-row justify-between items-center gap-x-2 w-full 
+          bg-secondary rounded-lg px-4 py-2 border-2 border-white
+          ${currentUser === u && currentPage === "chat" ? "bg-accent" : ""}`}>
             <UserCard
               onClick={() => {
                 if (user) {

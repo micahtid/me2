@@ -33,11 +33,11 @@ const ChatSection = () => {
   >
     {currentUser && (
       <div className="flex flex-row justify-start items-center gap-x-6">
-        <img src={currentUser.pfp} width={45} className="rounded-sm" alt="" />
-        <h3 className="text-2xl font-semibold">{currentUser.userName}</h3>
+        <img src={currentUser.pfp} width={45} className="rounded-full" alt="" />
+        <h3 className="text-2xl">{currentUser.userName}</h3>
       </div>
     )}
-    <div className="h-[68vh] overflow-y-scroll px-2">
+    <div className="h-[63.5vh] overflow-y-scroll px-2">
       <ChatContainer sending={sending} setSending={setSending} targetRef={dummy}  />
     </div>
     <MessageForm setSending={setSending} targetRef={dummy} />
