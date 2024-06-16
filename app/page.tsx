@@ -60,13 +60,13 @@ const Home = () => {
 
   }, [user, users]);
 
-  if (isUserLoaded === null || isUserRegistered === null) {
-    return (
-    <div className="h-[100vh] w-full flex justify-center items-center">
-      <PacmanLoader color="#36d7b7" />
-    </div>
-    )
-  }
+  // if (isUserLoaded === null || isUserRegistered === null) {
+  //   return (
+  //   <div className="h-[100vh] w-full flex justify-center items-center">
+  //     <PacmanLoader color="#36d7b7" />
+  //   </div>
+  //   )
+  // }
 
 
   return (
