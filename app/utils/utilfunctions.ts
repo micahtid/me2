@@ -1,5 +1,5 @@
 import { DocumentData } from "firebase/firestore"
-import { getChatTimeStamp } from "./chatfunctions";
+import { getChatProperty } from "./chatfunctions";
 
 export const checkUser = (uid: string | undefined, uidList: DocumentData[] | null | undefined) => {
     if (!uidList || !uid) {
@@ -36,7 +36,7 @@ export const toTitleCase = (str: string) => {
 }
 
 export const getTimeLeft = async (chatid: string) => {
-    const createdAt = await getChatTimeStamp(chatid);
+    const createdAt = await getChatProperty(chatid, "createdAt");
 
     if (!createdAt) {
         console.log('Chat creation time not found.');

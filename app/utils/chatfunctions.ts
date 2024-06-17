@@ -37,7 +37,7 @@ export const getChatData = (chatid: string, setMessages: (msgs: DocumentData[]) 
     return unsubscribe;
 };
 
-export const getChatTimeStamp = async (chatid: string): Promise<Date | null> => {
+export const getChatProperty = async (chatid: string, property: string) => {
     const app = initializeFirebase();
     const firestore = getFireStore(true);
 
@@ -55,7 +55,13 @@ export const getChatTimeStamp = async (chatid: string): Promise<Date | null> => 
     const chatDoc = querySnapshot.docs[0];
     const chatData = chatDoc.data();
 
-    return chatData.createdAt ? chatData.createdAt.toDate() : null;
+    if (property === "createdAt") {
+        return chatData.createdAt ? chatData.createdAt.toDate() : null;
+    } else if (property === "socialStatus") {
+        return chatData.socialStatus ? chatData.socialStatus :null;
+    } else {
+        return null
+    }
 };
 
 export const sendMessage = async (e: React.FormEvent<HTMLFormElement>, chatid: string, formValue: string, setFormValue: Function, setSending: Function) => {
@@ -86,7 +92,7 @@ export const sendMessage = async (e: React.FormEvent<HTMLFormElement>, chatid: s
     }
 };
 
-export const deleteChat = async (chatid: string): Promise<void> => {
+export const deleteChat = async (chatid: string) => {
     const app = initializeFirebase();
     const firestore = getFireStore(true);
 
@@ -111,3 +117,7 @@ export const setChatComplete = async (chatid: string) => {
         await updateDoc(doc.ref, { activeState: "complete" });
     });
 }
+
+export const editSocialStatus = async (chatid: string, uid: string) => {
+
+};

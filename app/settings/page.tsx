@@ -18,12 +18,12 @@ import Button from "../components/Button";
 
 const Settings = () => {
   const router = useRouter();
-  const { user } = useData();
+  const { user, users } = useData();
 
   const [clicked, setClicked] = useState(false);
 
   // Getting Initial User Data
-  const [userData, setUserData] = useState<DocumentData | null>(null);
+  const [userData, setUserData] = useState<DocumentData | undefined>(undefined);
   const [loading, setLoading] = useState(true);
 
   // Storing Form Values
@@ -33,19 +33,17 @@ const Settings = () => {
   const [userLocation, setUserLocation] = useState("");
   const [userHobbies, setUserHobbies] = useState<string[]>([]);
 
-  // Fetching User Data
+  // Setting User Value
   useEffect(() => {
-    const fetchUserData = async () => {
-      if (user && user.uid) {
-        const data = await getUser(user.uid);
-        setUserData(data);
-        setLoading(false);
-      }
-    };
+    if (users && user) {
+      const userDoc = users.find(u => u.uid === user.uid);
+      setLoading(false);
+      console.log(userDoc)
+      setUserData(userDoc);
+    }
 
-    fetchUserData();
-  }, [user]);
-
+  }, [users, user]);
+  
   // Setting Default Values
   useEffect(() => {
     if (userData) {
