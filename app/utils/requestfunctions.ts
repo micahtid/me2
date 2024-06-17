@@ -19,11 +19,11 @@ export const createRequest = async (chatid: string, uid1: string, uid2: string) 
   
     const messagesCollectionRef = collection(firestore, `chat_data/${chatDataDocRef.id}/messages`);
   
-    await addDoc(messagesCollectionRef, {
-      text: "Hi there!",
-      createdAt: serverTimestamp(),
-      uid: uid1
-    });
+    // await addDoc(messagesCollectionRef, {
+    //   text: "Hi there!",
+    //   createdAt: serverTimestamp(),
+    //   uid: uid1
+    // });
   
   }
 
@@ -76,7 +76,7 @@ export const acceptRequest = async (chatid: string, uid1: string, uid2: string):
     const querySnapshot = await getDocs(q);
     
     querySnapshot.forEach(async (doc) => {
-      await updateDoc(doc.ref, { activeState: "active" });
+      await updateDoc(doc.ref, { activeState: "active", createdAt: serverTimestamp() });
     });
   
     addUserToUserChats(uid1, uid2)

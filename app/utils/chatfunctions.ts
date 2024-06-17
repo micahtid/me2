@@ -1,4 +1,4 @@
-import { setDoc, addDoc, query, orderBy, serverTimestamp, doc, DocumentData, onSnapshot, collection, where, getDocs, deleteDoc } from "firebase/firestore";
+import { updateDoc, addDoc, query, orderBy, serverTimestamp, doc, DocumentData, onSnapshot, collection, where, getDocs, deleteDoc } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { initializeFirebase, getUserAuth, getFireStore } from "./databasefunctions";
 
@@ -37,6 +37,27 @@ export const getChatData = (chatid: string, setMessages: (msgs: DocumentData[]) 
     return unsubscribe;
 };
 
+export const getChatTimeStamp = async (chatid: string): Promise<Date | null> => {
+    const app = initializeFirebase();
+    const firestore = getFireStore(true);
+
+    if (!chatid) {
+        return null;
+    }
+
+    const q = query(collection(firestore, "chat_data"), where("chatid", "==", chatid));
+    const querySnapshot = await getDocs(q);
+
+    if (querySnapshot.empty) {
+        return null;
+    }
+
+    const chatDoc = querySnapshot.docs[0];
+    const chatData = chatDoc.data();
+
+    return chatData.createdAt ? chatData.createdAt.toDate() : null;
+};
+
 export const sendMessage = async (e: React.FormEvent<HTMLFormElement>, chatid: string, formValue: string, setFormValue: Function, setSending: Function) => {
     const app = initializeFirebase();
     const auth = getUserAuth(true);
@@ -65,40 +86,28 @@ export const sendMessage = async (e: React.FormEvent<HTMLFormElement>, chatid: s
     }
 };
 
-export const createChat = async (chatid: string, uid1: string, uid2: string, alreadyInit: boolean) => {
-    const app = initializeFirebase();
-    const firestore = getFireStore(true);
-    const activeState = "request";
-    const ids = [uid1, uid2]
-
-    const chatDataDocRef = doc(firestore, "chat_data", chatid);
-    await setDoc(chatDataDocRef, {
-        chatid,
-        activeState,
-        ids
-        // uid1,
-        // uid2
-    });
-
-    const messagesCollectionRef = collection(firestore, `chat_data/${chatDataDocRef.id}/messages`);
-
-    await addDoc(messagesCollectionRef, {
-        text: "Hi there!",
-        createdAt: serverTimestamp(),
-        uid: uid1
-    });
-}
-
 export const deleteChat = async (chatid: string): Promise<void> => {
     const app = initializeFirebase();
     const firestore = getFireStore(true);
-  
+
     const q = query(collection(firestore, `/chat_data`), where("chatid", "==", chatid));
-  
+
     const querySnapshot = await getDocs(q);
-    
+
     querySnapshot.forEach(async (doc) => {
-      await deleteDoc(doc.ref);
+        await deleteDoc(doc.ref);
     });
-  };
-  
+};
+
+export const setChatComplete = async (chatid: string) => {
+    const app = initializeFirebase();
+    const firestore = getFireStore(true);
+
+    const q = query(collection(firestore, `/chat_data`), where("chatid", "==", chatid));
+
+    const querySnapshot = await getDocs(q);
+
+    querySnapshot.forEach(async (doc) => {
+        await updateDoc(doc.ref, { activeState: "complete" });
+    });
+}

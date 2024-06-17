@@ -9,9 +9,10 @@ import { useActiveUserChat } from "@/hooks/useActiveUserChat"
 // Component Imports
 import ChatContainer from "./ChatContainer"
 import MessageForm from "./MessageForm"
+import SocialForm from "./SocialForm"
 
 const ChatSection = () => {
-  const { currentChat, currentUser } = useActiveUserChat();
+  const { currentChat, currentUser, isChatComplete } = useActiveUserChat();
 
   ////////
   const [sending, setSending] = useState(false);
@@ -40,7 +41,14 @@ const ChatSection = () => {
     <div className="h-[63.5vh] overflow-y-scroll px-2">
       <ChatContainer sending={sending} setSending={setSending} targetRef={dummy}  />
     </div>
-    <MessageForm setSending={setSending} targetRef={dummy} />
+    {
+      isChatComplete ? (
+        <SocialForm />
+      ) : (
+        // <MessageForm setSending={setSending} targetRef={dummy} />
+        <SocialForm />
+      )
+    }
   </div>
   )
 }

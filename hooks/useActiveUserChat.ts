@@ -4,11 +4,15 @@ import { DocumentData } from 'firebase/firestore';
 interface activUsereChat {
   currentUser: DocumentData | null;
   currentChat: string;
-  onChange: (newUser: DocumentData, newChatId: string) => void;
+  isChatComplete: boolean;
+  setChatComplete: (newStatus: boolean) => void;
+  onChange: (newUser: DocumentData | null, newChatId: string) => void;
 }
 
 export const useActiveUserChat= create<activUsereChat>((set) => ({
   currentUser: null,
   currentChat: "",
-  onChange: (newUser: DocumentData, newChatId: string) => set({ currentUser: newUser, currentChat: newChatId }),
+  isChatComplete: false,
+  setChatComplete: (newStatus: boolean) => set({ isChatComplete: newStatus }),
+  onChange: (newUser: DocumentData | null, newChatId: string) => set({ currentUser: newUser, currentChat: newChatId }),
 }));

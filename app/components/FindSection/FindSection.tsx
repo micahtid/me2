@@ -54,7 +54,8 @@ const FindSection = () => {
           return (
             <div
               key={index}
-              className={`flex flex-row justify-start items-center w-full ${
+              className={`flex flex-row justify-start items-center w-full
+                user-card-accent ${
                 user && u.uid === user.uid ? "hidden" : ""
               }`}
             >

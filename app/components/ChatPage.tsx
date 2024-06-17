@@ -1,8 +1,11 @@
 "use client";
 
+import { useEffect } from "react";
+
 // Own Function Imports
 import { useActivePage } from "@/hooks/useActivePage";
 import { useData } from "@/providers/DataProvider";
+import { useActiveUserChat } from "@/hooks/useActiveUserChat";
 
 // Component Imports
 import ChatSection from "./ChatSection/ChatSection";
@@ -13,8 +16,13 @@ import QuickLinks from "./QuickLinks";
 
 const ChatPage = () => {
   const { currentPage } = useActivePage();
-  const { user, users, chats } = useData();
+  const { activeUsers } = useData();
+  const { onChange } = useActiveUserChat();
 
+  useEffect(() => {
+    onChange(null, "")
+  }, [activeUsers])
+  
   return (
     <section
       className="w-full h-[100vh] mx-auto
