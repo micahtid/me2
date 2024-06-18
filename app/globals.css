@@ -19,4 +19,8 @@
     .user-card-primary {
         @apply bg-secondary rounded-lg px-4 py-2 border-2 border-white
     }
+
+    .social-card {
+        @apply w-full bg-gray-100 p-3 flex flex-row justify-start items-center gap-x-4 rounded-lg
+    }
 }

@@ -125,7 +125,8 @@ export const removeUserFromUserChats = async (uid1: string, uid2: string) => {
   }
 };
 
-export const editUser = async (uid: string, userName: string, age: number, curr: string, location: string, hobbies: string[]) => {
+export const editUser = async (uid: string, userName: string, age: number, curr: string, location: string, hobbies: string[], 
+  instagram: string, discord: string, snap: string) => {
   const app = initializeFirebase();
   const firestore = getFireStore(true);
 
@@ -140,7 +141,10 @@ export const editUser = async (uid: string, userName: string, age: number, curr:
       age,
       location,
       curr,
-      hobbies
+      hobbies,
+      instagram,
+      discord,
+      snap
     });
 
     console.log(`User document with UID ${uid} successfully updated.`);

@@ -33,12 +33,16 @@ const Settings = () => {
   const [userLocation, setUserLocation] = useState("");
   const [userHobbies, setUserHobbies] = useState<string[]>([]);
 
+  /////////////
+  const [instagram, setInstagram] = useState("");
+  const [discord, setDiscord] = useState("");
+  const [snap, setSnap] = useState("");
+
   // Setting User Value
   useEffect(() => {
     if (users && user) {
       const userDoc = users.find(u => u.uid === user.uid);
       setLoading(false);
-      console.log(userDoc)
       setUserData(userDoc);
     }
 
@@ -52,6 +56,9 @@ const Settings = () => {
       setUserCurriculum(userData.curr || "");
       setUserLocation(userData.location || "");
       setUserHobbies(userData.hobbies || []);
+      setInstagram(userData.instagram || "");
+      setDiscord(userData.discord || "");
+      setSnap(userData.snap || "");
     }
   }, [userData]);
 
@@ -65,7 +72,10 @@ const Settings = () => {
         Number(userAge),
         userCurriculum,
         userLocation,
-        userHobbies
+        userHobbies,
+        instagram,
+        discord,
+        snap
       );
       setClicked(true);
       router.replace("./");
@@ -150,6 +160,36 @@ const Settings = () => {
                 setUserHobbies([]);
               }
             }}
+          />
+        </div>
+        <div className="">
+          <p className="sub-heading">Instagram</p>
+          <input
+            type="text"
+            value={instagram}
+            placeholder="Enter Here..."
+            onChange={(e) => setInstagram(e.target.value)}
+            className="input-field"
+          />
+        </div>
+        <div className="">
+          <p className="sub-heading">Discord</p>
+          <input
+            type="text"
+            value={discord}
+            placeholder="Enter Here..."
+            onChange={(e) => setDiscord(e.target.value)}
+            className="input-field"
+          />
+        </div>
+        <div className="">
+          <p className="sub-heading">Snap Chat</p>
+          <input
+            type="text"
+            value={snap}
+            placeholder="Enter Here..."
+            onChange={(e) => setSnap(e.target.value)}
+            className="input-field"
           />
         </div>
         <div className="">

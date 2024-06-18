@@ -50,15 +50,14 @@ const UserDisplay = () => {
           const chatid = user.uid > u.uid ? user.uid + u.uid : u.uid + user.uid;
           const hoursLeft = timeLeft[chatid] !== undefined ? `${timeLeft[chatid]} Hours` : "Loading...";
 
+          console.log(timeLeft[chatid])
+
           // To-Do Run Code Here
+          // Should this code be here or in page.tsx?
           if (timeLeft[chatid] <= 0) {
             // deleteChat(chatid);
             console.log("Delete the chat!")
-          } else if (timeLeft[chatid] <= 12) {
-            console.log("Only able to share socials!")
-          } else {
-            console.log("Continue chatting :)")
-          }
+          } 
 
           return (
             <div

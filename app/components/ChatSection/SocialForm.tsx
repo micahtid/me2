@@ -2,8 +2,13 @@
 
 // React Imports
 import { useState, useEffect } from "react";
-import { FaCircleCheck } from "react-icons/fa6";
-import { IoIosCloseCircle } from "react-icons/io";
+import { MdOutlineTimer } from "react-icons/md";
+import { IoMdCheckmarkCircle } from "react-icons/io";
+import { IoMdCloseCircle } from "react-icons/io";
+
+import { FaDiscord } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
+import { FaSnapchatGhost } from "react-icons/fa";
 
 // Own Function Imports
 import { useData } from "@/providers/DataProvider";
@@ -29,10 +34,10 @@ const SocialForm = () => {
   const { currentChat, currentUser } = useActiveUserChat();
 
   const [socialStatus, setSocialStatus] = useState<SocialStatus>({});
-  const [u1Display, setU1Display] = useState<string>("");
-  const [u2Display, setU2Display] = useState<string>("");
+  const [u1Icon, setU1Icon] = useState<JSX.Element | null>(null);
+  const [u2Icon, setU2Icon] = useState<JSX.Element | null>(null);
 
-  // To-Do Use GetChatProperty Here
+  // To Do --> Edit getChatProperty and Apply Here
   useEffect(() => {
     if (!currentChat) return;
 
@@ -55,70 +60,78 @@ const SocialForm = () => {
 
   useEffect(() => {
     if (socialStatus && user && currentUser) {
-      setU1Display(
-        socialStatus[user.uid] === null
-          ? "Waiting ⏱️"
-          : socialStatus[user.uid]
-          ? "Agree ✅"
-          : "Disagree ❌"
-      );
-      setU2Display(
-        socialStatus[currentUser.uid] === null
-          ? "Waiting ⏱️"
-          : socialStatus[currentUser.uid]
-          ? "Agree ✅"
-          : "Disagree ❌"
-      );
+      const getStatusIcon = (status: boolean | null) => {
+        if (status === null) {
+          return <MdOutlineTimer size={40} color="#FF964F" />;
+        }
+        return status ? <IoMdCheckmarkCircle size={40} color="#80EF80" /> : <IoMdCloseCircle size={40} color="#FF6961" />;
+      };
+
+      setU1Icon(getStatusIcon(socialStatus[user.uid]));
+      setU2Icon(getStatusIcon(socialStatus[currentUser.uid]));
     }
   }, [socialStatus]);
+
+  // console.log(socialStatus)
 
   return (
     <div
       className="bg-primary p-4 mt-8 rounded-lg drop-shadow-sm
     flex flex-col justify-start items-start gap-y-4"
     >
-      <p className="text-xs text-gray-500">
-        The chat has been open <span className="italic">for 24 hours</span> and
-        is now <span className="underline">closed</span>. <br />
-        Would you like to share socials?
-      </p>
-      <div className="">
-        <p>
-          <span className="font-semibold">You</span> : {u1Display}
-        </p>
-        <p>
-          <span className="font-semibold">{currentUser?.userName}</span> :{" "}
-          {u2Display}
-        </p>
-      </div>
       {socialStatus[user?.uid] && socialStatus[currentUser?.uid] ? (
-        <div>
-          {currentUser?.discord && (
-            <p>Discord <span className="font-semibold">{currentUser?.discord}</span></p>
-          )}
-          {currentUser?.instagram && (
-            <p>Instagram <span className="font-semibold">{currentUser?.instagram}</span></p>
-          )}
-          {currentUser?.snap && (
-            <p>Snap <span className="font-semibold">{currentUser?.snap}</span></p>
-          )}
+        <p className="text-xs text-gray-500">
+          Both users have agreed to share socials. <br />
+          Please <span className="italic">store these socials</span> from{" "}
+          <span className="underline">{currentUser?.userName}</span> if you'd
+          like to stay in touch.
+        </p>
+      ) : (
+        <p className="text-xs text-gray-500">
+          * The chat has been open <span className="italic">for 24 hours</span>{" "}
+          and is now <span className="underline">closed</span>. <br />
+          Would you like to share socials? <span className="italic">Click to edit status!</span>
+        </p>
+      )}
+      {socialStatus[user?.uid] && socialStatus[currentUser?.uid] ? (
+        <div className="flex flex-col justify-start items-start gap-y-2 w-full">
+          {
+            currentUser?.discord && (
+              <div className="social-card bg-[#7785CC]">
+                <FaDiscord size={20} color="white" />
+                <p className="text-white">{currentUser?.discord}</p>
+              </div>
+            )
+          }
+          {
+            currentUser?.instagram && (
+              <div className="social-card bg-[#E1306C]">
+                <FaInstagram size={20} color="white" />
+                <p className="text-white">{currentUser?.instagram}</p>
+              </div>  
+            )
+          }
+          {
+            currentUser?.snap && (
+              <div className="social-card bg-[#FFFC00]">
+                <FaSnapchatGhost size={20} color="white" />
+                <p className="text-white">{currentUser?.snap}</p>
+              </div>
+            )
+          }
         </div>
       ) : (
         <div className="flex flex-row justify-start items-center gap-x-4">
-          <Button
-            onClick={() => {
-              editSocialStatus(currentChat, user?.uid, true);
-            }}
+          <button className="flex flex-col justify-center items-center gap-y-2"
+          onClick={() => editSocialStatus(currentChat, user?.uid, !socialStatus[user?.uid])}
           >
-            <FaCircleCheck />
-          </Button>
-          <Button
-            onClick={() => {
-              editSocialStatus(currentChat, user?.uid, false);
-            }}
-          >
-            <IoIosCloseCircle />
-          </Button>
+            <div className="bg-gray-500/10 rounded-full p-2">{u1Icon}</div>
+            <p className="text-xs text-gray-600">You</p>
+          </button>
+          <div className="flex flex-col justify-center items-center gap-y-2">
+            <div className="bg-gray-500/10 rounded-full p-2">{u2Icon}</div>
+            <p className="text-xs text-gray-600">{currentUser?.userName}</p>
+          </div>
         </div>
       )}
     </div>
