@@ -118,6 +118,17 @@ export const setChatComplete = async (chatid: string) => {
     });
 }
 
-export const editSocialStatus = async (chatid: string, uid: string) => {
+export const editSocialStatus = async (chatid: string, uid: string, status: boolean) => {
+    const app = initializeFirebase();
+    const firestore = getFireStore(true);
 
+    const q = query(collection(firestore, 'chat_data'), where('chatid', '==', chatid));
+    const querySnapshot = await getDocs(q);
+
+    querySnapshot.forEach(async (doc) => {
+        const chatData = doc.data();
+        const socialStatus = chatData.socialStatus || {};
+        socialStatus[uid] = status;
+        await updateDoc(doc.ref, { socialStatus });
+    });
 };

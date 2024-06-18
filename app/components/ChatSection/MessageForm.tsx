@@ -21,7 +21,7 @@ const MessageForm: React.FC<MessageFormProps> = ({ setSending, targetRef }) => {
   };
 
   return (
-    <form className="flex flex-row
+    <form className="flex flex-row drop-shadow-sm
     bg-primary rounded-lg p-2 mt-8" onSubmit={handleSubmit}>
         <div className="flex justify-center items-center mx-4">
           <MdFileUpload size={30} />

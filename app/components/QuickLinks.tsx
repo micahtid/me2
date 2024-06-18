@@ -28,7 +28,7 @@ const QuickLinks = () => {
         <nav className='flex flex-col justify-between items-center gap-y-10 px-6 h-full'>
             <div className="flex flex-col justify-start items-center gap-y-5">
                 <button onClick={() => router.replace('./settings')}>
-                    <img src={user?.photoURL} width={50} className="rounded-full" alt="User" />
+                    <img src={user?.photoURL} alt="profile-picture" width={50} className="rounded-full" />
                 </button>
                 {links.map((link, index) => (
                     <button

@@ -52,7 +52,7 @@ const UserDisplay = () => {
 
           // To-Do Run Code Here
           if (timeLeft[chatid] <= 0) {
-            deleteChat(chatid);
+            // deleteChat(chatid);
             console.log("Delete the chat!")
           } else if (timeLeft[chatid] <= 12) {
             console.log("Only able to share socials!")

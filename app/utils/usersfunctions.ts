@@ -34,7 +34,9 @@ export const getUser = async (uid: string): Promise<DocumentData | null> => {
   return user;
 };
 
-export const addUser = async (userName: string, age: number, curr: string, location: string, hobbies: string[], pfp: string | null | undefined) => {
+export const addUser = async (userName: string, age: number, 
+  curr: string, location: string, hobbies: string[], pfp: string | null | undefined, 
+  instagram: string, discord: string, snap: string) => {
   const app = initializeFirebase
   const auth = getUserAuth(true);
   const firestore = getFireStore(true);
@@ -51,7 +53,10 @@ export const addUser = async (userName: string, age: number, curr: string, locat
         curr,
         location,
         hobbies,
-        pfp
+        pfp,
+        instagram,
+        discord,
+        snap
       });
     } catch (error) {
       console.error("Error adding document: ", error);

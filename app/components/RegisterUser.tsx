@@ -20,11 +20,17 @@ import { FaHome } from "react-icons/fa";
 const RegisterUser = () => {
   const [clicked, setClicked] = useState(false);
 
+  /////////////
   const [userName, setUserName] = useState("");
   const [userAge, setUserAge] = useState("");
   const [userCurriculum, setUserCurriculum] = useState("");
   const [userLocation, setUserLocation] = useState("");
   const [userHobbies, setUserHobbies] = useState<string[]>([]);
+
+  /////////////
+  const [instagram, setInstagram] = useState("");
+  const [discord, setDiscord] = useState("");
+  const [snap, setSnap] = useState("");
 
   const auth = getUserAuth(false);
 
@@ -33,14 +39,24 @@ const RegisterUser = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (userName && userAge && userCurriculum && userLocation && userHobbies) {
+    if (
+      userName &&
+      userAge &&
+      userCurriculum &&
+      userLocation &&
+      userHobbies &&
+      (instagram || discord || snap)
+    ) {
       addUser(
         userName,
         Number(userAge),
         userCurriculum,
         userLocation,
         userHobbies,
-        auth.currentUser?.photoURL
+        auth.currentUser?.photoURL,
+        instagram,
+        discord,
+        snap
       );
       setClicked(true);
       router.refresh();
@@ -117,14 +133,39 @@ const RegisterUser = () => {
           />
         </div>
         <div className="">
-          <button
-            className="uppercase text-xl font-semibold bg-gray-500/10 py-2 px-2 rounded-md shadow-sm mt-5"
-            type="submit"
-            disabled={clicked}
-          >
-            Submit
-          </button>
+          <p className="sub-heading">Instagram</p>
+          <input
+            type="text"
+            placeholder="Enter Here..."
+            onChange={(e) => setInstagram(e.target.value)}
+            className="input-field"
+          />
         </div>
+        <div className="">
+          <p className="sub-heading">Discord</p>
+          <input
+            type="text"
+            placeholder="Enter Here..."
+            onChange={(e) => setDiscord(e.target.value)}
+            className="input-field"
+          />
+        </div>
+        <div className="">
+          <p className="sub-heading">Snap Chat</p>
+          <input
+            type="text"
+            placeholder="Enter Here..."
+            onChange={(e) => setSnap(e.target.value)}
+            className="input-field"
+          />
+        </div>
+        <button
+          className="uppercase text-xl font-semibold bg-gray-500/10 py-2 px-2 rounded-md shadow-sm mt-5"
+          type="submit"
+          disabled={clicked}
+        >
+          Submit
+        </button>
       </form>
     </div>
   );
