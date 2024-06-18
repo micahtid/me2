@@ -1,16 +1,18 @@
 "use client";
 
-import Button from "./components/Button";
-import RegisterUser from "./components/RegisterUser";
-import ChatPage from "./components/ChatPage";
+// Library Imports
+import { useState, useEffect } from "react";
 
+// Own Function Imports
 import { useData } from "@/providers/DataProvider";
-
-import { PacmanLoader } from "react-spinners";
 import { signIn } from "./utils/databasefunctions";
 import { checkUser } from "./utils/utilfunctions";
 
-import { useState, useEffect } from "react";
+// Component Imports
+import Button from "./components/Button";
+import RegisterUser from "./components/RegisterUser";
+import ChatPage from "./components/ChatPage";
+import Loader from "./components/Loader";
 
 const Home = () => {
   const [isUserLoaded, setIsUserLoaded] = useState<boolean | null>(null);
@@ -34,9 +36,7 @@ const Home = () => {
 
   if (isUserLoaded === null || isUserRegistered === null) {
     return (
-      <div className="h-[100vh] w-full flex justify-center items-center">
-        <PacmanLoader color="#36d7b7" />
-      </div>
+      <Loader />
     );
   }
 

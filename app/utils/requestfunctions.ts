@@ -19,11 +19,11 @@ export const createRequest = async (chatid: string, uid1: string, uid2: string) 
   
     const messagesCollectionRef = collection(firestore, `chat_data/${chatDataDocRef.id}/messages`);
   
-    await addDoc(messagesCollectionRef, {
-      text: "Hi there!",
-      createdAt: serverTimestamp(),
-      uid: uid1
-    });
+    // await addDoc(messagesCollectionRef, {
+    //   text: "Hi there!",
+    //   createdAt: serverTimestamp(),
+    //   uid: uid1
+    // });
   
   }
 
@@ -54,7 +54,7 @@ export const getRequests = (uid: string | null | undefined, setRequests: (users:
   return unsubscribe;
 };
 
-export const deleteRequest = async (chatid: string): Promise<void> => {
+export const deleteRequest = async (chatid: string) => {
   const app = initializeFirebase();
   const firestore = getFireStore(true);
 
@@ -67,16 +67,17 @@ export const deleteRequest = async (chatid: string): Promise<void> => {
   });
 };
 
-export const acceptRequest = async (chatid: string, uid1: string, uid2: string): Promise<void> => {
+export const acceptRequest = async (chatid: string, uid1: string, uid2: string) => {
     const app = initializeFirebase();
     const firestore = getFireStore(true);
+    const socialStatus = {[uid1]: null, [uid2]: null}
   
     const q = query(collection(firestore, `/chat_data`), where("chatid", "==", chatid));
   
     const querySnapshot = await getDocs(q);
     
     querySnapshot.forEach(async (doc) => {
-      await updateDoc(doc.ref, { activeState: "active" });
+      await updateDoc(doc.ref, { activeState: "active", createdAt: serverTimestamp(), socialStatus });
     });
   
     addUserToUserChats(uid1, uid2)
