@@ -3,23 +3,46 @@ import { useData } from "@/providers/DataProvider";
 import { useActiveUserChat } from "@/hooks/useActiveUserChat";
 import { useActivePage } from "@/hooks/useActivePage";
 import { IoIosClose } from "react-icons/io";
+import { DocumentData } from "firebase/firestore";
 
 // Own Function Imports
 import { useConfirmationModal } from "@/hooks/useConfirmationModal";
 import { getTimeLeft } from "../utils/utilfunctions";
 import { deleteChat } from "../utils/chatfunctions";
+import { getCompatibility } from "../utils/utilfunctions";
 
 // Component Imports
 import UserCard from "./UserCard";
 import { useEffect, useState } from "react";
 
+
+// To Do: Clean Up Code (!)
 const UserDisplay = () => {
   const { onChange, currentUser, setChatComplete } = useActiveUserChat();
   const { onChange: changePage, currentPage } = useActivePage();
-  const { user, activeUsers } = useData();
+  const { user, users, activeUsers } = useData();
   const { onModalOpen, setDeleteData } = useConfirmationModal();
 
   const [timeLeft, setTimeLeft] = useState<{ [key: string]: number }>({});
+
+  // To-Do: TESTING
+  const [userData, setUserData] = useState<DocumentData | undefined>(undefined);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (users && user) {
+      const userDoc = users.find(u => u.uid === user.uid);
+      setLoading(false);
+      setUserData(userDoc);
+    }
+
+  }, [users, user]);
+
+  if (userData && currentUser) {
+    console.log(getCompatibility(userData, currentUser))
+  }
+
+  //////////
 
   useEffect(() => {
     const fetchTimeLeft = async (uid1: string, uid2: string) => {
@@ -49,8 +72,6 @@ const UserDisplay = () => {
 
           const chatid = user.uid > u.uid ? user.uid + u.uid : u.uid + user.uid;
           const hoursLeft = timeLeft[chatid] !== undefined ? `${timeLeft[chatid]} Hours` : "Loading...";
-
-          console.log(timeLeft[chatid])
 
           // To-Do Run Code Here
           // Should this code be here or in page.tsx?
