@@ -24,3 +24,12 @@
         @apply w-full bg-gray-100 p-3 flex flex-row justify-start items-center gap-x-4 rounded-lg
     }
 }
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }

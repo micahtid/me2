@@ -25,25 +25,6 @@ const UserDisplay = () => {
 
   const [timeLeft, setTimeLeft] = useState<{ [key: string]: number }>({});
 
-  // To-Do: TESTING
-  const [userData, setUserData] = useState<DocumentData | undefined>(undefined);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    if (users && user) {
-      const userDoc = users.find(u => u.uid === user.uid);
-      setLoading(false);
-      setUserData(userDoc);
-    }
-
-  }, [users, user]);
-
-  if (userData && currentUser) {
-    console.log(getCompatibility(userData, currentUser))
-  }
-
-  //////////
-
   useEffect(() => {
     const fetchTimeLeft = async (uid1: string, uid2: string) => {
       const chatid = uid1 > uid2 ? uid1 + uid2 : uid2 + uid1;
@@ -64,7 +45,7 @@ const UserDisplay = () => {
   }, [user, activeUsers]);
 
   return (
-    <div className="flex flex-col justify-start items-start gap-y-3 min-w-[350px]">
+    <div className="flex flex-col justify-start items-start gap-y-3 min-w-[350px] h-full overflow-y-auto no-scrollbar">
       <h3 className="text-2xl mb-6 ml-2">Chats</h3>
       {activeUsers &&
         activeUsers.map((u, index) => {
@@ -76,7 +57,7 @@ const UserDisplay = () => {
           // To-Do Run Code Here
           // Should this code be here or in page.tsx?
           if (timeLeft[chatid] <= 0) {
-            // deleteChat(chatid);
+            deleteChat(chatid);
             console.log("Delete the chat!")
           } 
 
