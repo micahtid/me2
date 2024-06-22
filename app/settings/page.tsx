@@ -41,9 +41,8 @@ const Settings = () => {
   // Setting User Value
   useEffect(() => {
     if (users && user) {
-      const userDoc = users.find(u => u.uid === user.uid);
+      setUserData(users.find(u => u.uid === user.uid));
       setLoading(false);
-      setUserData(userDoc);
     }
 
   }, [users, user]);

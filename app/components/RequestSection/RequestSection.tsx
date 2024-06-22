@@ -85,7 +85,7 @@ const RequestSection = () => {
           user-card-accent">
             <UserCard
               onClick={() => {
-                console.log("Here");
+                // console.log("Here");
               }}
               className={`flex-grow`}
               status="Compatibility 80%"

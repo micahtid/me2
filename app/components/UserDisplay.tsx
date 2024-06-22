@@ -3,20 +3,24 @@ import { useData } from "@/providers/DataProvider";
 import { useActiveUserChat } from "@/hooks/useActiveUserChat";
 import { useActivePage } from "@/hooks/useActivePage";
 import { IoIosClose } from "react-icons/io";
+import { DocumentData } from "firebase/firestore";
 
 // Own Function Imports
 import { useConfirmationModal } from "@/hooks/useConfirmationModal";
 import { getTimeLeft } from "../utils/utilfunctions";
 import { deleteChat } from "../utils/chatfunctions";
+import { getCompatibility } from "../utils/utilfunctions";
 
 // Component Imports
 import UserCard from "./UserCard";
 import { useEffect, useState } from "react";
 
+
+// To Do: Clean Up Code (!)
 const UserDisplay = () => {
   const { onChange, currentUser, setChatComplete } = useActiveUserChat();
   const { onChange: changePage, currentPage } = useActivePage();
-  const { user, activeUsers } = useData();
+  const { user, users, activeUsers } = useData();
   const { onModalOpen, setDeleteData } = useConfirmationModal();
 
   const [timeLeft, setTimeLeft] = useState<{ [key: string]: number }>({});
@@ -41,7 +45,7 @@ const UserDisplay = () => {
   }, [user, activeUsers]);
 
   return (
-    <div className="flex flex-col justify-start items-start gap-y-3 min-w-[350px]">
+    <div className="flex flex-col justify-start items-start gap-y-3 min-w-[350px] h-full overflow-y-auto no-scrollbar">
       <h3 className="text-2xl mb-6 ml-2">Chats</h3>
       {activeUsers &&
         activeUsers.map((u, index) => {
@@ -50,12 +54,10 @@ const UserDisplay = () => {
           const chatid = user.uid > u.uid ? user.uid + u.uid : u.uid + user.uid;
           const hoursLeft = timeLeft[chatid] !== undefined ? `${timeLeft[chatid]} Hours` : "Loading...";
 
-          console.log(timeLeft[chatid])
-
           // To-Do Run Code Here
           // Should this code be here or in page.tsx?
           if (timeLeft[chatid] <= 0) {
-            // deleteChat(chatid);
+            deleteChat(chatid);
             console.log("Delete the chat!")
           } 
 
