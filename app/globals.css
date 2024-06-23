@@ -2,13 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer components {
-    .sub-heading {
-        @apply text-xl font-semibold uppercase
-    }
+  .sub-heading {
+    @apply text-xl font-semibold uppercase;
+  }
 
-    .input-field {
-        @apply ring-[1.25px] py-2 px-2 rounded-sm w-full ring-gray-300 outline-none
-    }
+  .input-field {
+    @apply ring-[1.25px] py-2 px-2 rounded-sm w-full ring-gray-300 outline-none;
+  }
+
+  /* Removes the scrollbar entirely */
+  ::-webkit-scrollbar {
+    display: none;
+  }
 }
