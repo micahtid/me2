@@ -9,7 +9,7 @@ import { DocumentData } from "firebase/firestore";
 import { useConfirmationModal } from "@/hooks/useConfirmationModal";
 import { getTimeLeft } from "../utils/utilfunctions";
 import { deleteChat } from "../utils/chatfunctions";
-import { getCompatibility } from "../utils/utilfunctions";
+import { removeUserFromUserChats } from "../utils/usersfunctions";
 
 // Component Imports
 import UserCard from "./UserCard";
@@ -56,8 +56,13 @@ const UserDisplay = () => {
 
           // To-Do Run Code Here
           // Should this code be here or in page.tsx?
+          // And should removeUserFromUserChats be in deleteChat?
+          console.log(timeLeft[chatid])
+
           if (timeLeft[chatid] <= 0) {
             deleteChat(chatid);
+            removeUserFromUserChats(user.uid, u.uid);
+            removeUserFromUserChats(u.uid, user.uid);
             console.log("Delete the chat!")
           } 
 
