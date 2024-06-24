@@ -14,14 +14,15 @@ import FacebookIcon from "./components/Icons/FacebookIcon";
 import InstagramIcon from "./components/Icons/InstagramIcon";
 import XIcon from "./components/Icons/XIcon";
 
-import { useData } from "@/providers/DataProvider";
+// Library Imports
+import { useState, useEffect } from "react";
 
-import { PacmanLoader } from "react-spinners";
+// Own Function Imports
+import { useData } from "@/providers/DataProvider";
 import { signIn } from "./utils/databasefunctions";
 import { checkUser } from "./utils/utilfunctions";
 
-import { useState, useEffect } from "react";
-import "./globals.css"
+import Loader from "./components/Loader";
 
 const Home = () => {
   const [isUserLoaded, setIsUserLoaded] = useState<boolean | null>(null);
@@ -43,13 +44,12 @@ const Home = () => {
     }
   }, [user, users]);
 
-  // if (isUserLoaded === null || isUserRegistered === null) {
-  //   return (
-  //   <div className="h-[100vh] w-full flex justify-center items-center">
-  //     <PacmanLoader color="#36d7b7" />
-  //   </div>
-  //   )
-  // }
+
+  if (isUserLoaded === null || isUserRegistered === null) {
+    return (
+      <Loader />
+    );
+  }
 
   return (
     <div className="scroll-smooth ">

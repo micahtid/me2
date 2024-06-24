@@ -41,7 +41,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ sending, setSending, targ
     <div className="h-full flex flex-col">
       <div className="flex-1">
         {isLoaded && (
-          <div className="flex flex-col justify-center gap-y-4">
+          <div className="flex flex-col justify-center gap-y-7">
             {messages &&
               messages.map((msg, index) => (
                 <ChatMessage key={index} document={msg} className={`${(index+1 === messages.length && sending) ? "text-gray-400" : ""}`} />

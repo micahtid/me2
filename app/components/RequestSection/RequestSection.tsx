@@ -64,8 +64,9 @@ const RequestSection = () => {
   };
 
   return (
-    <div>
-      <div className="w-full flex flex-row justify-start items-center gap-x-2">
+    <div className="ml-2 flex flex-col gap-y-3">
+      <h3 className="text-2xl mb-6">Manage Requests</h3>
+      <div className="w-full flex flex-row justify-start items-center gap-x-2 mb-5">
         <button
           onClick={() => setSection("sent")}
           className={`bg-gray-200 rounded-lg p-2 ${section === "sent" ? "font-bold" : ""}`}
@@ -79,12 +80,12 @@ const RequestSection = () => {
           Received
         </button>
       </div>
-      <div>
         {requestList?.map((request, index) => (
-          <div key={index} className="flex flex-row justify-start items-center w-full">
+          <div key={index} className="flex flex-row justify-start items-center w-full
+          user-card-accent">
             <UserCard
               onClick={() => {
-                console.log("Here");
+                // console.log("Here");
               }}
               className={`flex-grow`}
               status="Compatibility 80%"
@@ -109,7 +110,6 @@ const RequestSection = () => {
             </button>
           </div>
         ))}
-      </div>
     </div>
   );
 };
