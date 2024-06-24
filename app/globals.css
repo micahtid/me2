@@ -2,27 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer components {
-    .sub-heading {
-        @apply text-xl font-semibold uppercase
-    }
+  .sub-heading {
+    @apply text-xl font-semibold uppercase;
+  }
 
-    .input-field {
-        @apply ring-[1.25px] py-2 px-2 rounded-sm w-full ring-gray-300 outline-none
-    }
+  .input-field {
+    @apply ring-[1.25px] py-2 px-2 rounded-sm w-full ring-gray-300 outline-none;
+  }
 
-    .user-card-accent {
-        @apply bg-secondary rounded-lg px-4 py-2 border-2 border-black
-    }
+  .input-field {
+      @apply ring-[1.25px] py-2 px-2 rounded-sm w-full ring-gray-300 outline-none
+  }
 
-    .user-card-primary {
-        @apply bg-secondary rounded-lg px-4 py-2 border-2 border-white
-    }
+  .user-card-accent {
+      @apply bg-secondary rounded-lg px-4 py-2 border-2 border-black
+  }
 
-    .social-card {
-        @apply w-full bg-gray-100 p-3 flex flex-row justify-start items-center gap-x-4 rounded-lg
-    }
+  .user-card-primary {
+      @apply bg-secondary rounded-lg px-4 py-2 border-2 border-white
+  }
+
+  .social-card {
+      @apply w-full bg-gray-100 p-3 flex flex-row justify-start items-center gap-x-4 rounded-lg
+  }
 }
 
 .no-scrollbar::-webkit-scrollbar {
