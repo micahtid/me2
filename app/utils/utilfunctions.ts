@@ -56,10 +56,6 @@ export const getTimeLeft = async (chatid: string) => {
 };
 
 export const getCompatibility = (user1: DocumentData, user2: DocumentData) => {
-    // Get compatibility percentage for each area
-    // Find the mean and add weighting to certain areas
-    // Age -> 2x, Hobbies -> 3x, Academic -> 2x
-
     const areaPercentage = user1.location === user2.location ? 1 : 0.25;
     const academicPercentage = user1.curr === user2.curr ? 1 : 0.25;
 

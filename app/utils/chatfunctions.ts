@@ -1,4 +1,4 @@
-import { updateDoc, addDoc, query, orderBy, serverTimestamp, doc, DocumentData, onSnapshot, collection, where, getDocs, deleteDoc } from "firebase/firestore";
+import { updateDoc, addDoc, query, orderBy, serverTimestamp, DocumentData, onSnapshot, collection, where, getDocs, deleteDoc } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { initializeFirebase, getUserAuth, getFireStore } from "./databasefunctions";
 
