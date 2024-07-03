@@ -3,6 +3,18 @@
 @tailwind utilities;
 
 @layer components {
+  .dynamic-heading {
+    @apply text-6xl max-lg:text-5xl
+  }
+
+  .dynamic-subheading {
+    @apply text-5xl max-lg:text-4xl
+  }
+
+  .dynamic-text {
+    @apply text-lg max-lg:text-base
+  }
+
   .sub-heading {
     @apply text-xl font-semibold uppercase;
   }
@@ -11,28 +23,59 @@
     @apply ring-[1.25px] py-2 px-2 rounded-sm w-full ring-gray-300 outline-none;
   }
 
-  .input-field {
-      @apply ring-[1.25px] py-2 px-2 rounded-sm w-full ring-gray-300 outline-none
-  }
-
   .user-card-accent {
-      @apply bg-secondary rounded-lg px-4 py-2 border-2 border-black
+    @apply bg-secondary rounded-lg px-4 py-2 border-2 border-black
   }
 
   .user-card-primary {
-      @apply bg-secondary rounded-lg px-4 py-2 border-2 border-white
+    @apply bg-secondary rounded-lg px-4 py-2 border-2 border-white
   }
 
   .social-card {
-      @apply w-full bg-gray-100 p-3 flex flex-row justify-start items-center gap-x-4 rounded-lg
+    @apply w-full bg-gray-100 p-3 flex flex-row justify-start items-center gap-x-4 rounded-lg
   }
 }
 
 .no-scrollbar::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-  }
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.clipped-gradient {
+  clip-path: polygon(0 0, 100% 0%, 100% 73%, 0% 100%);
+  background: 
+  radial-gradient(circle at 20% 20%, #54ACFD, transparent 50%),
+  radial-gradient(circle at 80% 30%, #D5E6FF, transparent 50%),
+  radial-gradient(circle at 50% 80%, #FFD99F, transparent 50%),
+  radial-gradient(circle at 70% 50%, #54ACFD, transparent 50%),
+  radial-gradient(circle at 30% 70%, #D5E6FF, transparent 50%);
+  background-size: 100% 100%;
+}
+
+.blue-gradient {
+  background: 
+  radial-gradient(circle at 20% 20%, #C6E0FF, transparent 40%),
+  radial-gradient(circle at 80% 30%, #E0F3FF, transparent 40%),
+  radial-gradient(circle at 50% 80%, #C6E0FF, transparent 40%),
+  radial-gradient(circle at 70% 50%, #FFFFFF, transparent 30%),
+  radial-gradient(circle at 30% 70%, #C6E0FF, transparent 40%),
+  radial-gradient(circle at 50% 50%, #E0F3FF, transparent 40%);
+  background-size: 100% 100%;
+}
+
+.yellow-gradient {
+  background: 
+  radial-gradient(circle at 20% 20%, #FFE2B7, transparent 70%),
+  radial-gradient(circle at 80% 30%, #FFF1CC, transparent 70%),
+  radial-gradient(circle at 50% 80%, #FFE2B7, transparent 70%),
+  radial-gradient(circle at 70% 50%, #FFFFFF, transparent 70%),
+  radial-gradient(circle at 30% 70%, #FFE2B7, transparent 70%),
+  radial-gradient(circle at 50% 50%, #FFF1CC, transparent 70%);
+  background-size: 100% 100%;
+}
