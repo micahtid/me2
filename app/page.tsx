@@ -50,7 +50,14 @@ const Home = () => {
     <div className="scroll-smooth ">
       <section>
         {isUserLoaded && isUserRegistered ? (
-          <ChatPage />
+          <div className="">
+            <div className="max-[500px]:hidden">
+              <ChatPage />
+            </div>
+            <div className="hidden max-[500px]:inline">
+              <p className="text-center p-4">Oops! Me2 isn't yet suited for smaller devices. Please login on a larger device or enlargen your window.</p>
+            </div>
+          </div>
         ) : isUserLoaded ? (
           <RegisterUser />
         ) : (

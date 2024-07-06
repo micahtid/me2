@@ -28,12 +28,9 @@ const ChatSection = () => {
   }
 
   return (
-    <div className="flex flex-col h-[100vh] w-full p-4 overflow-hidden">
+    <div className="flex flex-col h-[100vh] w-full px-4 pb-4 overflow-hidden">
       {currentUser && (
-        <div className="flex flex-row justify-start items-center gap-x-6 mb-4">
-          <img src={currentUser.pfp} width={45} className="rounded-full" alt="profile-pic" />
-          <h3 className="text-2xl">{currentUser.userName}</h3>
-        </div>
+        <h3 className="text-2xl font-medium">{currentUser.userName}</h3>
       )}
       <div className="flex-1 overflow-y-auto no-scrollbar mb-4">
         <ChatContainer sending={sending} setSending={setSending} targetRef={dummy} />

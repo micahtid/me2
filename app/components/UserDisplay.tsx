@@ -1,14 +1,14 @@
-// Own Function Imports
+// Hook Imports
 import { useData } from "@/providers/DataProvider";
 import { useActiveUserChat } from "@/hooks/useActiveUserChat";
 import { useActivePage } from "@/hooks/useActivePage";
+
 import { IoIosClose } from "react-icons/io";
-import { DocumentData } from "firebase/firestore";
 
 // Own Function Imports
 import { useConfirmationModal } from "@/hooks/useConfirmationModal";
 import { getTimeLeft } from "../utils/utilfunctions";
-import { deleteChat } from "../utils/chatfunctions";
+import { deleteChat, checkNotificationStatus } from "../utils/chatfunctions";
 import { removeUserFromUserChats } from "../utils/usersfunctions";
 
 // Component Imports
@@ -20,7 +20,7 @@ import { useEffect, useState } from "react";
 const UserDisplay = () => {
   const { onChange, currentUser, setChatComplete } = useActiveUserChat();
   const { onChange: changePage, currentPage } = useActivePage();
-  const { user, users, activeUsers } = useData();
+  const { user, activeUsers } = useData();
   const { onModalOpen, setDeleteData } = useConfirmationModal();
 
   const [timeLeft, setTimeLeft] = useState<{ [key: string]: number }>({});
@@ -45,14 +45,17 @@ const UserDisplay = () => {
   }, [user, activeUsers]);
 
   return (
-    <div className="flex flex-col justify-start items-start gap-y-3 min-w-[350px] h-full overflow-y-auto no-scrollbar">
-      <h3 className="text-2xl mb-6 ml-2">Chats</h3>
+    <div className="flex flex-col justify-start items-start gap-y-3 min-w-[350px] h-full overflow-y-auto no-scrollbar
+    max-lg:pb-6">
+      <h3 className="text-2xl mb-6 ml-2 font-medium">Chats</h3>
       {activeUsers &&
         activeUsers.map((u, index) => {
           if (!user) return null;
 
           const chatid = user.uid > u.uid ? user.uid + u.uid : u.uid + user.uid;
           const hoursLeft = timeLeft[chatid] !== undefined ? `${timeLeft[chatid]} Hours` : "Loading...";
+
+          const notification = checkNotificationStatus(chatid, user.uid);
 
           // To-Do Run Code Here
           // Should this code be here or in page.tsx?
@@ -86,7 +89,10 @@ const UserDisplay = () => {
                     }
                   }
                 }}
+                notification
                 className={`${user && u.uid === user.uid ? "hidden" : ""}`}
+                statusClassName="bg-white text-gray-700
+                px-6 py-1 rounded-xl -ml-1 mt-1"
                 status={hoursLeft}
                 user={u}
               />

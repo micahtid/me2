@@ -132,3 +132,7 @@ export const editSocialStatus = async (chatid: string, uid: string, status: bool
         await updateDoc(doc.ref, { socialStatus });
     });
 };
+
+export const checkNotificationStatus = async (chatid: string, uid: string) => {
+    return true;
+}

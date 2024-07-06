@@ -28,7 +28,7 @@
   }
 
   .user-card-primary {
-    @apply bg-secondary rounded-lg px-4 py-2 border-2 border-white
+    @apply bg-secondary rounded-lg px-4 py-2 border-2 border-accent
   }
 
   .social-card {

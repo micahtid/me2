@@ -42,9 +42,10 @@ const FindSection = () => {
   return (
     <div
       className="
-    flex flex-col justify-start items-start gap-y-3"
+    flex flex-col justify-start items-start gap-y-3
+    max-lg:pb-6"
     >
-      <h3 className="text-2xl mb-6 ml-2">Find People</h3>
+      <h3 className="text-2xl mb-6 ml-2 font-medium">Find People</h3>
       {filteredUsers &&
         filteredUsers.map((u, index) => {
           if (sentRequests && receivedRequests && userData) {
@@ -67,14 +68,16 @@ const FindSection = () => {
               <div
                 key={index}
                 className={`flex flex-row justify-start items-center w-full
-                user-card-accent ${user && u.uid === user.uid ? "hidden" : ""}`}
+                user-card-accent bg-primary border-primary ${user && u.uid === user.uid ? "hidden" : ""}`}
               >
                 <UserCard
                   onClick={() => {
                     onChangeCurrentUser(u);
                     onModalOpen();
                   }}
-                  className={`flex-grow`}
+                  className="flex-grow"
+                  statusClassName="bg-white text-black
+                px-6 py-1 rounded-xl -ml-1 mt-1"
                   status={`Compatibility ${Math.round(compatibility * 100)}%`}
                   user={u}
                 ></UserCard>
