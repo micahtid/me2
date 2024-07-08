@@ -73,3 +73,67 @@ export const getCompatibility = (user1: DocumentData, user2: DocumentData) => {
 
     return totalCompatibility;
 }
+
+
+//////////////////////////////
+
+interface Timestamp {
+    seconds: number;
+    nanoseconds: number;
+}
+
+export const convertTimestampToDate = (timestamp: Timestamp): Date => {
+    // Extract the seconds and nanoseconds
+    const { seconds, nanoseconds } = timestamp;
+    const milliseconds = seconds * 1000 + Math.floor(nanoseconds / 1000000);
+    
+    // Create a new Date object using the milliseconds
+    const date = new Date(milliseconds);
+    
+    return date;
+};
+
+export const sortMessagesByDate = (messages: DocumentData[]) => {
+    // Convert messages to include the date
+    let dates: number[] = [];
+  
+    messages.forEach((message) => {
+      dates.push(convertTimestampToDate(message.createdAt).getDate());
+    });
+  
+    const result: { date: Date | null, messages: DocumentData[] }[] = [];
+    let resultObject: { date: Date | null, messages: DocumentData[] } = { date: null, messages: [] };
+  
+    messages.forEach((message, index) => {
+      if (index === 0) {
+        resultObject.date = convertTimestampToDate(message.createdAt);
+        resultObject.messages.push(message);
+      } else {
+        if (dates[index] !== dates[index - 1]) {
+          result.push(resultObject);
+          resultObject = { date: convertTimestampToDate(message.createdAt), messages: [] };
+          resultObject.messages.push(message);
+        } else {
+          resultObject.date = convertTimestampToDate(message.createdAt);
+          resultObject.messages.push(message);
+        }
+      }
+    });
+  
+    // Push the last resultObject if it has messages
+    if (resultObject.messages.length > 0) {
+      result.push(resultObject);
+    }
+  
+    return result;
+  };
+
+//////////////////////////////
+
+export const shuffleArray = (array: DocumentData[]) => {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}

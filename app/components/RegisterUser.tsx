@@ -181,7 +181,6 @@ const RegisterUser = () => {
                 borderColor: 'rgba(198, 203, 210, 0.6)',
                 borderWidth: '2px',
                 borderRadius: '10px',
-                height: '45px',
                 marginTop: '-1px',
                 color: 'rgba(198, 203, 210, 0.6)',
                 fontSize: '15.5px',

@@ -69,17 +69,23 @@ const RequestSection = () => {
       <div className="w-full flex flex-row justify-start items-center gap-x-2 mb-5">
         <button
           onClick={() => setSection("sent")}
-          className={`bg-gray-200 rounded-lg p-2 ${section === "sent" ? "font-bold" : ""}`}
+          className={`bg-gray-100 rounded-lg p-2 text-black/20 ${section === "sent" ? "text-black/80" : ""}`}
         >
           Sent
         </button>
         <button
           onClick={() => setSection("received")}
-          className={`bg-gray-200 rounded-lg p-2 ${section === "received" ? "font-bold" : ""}`}
+          className={`bg-gray-100 rounded-lg p-2 text-black/20 ${section === "received" ? "text-black/80" : ""}`}
         >
           Received
         </button>
       </div>
+        {requestList?.length === 0 && (
+          <div className="w-full h-full
+          flex justify-center items-center">
+            <p>Oops! No requests right now...</p>
+          </div>
+        )}
         {requestList?.map((request, index) => (
           <div key={index} className="flex flex-row justify-start items-center w-full
           user-card-accent border-secondary">

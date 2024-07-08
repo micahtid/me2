@@ -44,7 +44,7 @@ const Home = () => {
     return <Loader />;
   }
 
-  console.log(isUserLoaded, isUserRegistered)
+  // console.log(isUserLoaded, isUserRegistered)
 
   return (
     <div className="scroll-smooth ">

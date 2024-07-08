@@ -28,7 +28,8 @@ const ChatSection = () => {
   }
 
   return (
-    <div className="flex flex-col h-[100vh] w-full px-4 pb-4 overflow-hidden">
+    <div className="flex flex-col h-[100vh] w-full px-4 pb-4 overflow-hidden
+    bg-white">
       {currentUser && (
         <h3 className="text-2xl font-medium">{currentUser.userName}</h3>
       )}

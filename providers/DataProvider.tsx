@@ -39,7 +39,7 @@ export const DataContextProvider = (props: Props) => {
 
     useEffect(() => {
       const unsubscribe = auth.onAuthStateChanged((user) => {
-        console.log(user)
+        // console.log(user)
         setUser(user);
       });
       return () => unsubscribe();

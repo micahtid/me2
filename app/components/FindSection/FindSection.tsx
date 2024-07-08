@@ -9,10 +9,15 @@ import { IoPersonAddSharp } from "react-icons/io5";
 import { createRequest } from "@/app/utils/requestfunctions";
 import { useData } from "@/providers/DataProvider";
 import { useUserModal } from "@/hooks/useUserModal";
-import { getCompatibility } from "@/app/utils/utilfunctions";
+import { getCompatibility, shuffleArray } from "@/app/utils/utilfunctions";
+
+import { FaDice } from "react-icons/fa";
 
 // Component Imports
 import UserCard from "../UserCard";
+
+// To Do: Increase Efficiency Of Switching Display Users
+// To Do: Clean Up Code; A Lot of UseEffect(s)
 
 const FindSection = () => {
   const { onChangeCurrentUser, onModalOpen } = useUserModal();
@@ -22,11 +27,15 @@ const FindSection = () => {
   const [filteredUsers, setFilteredUsers] = useState<DocumentData[]>([]);
   const [userData, setUserData] = useState<DocumentData | undefined>(undefined);
 
+  ////////
+  const [section, setSection] = useState("filtered");
+  ////////
+
   useEffect(() => {
     if (user && users) {
       setUserData(users?.find((u) => u.uid === user?.uid));
     }
-  }, [users]);
+  }, [users, user]);
 
   useEffect(() => {
     if (users && activeUsers) {
@@ -46,9 +55,37 @@ const FindSection = () => {
     max-lg:pb-6"
     >
       <h3 className="text-2xl mb-6 ml-2 font-medium">Find People</h3>
+      <div className="w-full flex flex-row justify-between items-center gap-x-2 mb-5">
+        <div className="flex flex-row gap-x-2">
+          <button
+            onClick={() => setSection("filtered")}
+            className={`bg-gray-100 rounded-lg p-2 text-black/20
+              ${section === "filtered" ? "text-black/80" : ""}`}
+          >
+            Filtered Users
+          </button>
+          <button
+            onClick={() => setSection("all")}
+            className={`bg-gray-100 rounded-lg p-2 text-black/20
+              ${section === "all" ? "text-black/80" : ""}`}
+          >
+            All Users
+          </button>
+        </div>
+        <button className="mr-2
+        bg-gray-200 rounded-lg p-2
+        flex justify-center items-center"
+        onClick={() => {
+          const shuffledArr = shuffleArray([...filteredUsers]);
+          setFilteredUsers(shuffledArr);
+        }}>
+          <FaDice size={25} className="text-black/60" />
+        </button>
+      </div>
       {filteredUsers &&
         filteredUsers.map((u, index) => {
           if (sentRequests && receivedRequests && userData) {
+        
             const requests = [...sentRequests, ...receivedRequests];
 
             const compatibility = getCompatibility(userData, u);
@@ -60,13 +97,13 @@ const FindSection = () => {
                   request.ids.includes(user.uid) && request.ids.includes(u.uid)
               );
 
-            if (compatibility < 0.65) {
+            if (compatibility < 0.65 && section === "filtered") {
               return;
             }
 
             return (
               <div
-                key={index}
+                key={u.uid} // Use a unique key
                 className={`flex flex-row justify-start items-center w-full
                 user-card-accent bg-primary border-primary ${user && u.uid === user.uid ? "hidden" : ""}`}
               >
