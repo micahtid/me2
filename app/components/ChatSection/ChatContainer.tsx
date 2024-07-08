@@ -36,9 +36,9 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ sending, setSending, targ
   }, [currentChat]);
 
   useEffect(() => {
-    if (targetRef.current) {
-      targetRef.current.scrollIntoView({ behavior: "smooth" });
-    }
+    setTimeout(() => {
+      targetRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, 100);
   }, [messages]);
 
   useEffect(() => {
@@ -66,7 +66,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ sending, setSending, targ
                 ))}
               </div>
             ))}
-            <div ref={targetRef}></div>
+            <div className="" ref={targetRef}></div>
           </div>
         )}
       </div>

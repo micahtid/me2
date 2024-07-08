@@ -4,7 +4,6 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { DocumentData } from "firebase/firestore";
 
 import { initializeFirebase, getUserAuth } from "@/app/utils/databasefunctions";
-import { getChats } from "@/app/utils/chatfunctions";
 import { getUsers, getActiveUsers } from "@/app/utils/usersfunctions";
 import { getRequests } from "@/app/utils/requestfunctions";
 import { Auth, User } from "firebase/auth";
@@ -13,7 +12,6 @@ import { FirebaseApp } from "firebase/app";
 type DataContextType = {
   user: null | undefined | DocumentData;
   users: null | undefined | DocumentData[];
-  chats: undefined | DocumentData[];
   sentRequests: undefined | null | DocumentData[];
   receivedRequests: undefined | null | DocumentData[];
   activeUsers: undefined | DocumentData[]; // Added activeUsers
@@ -30,7 +28,6 @@ export interface Props {
 export const DataContextProvider = (props: Props) => {
   const app = initializeFirebase();
   const auth = getUserAuth(true);
-  const chats = getChats(true);
 
   ////////////////////////////////////////////
   ////////////////////////////////////////////
@@ -104,7 +101,6 @@ export const DataContextProvider = (props: Props) => {
   const value = {
     user,
     users,
-    chats,
     sentRequests,
     receivedRequests,
     activeUsers // Added activeUsers to the value
