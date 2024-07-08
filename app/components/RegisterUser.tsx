@@ -88,7 +88,7 @@ const RegisterUser = () => {
             Welcome to Me2!
           </h3>
           <p className="text-white/70">
-            The platform where you'll connect with like-minded individuals.
+            The platform where you will connect with like-minded individuals.
           </p>
         </div>
         <form
@@ -99,10 +99,16 @@ const RegisterUser = () => {
         max-xl:px-28 max-lg:px-12 
         max-xl:pt-64 max-lg:pt-64 max-md:py-96"
         >
-          <h3 className="dynamic-subheading font-semibold text-center
-          max-md:text-left">Register</h3>
-          <p className="dynamic-text text-gray-700 italic text-center
-          max-md:text-left">
+          <h3
+            className="dynamic-subheading font-semibold text-center
+          max-md:text-left"
+          >
+            Register
+          </h3>
+          <p
+            className="dynamic-text text-gray-700 italic text-center
+          max-md:text-left"
+          >
             Me2 ensures your data is kept safe and not used in malpractice.
           </p>
           <input
@@ -129,13 +135,13 @@ const RegisterUser = () => {
               styles={{
                 control: (baseStyles: any, state: any) => ({
                   ...baseStyles,
-                  borderColor: 'rgba(198, 203, 210, 0.6)',
-                  borderWidth: '2px',
-                  borderRadius: '10px',
-                  height: '45px',
-                  marginTop: '-1px',
-                  color: 'rgba(198, 203, 210, 0.6)',
-                  fontSize: '15.5px',
+                  borderColor: "rgba(198, 203, 210, 0.6)",
+                  borderWidth: "2px",
+                  borderRadius: "10px",
+                  height: "45px",
+                  marginTop: "-1px",
+                  color: "rgba(198, 203, 210, 0.6)",
+                  fontSize: "15.5px",
                 }),
               }}
             />
@@ -152,13 +158,13 @@ const RegisterUser = () => {
             styles={{
               control: (baseStyles: any, state: any) => ({
                 ...baseStyles,
-                borderColor: 'rgba(198, 203, 210, 0.6)',
-                borderWidth: '2px',
-                borderRadius: '10px',
-                height: '45px',
-                marginTop: '-1px',
-                color: 'rgba(198, 203, 210, 0.6)',
-                fontSize: '15.5px',
+                borderColor: "rgba(198, 203, 210, 0.6)",
+                borderWidth: "2px",
+                borderRadius: "10px",
+                height: "45px",
+                marginTop: "-1px",
+                color: "rgba(198, 203, 210, 0.6)",
+                fontSize: "15.5px",
               }),
             }}
           />
@@ -178,17 +184,19 @@ const RegisterUser = () => {
             styles={{
               control: (baseStyles: any, state: any) => ({
                 ...baseStyles,
-                borderColor: 'rgba(198, 203, 210, 0.6)',
-                borderWidth: '2px',
-                borderRadius: '10px',
-                marginTop: '-1px',
-                color: 'rgba(198, 203, 210, 0.6)',
-                fontSize: '15.5px',
+                borderColor: "rgba(198, 203, 210, 0.6)",
+                borderWidth: "2px",
+                borderRadius: "10px",
+                marginTop: "-1px",
+                color: "rgba(198, 203, 210, 0.6)",
+                fontSize: "15.5px",
               }),
             }}
           />
-          <p className="dynamic-text text-gray-700 italic text-center
-          max-md:text-left">
+          <p
+            className="dynamic-text text-gray-700 italic text-center
+          max-md:text-left"
+          >
             *Fill out at least one of these forms below.
           </p>
           <input
@@ -209,8 +217,10 @@ const RegisterUser = () => {
             onChange={(e) => setSnap(e.target.value)}
             className="input-field"
           />
-          <div className="w-full flex justify-end
-          max-md:justify-start">
+          <div
+            className="w-full flex justify-end
+          max-md:justify-start"
+          >
             <button
               className="dynamic-text font-semibold 
               bg-[#FFD99F] py-2 px-6 rounded-md mt-5"
