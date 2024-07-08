@@ -38,7 +38,7 @@ export const getFireStore = (alreadyInit: boolean) => {
 export const signIn = () => {
   const auth = getUserAuth(false);
   const provider = new GoogleAuthProvider();
-  signInWithRedirect(auth, provider);
+  signInWithPopup(auth, provider);
 }
 
 export const signOut = () => {

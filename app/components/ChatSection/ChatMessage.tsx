@@ -20,7 +20,7 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ document, className }) => {
       w-full flex flex-row`, className)}
     >
       <p className={`${messageClass == "sent" ? "bg-blue-400/50" : "bg-gray-500/10"}
-      p-3 rounded-lg max-w-[60%]`}>
+      p-3 rounded-2xl max-w-[60%`}>
         {document.text}
       </p>
     </div>

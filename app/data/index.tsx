@@ -1,3 +1,14 @@
+
+import { FaHome } from "react-icons/fa";
+import { BsFillPeopleFill } from "react-icons/bs";
+import { BiSolidHelpCircle } from "react-icons/bi";
+
+export const navItems = [
+    { text: 'Home', icon: <FaHome size={20} /> },
+    { text: 'About', icon: <BsFillPeopleFill size={20} /> },
+    { text: 'Help', icon: <BiSolidHelpCircle size={20} /> },
+  ];
+
 export const locations = [
     { value: 'as', label: 'Asia' },
     { value: 'af', label: 'Africa' },

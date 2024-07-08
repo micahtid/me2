@@ -21,10 +21,12 @@ const ConfirmationModal = () => {
 
   return (
     <Modal title="Confirmation" isOpen={isModalOpen} onChange={onChange}>
-        <div className="flex flex-col justify-start items-center">
-            <p>Are you sure you want to remove remove {userName} </p>
-            <div className="flex justify-row w-full ">
-                <button className="px-2 py-1" onClick={() => {
+        <div className="flex flex-col justify-start items-center gap-y-4">
+            <p className="text-left">Are you sure you want to close your chat with 
+                <span className="font-semibold"> {userName}</span>?</p>
+            <div className="flex justify-row w-full gap-x-2">
+                <button className="px-4 py-1 bg-accent
+                rounded-lg" onClick={() => {
                     if (uid1 && uid2) {
                         const chatid =
                         uid1 > uid2 ? uid1 + uid2 : uid2 + uid1;
@@ -35,7 +37,8 @@ const ConfirmationModal = () => {
                         onModalClose();
                     }
                 }}>Yes</button>
-                <button className="px-2 py-1" onClick={() => {
+                <button className="px-4 py-1 bg-secondary
+                rounded-lg" onClick={() => {
                     onModalClose();
                 }}>No</button>
             </div>

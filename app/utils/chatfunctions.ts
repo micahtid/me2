@@ -1,4 +1,4 @@
-import { updateDoc, addDoc, query, orderBy, serverTimestamp, DocumentData, onSnapshot, collection, where, getDocs, deleteDoc } from "firebase/firestore";
+import { updateDoc, addDoc, query, orderBy, serverTimestamp, DocumentData, onSnapshot, collection, where, getDocs, deleteDoc, limit } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { initializeFirebase, getUserAuth, getFireStore } from "./databasefunctions";
 
@@ -132,3 +132,42 @@ export const editSocialStatus = async (chatid: string, uid: string, status: bool
         await updateDoc(doc.ref, { socialStatus });
     });
 };
+
+export const checkNotificationStatus = (
+    chatids: string[],
+    uid: string,
+    setNotifStatus: (status: (prevStatus: { [key: string]: boolean }) => { [key: string]: boolean }) => void
+  ) => {
+    const app = initializeFirebase();
+    const firestore = getFireStore(true);
+
+    const unsubscribes: (() => void)[] = [];
+  
+    for (const chatid of chatids) {
+      // Access the messages collection within the chat_data document
+      const messagesCollectionRef = collection(firestore, `chat_data/${chatid}/messages`);
+  
+      // Query to get the last added message document, ordered by createdAt
+      const messagesQuery = query(messagesCollectionRef, orderBy('createdAt', 'desc'), limit(1));
+  
+      const unsubscribe = onSnapshot(messagesQuery, (messagesSnapshot) => {
+        if (messagesSnapshot.empty) {
+          setNotifStatus((prevStatus) => ({ ...prevStatus, [chatid]: false }));
+          return;
+        }
+  
+        // Assuming we have at least one message, get the latest message document
+        const latestMessageDoc = messagesSnapshot.docs[0];
+        const latestMessageData = latestMessageDoc.data();
+  
+        // Check if the uid matches uid1 in the latest message document
+        setNotifStatus((prevStatus) => ({ ...prevStatus, [chatid]: latestMessageData.uid !== uid }));
+      });
+  
+      unsubscribes.push(unsubscribe);
+    }
+  
+    return () => {
+      unsubscribes.forEach((unsubscribe) => unsubscribe());
+    };
+  };

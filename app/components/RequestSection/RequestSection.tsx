@@ -65,29 +65,37 @@ const RequestSection = () => {
 
   return (
     <div className="ml-2 flex flex-col gap-y-3">
-      <h3 className="text-2xl mb-6">Manage Requests</h3>
+      <h3 className="text-2xl mb-6 font-medium">Manage Requests</h3>
       <div className="w-full flex flex-row justify-start items-center gap-x-2 mb-5">
         <button
           onClick={() => setSection("sent")}
-          className={`bg-gray-200 rounded-lg p-2 ${section === "sent" ? "font-bold" : ""}`}
+          className={`bg-gray-100 rounded-lg p-2 text-black/20 ${section === "sent" ? "text-black/80" : ""}`}
         >
           Sent
         </button>
         <button
           onClick={() => setSection("received")}
-          className={`bg-gray-200 rounded-lg p-2 ${section === "received" ? "font-bold" : ""}`}
+          className={`bg-gray-100 rounded-lg p-2 text-black/20 ${section === "received" ? "text-black/80" : ""}`}
         >
           Received
         </button>
       </div>
+        {requestList?.length === 0 && (
+          <div className="w-full h-full
+          flex justify-center items-center">
+            <p>Oops! No requests right now...</p>
+          </div>
+        )}
         {requestList?.map((request, index) => (
           <div key={index} className="flex flex-row justify-start items-center w-full
-          user-card-accent">
+          user-card-accent border-secondary">
             <UserCard
               onClick={() => {
                 // console.log("Here");
               }}
-              className={`flex-grow`}
+              className="flex-grow"
+              statusClassName="bg-white text-black
+              px-6 py-1 rounded-xl -ml-1 mt-1"
               status="Compatibility 80%"
               user={request}
             />
