@@ -40,12 +40,11 @@ const Settings = () => {
   // Setting User Value
   useEffect(() => {
     if (users && user) {
-      setUserData(users.find(u => u.uid === user.uid));
+      setUserData(users.find((u) => u.uid === user.uid));
       setLoading(false);
     }
-
   }, [users, user]);
-  
+
   // Setting Default Values
   useEffect(() => {
     if (userData) {
@@ -88,24 +87,31 @@ const Settings = () => {
   };
 
   if (loading) {
-    return (
-      <Loader />
-    );
+    return <Loader />;
   }
 
   return (
-    <div className="bg-[#D5E6FF] w-[100vw] h-[100vh]
-    flex justify-center items-center">
-      <div className="w-[calc(100vw-8rem)] h-[calc(100vh-4rem)]
+    <div
+      className="bg-[#D5E6FF] w-[100vw] h-[100vh]
+    flex justify-center items-center"
+    >
+      <div
+        className="w-[calc(100vw-8rem)] h-[calc(100vh-4rem)]
       flex flex-row shadow-md
       max-md:w-full max-md:h-full
-      max-md:flex-col">
-        <div className="w-[500px] h-full bg-[#54ACFD]
+      max-md:flex-col"
+      >
+        <div
+          className="w-[500px] h-full bg-[#54ACFD]
         flex flex-col justify-center items-start gap-y-2 px-16
         max-md:max-w-[100vw] max-md:w-full
         max-md:py-14
-        max-xl:w-[400px] max-lg:w-[300px]">
-          <Button className="mb-6 shadow-none text-sm" onClick={() => router.replace("./")}>
+        max-xl:w-[400px] max-lg:w-[300px]"
+        >
+          <Button
+            className="mb-6 shadow-none text-sm"
+            onClick={() => router.replace("./")}
+          >
             <FaHome size={20} color="white" />
           </Button>
           <h3 className="dynamic-subheading text-white font-semibold">
@@ -115,12 +121,17 @@ const Settings = () => {
             Me2 ensures your data is kept safe and not used in malpractice.
           </p>
         </div>
-        <form onSubmit={handleSubmit} className="flex-grow h-full bg-white px-52 pt-40 pb-20  
+        <form
+          onSubmit={handleSubmit}
+          className="flex-grow h-full bg-white px-52 pt-40 pb-20  
         flex flex-col justify-center items-center gap-y-3 overflow-y-scroll
         max-md:overflow-y-visible max-md:items-start
         max-xl:px-28 max-lg:px-12 
-        max-xl:pt-64 max-lg:pt-64 max-md:py-96">
-          <h3 className="dynamic-subheading font-semibold text-center max-md:text-left">Edit Your Information</h3>
+        max-xl:pt-64 max-lg:pt-64 max-md:py-96"
+        >
+          <h3 className="dynamic-subheading font-semibold text-center max-md:text-left">
+            Edit Your Information
+          </h3>
           <p className="dynamic-text text-gray-700 italic text-center max-md:text-left">
             Me2 ensures your data is kept safe and not used in malpractice.
           </p>
@@ -150,13 +161,13 @@ const Settings = () => {
               styles={{
                 control: (baseStyles: any, state: any) => ({
                   ...baseStyles,
-                  borderColor: 'rgba(198, 203, 210, 0.6)',
-                  borderWidth: '2px',
-                  borderRadius: '10px',
-                  height: '45px',
-                  marginTop: '-1px',
-                  color: 'rgba(198, 203, 210, 0.6)',
-                  fontSize: '15.5px',
+                  borderColor: "rgba(198, 203, 210, 0.6)",
+                  borderWidth: "2px",
+                  borderRadius: "10px",
+                  height: "45px",
+                  marginTop: "-1px",
+                  color: "rgba(198, 203, 210, 0.6)",
+                  fontSize: "15.5px",
                 }),
               }}
             />
@@ -173,13 +184,13 @@ const Settings = () => {
             styles={{
               control: (baseStyles: any, state: any) => ({
                 ...baseStyles,
-                borderColor: 'rgba(198, 203, 210, 0.6)',
-                borderWidth: '2px',
-                borderRadius: '10px',
-                height: '45px',
-                marginTop: '-1px',
-                color: 'rgba(198, 203, 210, 0.6)',
-                fontSize: '15.5px',
+                borderColor: "rgba(198, 203, 210, 0.6)",
+                borderWidth: "2px",
+                borderRadius: "10px",
+                height: "45px",
+                marginTop: "-1px",
+                color: "rgba(198, 203, 210, 0.6)",
+                fontSize: "15.5px",
               }),
             }}
           />
@@ -199,12 +210,12 @@ const Settings = () => {
             styles={{
               control: (baseStyles: any, state: any) => ({
                 ...baseStyles,
-                borderColor: 'rgba(198, 203, 210, 0.6)',
-                borderWidth: '2px',
-                borderRadius: '10px',
-                marginTop: '-1px',
-                color: 'rgba(198, 203, 210, 0.6)',
-                fontSize: '15.5px',
+                borderColor: "rgba(198, 203, 210, 0.6)",
+                borderWidth: "2px",
+                borderRadius: "10px",
+                marginTop: "-1px",
+                color: "rgba(198, 203, 210, 0.6)",
+                fontSize: "15.5px",
               }),
             }}
           />

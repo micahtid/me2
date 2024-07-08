@@ -1,17 +1,5 @@
 import { updateDoc, addDoc, query, orderBy, serverTimestamp, DocumentData, onSnapshot, collection, where, getDocs, deleteDoc, limit } from "firebase/firestore";
-import { useCollectionData } from "react-firebase-hooks/firestore";
 import { initializeFirebase, getUserAuth, getFireStore } from "./databasefunctions";
-
-
-export const getChats = (alreadyInit: boolean) => {
-    const app = initializeFirebase();
-    const firestore = getFireStore(true);
-
-    const chatsRef = collection(firestore, "chat_data");
-    const chatsQuery = query(chatsRef);
-    const [chats] = useCollectionData(chatsQuery);
-    return chats;
-}
 
 export const getChatData = (chatid: string, setMessages: (msgs: DocumentData[]) => void, setIsLoaded: (loaded: boolean) => void) => {
     const app = initializeFirebase();

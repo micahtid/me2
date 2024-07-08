@@ -47,7 +47,7 @@ const Home = () => {
   // console.log(isUserLoaded, isUserRegistered)
 
   return (
-    <div className="scroll-smooth ">
+    <div className="">
       <section>
         {isUserLoaded && isUserRegistered ? (
           <div className="">
