@@ -36,7 +36,7 @@ const UserDisplay = () => {
 
       setTimeLeft((prevTimeLeft) => ({
         ...prevTimeLeft, 
-        [chatid]: Math.floor(hoursLeft ?? 0),
+        [chatid]: Math.floor(hoursLeft ?? 100),
       }));
     };
 
@@ -75,6 +75,8 @@ const UserDisplay = () => {
 
           // Handle chat deletion based on time left
           if (timeLeft[chatid] <= 0) {
+            console.log(timeLeft[chatid])
+
             deleteChat(chatid);
             removeUserFromUserChats(user.uid, u.uid);
             removeUserFromUserChats(u.uid, user.uid);

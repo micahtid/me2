@@ -48,8 +48,8 @@ const QuickLinks = () => {
                         className="flex flex-col justify-center items-center"
                         onClick={link.func}
                     >
-                        <div className={`${currentPage === link.label ? 'bg-white' : ''}
-                        transition-all duration-75 p-2 rounded-lg`}>
+                        <div className={`${currentPage === link.label ? 'bg-white/70' : ''}
+                        transition-all duration-75 p-2 rounded-lg text-black/90`}>
                             {link.icon}
                         </div>
                     </button>

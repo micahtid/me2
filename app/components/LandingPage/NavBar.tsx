@@ -15,7 +15,9 @@ const NavBar = () => {
     <div className='w-full px-8 py-4
     flex flex-row justify-between items-center
     max-lg:hidden'>
-      <div>Logo</div>
+      <div>
+        <img src="favicon.ico" width={35} className="" />
+      </div>
       <div className="flex flex-row justify-between items-center gap-x-6">
         {navItems.map((item, index) => (
           <a key={index}

@@ -22,7 +22,7 @@ const Hero = () => {
             text-white font-semibold"
             onClick={signIn}
           >
-            Sing Up
+            Sign Up
           </Button>
         </div>
       </div>

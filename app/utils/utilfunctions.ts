@@ -83,6 +83,10 @@ interface Timestamp {
 }
 
 export const convertTimestampToDate = (timestamp: Timestamp): Date => {
+    if (!timestamp) {
+        return new Date();
+    }
+
     // Extract the seconds and nanoseconds
     const { seconds, nanoseconds } = timestamp;
     const milliseconds = seconds * 1000 + Math.floor(nanoseconds / 1000000);

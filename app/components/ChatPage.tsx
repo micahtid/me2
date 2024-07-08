@@ -30,15 +30,15 @@ const ChatPage = () => {
     flex flex-row gap-x-4 p-4
     max-lg:flex-col"
     >
-      <div className="my-5 bg-primary rounded-xl py-10
+      <div className="my-3 bg-primary rounded-xl py-10
       max-lg:py-4 max-lg:my-2">
         <QuickLinks />
       </div>
-      <div className="my-5 bg-primary rounded-xl px-6 pt-12
+      <div className="my-3 bg-primary rounded-xl px-6 pt-12
       max-lg:my-2">
         <UserDisplay /> 
       </div>
-      <div className="my-5 flex flex-col gap-y-8 bg-gray-200/10 rounded-xl px-6 pt-12 flex-grow
+      <div className="my-3 flex flex-col gap-y-8 bg-gray-200/10 rounded-xl px-6 pt-12 flex-grow
       border-[3px] border-gray-200
       max-lg:my-2 bg-white">
         {
