@@ -21,7 +21,7 @@ const ChatSection = () => {
 
   if (!currentChat) {
     return (
-      <div className="flex justify-center items-center h-full">
+      <div className="flex justify-center items-center h-full text-4xl font-bold">
         Please select a chat!
       </div>
     )

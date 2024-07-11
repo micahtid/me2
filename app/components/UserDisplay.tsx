@@ -61,7 +61,7 @@ const UserDisplay = () => {
 
   return (
     <div className="flex flex-col justify-start items-start gap-y-3 min-w-[350px] h-full overflow-y-auto no-scrollbar max-lg:pb-6">
-      <h3 className="text-2xl mb-6 ml-2 font-medium">Chats</h3>
+      <h3 className="text-4xl mb-6 ml-2 font-semibold">Chats</h3>
       {activeUsers &&
         activeUsers.map((u, index) => {
           if (!user) return null;

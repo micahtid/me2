@@ -96,7 +96,7 @@ const Settings = () => {
     flex justify-center items-center"
     >
       <div
-        className="w-[calc(100vw-8rem)] h-[calc(100vh-4rem)]
+        className="w-[1500px] h-[1000px]
       flex flex-row shadow-md
       max-md:w-full max-md:h-full
       max-md:flex-col"
@@ -108,18 +108,18 @@ const Settings = () => {
         max-md:py-14
         max-xl:w-[400px] max-lg:w-[300px]"
         >
+          <h3 className="dynamic-subheading text-white font-semibold">
+            Edit Your Information
+          </h3>
+          <p className="text-white mt-[10px]">
+            Me2 ensures your data is kept safe and not used in malpractice.
+          </p>
           <Button
-            className="mb-6 shadow-none text-sm"
+            className="shadow-none text-sm mt-[20px] ml-auto"
             onClick={() => router.replace("./")}
           >
             <FaHome size={20} color="white" />
           </Button>
-          <h3 className="dynamic-subheading text-white font-semibold">
-            Edit Your Information
-          </h3>
-          <p className="text-white/70">
-            Me2 ensures your data is kept safe and not used in malpractice.
-          </p>
         </div>
         <form
           onSubmit={handleSubmit}
@@ -129,10 +129,10 @@ const Settings = () => {
         max-xl:px-28 max-lg:px-12 
         max-xl:pt-64 max-lg:pt-64 max-md:py-96"
         >
-          <h3 className="dynamic-subheading font-semibold text-center max-md:text-left">
+          <h3 className="dynamic-subheading font-semibold text-center max-md:text-left mt-[-100px]">
             Edit Your Information
           </h3>
-          <p className="dynamic-text text-gray-700 italic text-center max-md:text-left">
+          <p className="dynamic-text text-gray-700 italic text-center max-md:text-left mt-[10px]">
             Me2 ensures your data is kept safe and not used in malpractice.
           </p>
           <input
@@ -140,15 +140,15 @@ const Settings = () => {
             value={userName}
             placeholder="Username"
             onChange={(e) => setUserName(e.target.value)}
-            className="input-field"
+            className="input-field mt-[10px] w-full hover:border-[#939393] hover:border-[1px] ease-in-out duration-100"
           />
-          <div className="w-full grid grid-cols-2 gap-x-3">
+          <div className="w-full grid grid-cols-2 gap-x-[10px] mt-[5px]">
             <input
               type="number"
               value={userAge}
               placeholder="Enter Here..."
               onChange={(e) => setUserAge(e.target.value)}
-              className="input-field"
+              className="input-field hover:border-[#939393] hover:border-[1px] ease-in-out duration-100"
             />
             <Select
               options={locations}
@@ -168,12 +168,16 @@ const Settings = () => {
                   marginTop: "-1px",
                   color: "rgba(198, 203, 210, 0.6)",
                   fontSize: "15.5px",
+                  boxShadow: state.isFocused ? "0 0 0 0 rgba(198, 203, 210, 0.6)" : "none",
+                  "&:hover": {
+                    borderColor: "#a1a1a1",
+                  },
                 }),
               }}
             />
           </div>
           <Select
-            className="w-full"
+            className="w-full mt-[6px]"
             options={curriculums}
             value={curriculums.find((curr) => curr.value === userCurriculum)}
             onChange={(curr) => {
@@ -191,13 +195,17 @@ const Settings = () => {
                 marginTop: "-1px",
                 color: "rgba(198, 203, 210, 0.6)",
                 fontSize: "15.5px",
+                boxShadow: state.isFocused ? "0 0 0 0 rgba(198, 203, 210, 0.6)" : "none",
+                "&:hover": {
+                  borderColor: "#a1a1a1",
+                },
               }),
             }}
           />
           <Select
             options={hobbies}
             isMulti
-            className="w-full"
+            className="w-full mt-[5px]"
             value={hobbies.filter((hobby) => userHobbies.includes(hobby.value))}
             onChange={(hobbies) => {
               if (hobbies) {
@@ -213,9 +221,14 @@ const Settings = () => {
                 borderColor: "rgba(198, 203, 210, 0.6)",
                 borderWidth: "2px",
                 borderRadius: "10px",
+                height: "45px",
                 marginTop: "-1px",
                 color: "rgba(198, 203, 210, 0.6)",
                 fontSize: "15.5px",
+                boxShadow: state.isFocused ? "0 0 0 0 rgba(198, 203, 210, 0.6)" : "none",
+                "&:hover": {
+                  borderColor: "#a1a1a1",
+                },
               }),
             }}
           />
@@ -224,21 +237,21 @@ const Settings = () => {
             value={instagram}
             placeholder="Instagram"
             onChange={(e) => setInstagram(e.target.value)}
-            className="input-field"
+            className="input-field hover:border-[#939393] hover:border-[1px] ease-in-out duration-100 mt-[5px]"
           />
           <input
             type="text"
             value={discord}
             placeholder="Discord"
             onChange={(e) => setDiscord(e.target.value)}
-            className="input-field"
+            className="input-field hover:border-[#939393] hover:border-[1px] ease-in-out duration-100 mt-[5px]"
           />
           <input
             type="text"
             value={snap}
             placeholder="Snap Chat"
             onChange={(e) => setSnap(e.target.value)}
-            className="input-field"
+            className="input-field hover:border-[#939393] hover:border-[1px] ease-in-out duration-100 mt-[5px]"
           />
           <div className="w-full flex justify-end max-md:justify-start">
             <button

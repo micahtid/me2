@@ -54,19 +54,19 @@ const FindSection = () => {
     flex flex-col justify-start items-start gap-y-3
     max-lg:pb-6"
     >
-      <h3 className="text-2xl mb-6 ml-2 font-medium">Find People</h3>
+      <h3 className="text-4xl mb-6 ml-2 font-semibold">Find People</h3>
       <div className="w-full flex flex-row justify-between items-center gap-x-2 mb-5">
-        <div className="flex flex-row gap-x-2">
+        <div className="flex flex-row gap-x-2 mt-[-5px]">
           <button
             onClick={() => setSection("filtered")}
-            className={`bg-gray-100 rounded-lg p-2 text-black/20
+            className={`bg-gray-100 rounded-lg p-2 text-black/20 text-xl font-medium hover:text-black/70 ease-in-out duration-500
               ${section === "filtered" ? "text-black/80" : ""}`}
           >
             Filtered Users
           </button>
           <button
             onClick={() => setSection("all")}
-            className={`bg-gray-100 rounded-lg p-2 text-black/20
+            className={`bg-gray-100 rounded-lg p-2 text-black/20 text-xl font-medium hover:text-black/70 ease-in-out duration-500
               ${section === "all" ? "text-black/80" : ""}`}
           >
             All Users
@@ -79,7 +79,7 @@ const FindSection = () => {
           const shuffledArr = shuffleArray([...filteredUsers]);
           setFilteredUsers(shuffledArr);
         }}>
-          <FaDice size={25} className="text-black/60" />
+          <FaDice size={30} className="text-black" />
         </button>
       </div>
       {filteredUsers &&
@@ -105,7 +105,7 @@ const FindSection = () => {
               <div
                 key={u.uid} // Use a unique key
                 className={`flex flex-row justify-start items-center w-full
-                user-card-accent bg-primary border-primary ${user && u.uid === user.uid ? "hidden" : ""}`}
+                user-card-accent bg-primary border-primary font-medium ${user && u.uid === user.uid ? "hidden" : ""}`}
               >
                 <UserCard
                   onClick={() => {
@@ -114,8 +114,8 @@ const FindSection = () => {
                   }}
                   className="flex-grow"
                   statusClassName="bg-white text-black
-                px-6 py-1 rounded-xl -ml-1 mt-1"
-                  status={`Compatibility ${Math.round(compatibility * 100)}%`}
+                px-6 py-1 rounded-[20px] -ml-1 mt-1"
+                  status={`Compatibility: ${Math.round(compatibility * 100)}%`}
                   user={u}
                 ></UserCard>
                 <button
@@ -130,7 +130,7 @@ const FindSection = () => {
                     }
                   }}
                 >
-                  <IoPersonAddSharp size={20} />
+                  <IoPersonAddSharp size={30} />
                 </button>
               </div>
             );

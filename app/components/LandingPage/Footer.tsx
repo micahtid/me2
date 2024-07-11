@@ -13,7 +13,7 @@ const Footer = () => {
           Sign up here with your email to get updates on incoming features for
           Me2!
         </p>
-        <form className="flex flex-row justify-center items-center gap-x-2 w-full max-w-[500px]">
+        <form className="flex flex-row justify-center items-center gap-x-2 w-full max-w-[500px] mt-[10px]">
               <input
                 type="text"
                 placeholder="Enter your email here"
