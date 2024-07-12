@@ -40,7 +40,7 @@ const QuickLinks = () => {
             max-lg:flex-row max-lg:gap-x-4 w-[70px]">
                 <button onClick={() => router.replace('./settings')}
                     className="max-lg:mr-8 mb-[15px]">
-                    <img src={user?.photoURL} alt="profile-picture" width={65} className="rounded-full" />
+                    <img src={user?.photoURL} alt="profile-picture" width={65} className="rounded-full max-lg:min-w-[65px] max-lg:mr-[-20px] max-lg:mb-[-15px]" />
                 </button>
                 {links.map((link, index) => (
                     <button
