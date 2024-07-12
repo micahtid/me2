@@ -54,19 +54,19 @@ const FindSection = () => {
     flex flex-col justify-start items-start gap-y-3
     max-lg:pb-6"
     >
-      <h3 className="text-4xl mb-6 ml-2 font-semibold">Find People</h3>
+      <h3 className="text-2xl mb-6 ml-2 font-semibold">Find People</h3>
       <div className="w-full flex flex-row justify-between items-center gap-x-2 mb-5">
         <div className="flex flex-row gap-x-2 mt-[-5px]">
           <button
             onClick={() => setSection("filtered")}
-            className={`bg-gray-100 rounded-lg p-2 text-black/20 text-xl font-medium hover:text-black/70 ease-in-out duration-500
+            className={`bg-gray-100 rounded-lg p-2 text-black/20 text-md font-medium hover:text-black/70 ease-in-out duration-500
               ${section === "filtered" ? "text-black/80" : ""}`}
           >
             Filtered Users
           </button>
           <button
             onClick={() => setSection("all")}
-            className={`bg-gray-100 rounded-lg p-2 text-black/20 text-xl font-medium hover:text-black/70 ease-in-out duration-500
+            className={`bg-gray-100 rounded-lg p-2 text-black/20 text-md font-medium hover:text-black/70 ease-in-out duration-500
               ${section === "all" ? "text-black/80" : ""}`}
           >
             All Users

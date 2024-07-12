@@ -39,27 +39,27 @@ const UserModal = () => {
         <div className="flex flex-row gap-x-2">
           <div className="flex flex-row flex-grow justify-center gap-x-2 items-center border-2 border-primary px-5 py-2 rounded-lg">
             <FaClock size={20}/>
-            <p className="font-medium text-xl">Age: {currentUser?.age}</p>
+            <p className="font-medium text-lg">Age: {currentUser?.age}</p>
           </div>
           <div className="flex flex-row flex-grow gap-x-2 justify-center items-center border-2 border-primary px-5 py-2 rounded-lg">
             <FaLocationDot size={20}/>
-            <p className="font-medium text-xl">Location: {locationLabel}</p>
+            <p className="font-medium text-lg">Location: {locationLabel}</p>
           </div>
         </div>
         <div className="flex flex-row gap-x-2 justify-start items-center
         bg-primary px-2 py-2 rounded-lg">
           <FaSchoolFlag size={20} className="ml-[15px]"/>
-          <p className="text-nowrap overflow-hidden font-medium text-xl px-5 py-2 ml-[-20px]">Curriculum: {curriculumLabel}</p>
+          <p className="text-nowrap overflow-hidden font-medium text-lg px-5 py-2 ml-[-20px]">Curriculum: {curriculumLabel}</p>
         </div>
         <div className="flex flex-col
         bg-primary px-2 py-2 rounded-lg">
           <div className="flex flex-row gap-x-2 justify-start items-center px-5 py-2">
             <FaRegSmile size={20} className="ml-[-5px]"/>
-            <p className="font-medium text-xl">Hobbies: </p>
+            <p className="font-medium text-lg">Hobbies: </p>
           </div>
           <div className="flex flex-row gap-x-2 flex-wrap px-5 py-2 mt-[-10px] ml-[-5px]">
             {hobbiesLabels.map((hobby: string, index: number) => (
-              <p key={index} className="text-right font-medium">
+              <p key={index} className="text-right font-medium text-lg">
                 {hobby};
               </p>
             ))}

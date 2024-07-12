@@ -97,7 +97,7 @@ const RegisterUser = () => {
         flex flex-col justify-center items-center gap-y-3 overflow-y-scroll
         max-md:overflow-y-visible max-md:items-start
         max-xl:px-28 max-lg:px-12 
-        max-xl:pt-64 max-lg:pt-64 max-md:py-96"
+        max-xl:pt-64 max-lg:pt-64 max-md:py-96 no-scrollbar"
         >
           <h3
             className="dynamic-subheading font-semibold text-center
