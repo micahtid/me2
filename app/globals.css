@@ -20,7 +20,8 @@
   }
 
   .input-field {
-    @apply ring-[1.25px] py-2 px-2 rounded-[10px] w-full ring-gray-300 outline-none;
+    @apply ring-[1.25px] py-2 px-2 rounded-[10px] w-full ring-gray-300 outline-none
+    hover:ring-[#B3B3B3] transition-all duration-100;
   }
 
   .user-card-accent {

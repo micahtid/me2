@@ -52,7 +52,7 @@ const FindSection = () => {
     <div
       className="
     flex flex-col justify-start items-start gap-y-3
-    max-lg:pb-6"
+    max-lg:pb-6 overflow-y-auto no-scrollbar pb-5"
     >
       <h3 className="text-2xl mb-6 ml-2 font-semibold">Find People</h3>
       <div className="w-full flex flex-row justify-between items-center gap-x-2 mb-5">
@@ -82,6 +82,12 @@ const FindSection = () => {
           <FaDice size={30} className="text-black" />
         </button>
       </div>
+      {filteredUsers?.length === 0 && (
+          <div className="w-full h-full
+          flex justify-center items-center text-lg font-bold mt-[40px]">
+            <p>Oops! It looks like you're a unique character.</p>
+          </div>
+        )}
       {filteredUsers &&
         filteredUsers.map((u, index) => {
           if (sentRequests && receivedRequests && userData) {
@@ -103,7 +109,7 @@ const FindSection = () => {
 
             return (
               <div
-                key={u.uid} // Use a unique key
+                key={index} // Use a unique key
                 className={`flex flex-row justify-start items-center w-full
                 user-card-accent bg-primary border-primary font-medium ${user && u.uid === user.uid ? "hidden" : ""}`}
               >
@@ -130,7 +136,7 @@ const FindSection = () => {
                     }
                   }}
                 >
-                  <IoPersonAddSharp size={30} />
+                  <IoPersonAddSharp size={22} />
                 </button>
               </div>
             );

@@ -64,7 +64,8 @@ const RequestSection = () => {
   };
 
   return (
-    <div className="ml-2 flex flex-col gap-y-3">
+    <div className="ml-2 flex flex-col gap-y-3
+    overflow-y-auto no-scrollbar pb-5">
       <h3 className="mb-6 font-semibold text-2xl">Manage Requests</h3>
       <div className="w-full flex flex-row justify-start items-center gap-x-2 mb-5">
         <button
@@ -114,7 +115,7 @@ const RequestSection = () => {
                 }
               }}
             >
-              {section === "sent" ? <IoCloseCircleSharp size={20} /> : <FaCheckCircle size={20} />}
+              {section === "sent" ? <IoCloseCircleSharp size={25} /> : <FaCheckCircle size={20} />}
             </button>
           </div>
         ))}

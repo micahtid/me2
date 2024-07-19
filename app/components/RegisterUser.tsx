@@ -68,7 +68,7 @@ const RegisterUser = () => {
     flex justify-center items-center"
     >
       <div
-        className="w-[1500px] h-[1000px]
+        className="w-[calc(100vw-8rem)] h-[calc(100vh-4rem)]
       flex flex-row shadow-md
       max-md:w-full max-md:h-full
       max-md:flex-col"
@@ -81,33 +81,32 @@ const RegisterUser = () => {
         max-xl:w-[400px] max-lg:w-[300px]
         "
         >
+          <Button onClick={signOut} className="mb-6 shadow-none text-sm">
+            Return
+          </Button>
           <h3 className="dynamic-subheading text-white font-semibold">
             Welcome to Me2!
           </h3>
-          <p className="text-white mt-[10px]">
-            The platform where you will connect and bond with like-minded individuals.
+          <p className="text-white/70">
+            The platform where you will connect with like-minded individuals.
           </p>
-          <Button onClick={signOut} className="shadow-none text-sm mt-[20px] ml-auto mr-[20px]">
-            Return
-          </Button>
         </div>
         <form
           onSubmit={handleSubmit}
           className="flex-grow h-full bg-white px-52 pt-40 pb-20  
         flex flex-col justify-center items-center gap-y-3 overflow-y-scroll
         max-md:overflow-y-visible max-md:items-start
-        max-xl:px-28 max-lg:px-12 
-        max-xl:pt-64 max-lg:pt-64 max-md:py-96 no-scrollbar"
+        max-xl:px-28 max-lg:px-12"
         >
           <h3
             className="dynamic-subheading font-semibold text-center
-          max-md:text-left mt-[-90px]"
+          max-md:text-left"
           >
             Register
           </h3>
           <p
             className="dynamic-text text-gray-700 italic text-center
-          max-md:text-left mt-[10px]"
+          max-md:text-left"
           >
             Me2 ensures your data is kept safe and not used in malpractice.
           </p>
@@ -115,14 +114,14 @@ const RegisterUser = () => {
             type="text"
             placeholder="Username"
             onChange={(e) => setUserName(e.target.value)}
-            className="input-field mt-[10px] hover:border-[#939393] hover:border-[1px] ease-in-out duration-100"
+            className="input-field"
           />
-          <div className="w-full grid grid-cols-2 gap-x-[10px] mt-[5px]">
+          <div className="w-full grid grid-cols-2 gap-x-3">
             <input
               type="number"
               placeholder="Age"
               onChange={(e) => setUserAge(e.target.value)}
-              className="input-field hover:border-[#939393] hover:border-[1px] ease-in-out duration-100"
+              className="input-field"
             />
             <Select
               placeholder="Location"
@@ -142,17 +141,13 @@ const RegisterUser = () => {
                   marginTop: "-1px",
                   color: "rgba(198, 203, 210, 0.6)",
                   fontSize: "15.5px",
-                  boxShadow: state.isFocused ? "0 0 0 0 rgba(198, 203, 210, 0.6)" : "none",
-                  "&:hover": {
-                    borderColor: "#a1a1a1",
-                  },
                 }),
               }}
             />
           </div>
           <Select
             placeholder="Curriculum"
-            className="w-full mt-[6px]"
+            className="w-full"
             options={curriculums}
             onChange={(curr) => {
               if (curr) {
@@ -169,17 +164,13 @@ const RegisterUser = () => {
                 marginTop: "-1px",
                 color: "rgba(198, 203, 210, 0.6)",
                 fontSize: "15.5px",
-                boxShadow: state.isFocused ? "0 0 0 0 rgba(198, 203, 210, 0.6)" : "none",
-                "&:hover": {
-                  borderColor: "#a1a1a1",
-                },
               }),
             }}
           />
           <Select
             placeholder="Hobbies"
             options={hobbies}
-            className="w-full mt-[5px]"
+            className="w-full"
             isMulti
             onChange={(hobbies) => {
               if (hobbies) {
@@ -195,19 +186,16 @@ const RegisterUser = () => {
                 borderColor: "rgba(198, 203, 210, 0.6)",
                 borderWidth: "2px",
                 borderRadius: "10px",
+                height: "45px",
                 marginTop: "-1px",
                 color: "rgba(198, 203, 210, 0.6)",
                 fontSize: "15.5px",
-                boxShadow: state.isFocused ? "0 0 0 0 rgba(198, 203, 210, 0.6)" : "none",
-                "&:hover": {
-                  borderColor: "rgba(198, 203, 210, 0.6)",
-                },
               }),
             }}
           />
           <p
             className="dynamic-text text-gray-700 italic text-center
-          max-md:text-left mt-[30px]"
+          max-md:text-left"
           >
             *Fill out at least one of these forms below.
           </p>
@@ -215,19 +203,19 @@ const RegisterUser = () => {
             type="text"
             placeholder="Instagram"
             onChange={(e) => setInstagram(e.target.value)}
-            className="input-field mt-[10px] hover:border-[#939393] hover:border-[1px] ease-in-out duration-100"
+            className="input-field"
           />
           <input
             type="text"
             placeholder="Discord"
             onChange={(e) => setDiscord(e.target.value)}
-            className="input-field mt-[5px] hover:border-[#939393] hover:border-[1px] ease-in-out duration-100"
+            className="input-field"
           />
           <input
             type="text"
             placeholder="Snap Chat"
             onChange={(e) => setSnap(e.target.value)}
-            className="input-field mt-[5px] hover:border-[#939393] hover:border-[1px] ease-in-out duration-100"
+            className="input-field"
           />
           <div
             className="w-full flex justify-end
