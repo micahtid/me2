@@ -82,12 +82,6 @@ const FindSection = () => {
           <FaDice size={30} className="text-black" />
         </button>
       </div>
-      {filteredUsers?.length === 0 && (
-          <div className="w-full h-full
-          flex justify-center items-center text-lg font-bold mt-[40px]">
-            <p>Oops! It looks like you're a unique character.</p>
-          </div>
-        )}
       {filteredUsers &&
         filteredUsers.map((u, index) => {
           if (sentRequests && receivedRequests && userData) {

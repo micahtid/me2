@@ -83,7 +83,7 @@ const RequestSection = () => {
       </div>
         {requestList?.length === 0 && (
           <div className="w-full h-full
-          flex justify-center items-center text-lg font-bold mt-[40px]">
+          flex justify-center items-center text-lg mt-[40px]">
             <p>Oops! No requests right now...</p>
           </div>
         )}
