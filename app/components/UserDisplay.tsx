@@ -30,7 +30,6 @@ const UserDisplay = () => {
 
   const [timeLeft, setTimeLeft] = useState<{ [key: string]: number }>({});
   const [notifStatus, setNotifStatus] = useState<{ [key: string]: boolean }>({});
-  const [retryCounts, setRetryCounts] = useState<{ [key: string]: number }>({});
 
   useEffect(() => {
     const fetchTimeLeft = async (uid1: string, uid2: string, retries = 0) => {
