@@ -55,7 +55,7 @@ const Home = () => {
               <ChatPage />
             </div>
             <div className="hidden max-[500px]:inline">
-              <p className="text-center p-4">Oops! Me2 isn't yet suited for smaller devices. Please login on a larger device or enlargen your window.</p>
+              <p className="text-center p-4 fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-lg text-medium">Oops! Me2 isn't yet suited for smaller devices. Please login on a larger device or enlargen your window.</p>
             </div>
           </div>
         ) : isUserLoaded ? (

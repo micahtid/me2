@@ -16,13 +16,13 @@ const AboutUs = () => {
       title: "Time Efficient",
       description:
         "Each chat is only open for 24 hours; after which it closes and gives users the chance to accept or decline the option to share socials.",
-      iconMarginX: "30px",
+      iconMarginX: "0px",
     },
     {
       icon: LearnIcon,
       title: "Safety Concerns",
       description:
-        "Me2 allows you to close chats whenever you want! Additionally it does not allow users to share images preventing- you know...",
+        "Me2 allows you to close chats whenever you want! Additionally it does not allow users to share images preventing - you know...",
       iconMarginX: "0",
     },
   ];
@@ -47,7 +47,7 @@ const AboutUs = () => {
             max-sm:w-[275px] sm:w-[300px] md:w-[350px] lg:w-[300px] xl:w-[325px] 2xl:w-[335px] 
             blue-gradient rounded-md shadow-md"
           >
-            <div className="flex items-center justify-center w-full h-[100px]">
+            <div className="flex items-center justify-center w-full h-[100px] mt-[20px]">
               <card.icon className={`ml-[${card.iconMarginX}]`} />
             </div>
             <p className="text-xl font-semibold h-[35px]

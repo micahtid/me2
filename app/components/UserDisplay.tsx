@@ -20,6 +20,8 @@ import { IoIosClose } from "react-icons/io";
 // To Do: Clean Up Code (!)
 // To Do: Uncessary Code --> Generating ChatID(s) Twice
 
+const MAX_RETRIES = 3;
+
 const UserDisplay = () => {
   const { onChange, currentUser, setChatComplete } = useActiveUserChat();
   const { onChange: changePage, currentPage } = useActivePage();
@@ -30,14 +32,19 @@ const UserDisplay = () => {
   const [notifStatus, setNotifStatus] = useState<{ [key: string]: boolean }>({});
 
   useEffect(() => {
-    const fetchTimeLeft = async (uid1: string, uid2: string) => {
+    const fetchTimeLeft = async (uid1: string, uid2: string, retries = 0) => {
       const chatid = uid1 > uid2 ? uid1 + uid2 : uid2 + uid1;
       const hoursLeft = await getTimeLeft(chatid);
 
-      setTimeLeft((prevTimeLeft) => ({
-        ...prevTimeLeft, 
-        [chatid]: Math.floor(hoursLeft ?? 100),
-      }));
+      if (hoursLeft === undefined && retries < MAX_RETRIES) {
+        // Retry fetching time left
+        setTimeout(() => fetchTimeLeft(uid1, uid2, retries + 1), 1000); // Retry after 1 second
+      } else {
+        setTimeLeft((prevTimeLeft) => ({
+          ...prevTimeLeft,
+          [chatid]: Math.floor(hoursLeft ?? 100),
+        }));
+      }
     };
 
     // Fetch the time left for each active user
@@ -50,7 +57,9 @@ const UserDisplay = () => {
 
   useEffect(() => {
     if (user && activeUsers) {
-      const chatIds = activeUsers.map(u => user.uid > u.uid ? user.uid + u.uid : u.uid + user.uid);
+      const chatIds = activeUsers.map((u) =>
+        user.uid > u.uid ? user.uid + u.uid : u.uid + user.uid
+      );
       const unsubscribe = checkNotificationStatus(chatIds, user.uid, setNotifStatus);
 
       return () => {
@@ -59,9 +68,11 @@ const UserDisplay = () => {
     }
   }, [user, activeUsers]);
 
+  console.log(timeLeft);
+
   return (
     <div className="flex flex-col justify-start items-start gap-y-3 min-w-[350px] h-full overflow-y-auto no-scrollbar max-lg:pb-6">
-      <h3 className="text-2xl mb-6 ml-2 font-medium">Chats</h3>
+      <h3 className="text-2xl mb-6 ml-2 font-semibold">Chats</h3>
       {activeUsers &&
         activeUsers.map((u, index) => {
           if (!user) return null;
@@ -71,16 +82,14 @@ const UserDisplay = () => {
 
           const notification = notifStatus[chatid] || false;
 
-          // console.log(notifStatus)
-
           // Handle chat deletion based on time left
           if (timeLeft[chatid] <= 0) {
-            console.log(timeLeft[chatid])
+            console.log(timeLeft[chatid]);
 
             deleteChat(chatid);
             removeUserFromUserChats(user.uid, u.uid);
             removeUserFromUserChats(u.uid, user.uid);
-          } 
+          }
 
           return (
             <div
@@ -132,4 +141,3 @@ const UserDisplay = () => {
 };
 
 export default UserDisplay;
-

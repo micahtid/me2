@@ -23,7 +23,9 @@ const NavBar = () => {
           <a key={index}
           className='flex flex-row gap-x-2 font-medium'>
             {item.text}
-            {item.icon}
+            <div className="mt-[2px]">
+              {item.icon}
+            </div>
           </a>
         ))}
         <a href="" className="bg-[#C6E0FF] px-4 py-2 rounded-lg
@@ -32,8 +34,8 @@ const NavBar = () => {
     </div>
     <div className="w-full
     flex justify-end p-4">
-        <button className="p-3 bg-gray-100 rounded-lg shadow-md
-        hidden max-lg:inline"
+        <button className="p-3 bg-white rounded-lg shadow-lg
+        hidden max-lg:inline ease-in-out duration-500"
         onClick={() => setIsOpen(true)}
         >
           <RxHamburgerMenu size={20} />

@@ -96,8 +96,7 @@ const RegisterUser = () => {
           className="flex-grow h-full bg-white px-52 pt-40 pb-20  
         flex flex-col justify-center items-center gap-y-3 overflow-y-scroll
         max-md:overflow-y-visible max-md:items-start
-        max-xl:px-28 max-lg:px-12 
-        max-xl:pt-64 max-lg:pt-64 max-md:py-96"
+        max-xl:px-28 max-lg:px-12"
         >
           <h3
             className="dynamic-subheading font-semibold text-center
@@ -120,7 +119,7 @@ const RegisterUser = () => {
           <div className="w-full grid grid-cols-2 gap-x-3">
             <input
               type="number"
-              placeholder="Enter Here..."
+              placeholder="Age"
               onChange={(e) => setUserAge(e.target.value)}
               className="input-field"
             />
@@ -187,6 +186,7 @@ const RegisterUser = () => {
                 borderColor: "rgba(198, 203, 210, 0.6)",
                 borderWidth: "2px",
                 borderRadius: "10px",
+                height: "45px",
                 marginTop: "-1px",
                 color: "rgba(198, 203, 210, 0.6)",
                 fontSize: "15.5px",

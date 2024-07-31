@@ -16,6 +16,20 @@ import { useData } from "@/providers/DataProvider";
 import Loader from "../components/Loader";
 import Button from "../components/Button";
 
+// Common Styles
+const selectStyles = {
+  control: (baseStyles: any) => ({
+    ...baseStyles,
+    borderColor: "rgba(198, 203, 210, 0.6)",
+    borderWidth: "2px",
+    borderRadius: "10px",
+    height: "45px",
+    marginTop: "-1px",
+    color: "rgba(198, 203, 210, 0.6)",
+    fontSize: "15.5px",
+  }),
+};
+
 const Settings = () => {
   const router = useRouter();
   const { user, users } = useData();
@@ -91,27 +105,10 @@ const Settings = () => {
   }
 
   return (
-    <div
-      className="bg-[#D5E6FF] w-[100vw] h-[100vh]
-    flex justify-center items-center"
-    >
-      <div
-        className="w-[calc(100vw-8rem)] h-[calc(100vh-4rem)]
-      flex flex-row shadow-md
-      max-md:w-full max-md:h-full
-      max-md:flex-col"
-      >
-        <div
-          className="w-[500px] h-full bg-[#54ACFD]
-        flex flex-col justify-center items-start gap-y-2 px-16
-        max-md:max-w-[100vw] max-md:w-full
-        max-md:py-14
-        max-xl:w-[400px] max-lg:w-[300px]"
-        >
-          <Button
-            className="mb-6 shadow-none text-sm"
-            onClick={() => router.replace("./")}
-          >
+    <div className="bg-[#D5E6FF] w-[100vw] h-[100vh] flex justify-center items-center">
+      <div className="w-[calc(100vw-8rem)] h-[calc(100vh-4rem)] flex flex-row shadow-md max-md:w-full max-md:h-full max-md:flex-col">
+        <div className="w-[500px] h-full bg-[#54ACFD] flex flex-col justify-center items-start gap-y-2 px-16 max-md:max-w-[100vw] max-md:w-full max-md:py-14 max-xl:w-[400px] max-lg:w-[300px]">
+          <Button className="mb-6 shadow-none text-sm" onClick={() => router.replace("./")}>
             <FaHome size={20} color="white" />
           </Button>
           <h3 className="dynamic-subheading text-white font-semibold">
@@ -123,17 +120,13 @@ const Settings = () => {
         </div>
         <form
           onSubmit={handleSubmit}
-          className="flex-grow h-full bg-white px-52 pt-40 pb-20  
-        flex flex-col justify-center items-center gap-y-3 overflow-y-scroll
-        max-md:overflow-y-visible max-md:items-start
-        max-xl:px-28 max-lg:px-12 
-        max-xl:pt-64 max-lg:pt-64 max-md:py-96"
+          className="flex-grow h-full bg-white px-52 pt-40 pb-20 flex flex-col justify-center items-center gap-y-3 overflow-y-scroll max-md:overflow-y-visible max-md:items-start max-xl:px-28 max-lg:px-12"
         >
           <h3 className="dynamic-subheading font-semibold text-center max-md:text-left">
-            Edit Your Information
+            Edit Your Profile Information
           </h3>
           <p className="dynamic-text text-gray-700 italic text-center max-md:text-left">
-            Me2 ensures your data is kept safe and not used in malpractice.
+            All edits must be saved before applied.
           </p>
           <input
             type="text"
@@ -146,7 +139,7 @@ const Settings = () => {
             <input
               type="number"
               value={userAge}
-              placeholder="Enter Here..."
+              placeholder="Age"
               onChange={(e) => setUserAge(e.target.value)}
               className="input-field"
             />
@@ -158,18 +151,7 @@ const Settings = () => {
                   setUserLocation(loc.value);
                 }
               }}
-              styles={{
-                control: (baseStyles: any, state: any) => ({
-                  ...baseStyles,
-                  borderColor: "rgba(198, 203, 210, 0.6)",
-                  borderWidth: "2px",
-                  borderRadius: "10px",
-                  height: "45px",
-                  marginTop: "-1px",
-                  color: "rgba(198, 203, 210, 0.6)",
-                  fontSize: "15.5px",
-                }),
-              }}
+              styles={selectStyles}
             />
           </div>
           <Select
@@ -181,18 +163,7 @@ const Settings = () => {
                 setUserCurriculum(curr.value);
               }
             }}
-            styles={{
-              control: (baseStyles: any, state: any) => ({
-                ...baseStyles,
-                borderColor: "rgba(198, 203, 210, 0.6)",
-                borderWidth: "2px",
-                borderRadius: "10px",
-                height: "45px",
-                marginTop: "-1px",
-                color: "rgba(198, 203, 210, 0.6)",
-                fontSize: "15.5px",
-              }),
-            }}
+            styles={selectStyles}
           />
           <Select
             options={hobbies}
@@ -207,17 +178,7 @@ const Settings = () => {
                 setUserHobbies([]);
               }
             }}
-            styles={{
-              control: (baseStyles: any, state: any) => ({
-                ...baseStyles,
-                borderColor: "rgba(198, 203, 210, 0.6)",
-                borderWidth: "2px",
-                borderRadius: "10px",
-                marginTop: "-1px",
-                color: "rgba(198, 203, 210, 0.6)",
-                fontSize: "15.5px",
-              }),
-            }}
+            styles={selectStyles}
           />
           <input
             type="text"
@@ -242,8 +203,7 @@ const Settings = () => {
           />
           <div className="w-full flex justify-end max-md:justify-start">
             <button
-              className="dynamic-text font-semibold 
-              bg-[#FFD99F] py-2 px-6 rounded-md mt-5"
+              className="dynamic-text font-semibold bg-[#FFD99F] py-2 px-6 rounded-md mt-5"
               type="submit"
               disabled={clicked}
             >

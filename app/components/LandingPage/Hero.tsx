@@ -11,15 +11,15 @@ const Hero = () => {
       max-lg:items-center">
         <h3 className="dynamic-heading font-semibold text-left leading-[65px]
         max-lg:leading-[60px]
-        max-lg:text-center">The Chat App For Students</h3>
-        <p className="dynamic-text text-gray-700 mt-10 text-left
+        max-lg:text-center mt-[-60px]">The chat app for students</h3>
+        <p className="dynamic-text text-gray-700 mt-[30px] text-left
         max-lg:text-center">
           Meet Me2! The chat app designed for students to find other students with similar interests and experiences.
         </p>
         <div className="flex justify-end mt-8">
           <Button
-            className="px-12 py-4 rounded-full
-            text-white font-semibold"
+            className="px-12 py-4 rounded-[10px]
+            text-white font-semibold hover:bg-[#D5E6FF] ease-in-out duration-500"
             onClick={signIn}
           >
             Sign Up
