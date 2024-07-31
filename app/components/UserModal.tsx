@@ -30,36 +30,38 @@ const UserModal = () => {
 
   return (
     <Modal isOpen={isModalOpen} onChange={onChange}>
-      <div className="flex flex-col w-full justify-start gap-y-3">
+      <div className="flex flex-col w-full justify-start gap-y-2">
         <div className="flex flex-row items-center justify-start gap-x-5
         w-full mb-4">
-          <img src={currentUser?.pfp} width={60} className="rounded-full" alt="" />
-          <h3 className="text-4xl font-semibold">{currentUser?.userName}</h3>
+          <img src={currentUser?.pfp} width={40} className="rounded-full" alt="" />
+          <h3 className="text-2xl">{currentUser?.userName}</h3>
         </div>
         <div className="flex flex-row gap-x-2">
-          <div className="flex flex-row flex-grow justify-center gap-x-2 items-center border-2 border-primary px-5 py-2 rounded-lg">
-            <FaClock size={20}/>
-            <p className="font-medium text-lg">Age: {currentUser?.age}</p>
+          <div className="flex flex-row gap-x-2 justify-start items-center
+          flex-grow border-2 border-primary px-2 py-1 rounded-lg">
+            <FaClock />
+            <p className="">Age {currentUser?.age}</p>
           </div>
-          <div className="flex flex-row flex-grow gap-x-2 justify-center items-center border-2 border-primary px-5 py-2 rounded-lg">
-            <FaLocationDot size={20}/>
-            <p className="font-medium text-lg">Location: {locationLabel}</p>
+          <div className="flex flex-row gap-x-2 justify-start items-center
+          flex-grow border-2 border-primary px-2 py-1 rounded-lg">
+            <FaLocationDot />
+            <p className="">Location: {locationLabel}</p>
           </div>
         </div>
         <div className="flex flex-row gap-x-2 justify-start items-center
         bg-primary px-2 py-2 rounded-lg">
-          <FaSchoolFlag size={20} className="ml-[15px]"/>
-          <p className="text-nowrap overflow-hidden font-medium text-lg px-5 py-2 ml-[-20px]">Curriculum: {curriculumLabel}</p>
+          <FaSchoolFlag />
+          <p className="text-nowrap overflow-hidden">Curriculum: {curriculumLabel}</p>
         </div>
         <div className="flex flex-col
         bg-primary px-2 py-2 rounded-lg">
-          <div className="flex flex-row gap-x-2 justify-start items-center px-5 py-2">
-            <FaRegSmile size={20} className="ml-[-5px]"/>
-            <p className="font-medium text-lg">Hobbies: </p>
+          <div className="flex flex-row gap-x-2 justify-start items-center">
+            <FaRegSmile />
+            <p className="">Hobbies: </p>
           </div>
-          <div className="flex flex-row gap-x-2 flex-wrap px-5 py-2 mt-[-10px] ml-[-5px]">
+          <div className="flex flex-row gap-x-2 flex-wrap">
             {hobbiesLabels.map((hobby: string, index: number) => (
-              <p key={index} className="text-right font-medium text-lg">
+              <p key={index} className="text-right">
                 {hobby};
               </p>
             ))}

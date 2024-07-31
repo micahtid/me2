@@ -105,7 +105,7 @@ const FindSection = () => {
               <div
                 key={index} // Use a unique key
                 className={`flex flex-row justify-start items-center w-full
-                user-card-accent bg-primary border-primary font-medium ${user && u.uid === user.uid ? "hidden" : ""}`}
+                user-card-accent bg-primary border-primary ${user && u.uid === user.uid ? "hidden" : ""}`}
               >
                 <UserCard
                   onClick={() => {
