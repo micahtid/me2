@@ -4,7 +4,8 @@
 import { useState, useRef } from "react"
 
 // Own Function Imports
-import { useActiveUserChat } from "@/hooks/useActiveUserChat"
+import { useActiveUserChat } from "@/hooks/useActiveUserChat";
+import { useUserModal } from "@/hooks/useUserModal";
 
 // Component Imports
 import ChatContainer from "./ChatContainer"
@@ -13,6 +14,7 @@ import SocialForm from "./SocialForm"
 
 const ChatSection = () => {
   const { currentChat, currentUser, isChatComplete } = useActiveUserChat();
+  const { onChangeCurrentUser, onModalOpen } = useUserModal();
 
   ////////
   const [sending, setSending] = useState(false);
@@ -31,7 +33,11 @@ const ChatSection = () => {
     <div className="flex flex-col h-[100vh] w-full px-4 pb-4 overflow-hidden
     bg-white">
       {currentUser && (
-        <h3 className="text-2xl font-medium">{currentUser.userName}</h3>
+        <button className="text-2xl font-medium text-left"
+        onClick={() => {
+          onChangeCurrentUser(currentUser);
+          onModalOpen();
+        }}>{currentUser.userName}</button>
       )}
       <div className="flex-1 overflow-y-auto no-scrollbar mb-4">
         <ChatContainer sending={sending} setSending={setSending} targetRef={dummy} />

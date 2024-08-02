@@ -45,8 +45,6 @@ const ChatPage = () => {
           currentPage === "chat" ? 
           <ChatSection /> : currentPage === "requests" ? <RequestSection /> : <FindSection />
         }
-
-
       </div>
       <div className="w-full p-1
       hidden max-lg:inline"/>

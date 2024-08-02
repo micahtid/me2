@@ -7,6 +7,9 @@ import { hobbies, curriculums, locations } from "../data";
 import { FaClock, FaLocationDot, FaSchoolFlag  } from "react-icons/fa6";
 import { FaRegSmile } from "react-icons/fa";
 
+import { formatDistanceToNow } from 'date-fns';
+import { convertTimestampToDate } from "../utils/utilfunctions";
+
 const UserModal = () => {
   const { isModalOpen, onModalClose, currentUser } = useUserModal();
 
@@ -34,7 +37,14 @@ const UserModal = () => {
         <div className="flex flex-row items-center justify-start gap-x-5
         w-full mb-4">
           <img src={currentUser?.pfp} width={40} className="rounded-full" alt="" />
-          <h3 className="text-2xl">{currentUser?.userName}</h3>
+          <div className="flex flex-col justify-center items-start">
+            <h3 className="text-2xl">{currentUser?.userName}</h3>
+            <p className="text-sm text-gray-500">
+              {currentUser?.online ? 
+              `Online` 
+              : `Active ${formatDistanceToNow(convertTimestampToDate(currentUser?.lastOnline), { addSuffix: true })}`}
+            </p>
+          </div>
         </div>
         <div className="flex flex-row gap-x-2">
           <div className="flex flex-row gap-x-2 justify-start items-center

@@ -68,7 +68,7 @@ export const DataContextProvider = (props: Props) => {
         const unsubscribe = getActiveUsers(uid, setActiveUsers);
         return () => unsubscribe();
       }
-    }, [uid]);
+    }, [uid, users]);
 
     return [activeUsers];
   };

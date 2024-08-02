@@ -74,7 +74,6 @@ export const getCompatibility = (user1: DocumentData, user2: DocumentData) => {
     return totalCompatibility;
 }
 
-
 //////////////////////////////
 
 interface Timestamp {
@@ -141,3 +140,5 @@ export const shuffleArray = (array: DocumentData[]) => {
     }
     return array;
 }
+
+//////////////////////////////

@@ -1,4 +1,5 @@
 import { navItems } from "@/app/data";
+import { IoMdClose } from "react-icons/io";
 
 interface NavModalProps {
     isOpen: boolean;
@@ -7,13 +8,15 @@ interface NavModalProps {
 
 const NavModal: React.FC<NavModalProps> = ({ isOpen, setIsOpen }) => {
   return (
-    <nav className={`h-[100vh] bg-[#8DC1FF]/50
+    <nav className={`h-[100vh] bg-[#8DC1FF]/10
     backdrop-blur-[10px]
     fixed top-0 right-0 pl-20 pr-4 pt-12
     flex flex-col justify-start items-end gap-y-2
     ${isOpen ? "" : "hidden"}`}>
         <button onClick={() => setIsOpen(false)}
-            className="mb-12 font-semibold text-[20px]">Close</button>
+            className="mb-12 font-semibold text-xl">
+                <IoMdClose />
+            </button>
         {navItems.map((item, index) => (
             <a className="flex flex-row justify-center items-center gap-x-2"
             key={index}>

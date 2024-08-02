@@ -20,40 +20,53 @@ import { IoIosClose } from "react-icons/io";
 // To Do: Clean Up Code (!)
 // To Do: Uncessary Code --> Generating ChatID(s) Twice
 
-const MAX_RETRIES = 3;
+const FETCH_INTERVAL = 60000; // Fetch every 60 seconds
 
 const UserDisplay = () => {
   const { onChange, currentUser, setChatComplete } = useActiveUserChat();
   const { onChange: changePage, currentPage } = useActivePage();
-  const { user, activeUsers } = useData();
+  const { user, activeUsers, users } = useData();
   const { onModalOpen, setDeleteData } = useConfirmationModal();
 
   const [timeLeft, setTimeLeft] = useState<{ [key: string]: number }>({});
   const [notifStatus, setNotifStatus] = useState<{ [key: string]: boolean }>({});
 
+  const fetchTimeLeft = async (uid1: string, uid2: string) => {
+    // console.log("Here");
+    const chatid = uid1 > uid2 ? uid1 + uid2 : uid2 + uid1;
+    const hoursLeft = await getTimeLeft(chatid);
+    setTimeLeft((prevTimeLeft) => ({
+      ...prevTimeLeft,
+      [chatid]: Math.floor(hoursLeft ?? 100),
+    }));
+  };
+
+  /////////////////////////////////////////////////
+  /////////////////////////////////////////////////
+  /////////////////////////////////////////////////
   useEffect(() => {
-    const fetchTimeLeft = async (uid1: string, uid2: string, retries = 0) => {
-      const chatid = uid1 > uid2 ? uid1 + uid2 : uid2 + uid1;
-      const hoursLeft = await getTimeLeft(chatid);
-
-      if (hoursLeft === undefined && retries < MAX_RETRIES) {
-        // Retry fetching time left
-        setTimeout(() => fetchTimeLeft(uid1, uid2, retries + 1), 1000); // Retry after 1 second
-      } else {
-        setTimeLeft((prevTimeLeft) => ({
-          ...prevTimeLeft,
-          [chatid]: Math.floor(hoursLeft ?? 100),
-        }));
-      }
-    };
-
-    // Fetch the time left for each active user
+    // Fetch the time left for each active user on initial load
     if (user && activeUsers) {
       activeUsers.forEach((u) => {
         fetchTimeLeft(user.uid, u.uid);
       });
     }
+
+    // Set up interval to fetch time left periodically
+    const interval = setInterval(() => {
+      if (user && activeUsers) {
+        activeUsers.forEach((u) => {
+          fetchTimeLeft(user.uid, u.uid);
+        });
+      }
+    }, FETCH_INTERVAL);
+
+    // Clear interval on component unmount
+    return () => clearInterval(interval);
   }, [user, activeUsers]);
+  /////////////////////////////////////////////////
+  /////////////////////////////////////////////////
+  /////////////////////////////////////////////////
 
   useEffect(() => {
     if (user && activeUsers) {
@@ -67,8 +80,6 @@ const UserDisplay = () => {
       };
     }
   }, [user, activeUsers]);
-
-  console.log(timeLeft);
 
   return (
     <div className="flex flex-col justify-start items-start gap-y-3 min-w-[350px] h-full overflow-y-auto no-scrollbar max-lg:pb-6">
@@ -111,6 +122,8 @@ const UserDisplay = () => {
                   }
                 }}
                 notification={notification}
+                activeStatus={true}
+                activeStatusClassName={`${currentUser === u && currentPage === "chat" ? "border-accent" : "border-secondary"}`}
                 className={`${user && u.uid === user.uid ? "hidden" : ""}`}
                 statusClassName="bg-white text-gray-700 px-6 py-1 rounded-xl -ml-1 mt-1"
                 status={hoursLeft}

@@ -12,13 +12,16 @@ import Footer from "./components/LandingPage/Footer";
 
 // Library Imports
 import { useState, useEffect } from "react";
+import { serverTimestamp } from "firebase/firestore";
 
 // Own Function Imports
 import { useData } from "@/providers/DataProvider";
 import { signIn } from "./utils/databasefunctions";
 import { checkUser } from "./utils/utilfunctions";
+import { setUserOnline } from "./utils/usersfunctions";
 
 import Loader from "./components/Loader";
+import useIsTabActive from "../hooks/useActiveTab";
 
 const Home = () => {
   const [isUserLoaded, setIsUserLoaded] = useState<boolean | null>(null);
@@ -40,12 +43,20 @@ const Home = () => {
     }
   }, [user, users]);
 
+  ////////////////////////////////////
+  const status = useIsTabActive();
+  
+  useEffect(() => {
+    if (user?.uid) {
+      setUserOnline(user?.uid, status);
+    }
+  }, [status, user])
+  ////////////////////////////////////
+
   if (isUserLoaded === null || isUserRegistered === null) {
     return <Loader />;
   }
-
-  // console.log(isUserLoaded, isUserRegistered)
-
+  
   return (
     <div className="">
       <section>
