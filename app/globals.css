@@ -35,6 +35,10 @@
   .social-card {
     @apply w-full bg-gray-100 p-3 flex flex-row justify-start items-center gap-x-4 rounded-lg;
   }
+
+  .dynamic-svg {
+    @apply w-[500px] max-xl:w-[450px] max-lg:w-[375px] max-md:w-[400px]
+  }
 }
 
 @layer utilities {

@@ -11,6 +11,7 @@ const Testimonies = () => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    arrows: false
   };
 
   return (
@@ -24,7 +25,8 @@ const Testimonies = () => {
           <h3 className="dynamic-subheading font-semibold">Testimonies</h3>
         </div>
         <div className="relative">
-          <svg viewBox="0 0 52 24" fill="currentColor" className="absolute top-0 left-[25px] z-0 hidden w-32 -mt-8 -ml-20 text-emerald-gray-100 lg:w-32 lg:-ml-28 lg:-mt-10 sm:block">
+          <svg viewBox="0 0 52 24" fill="currentColor" className="absolute top-0 left-[25px] z-0 hidden w-32 -mt-8 -ml-20 text-emerald-gray-100 lg:w-32 lg:-ml-28 lg:-mt-10 lg:block
+          max-lg:hidden">
             <defs>
               <pattern id="d0d83814-78b6-480f-9a5f-7f637616b267" x="0" y="0" width=".135" height=".30">
                 <circle cx="1" cy="1" r=".7">
@@ -34,7 +36,8 @@ const Testimonies = () => {
               <rect fill="url(#d0d83814-78b6-480f-9a5f-7f637616b267)" width="52" height="24">
               </rect>
           </svg>
-          <svg viewBox="0 0 52 24" fill="currentColor" className="absolute bottom-0 -right-[40px] z-0 hidden w-32 -mt-8 -ml-20 text-emerald-gray-100 lg:w-32 lg:-ml-28 lg:-mt-10 sm:block">
+          <svg viewBox="0 0 52 24" fill="currentColor" className="absolute bottom-0 -right-[40px] z-0 hidden w-32 -mt-8 -ml-20 text-emerald-gray-100 lg:w-32 lg:-ml-28 lg:-mt-10 lg:block
+          max-lg:hidden">
             <defs>
               <pattern id="d0d83814-78b6-480f-9a5f-7f637616b267" x="0" y="0" width=".135" height=".30">
                 <circle cx="1" cy="1" r=".7">
@@ -47,16 +50,16 @@ const Testimonies = () => {
           <Slider
               {...settings}
               className="
-            mx-6 w-[600px] max-lg:w-[525px] max-md:w-[450px] max-sm:w-[375px] max-[450px]:w-[225px]"
+            mx-6 w-[600px] max-lg:w-[90vw]"
             >
             {data.map((d) => (
               <div
                 key={d.name}
-                className="bg-white text-black max-w-[600px]
+                className="bg-white text-black w-[600px] max-lg:w-full
               flex flex-col justify-start items-center"
               >
                 <div
-                  className="h-56 bg-[#8DC1FF] flex justify-center items-center w-[600px] 
+                  className="h-56 bg-[#8DC1FF] flex justify-center items-center w-full
                 relative overflow-hidden"
                 >
                   <ImQuotesLeft

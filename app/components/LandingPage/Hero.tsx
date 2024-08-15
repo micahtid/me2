@@ -5,7 +5,7 @@ import { signIn } from "@/app/utils/databasefunctions";
 
 const Hero = () => {
   return (
-    <section className="flex flex-row justify-center items-center gap-x-12 m-10
+    <section className="flex flex-row justify-center items-center gap-x-12 m-10 mt-36
     max-lg:flex-col max-lg:mt-28">
       <div className="flex flex-col justify-center items-start max-w-[350px]
       max-lg:items-center">

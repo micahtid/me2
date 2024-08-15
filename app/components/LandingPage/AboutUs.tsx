@@ -29,6 +29,10 @@ const AboutUs = () => {
 
   return (
     <section className="flex flex-col justify-center">
+      {/* <img src="/clumsy.svg" alt="Clumsy SVG" className="wabsolute left-[400px] -z-10 -rotate-[20deg]
+      dynamic-svg"/>
+      <img src="/roller-skating.svg" alt="Clumsy SVG" className="absolute right-[400px] -z-10\
+      dynamic-svg"/> */}
       <div className="flex justify-center items-center relative">
         <h3 className="dynamic-subheading font-semibold mt-[200px] mb-[40px]">
           <span 
@@ -44,7 +48,7 @@ const AboutUs = () => {
           <div
             key={index}
             className="flex flex-col justify-center items-center h-[325px] 
-            max-sm:w-[275px] sm:w-[300px] md:w-[350px] lg:w-[300px] xl:w-[325px] 2xl:w-[335px] 
+            w-[335px] max-xl:w-[300px] max-lg:w-[80vw]
             blue-gradient rounded-md shadow-md"
           >
             <div className="flex items-center justify-center w-full h-[100px] mt-[20px]">
