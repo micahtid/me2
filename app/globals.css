@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;700;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,7 +10,7 @@
   }
 
   .dynamic-subheading {
-    @apply text-5xl max-lg:text-4xl;
+    @apply text-5xl max-lg:text-4xl max-md:text-3xl;
   }
 
   .dynamic-text {
@@ -37,7 +39,8 @@
   }
 
   .dynamic-svg {
-    @apply w-[500px] max-xl:w-[450px] max-lg:w-[375px] max-md:w-[400px]
+    @apply w-[500px] max-lg:w-[450px] max-md:w-[400px] max-sm:w-[300px] max-[450px]:w-[250px]
+    opacity-15
   }
 }
 
@@ -86,4 +89,9 @@
     radial-gradient(circle at 30% 70%, #ffe2b7, transparent 70%),
     radial-gradient(circle at 50% 50%, #fff1cc, transparent 70%);
   background-size: 100% 100%;
+}
+
+
+.text-shadow-no-blur {
+  text-shadow: -5px 5px 0px #00000027; /* Adjust the offset and color as needed */
 }

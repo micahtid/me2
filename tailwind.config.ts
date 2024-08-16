@@ -1,7 +1,5 @@
+// tailwind.config.ts
 import { Config } from 'tailwindcss';
-
-import plugin from 'tailwindcss/plugin';
-import { PluginAPI } from 'tailwindcss/types/config';
 
 const config: Config = {
   content: [
@@ -11,33 +9,16 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
       colors: {
         primary: "#C6E0FF",
         secondary: "#9ECAFF",
         accent: "#FFF5DB",
       },
+      fontFamily: {
+        bubble: ['Rubik', 'sans-serif'],
+      },
     },
-  },
-  plugins: [
-    plugin(function ({ addUtilities }: PluginAPI) {
-      addUtilities({
-        '.hide-scrollbar': {
-          /* Hide scrollbar for IE, Edge and Firefox */
-          '-ms-overflow-style': 'none', /* IE and Edge */
-          'scrollbar-width': 'none', /* Firefox */
-          /* Hide scrollbar for Chrome, Safari and Opera */
-          '&::-webkit-scrollbar': {
-            display: 'none',
-          },
-        },
-      });
-    }),
-  ],
+  }
 };
 
 export default config;

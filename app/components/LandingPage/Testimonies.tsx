@@ -15,14 +15,22 @@ const Testimonies = () => {
   };
 
   return (
-    <div className="w-full yellow-gradient py-16
-    my-40">
+    <div id="testimonies" className="w-full yellow-gradient py-16
+    relative">
+      <div className="absolute w-[100vw] overflow-x-hidden
+      -top-[100px] max-lg:-top-[90px] max-md:-top-[60px] max-sm:top-[10px] max-[450px]:top-[40px]
+      flex justify-center items-center">
+        <img
+          src="/chilling.svg"
+          className="dynamic-svg"
+        />
+      </div>
       <div className="flex flex-col justify-center gap-y-16 items-center">
         <div className="">
-          <p className="uppercase font-semibold text-left">
+          <p className="uppercase font-bold font-bubble text-black/70 text-center">
             What our users say
           </p>
-          <h3 className="dynamic-subheading font-semibold">Testimonies</h3>
+          <h3 className="dynamic-subheading font-semibold font-bubble uppercase">Testimonies</h3>
         </div>
         <div className="relative">
           <svg viewBox="0 0 52 24" fill="currentColor" className="absolute top-0 left-[25px] z-0 hidden w-32 -mt-8 -ml-20 text-emerald-gray-100 lg:w-32 lg:-ml-28 lg:-mt-10 lg:block

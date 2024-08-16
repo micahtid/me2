@@ -5,12 +5,12 @@ import { signIn } from "@/app/utils/databasefunctions";
 
 const Hero = () => {
   return (
-    <section className="flex flex-row justify-center items-center gap-x-12 m-10 mt-36
-    max-lg:flex-col max-lg:mt-28">
-      <div className="flex flex-col justify-center items-start max-w-[350px]
+    <section id="hero" className="flex flex-row justify-center items-center gap-x-20
+    max-lg:flex-col">
+      <div className="flex flex-col justify-center items-start max-w-[350px] max-lg:max-w-[400px]
       max-lg:items-center">
-        <h3 className="dynamic-heading font-semibold text-left leading-[65px]
-        max-lg:leading-[60px]
+        <h3 className="dynamic-heading font-bubble font-extrabold uppercase text-white text-left text-shadow-no-blur
+        leading-[65px] max-lg:leading-[60px]
         max-lg:text-center">The Chat App For Students</h3>
         <p className="dynamic-text text-gray-700 mt-10 text-left
         max-lg:text-center">

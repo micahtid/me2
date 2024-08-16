@@ -28,19 +28,27 @@ const AboutUs = () => {
   ];
 
   return (
-    <section className="flex flex-col justify-center">
-      {/* <img src="/clumsy.svg" alt="Clumsy SVG" className="wabsolute left-[400px] -z-10 -rotate-[20deg]
-      dynamic-svg"/>
-      <img src="/roller-skating.svg" alt="Clumsy SVG" className="absolute right-[400px] -z-10\
-      dynamic-svg"/> */}
+    <section id="about" className="flex flex-col justify-center
+    relative">
+      <div className="absolute w-[50vw] max-lg:w-[100vw]
+      flex justify-end items-center max-lg:justify-start max-md:justify-center
+      top-[10px] max-lg:top-[30px] max-md:top-[60px] max-sm:top-[125px] max-[450px]:top-[160px]">
+        <img
+          src="/reading-side.svg"
+          className="dynamic-svg
+          max-lg:ml-24 max-md:ml-0"
+        />
+      </div>
       <div className="flex justify-center items-center relative">
-        <h3 className="dynamic-subheading font-semibold mt-[200px] mb-[40px]">
-          <span 
-          className="font-semibold text-[#8DC1FF] text-base uppercase">
-            Some Features 
-          <br /></span> 
-          Why Choose Us?
-        </h3>
+        <div className="mt-[200px] mb-[60px]">
+          <p 
+            className="font-bold font-bubble text-[#8DC1FF] text-base uppercase w-full text-center">
+              Some Features 
+          </p> 
+          <h3 className="dynamic-subheading font-semibold font-bubble uppercase">
+            Why Choose Us?
+          </h3>
+        </div>
       </div>
       <div className="flex flex-row justify-center gap-x-[15px] mb-[100px]
       max-lg:flex-col max-lg:items-center max-lg:gap-y-4">
