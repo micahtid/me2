@@ -11,7 +11,7 @@ const ColorDrop: React.FC<ColorDropProps> = ({ children }) => {
         <div
         className='absolute top-0 -z-10
         clipped-gradient opacity-50
-        w-full h-[500px]' />
+        w-full h-[750px]' />
     </div>
   )
 }

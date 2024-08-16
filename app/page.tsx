@@ -17,8 +17,10 @@ import { useState, useEffect } from "react";
 import { useData } from "@/providers/DataProvider";
 import { signIn } from "./utils/databasefunctions";
 import { checkUser } from "./utils/utilfunctions";
+import { setUserOnline } from "./utils/usersfunctions";
 
 import Loader from "./components/Loader";
+import useIsTabActive from "../hooks/useActiveTab";
 
 const Home = () => {
   const [isUserLoaded, setIsUserLoaded] = useState<boolean | null>(null);
@@ -40,36 +42,50 @@ const Home = () => {
     }
   }, [user, users]);
 
+  ////////////////////////////////////
+  const status = useIsTabActive();
+  
+  useEffect(() => {
+    if (user?.uid) {
+      setUserOnline(user?.uid, status);
+    }
+  }, [status, user])
+  ////////////////////////////////////
+
   if (isUserLoaded === null || isUserRegistered === null) {
     return <Loader />;
   }
-
-  // console.log(isUserLoaded, isUserRegistered)
-
+  
   return (
     <div className="">
-      <section>
+      <section className="max-[325px]:hidden">
         {isUserLoaded && isUserRegistered ? (
-          <div className="">
-            <div className="max-[500px]:hidden">
-              <ChatPage />
-            </div>
-            <div className="hidden max-[500px]:inline">
-              <p className="text-center p-4 fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-lg text-medium">Oops! Me2 isn't yet suited for smaller devices. Please login on a larger device or enlargen your window.</p>
-            </div>
-          </div>
+            <ChatPage />
         ) : isUserLoaded ? (
           <RegisterUser />
         ) : (
           <ColorDrop>
             <NavBar />
-            <Hero />
-            <AboutUs />
-            <Testimonies />
+            <div className="mx-10 mt-36 mb-32 max-lg:mt-28">
+              <Hero />
+            </div>
+            <div className="my-48">
+              <AboutUs />
+            </div>
+            <div className="my-56">
+              <Testimonies />
+            </div>
             <Footer />
           </ColorDrop>
         )}
       </section>
+      <div className="hidden max-[325px]:inline">
+          <p className="p-2">Oops! Me2 isn't yet suited for smaller devices. Please login on a larger device or enlargen your window.</p>
+          <img
+          src="/roller-skating.svg"
+          className="mt-5"
+        />
+      </div>
     </div>
   );
 };

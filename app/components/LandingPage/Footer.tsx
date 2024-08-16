@@ -1,40 +1,56 @@
-import Button from "../Button";
-
-import { FaFacebook } from "react-icons/fa";
-import { AiFillInstagram } from "react-icons/ai";
-import { RiTwitterXLine } from "react-icons/ri";
+import { footerNotes } from "@/app/data";
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-gray-100 
-    flex flex-col justify-center items-center gap-y-8 py-16 px-4">
-      <div className="flex flex-col justify-center items-center gap-y-2">
-        <p className="text-gray-700 text-center">
-          Sign up here with your email to get updates on incoming features for
-          Me2!
-        </p>
-        <form className="flex flex-row justify-center items-center gap-x-2 w-full max-w-[500px] mt-[10px]">
-              <input
-                type="text"
-                placeholder="Enter your email here"
-                className="input-field flex rounded-lg mr-3 font-medium"
-              />
-            <Button className="px-6 py-2 text-white" onClick={() => {}}>
-              Subscribe
-            </Button>
-        </form>
+    <div
+      id="footer"
+      className="bg-gray-200 px-20 py-20 flex justify-center items-center
+      max-lg:px-4 overflow-x-hidden"
+    >
+      <div
+        className="
+        flex flex-col justify-center items-center gap-y-2
+        max-w-[1100px] w-full
+        max-lg:max-w-[800px]"
+      >
+        <div
+          className="
+          flex flex-row justify-center items-start gap-x-20
+          max-h-[250px] overflow-hidden max-lg:mb-12
+          max-sm:grid max-sm:grid-cols-2 max-sm:max-h-none max-sm:gap-y-14
+          max-[400px]:flex max-[400px]:flex-col max-[400px]:items-start max-[400px]:w-full
+          max-[400px]:ml-16"
+        >
+          {footerNotes.map((col, index) => (
+            <div key={index} className="flex flex-col justify-start items-start gap-y-2
+            max-[400px]:grid max-[400px]:grid-cols-2">
+              <h3 className="uppercase font-bubble font-bold max-[400px]:text-left
+              max-[400px]:w-[125px]">{col.header}</h3>
+              <div className="max-[400px]:block hidden"></div>
+              {col.links.map((link, index) => (
+                <a key={index} href={link.link} className="text-black/50
+                max-[400px]:text-left max-[400px]:w-[125px] ">
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          ))}
+          <img
+            src="/bikini.svg"
+            className="w-[500px] opacity-50 max-xl:w-[300px] max-lg:hidden"
+          />
+        </div>
+        <div className="w-full max-lg:w-[550px] max-sm:w-[80%]">
+          <div className="w-full h-[2px] bg-black/50 rounded-full mb-4"></div>
+          <div className="w-full flex flex-row justify-between items-center
+          max-sm:flex-col max-sm:gap-y-1">
+            <p className="text-nowrap overflow-ellipsis text-black/80 text-sm">@2024 Me2, All Rights Reserved</p>
+            <img src="/favicon.ico" className="max-sm:hidden" width={20} alt="" />
+            <p className="text-black/80 text-sm">Built Using React & NextJS</p>
+          </div>
+        </div>
       </div>
-      <div className="flex flex-col justify-center items-center">
-        <p className="text-gray-700 italic text-center">All rights reserved for Me2 2024.</p>
-        <p className="text-gray-700 text-center"><a className="underline" href="https://micahdev.vercel.app">Micah Tid</a> & <a className="underline" href="">Ean Yu</a></p>
-      </div>
-      <div className="flex flex-row gap-4 justify-center items-center">
-        <p className="font-semibold uppercase text-nowrap">Connect</p>
-        <FaFacebook size={30} />
-        <AiFillInstagram size={30} />
-        <RiTwitterXLine size={30} />
-      </div>
-    </footer>
+    </div>
   );
 };
 

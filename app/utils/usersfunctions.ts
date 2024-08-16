@@ -1,4 +1,4 @@
-import { addDoc, query, DocumentData, onSnapshot, collection, updateDoc, where, getDocs, arrayUnion, doc } from "firebase/firestore";
+import { addDoc, query, DocumentData, onSnapshot, collection, updateDoc, serverTimestamp, where, getDocs, arrayUnion, doc } from "firebase/firestore";
 import { initializeFirebase, getUserAuth, getFireStore } from "./databasefunctions";
 
 export const getUsers = (setUsers: (users: DocumentData[]) => void) => {
@@ -44,7 +44,9 @@ export const addUser = async (userName: string, age: number,
 
   if (auth.currentUser) {
     const { uid } = auth.currentUser;
-
+    // const lastOnline = serverTimestamp();
+    // const online = true;
+    console.log("Went through here!")
     try {
       await addDoc(collection(firestore, "users"), {
         uid,
@@ -56,7 +58,9 @@ export const addUser = async (userName: string, age: number,
         pfp,
         instagram,
         discord,
-        snap
+        snap,
+        lastOnline: serverTimestamp(),
+        online : true
       });
     } catch (error) {
       console.error("Error adding document: ", error);
@@ -152,3 +156,63 @@ export const editUser = async (uid: string, userName: string, age: number, curr:
     console.error(`No user found with UID ${uid}.`);
   }
 };
+
+
+export const setUserOnline = async (uid: string, status: boolean) => {
+  const app = initializeFirebase
+  const auth = getUserAuth(true);
+  const firestore = getFireStore(true);
+
+  const q = query(collection(firestore, 'users'), where('uid', '==', uid));
+  const querySnapshot = await getDocs(q);
+
+  if (!querySnapshot.empty) {
+    const userDocRef = querySnapshot.docs[0].ref;
+
+    const updateData: {[key: string]: any } = {
+      online: status
+    };
+
+    if (status === false) {
+      updateData.lastOnline = serverTimestamp();
+    }
+
+    await updateDoc(userDocRef, updateData);
+
+    console.log(`User document with UID ${uid} successfully updated to online status: ${status}.`);
+  } else {
+    console.error(`No user found with UID ${uid}.`);
+  }
+};
+
+// export const updateAllUsers = async () => {
+//   const app = initializeFirebase
+//   const auth = getUserAuth(true);
+//   const firestore = getFireStore(true);
+
+
+//   try {
+//     const usersCollection = collection(firestore, "users");
+//     const usersSnapshot = await getDocs(usersCollection);
+
+//     for (const userDoc of usersSnapshot.docs) {
+//       const userRef = userDoc.ref;
+//       const userData = userDoc.data();
+
+//       const updates: any = {};
+//       if (userData.lastOnline === undefined) {
+//         updates.lastOnline = serverTimestamp();
+//       }
+//       if (userData.online === undefined) {
+//         updates.online = false;
+//       }
+
+//       if (Object.keys(updates).length > 0) {
+//         await updateDoc(userRef, updates);
+//         console.log(`User document with ID ${userDoc.id} successfully updated.`);
+//       }
+//     }
+//   } catch (error) {
+//     console.error("Error updating user documents: ", error);
+//   }
+// };

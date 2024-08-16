@@ -4,9 +4,9 @@ import { BsFillPeopleFill } from "react-icons/bs";
 import { BiSolidHelpCircle } from "react-icons/bi";
 
 export const navItems = [
-    { text: 'Home', icon: <FaHome size={20} /> },
-    { text: 'About', icon: <BsFillPeopleFill size={20} /> },
-    { text: 'Help', icon: <BiSolidHelpCircle size={20} /> },
+    { text: 'Home', icon: <FaHome size={20} />, link: '#hero' },
+    { text: 'About', icon: <BsFillPeopleFill size={20} />, link: '#about' },
+    { text: 'Others', icon: <BiSolidHelpCircle size={20} />, link: '#footer' },
   ];
 
 export const locations = [
@@ -25,7 +25,6 @@ export const curriculums = [
     { value: 'ib', label: 'International Baccalaureate Organization (IB)' },
     { value: 'other', label: 'National Curriculum/Other' },
 ];
-
 
 export const hobbies = [
     { value: 'archery', label: 'Archery' },
@@ -120,4 +119,58 @@ export const hobbies = [
     { value: 'woodworking', label: 'Woodworking' },
     { value: 'writing', label: 'Writing' },
     { value: 'yoga', label: 'Yoga' }
+]
+
+export const footerNotes = [
+    {
+        header: "Links",
+        links: [
+            {
+                label: "Hero",
+                link: "#hero"
+            },
+            {
+                label: "About Us",
+                link: "#about"
+            },
+            {
+                label: "Testimonies",
+                link: "#testimonies"
+            },
+            {
+                label: "Footer",
+                link: "#footer"
+            },
+        ]
+    },
+    {
+        header: "Socials",
+        links: [
+            {
+                label: "Instagram",
+                link: ""
+            },
+            {
+                label: "Twitter",
+                link: ""
+            },
+            {
+                label: "FaceBook",
+                link: ""
+            },
+        ]
+    },
+    {
+        header: "Developers",
+        links: [
+            {
+                label: "Micah Tid",
+                link: "https://micahdev.vercel.app"
+            },
+            {
+                label: "Ean Yu",
+                link: "https://eanyu.vercel.app"
+            }
+        ]
+    }
 ]
