@@ -16,7 +16,7 @@ const NavBar = () => {
     <nav className="w-full">
       <div className="max-lg:hidden
       max-w-[1200px] w-full rounded-lg
-      px-8 py-4 bg-black/10 backdrop-blur-[5px]
+      px-8 py-4 bg-gray-600/20 backdrop-blur-[5px]
       flex flex-row justify-between items-center
       mt-8 max-xl:max-w-none max-xl:w-[95%]
        fixed top-0 z-50 left-1/2 transform -translate-x-1/2">
@@ -25,14 +25,14 @@ const NavBar = () => {
         </div>
         <div className="flex flex-row justify-between items-center gap-x-6">
           {navItems.map((item, index) => (
-            <a key={index} href={item.link} className="flex flex-row gap-x-2 font-medium text-white">
+            <a key={index} href={item.link} className="flex flex-row gap-x-2 font-medium text-black">
               {item.text}
               <div className="mt-[2px]">{item.icon}</div>
             </a>
           ))}
           <Button
-            className="bg-secondary rounded-full px-4 py-2
-        font-medium text-white shadow-sm"
+            className="bg-white rounded-md px-4 py-2
+        font-medium text-black shadow-lg"
             onClick={signIn}
           >
             Log In
