@@ -12,7 +12,7 @@ const Hero = () => {
         <h3 className="dynamic-heading font-bubble font-extrabold uppercase text-white text-left text-shadow-no-blur
         leading-[65px] max-lg:leading-[60px]
         max-lg:text-center">The Chat App For Students</h3>
-        <p className="dynamic-text text-gray-700 mt-10 text-left
+        <p className="dynamic-text text-gray-700 mt-8 text-left
         max-lg:text-center">
           Meet Me2! The chat app designed for students to find other students with similar interests and experiences.
         </p>
