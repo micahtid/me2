@@ -121,6 +121,14 @@ export const hobbies = [
     { value: 'yoga', label: 'Yoga' }
 ]
 
+export const roomTags = [
+    { value: 'igcse', label: 'IGCSE'},
+    { value: 'ap', label: 'AP'},
+    { value: 'compsci', label: 'Computer Science'},
+    { value: 'math', label: 'Mathematics'},
+    { value: 'physics', label: 'Physics'},
+]
+
 export const footerNotes = [
     {
         header: "Links",

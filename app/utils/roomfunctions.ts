@@ -25,13 +25,13 @@ export const addRoom = async (
     roomId: string,
     limit: number,
     description: string,
-    tags: string[],
-    users: string[],
-    link: string
+    tags: string[]
 ) => {
     const app = initializeFirebase();
     const auth = getUserAuth(true);
     const firestore = getFireStore(true);
+
+    const users: string[] = [];
 
     if (auth.currentUser) {
         const { uid } = auth.currentUser;
@@ -44,7 +44,6 @@ export const addRoom = async (
                 description,
                 tags,
                 users,
-                link,
                 createdBy: uid,
             });
             console.log("Room successfully created!");
