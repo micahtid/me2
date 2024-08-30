@@ -15,16 +15,7 @@ const Testimonies = () => {
   };
 
   return (
-    <div id="testimonies" className="w-full yellow-gradient py-16
-    relative">
-      <div className="absolute w-[100vw] overflow-x-hidden
-      -top-[100px] max-lg:-top-[90px] max-md:-top-[60px] max-sm:top-[10px] max-[450px]:top-[40px]
-      flex justify-center items-center">
-        <img
-          src="/chilling.svg"
-          className="dynamic-svg"
-        />
-      </div>
+    <div id="testimonies" className="w-full yellow-gradient py-16">
       <div className="flex flex-col justify-center gap-y-16 items-center">
         <div className="">
           <p className="uppercase font-bold font-bubble text-black/70 text-center">

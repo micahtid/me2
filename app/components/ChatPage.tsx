@@ -13,6 +13,7 @@ import UserDisplay from "./UserDisplay";
 import FindSection from "./FindSection/FindSection";
 import RequestSection from "./RequestSection/RequestSection";
 import QuickLinks from "./QuickLinks";
+import RoomsSection from "./RoomsSection/RoomsSection";
 
 const ChatPage = () => {
   const { currentPage } = useActivePage();
@@ -43,7 +44,7 @@ const ChatPage = () => {
       max-lg:my-2 bg-white">
         {
           currentPage === "chat" ? 
-          <ChatSection /> : currentPage === "requests" ? <RequestSection /> : <FindSection />
+          <ChatSection /> : currentPage === "requests" ? <RequestSection /> : currentPage === "new people" ? <FindSection /> : <RoomsSection />
         }
       </div>
       <div className="w-full p-1

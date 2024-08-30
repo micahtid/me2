@@ -9,7 +9,7 @@ const Hero = () => {
     max-lg:flex-col">
       <div className="flex flex-col justify-center items-start max-w-[350px] max-lg:max-w-[400px]
       max-lg:items-center">
-        <h3 className="dynamic-heading font-bubble font-extrabold uppercase text-white text-left text-shadow-no-blur
+        <h3 className="dynamic-heading font-bubble font-extrabold text-white text-left text-shadow-no-blur
         leading-[65px] max-lg:leading-[60px]
         max-lg:text-center">The Chat App For Students</h3>
         <p className="dynamic-text text-gray-700 mt-8 text-left

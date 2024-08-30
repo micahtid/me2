@@ -36,16 +36,15 @@ const Footer = () => {
             </div>
           ))}
           <img
-            src="/bikini.svg"
+            src="/clumsy.svg"
             className="w-[500px] opacity-50 max-xl:w-[300px] max-lg:hidden"
           />
         </div>
         <div className="w-full max-lg:w-[550px] max-sm:w-[80%]">
           <div className="w-full h-[2px] bg-black/50 rounded-full mb-4"></div>
-          <div className="w-full flex flex-row justify-between items-center
+          <div className="w-full flex flex-row justify-start items-center gap-x-6
           max-sm:flex-col max-sm:gap-y-1">
             <p className="text-nowrap overflow-ellipsis text-black/80 text-sm">@2024 Me2, All Rights Reserved</p>
-            <img src="/favicon.ico" className="max-sm:hidden" width={20} alt="" />
             <p className="text-black/80 text-sm">Built Using React & NextJS</p>
           </div>
         </div>

@@ -7,6 +7,7 @@ import { PiSignOutBold } from "react-icons/pi";
 import { HiUsers } from "react-icons/hi";
 import { IoMail } from "react-icons/io5";
 import { IoNotifications } from "react-icons/io5";
+import { FaVideo } from "react-icons/fa";
 
 // Own Function Imports
 import { signOut } from "../utils/databasefunctions";
@@ -31,6 +32,7 @@ const QuickLinks = () => {
                 <IoMail size={32} className="" />
             </div>
         ), func: () => { onChange("requests") } },
+        { label: "rooms", icon: <FaVideo size={32} />, func: () => { onChange("rooms") } }
     ];
 
     return (
@@ -49,7 +51,7 @@ const QuickLinks = () => {
                         onClick={link.func}
                     >
                         <div className={`${currentPage === link.label ? 'bg-white' : ''}
-                        transition-all duration-300 p-2 rounded-lg text-black/90 hover:bg-white/80 ease-in-out`}>
+                        p-2 rounded-lg text-black/90 hover:bg-white/80 ease-in-out`}>
                             {link.icon}
                         </div>
                     </button>

@@ -28,24 +28,14 @@ const AboutUs = () => {
   ];
 
   return (
-    <section id="about" className="flex flex-col justify-center
-    relative">
-      <div className="absolute w-[50vw] max-lg:w-[100vw]
-      flex justify-end items-center max-lg:justify-start max-md:justify-center
-      top-[10px] max-lg:top-[30px] max-md:top-[60px] max-sm:top-[125px] max-[450px]:top-[160px]">
-        <img
-          src="/reading-side.svg"
-          className="dynamic-svg
-          max-lg:ml-24 max-md:ml-0"
-        />
-      </div>
+    <section id="about" className="flex flex-col justify-center">
       <div className="flex justify-center items-center relative">
         <div className="mt-[200px] mb-[60px]">
           <p 
             className="font-bold font-bubble text-[#8DC1FF] text-base uppercase w-full text-center">
               Some Features 
           </p> 
-          <h3 className="dynamic-subheading font-semibold font-bubble uppercase">
+          <h3 className="dynamic-subheading font-semibold font-bubble">
             Why Choose Us?
           </h3>
         </div>
