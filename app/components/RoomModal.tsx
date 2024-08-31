@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRoomModal } from "@/hooks/useRoomModal";
 import { roomTags } from "../data";
-import { addRoom } from "../utils/roomfunctions";
+import { addRoom, editRoom } from "../utils/roomfunctions";
 import { useData } from "@/providers/DataProvider";
 
 import Modal from "./Modal";
@@ -23,13 +23,19 @@ const selectStyles = {
 };
 
 const RoomModal = () => {
-  const { isModalOpen, onModalClose } = useRoomModal();
+  const { isModalOpen, onModalClose, activeRoom, isNewRoom } = useRoomModal();
   const { user } = useData();
 
   // Add useState for form inputs
   const [roomDescription, setRoomDescription] = useState("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [userLimit, setUserLimit] = useState("");
+
+  useEffect(() => {
+    setRoomDescription(activeRoom?.description || "");
+    setSelectedTags(activeRoom?.tags || []);
+    setUserLimit(activeRoom?.limit.toString() || "");
+  }, [activeRoom])
 
   const onChange = (open: boolean) => {
     if (!open) {
@@ -38,19 +44,18 @@ const RoomModal = () => {
   };
 
   const handleSubmit = () => {
-    const parsedUserLimit = parseInt(userLimit, 10); // Convert userLimit to an integer
+    // Convert userLimit to an integer
+    const parsedUserLimit = parseInt(userLimit, 10); 
 
     if (roomDescription && selectedTags.length > 0 && !isNaN(parsedUserLimit)) {
-      addRoom(user?.uid, parsedUserLimit, roomDescription, selectedTags);
+      if (isNewRoom) {
+        addRoom(user?.uid, parsedUserLimit, roomDescription, selectedTags);
+      } else {
+        editRoom(activeRoom?.roomId, parsedUserLimit, roomDescription, selectedTags)
+      }
     } else {
       console.error("Please fill in all fields correctly.");
     }
-    
-    console.log({
-      roomDescription,
-      selectedTags,
-      userLimit: parsedUserLimit,
-    });
     
     onModalClose();
   };
@@ -93,7 +98,7 @@ const RoomModal = () => {
             className="bg-primary px-4 py-2 rounded-lg"
             onClick={handleSubmit}
           >
-            Create
+            Confirm
           </button>
           <button
             onClick={onModalClose}

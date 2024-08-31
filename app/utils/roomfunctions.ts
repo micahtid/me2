@@ -31,7 +31,7 @@ export const addRoom = async (
     const auth = getUserAuth(true);
     const firestore = getFireStore(true);
 
-    const users: string[] = [];
+    const users: string[] = [roomId];
 
     if (auth.currentUser) {
         const { uid } = auth.currentUser;
@@ -104,9 +104,7 @@ export const editRoom = async (
     roomId: string,
     limit: number,
     description: string,
-    tags: string[],
-    users: string[],
-    link: string
+    tags: string[]
 ) => {
     const app = initializeFirebase();
     const firestore = getFireStore(true);
@@ -121,9 +119,7 @@ export const editRoom = async (
                 await updateDoc(doc.ref, {
                     limit,
                     description,
-                    tags,
-                    users,
-                    link
+                    tags
                 });
                 console.log(`Room with roomId: ${roomId} has been successfully updated.`);
             });
