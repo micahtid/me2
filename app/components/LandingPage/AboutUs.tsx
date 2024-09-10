@@ -28,21 +28,25 @@ const AboutUs = () => {
   ];
 
   return (
-    <section id="about" className="flex flex-col justify-center
-    relative">
+    <section
+      id="about"
+      className="flex flex-col justify-center
+    relative"
+    >
       <div className="flex justify-center items-center relative">
         <div className="mt-[200px] mb-[60px]">
-          <p 
-            className="font-bold font-bubble text-[#8DC1FF] text-base uppercase w-full text-center">
-              Some Features 
-          </p> 
+          <p className="font-bold font-bubble text-[#8DC1FF] text-lg uppercase w-full text-center">
+            Some Features
+          </p>
           <h3 className="dynamic-subheading font-semibold font-bubble">
             Why Choose Us?
           </h3>
         </div>
       </div>
-      <div className="flex flex-row justify-center gap-x-[15px] mb-[100px]
-      max-lg:flex-col max-lg:items-center max-lg:gap-y-4">
+      <div
+        className="flex flex-row justify-center gap-x-[15px] mb-[300px]
+      max-lg:flex-col max-lg:items-center max-lg:gap-y-4"
+      >
         {cards.map((card, index) => (
           <div
             key={index}
@@ -53,10 +57,16 @@ const AboutUs = () => {
             <div className="flex items-center justify-center w-full h-[100px] mt-[20px]">
               <card.icon className={`ml-[${card.iconMarginX}]`} />
             </div>
-            <p className="text-xl font-semibold h-[35px]
-            flex justify-center items-center mt-[15px]">{card.title}</p>
-            <p className="text-center text-sm max-w-[200px] h-[125px]
-            flex justify-center items-start">
+            <p
+              className="text-xl font-semibold h-[35px]
+            flex justify-center items-center mt-[15px]"
+            >
+              {card.title}
+            </p>
+            <p
+              className="text-center text-sm max-w-[200px] h-[125px]
+            flex justify-center items-start"
+            >
               {card.description}
             </p>
           </div>

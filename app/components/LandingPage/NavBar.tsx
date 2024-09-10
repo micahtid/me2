@@ -14,18 +14,24 @@ const NavBar = () => {
 
   return (
     <nav className="w-full">
-      <div className="max-lg:hidden
+      <div
+        className="max-lg:hidden
       max-w-[1200px] w-full rounded-lg
       px-8 py-4 bg-gray-600/20 backdrop-blur-[5px]
       flex flex-row justify-between items-center
-      mt-8 max-xl:max-w-none max-xl:w-[95%]
-       fixed top-0 z-50 left-1/2 transform -translate-x-1/2">
+      mt-20 max-xl:max-w-none max-xl:w-[95%]
+       fixed top-0 z-50 left-1/2 transform -translate-x-1/2"
+      >
         <div>
           <img src="favicon.ico" width={35} className="" />
         </div>
         <div className="flex flex-row justify-between items-center gap-x-6">
           {navItems.map((item, index) => (
-            <a key={index} href={item.link} className="flex flex-row gap-x-2 font-medium text-black">
+            <a
+              key={index}
+              href={item.link}
+              className="flex flex-row gap-x-2 font-medium text-black"
+            >
               {item.text}
               <div className="mt-[2px]">{item.icon}</div>
             </a>
@@ -37,7 +43,7 @@ const NavBar = () => {
           >
             Log In
           </Button>
-      </div>
+        </div>
       </div>
       <div
         className="w-full

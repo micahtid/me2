@@ -25,7 +25,7 @@ import useIsTabActive from "../hooks/useActiveTab";
 const Home = () => {
   const [isUserLoaded, setIsUserLoaded] = useState<boolean | null>(null);
   const [isUserRegistered, setIsUserRegistered] = useState<boolean | null>(
-    null
+    null,
   );
 
   const { user, users } = useData();
@@ -42,25 +42,23 @@ const Home = () => {
     }
   }, [user, users]);
 
-  ////////////////////////////////////
   const status = useIsTabActive();
-  
+
   useEffect(() => {
     if (user?.uid) {
       setUserOnline(user?.uid, status);
     }
-  }, [status, user])
-  ////////////////////////////////////
+  }, [status, user]);
 
   if (isUserLoaded === null || isUserRegistered === null) {
     return <Loader />;
   }
-  
+
   return (
     <div className="">
       <section className="max-[325px]:hidden">
         {isUserLoaded && isUserRegistered ? (
-            <ChatPage />
+          <ChatPage />
         ) : isUserLoaded ? (
           <RegisterUser />
         ) : (
@@ -80,11 +78,11 @@ const Home = () => {
         )}
       </section>
       <div className="hidden max-[325px]:inline">
-          <p className="p-2">Oops! Me2 isn't yet suited for smaller devices. Please login on a larger device or enlargen your window.</p>
-          <img
-          src="/roller-skating.svg"
-          className="mt-5"
-        />
+        <p className="p-2">
+          Oops! Me2 isn't yet suited for smaller devices. Please login on a
+          larger device or enlargen your window.
+        </p>
+        <img src="/roller-skating.svg" className="mt-5" />
       </div>
     </div>
   );

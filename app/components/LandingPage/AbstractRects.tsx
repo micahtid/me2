@@ -1,6 +1,5 @@
-import { memo } from 'react';
-import type { FC } from 'react';
-import { Grid, GridItem } from '@chakra-ui/react'
+import { memo } from "react";
+import type { FC } from "react";
 
 interface Props {
   className?: string;
@@ -8,22 +7,30 @@ interface Props {
 
 const AbstractRects: FC<Props> = memo(function AbstractRects(props = {}) {
   return (
-    <Grid
-      h="450px"
-      w="550px"
-      templateRows="repeat(9, 1fr)"
-      templateColumns="repeat(8, 1fr)"
-      gap={10}
-    >
-      <GridItem className='shadow-md' rowSpan={4} colSpan={5} bg="#54ACFD" borderRadius={10}/>
-      <GridItem className='shadow-md' rowSpan={2} colSpan={3} bg="#D5E6FF" borderRadius={10}/>
-      <GridItem className='shadow-md' rowSpan={3} colSpan={3} bg="#8DC1FF" borderRadius={10}/>
-      <GridItem className='shadow-md' rowSpan={4} colSpan={3} bg="#D5E6FF" borderRadius={10}/>
-      <GridItem className='shadow-md' rowSpan={2} colSpan={2} bg="#FFD99F" borderRadius={10}/>
-      <GridItem className='shadow-md' rowSpan={3} colSpan={3} bg="#54ACFD" borderRadius={10}/>
-      <GridItem className='shadow-md' rowSpan={2} colSpan={2} bg="#8DC1FF" borderRadius={10}/>
-    </Grid>
+    <div className="w-[480px] h-[490px] mt-24 grid grid-cols-8 grid-rows-9 gap-3">
+      <div className="shadow-md row-span-4 col-span-5 bg-[#2594fd] text-transparent rounded-xl">
+        {""}
+      </div>
+      <div className="shadow-md row-span-2 col-span-3 bg-[#6ca7ff] text-transparent rounded-xl">
+        {""}
+      </div>
+      <div className="shadow-md row-span-3 col-span-3 bg-[#7cb7ff] text-transparent rounded-xl">
+        {""}
+      </div>
+      <div className="shadow-md row-span-4 col-span-3 bg-[#6ca7ff] text-transparent rounded-xl">
+        {""}
+      </div>
+      <div className="shadow-md row-span-2 col-span-2 bg-[#ffb950] text-transparent rounded-xl">
+        {""}
+      </div>
+      <div className="shadow-md row-span-3 col-span-3 bg-[#2594fd] text-transparent rounded-xl">
+        {""}
+      </div>
+      <div className="shadow-md row-span-2 col-span-2 bg-[#7cb7ff] text-transparent rounded-xl">
+        {""}
+      </div>
+    </div>
   );
 });
 
-export default AbstractRects
+export default AbstractRects;

@@ -11,47 +11,76 @@ const Testimonies = () => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrows: false
+    arrows: false,
   };
 
   return (
-    <div id="testimonies" className="w-full yellow-gradient py-16
-    relative">
+    <div
+      id="testimonies"
+      className="w-full yellow-gradient py-36
+    relative"
+    >
       <div className="flex flex-col justify-center gap-y-16 items-center">
         <div className="">
           <p className="uppercase font-bold font-bubble text-black/70 text-center">
             What our users say
           </p>
-          <h3 className="dynamic-subheading font-semibold font-bubble">Testimonies</h3>
+          <h3 className="dynamic-subheading font-semibold font-bubble">
+            Testimonies
+          </h3>
         </div>
         <div className="relative">
-          <svg viewBox="0 0 52 24" fill="currentColor" className="absolute top-0 left-[25px] z-0 hidden w-32 -mt-8 -ml-20 text-emerald-gray-100 lg:w-32 lg:-ml-28 lg:-mt-10 lg:block
-          max-lg:hidden">
+          <svg
+            viewBox="0 0 52 24"
+            fill="currentColor"
+            className="absolute top-0 left-[25px] z-0 hidden w-32 -mt-8 -ml-20 text-emerald-gray-100 lg:w-32 lg:-ml-28 lg:-mt-10 lg:block
+          max-lg:hidden"
+          >
             <defs>
-              <pattern id="d0d83814-78b6-480f-9a5f-7f637616b267" x="0" y="0" width=".135" height=".30">
-                <circle cx="1" cy="1" r=".7">
-                  </circle>
-                </pattern>
-              </defs>
-              <rect fill="url(#d0d83814-78b6-480f-9a5f-7f637616b267)" width="52" height="24">
-              </rect>
+              <pattern
+                id="d0d83814-78b6-480f-9a5f-7f637616b267"
+                x="0"
+                y="0"
+                width=".135"
+                height=".30"
+              >
+                <circle cx="1" cy="1" r=".7"></circle>
+              </pattern>
+            </defs>
+            <rect
+              fill="url(#d0d83814-78b6-480f-9a5f-7f637616b267)"
+              width="52"
+              height="24"
+            ></rect>
           </svg>
-          <svg viewBox="0 0 52 24" fill="currentColor" className="absolute bottom-0 -right-[40px] z-0 hidden w-32 -mt-8 -ml-20 text-emerald-gray-100 lg:w-32 lg:-ml-28 lg:-mt-10 lg:block
-          max-lg:hidden">
+          <svg
+            viewBox="0 0 52 24"
+            fill="currentColor"
+            className="absolute bottom-0 -right-[40px] z-0 hidden w-32 -mt-8 -ml-20 text-emerald-gray-100 lg:w-32 lg:-ml-28 lg:-mt-10 lg:block
+          max-lg:hidden"
+          >
             <defs>
-              <pattern id="d0d83814-78b6-480f-9a5f-7f637616b267" x="0" y="0" width=".135" height=".30">
-                <circle cx="1" cy="1" r=".7">
-                  </circle>
-                </pattern>
-              </defs>
-              <rect fill="url(#d0d83814-78b6-480f-9a5f-7f637616b267)" width="52" height="24">
-              </rect>
+              <pattern
+                id="d0d83814-78b6-480f-9a5f-7f637616b267"
+                x="0"
+                y="0"
+                width=".135"
+                height=".30"
+              >
+                <circle cx="1" cy="1" r=".7"></circle>
+              </pattern>
+            </defs>
+            <rect
+              fill="url(#d0d83814-78b6-480f-9a5f-7f637616b267)"
+              width="52"
+              height="24"
+            ></rect>
           </svg>
           <Slider
-              {...settings}
-              className="
+            {...settings}
+            className="
             mx-6 w-[600px] max-lg:w-[90vw]"
-            >
+          >
             {data.map((d) => (
               <div
                 key={d.name}
