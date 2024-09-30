@@ -5,7 +5,6 @@ import { useRoomModal } from "@/hooks/useRoomModal";
 import { roomTags } from "../data";
 import { addRoom, editRoom } from "../utils/roomfunctions";
 import { useData } from "@/providers/DataProvider";
-
 import Modal from "./Modal";
 import Select from "react-select";
 
@@ -22,20 +21,55 @@ const selectStyles = {
   }),
 };
 
+const createZoomLink = async () => {
+  try {
+    const tokenResponse = await fetch("/api/accessToken", {
+      method: "POST",
+    });
+
+    if (!tokenResponse.ok) {
+      throw new Error("Failed to get access token");
+    }
+
+    const tokenData = await tokenResponse.json();
+    const accessToken = tokenData.access_token;
+
+    const zoomResponse = await fetch("/api/zoomLink", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify({}),
+    });
+
+    if (!zoomResponse.ok) {
+      throw new Error("Failed to create Zoom meeting");
+    }
+
+    return await zoomResponse.json();
+  } catch (err) {
+    console.error(err);
+    throw new Error("Error creating Zoom meeting");
+  }
+};
+
 const RoomModal = () => {
   const { isModalOpen, onModalClose, activeRoom, isNewRoom } = useRoomModal();
   const { user } = useData();
 
-  // Add useState for form inputs
   const [roomDescription, setRoomDescription] = useState("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [userLimit, setUserLimit] = useState("");
+
+  const [startUrl, setStartUrl] = useState<string | null>(null);
+  const [joinUrl, setJoinUrl] = useState<string | null>(null);
 
   useEffect(() => {
     setRoomDescription(activeRoom?.description || "");
     setSelectedTags(activeRoom?.tags || []);
     setUserLimit(activeRoom?.limit.toString() || "");
-  }, [activeRoom])
+  }, [activeRoom]);
 
   const onChange = (open: boolean) => {
     if (!open) {
@@ -43,20 +77,32 @@ const RoomModal = () => {
     }
   };
 
-  const handleSubmit = () => {
-    // Convert userLimit to an integer
-    const parsedUserLimit = parseInt(userLimit, 10); 
+  const handleSubmit = async () => {
+    const parsedUserLimit = parseInt(userLimit, 10);
 
     if (roomDescription && selectedTags.length > 0 && !isNaN(parsedUserLimit)) {
-      if (isNewRoom) {
-        addRoom(user?.uid, parsedUserLimit, roomDescription, selectedTags);
-      } else {
-        editRoom(activeRoom?.roomId, parsedUserLimit, roomDescription, selectedTags)
+      try {
+        const zoomLinks = await createZoomLink();
+        setStartUrl(zoomLinks.start_url);
+        setJoinUrl(zoomLinks.join_url);
+
+        if (isNewRoom && startUrl && joinUrl) {
+          await addRoom(user?.uid, parsedUserLimit, roomDescription, selectedTags, startUrl, joinUrl);
+        } else if (activeRoom?.roomId) {
+          await editRoom(activeRoom.roomId, parsedUserLimit, roomDescription, selectedTags);
+        }
+
+        setRoomDescription("");
+        setSelectedTags([]);
+        setUserLimit("");
+        console.log("Room successfully handled!");
+      } catch (error) {
+        console.error("Error handling the room: ", error);
       }
     } else {
       console.error("Please fill in all fields correctly.");
     }
-    
+
     onModalClose();
   };
 
@@ -100,10 +146,7 @@ const RoomModal = () => {
           >
             Confirm
           </button>
-          <button
-            onClick={onModalClose}
-            className="bg-gray-300 px-4 py-2 rounded-lg"
-          >
+          <button onClick={onModalClose} className="bg-gray-300 px-4 py-2 rounded-lg">
             Cancel
           </button>
         </div>

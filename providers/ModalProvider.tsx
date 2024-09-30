@@ -17,11 +17,11 @@ const ModalProvider = () => {
   }
 
   return (
-    <>
+    <div className="">
         <UserModal />
         <ConfirmationModal />
         <RoomModal />
-    </>
+    </div>
   );
 };
 

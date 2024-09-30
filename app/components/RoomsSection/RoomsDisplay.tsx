@@ -8,7 +8,7 @@ import { roomTags } from "@/app/data";
 
 import { FaClock, FaLink } from "react-icons/fa";
 import { IoEnter, IoExit } from "react-icons/io5";
-import { MdDelete, MdModeEdit } from "react-icons/md";
+import { MdDelete, MdModeEdit, MdStart } from "react-icons/md";
 
 import RoomUserList from "./RoomUserList";
 
@@ -71,18 +71,39 @@ const RoomsDisplay = () => {
       {rooms?.map((room, index) => (
         <div key={index} className={`
         w-full bg-gray-100
-        p-4 rounded-lg shadow-md
-        flex flex-col gap-y-4
-        ${(room.roomId === user?.uid || room.users.includes(user?.uid)) && "bg-primary/50"}
+        p-8 rounded-lg shadow-md
+        flex flex-col gap-y-6
+        ${(room.roomId === user?.uid || room.users.includes(user?.uid)) && "bg-primary/30"}
         `}>
-          <div className="flex justify-between w-full items-center gap-x-4">
-            <h3 className="text-xl font-semibold">{room.description}</h3>
+          <div className="flex justify-between w-full items-start gap-x-4">
+            <div className="">
+              <h3 className="text-xl font-semibold">{room.description}</h3>
+              <p className="text-gray-500 mb-2">Created {getHoursAgo(room.createdAt)} hours ago</p>
+              <div className="text-gray-500">
+                <RoomUserList display={`${room.users.length}/${room.limit} Users`}
+                users={users}
+                roomUserIds={room.users} />
+              </div>
+            </div>
             <div className="flex justify-center items-center gap-x-2">
               {
                 room.users.includes(user?.uid) && (
-                  <button className={iconStyles}>
+                  <a 
+                  target="_blank"
+                  href={room.startUrl}
+                  className={iconStyles}>
+                    <MdStart />
+                  </a>
+                )
+              }
+              {
+                room.users.includes(user?.uid) && (
+                  <a 
+                  target="_blank"
+                  href={room.joinUrl}
+                  className={iconStyles}>
                     <FaLink />
-                  </button>
+                  </a>
                 )
               }
               {
@@ -100,26 +121,13 @@ const RoomsDisplay = () => {
               <RoomButton room={room} user={user} />
             </div>
           </div>
-          <div className="">
-            <div className="flex flex-row justify-start items-center gap-x-2
-            text-gray-500">
-              <FaClock />
-              <p>Created {getHoursAgo(room.createdAt)} hours ago</p>
-            </div>
-            <div className="flex flex-row justify-start items-center gap-x-2
-            text-gray-500">
-              <RoomUserList display={`${room.users.length}/${room.limit} Users`}
-              users={users}
-              roomUserIds={room.users} />
-            </div>
-          </div>
           <div className="flex flex-row justify-start items-center gap-x-2">
               {room.tags.map((tag: string, index: number) => (
                 <div key={index} className="px-2 py-1 rounded-lg bg-secondary">
                   {roomTags.find((roomTag) => roomTag.value === tag)?.label || tag}
                 </div>
               ))}
-            </div>
+          </div>
         </div>
       ))}
     </div>  

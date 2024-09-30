@@ -25,7 +25,9 @@ export const addRoom = async (
     roomId: string,
     limit: number,
     description: string,
-    tags: string[]
+    tags: string[],
+    startUrl: string,
+    joinUrl: string
 ) => {
     const app = initializeFirebase();
     const auth = getUserAuth(true);
@@ -45,6 +47,8 @@ export const addRoom = async (
                 tags,
                 users,
                 createdBy: uid,
+                startUrl,
+                joinUrl
             });
             console.log("Room successfully created!");
         } catch (error) {
