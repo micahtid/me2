@@ -1,78 +1,127 @@
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import Marquee from 'react-fast-marquee';
+import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
 
-import { ImQuotesLeft } from "react-icons/im";
+interface Testimonial {
+  name: string;
+  role: string;
+  rating: number;
+  review: string;
+}
 
-const Testimonies = () => {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: false
-  };
+
+const testimonials: Testimonial[] = [
+  {
+    name: "Olivia K.",
+    role: "Student at Harvard University",
+    rating: 4.5,
+    review: "I was overwhelmed by all the university options, but Uniglow simplified everything. It's a must-use for any prospective student!"
+  },
+  {
+    name: "Alex W.",
+    role: "Freshman at MIT",
+    rating: 5,
+    review: "Uniglow's interface is so user-friendly, and the recommendations are incredibly accurate. It made my decision-making process a breeze!"
+  },
+  {
+    name: "Emily R.",
+    role: "High School Senior",
+    rating: 5,
+    review: "Thanks to Uniglow, I discovered universities that perfectly matched my career goals. It's an invaluable tool for any student!"
+  },
+  {
+    name: "Daniel M.",
+    role: "Graduate Student at Stanford",
+    rating: 4.5,
+    review: "Uniglow's comprehensive approach to matching students with universities is impressive. It considers every aspect of student life!"
+  },
+  {
+    name: "Sarah L.",
+    role: "Transfer Student at UCLA",
+    rating: 5,
+    review: "Uniglow made my university search so much easier! The personalized recommendations based on my preferences were spot-on."
+  },
+  {
+    name: "Michael B.",
+    role: "International Student at NYU",
+    rating: 4.5,
+    review: "As an international student, Uniglow helped me navigate the complex US university system. It's an excellent resource!"
+  },
+  {
+    name: "Jessica T.",
+    role: "Sophomore at UC Berkeley",
+    rating: 5,
+    review: "I wish I had known about Uniglow earlier! It would have saved me so much time and stress during my college application process."
+  },
+  {
+    name: "Ryan K.",
+    role: "High School Junior",
+    rating: 4.5,
+    review: "Uniglow is helping me plan my college applications strategically. It's like having a personal college counselor!"
+  },
+  {
+    name: "Sophia L.",
+    role: "Freshman at Columbia University",
+    rating: 5,
+    review: "Uniglow's recommendations were spot-on. I'm now attending my dream university thanks to their guidance!"
+  },
+  {
+    name: "Ethan J.",
+    role: "Student Athlete at Duke",
+    rating: 4.5,
+    review: "Uniglow considered my athletic aspirations alongside my academic goals. It found the perfect balance for me."
+  }
+];
+
+const TestimonialCard: React.FC<{ testimonial: Testimonial }> = ({ testimonial }) => (
+  <div className="flex flex-col space-y-4 mx-4 border border-black/50 rounded-[10px] p-6 w-[300px] h-[300px]">
+    <div className="flex flex-col">
+      <p className="text-xl font-medium text-black">{testimonial.name}</p>
+      <p className="text-lg text-black">{testimonial.role}</p>
+    </div>
+    <div className="flex items-center">
+      {[...Array(Math.floor(testimonial.rating))].map((_, i) => (
+        <FaStar key={i} className="text-[#f4b034]" />
+      ))}
+      {testimonial.rating % 1 !== 0 && <FaStarHalfAlt className="text-[#f4b034]" />}
+    </div>
+    <p className="text-base text-black/60">&quot;{testimonial.review}&quot;</p>
+  </div>
+);
+
+const Testimonies: React.FC = () => {
+  const halfIndex = Math.ceil(testimonials.length / 2);
+  const firstRowTestimonials = testimonials.slice(0, halfIndex);
+  const secondRowTestimonials = testimonials.slice(halfIndex);
 
   return (
-    <div id="testimonies" className="w-full yellow-gradient py-16">
-      <div className="flex flex-col justify-center gap-y-16 items-center">
-        <div className="">
-          <p className="uppercase font-bold font-bubble text-black/70 text-center">
-            What our users say
-          </p>
-          <h3 className="dynamic-subheading font-semibold font-bubble uppercase">Testimonies</h3>
+    <div className="w-full flex justify-center items-center">
+      <div className="max-w-[1100px] w-full
+      px-12 max-md:px-0
+      flex justify-center items-center flex-col mx-auto gap-y-8 
+      relative">
+        <div className="dynamic-subheading font-semibold font-bubble">
+          Testimonials
         </div>
-        <div className="relative">
-          <svg viewBox="0 0 52 24" fill="currentColor" className="absolute top-0 left-[25px] z-0 hidden w-32 -mt-8 -ml-20 text-emerald-gray-100 lg:w-32 lg:-ml-28 lg:-mt-10 lg:block
-          max-lg:hidden">
-            <defs>
-              <pattern id="d0d83814-78b6-480f-9a5f-7f637616b267" x="0" y="0" width=".135" height=".30">
-                <circle cx="1" cy="1" r=".7">
-                  </circle>
-                </pattern>
-              </defs>
-              <rect fill="url(#d0d83814-78b6-480f-9a5f-7f637616b267)" width="52" height="24">
-              </rect>
-          </svg>
-          <svg viewBox="0 0 52 24" fill="currentColor" className="absolute bottom-0 -right-[40px] z-0 hidden w-32 -mt-8 -ml-20 text-emerald-gray-100 lg:w-32 lg:-ml-28 lg:-mt-10 lg:block
-          max-lg:hidden">
-            <defs>
-              <pattern id="d0d83814-78b6-480f-9a5f-7f637616b267" x="0" y="0" width=".135" height=".30">
-                <circle cx="1" cy="1" r=".7">
-                  </circle>
-                </pattern>
-              </defs>
-              <rect fill="url(#d0d83814-78b6-480f-9a5f-7f637616b267)" width="52" height="24">
-              </rect>
-          </svg>
-          <Slider
-              {...settings}
-              className="
-            mx-6 w-[600px] max-lg:w-[90vw]"
-            >
-            {data.map((d) => (
-              <div
-                key={d.name}
-                className="bg-white text-black w-[600px] max-lg:w-full
-              flex flex-col justify-start items-center"
-              >
-                <div
-                  className="h-56 bg-[#8DC1FF] flex justify-center items-center w-full
-                relative overflow-hidden"
-                >
-                  <ImQuotesLeft
-                    className="absolute -left-[100px] -rotate-12 opacity-30"
-                    size={400}
-                  />
-                </div>
-                <div className="flex flex-grow flex-col items-center justify-center gap-4 px-4 py-16">
-                  <p className="text-2xl font-bold mt-[10px]">{d.name}</p>
-                  <p className="text-center text-gray-700">{d.review}</p>
-                </div>
-              </div>
-            ))}
-          </Slider>
+        <div className="flex flex-col gap-y-[40px] mx-auto w-full">
+          <div className="relative w-full overflow-hidden">
+            {/* First Row */}
+            <Marquee direction="left" className="py-4 max-w-[100%]" pauseOnHover={true}>
+              {firstRowTestimonials.map((testimonial, index) => (
+                <TestimonialCard key={index} testimonial={testimonial} />
+              ))}
+            </Marquee>
+            {/* Second Row */}
+            <Marquee direction="right" className="py-4 max-w-[100%]" pauseOnHover={true}>
+              {secondRowTestimonials.map((testimonial, index) => (
+                <TestimonialCard key={index} testimonial={testimonial} />
+              ))}
+            </Marquee>
+            {/* Edge Fade Effect */}
+            <div className="absolute inset-0 pointer-events-none">
+              <div className="absolute top-0 left-0 w-10 h-full bg-gradient-to-r from-white/90 to-transparent z-10"></div>
+              <div className="absolute top-0 right-0 w-10 h-full bg-gradient-to-l from-white/90 to-transparent z-10"></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -80,31 +129,3 @@ const Testimonies = () => {
 };
 
 export default Testimonies;
-
-const data = [
-  {
-    name: `John Morgan`,
-    img: `/students/John_Morgan.jpg`,
-    review: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
-  },
-  {
-    name: `Ellie Anderson`,
-    img: `/students/Ellie_Anderson.jpg`,
-    review: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
-  },
-  {
-    name: `Nia Adebayo`,
-    img: `/students/Nia_Adebayo.jpg`,
-    review: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
-  },
-  {
-    name: `Rigo Louie`,
-    img: `/students/Rigo_Louie.jpg`,
-    review: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
-  },
-  {
-    name: `Mia Williams`,
-    img: `/students/Mia_Williams.jpg`,
-    review: `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.`,
-  },
-];
