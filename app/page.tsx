@@ -3,11 +3,11 @@
 import RegisterUser from "./components/RegisterUser";
 import ChatPage from "./components/ChatPage";
 
-import ColorDrop from "./components/LandingPage/ColorDrop";
 import NavBar from "./components/LandingPage/NavBar";
-import Testimonies from "./components/LandingPage/Testimonies";
 import Hero from "./components/LandingPage/Hero";
+import Tutorial from "./components/LandingPage/Tutorial";
 import AboutUs from "./components/LandingPage/AboutUs";
+import Testimonies from "./components/LandingPage/Testimonies";
 import Footer from "./components/LandingPage/Footer";
 
 // Library Imports
@@ -57,17 +57,20 @@ const Home = () => {
   }
   
   return (
-    <div className="">
+    <div className="bg-[#FAFAFA]">
       <section className="max-[325px]:hidden">
         {isUserLoaded && isUserRegistered ? (
             <ChatPage />
         ) : isUserLoaded ? (
           <RegisterUser />
         ) : (
-          <ColorDrop>
+          <div>
             <NavBar />
             <div className="mx-10 mt-36 mb-32 max-lg:mt-28">
               <Hero />
+            </div>
+            <div className="mb-52 mt-72">
+              <Tutorial />
             </div>
             <div className="my-48">
               <AboutUs />
@@ -76,10 +79,10 @@ const Home = () => {
               <Testimonies />
             </div>
             <Footer />
-          </ColorDrop>
+          </div>
         )}
       </section>
-      <div className="hidden max-[325px]:inline">
+      <div className="hidden max-[325px]:inline h-[100vh] w-full">
           <p className="p-2">Oops! Me2 isn't yet suited for smaller devices. Please login on a larger device or enlargen your window.</p>
           <img
           src="/roller-skating.svg"

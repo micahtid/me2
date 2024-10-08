@@ -106,8 +106,8 @@ const Settings = () => {
 
   return (
     <div className="bg-[#D5E6FF] w-[100vw] h-[100vh] flex justify-center items-center">
-      <div className="w-[calc(100vw-8rem)] h-[calc(100vh-4rem)] flex flex-row shadow-md max-md:w-full max-md:h-full max-md:flex-col">
-        <div className="w-[500px] h-full bg-[#54ACFD] flex flex-col justify-center items-start gap-y-2 px-16 max-md:max-w-[100vw] max-md:w-full max-md:py-14 max-xl:w-[400px] max-lg:w-[300px]">
+      <div className="w-[calc(100vw-8rem)] h-[calc(100vh-4rem)] flex flex-row shadow-md max-xl:w-full max-xl:h-full max-xl:flex-col">
+        <div className="w-[500px] h-full bg-[#54ACFD] flex flex-col justify-center items-start gap-y-2 px-16 max-xl:max-w-[100vw] max-xl:w-full max-xl:py-14">
           <Button className="mb-6 shadow-none text-sm" onClick={() => router.replace("./")}>
             <FaHome size={20} color="white" />
           </Button>
@@ -120,12 +120,12 @@ const Settings = () => {
         </div>
         <form
           onSubmit={handleSubmit}
-          className="flex-grow h-full bg-white px-52 pt-40 pb-20 flex flex-col justify-center items-center gap-y-3 overflow-y-scroll max-md:overflow-y-visible max-md:items-start max-xl:px-28 max-lg:px-12"
+          className="flex-grow h-full bg-white px-52 max-[1920px] pt-40 pb-20 flex flex-col justify-center items-center gap-y-3 overflow-y-scroll max-xl:overflow-y-visible max-xl:items-start max-xl:px-28 max-lg:px-12"
         >
-          <h3 className="dynamic-subheading font-semibold text-center max-md:text-left">
+          <h3 className="dynamic-subheading font-semibold text-center max-xl:text-left">
             Edit Your Profile Information
           </h3>
-          <p className="dynamic-text text-gray-700 italic text-center max-md:text-left">
+          <p className="dynamic-text text-gray-700 italic text-center max-xl:text-left">
             All edits must be saved before applied.
           </p>
           <input
@@ -201,7 +201,7 @@ const Settings = () => {
             onChange={(e) => setSnap(e.target.value)}
             className="input-field"
           />
-          <div className="w-full flex justify-end max-md:justify-start">
+          <div className="w-full flex justify-end max-xl:justify-start">
             <button
               className="dynamic-text font-semibold bg-[#FFD99F] py-2 px-6 rounded-md mt-5"
               type="submit"

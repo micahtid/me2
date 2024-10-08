@@ -73,7 +73,7 @@ const testimonials: Testimonial[] = [
 ];
 
 const TestimonialCard: React.FC<{ testimonial: Testimonial }> = ({ testimonial }) => (
-  <div className="flex flex-col space-y-4 mx-4 border border-black/50 rounded-[10px] p-6 w-[300px] h-[300px]">
+  <div className="flex flex-col space-y-4 mx-4 border border-black/10 rounded-[10px] p-6 w-[300px] h-[300px]">
     <div className="flex flex-col">
       <p className="text-xl font-medium text-black">{testimonial.name}</p>
       <p className="text-lg text-black">{testimonial.role}</p>
@@ -99,7 +99,7 @@ const Testimonies: React.FC = () => {
       px-12 max-md:px-0
       flex justify-center items-center flex-col mx-auto gap-y-8 
       relative">
-        <div className="dynamic-subheading font-semibold font-bubble">
+        <div className="dynamic-subheading font-bold font-header">
           Testimonials
         </div>
         <div className="flex flex-col gap-y-[40px] mx-auto w-full">

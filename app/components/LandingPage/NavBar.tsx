@@ -7,7 +7,6 @@ import { useState } from "react";
 import NavModal from "./NavModal";
 
 import { signIn } from "@/app/utils/databasefunctions";
-import Button from "../Button";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,18 +24,18 @@ const NavBar = () => {
         </div>
         <div className="flex flex-row justify-between items-center gap-x-6">
           {navItems.map((item, index) => (
-            <a key={index} href={item.link} className="flex flex-row gap-x-2 font-medium text-white">
+            <a key={index} href={item.link} className="flex flex-row gap-x-2 font-medium text-black">
               {item.text}
               <div className="mt-[2px]">{item.icon}</div>
             </a>
           ))}
-          <Button
-            className="bg-secondary rounded-full px-4 py-2
+          <button
+            className="bg-header rounded-xl px-4 py-2
         font-medium text-white shadow-sm"
             onClick={signIn}
           >
             Log In
-          </Button>
+          </button>
       </div>
       </div>
       <div

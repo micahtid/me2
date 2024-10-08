@@ -32,10 +32,10 @@ const AboutUs = () => {
       <div className="flex justify-center items-center relative">
         <div className="mt-[200px] mb-[60px]">
           <p 
-            className="font-bold font-bubble text-[#8DC1FF] text-base uppercase w-full text-center">
+            className="font-bold font-header text-header text-base uppercase w-full text-center">
               Some Features 
           </p> 
-          <h3 className="dynamic-subheading font-semibold font-bubble">
+          <h3 className="dynamic-subheading font-bold font-header">
             Why Choose Us?
           </h3>
         </div>

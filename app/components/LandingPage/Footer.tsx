@@ -24,7 +24,7 @@ const Footer = () => {
           {footerNotes.map((col, index) => (
             <div key={index} className="flex flex-col justify-start items-start gap-y-2
             max-[400px]:grid max-[400px]:grid-cols-2">
-              <h3 className="uppercase font-bubble font-bold max-[400px]:text-left
+              <h3 className="uppercase font-header font-bold max-[400px]:text-left
               max-[400px]:w-[125px]">{col.header}</h3>
               <div className="max-[400px]:block hidden"></div>
               {col.links.map((link, index) => (
