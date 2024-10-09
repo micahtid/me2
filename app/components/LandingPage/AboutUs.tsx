@@ -2,7 +2,15 @@ import PeopleHuggingIcon from "../Icons/PeopleHuggingIcon";
 import ClockIcon from "../Icons/ClockIcon";
 import LearnIcon from "../Icons/LearnIcon";
 
+import { useEffect } from "react";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 const AboutUs = () => {
+  useEffect(() => {
+    AOS.init();
+  }, [])
+
   const cards = [
     {
       icon: PeopleHuggingIcon,
@@ -28,26 +36,26 @@ const AboutUs = () => {
   ];
 
   return (
-    <section id="about" className="flex flex-col justify-center">
+    <section 
+    id="about" 
+    data-aos="fade-up"
+    data-aos-once="true"
+    data-aos-anchor-placement="bottom-bottom"
+    className="flex flex-col justify-center bg-primary">
       <div className="flex justify-center items-center relative">
-        <div className="mt-[200px] mb-[60px]">
-          <p 
-            className="font-bold font-header text-header text-base uppercase w-full text-center">
-              Some Features 
-          </p> 
-          <h3 className="dynamic-subheading font-bold font-header">
-            Why Choose Us?
-          </h3>
-        </div>
+      <h3 className="dynamic-subheading font-bold font-header
+      mt-36 mb-20">
+        Why Choose Us?
+      </h3>
       </div>
-      <div className="flex flex-row justify-center gap-x-[15px] mb-[100px]
+      <div className="flex flex-row justify-center gap-x-[15px] mb-36
       max-lg:flex-col max-lg:items-center max-lg:gap-y-4">
         {cards.map((card, index) => (
           <div
             key={index}
             className="flex flex-col justify-center items-center h-[325px] 
             w-[335px] max-xl:w-[300px] max-lg:w-[80vw]
-            blue-gradient rounded-md shadow-md"
+            bg-[#FAFAFA] rounded-md shadow-md"
           >
             <div className="flex items-center justify-center w-full h-[100px] mt-[20px]">
               <card.icon className={`ml-[${card.iconMarginX}]`} />

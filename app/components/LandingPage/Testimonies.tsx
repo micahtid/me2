@@ -1,6 +1,10 @@
 import Marquee from 'react-fast-marquee';
 import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
 
+import { useEffect } from "react";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 interface Testimonial {
   name: string;
   role: string;
@@ -89,42 +93,60 @@ const TestimonialCard: React.FC<{ testimonial: Testimonial }> = ({ testimonial }
 );
 
 const Testimonies: React.FC = () => {
+  useEffect(() => {
+    AOS.init();
+  }, [])
+
   const halfIndex = Math.ceil(testimonials.length / 2);
   const firstRowTestimonials = testimonials.slice(0, halfIndex);
   const secondRowTestimonials = testimonials.slice(halfIndex);
 
   return (
-    <div className="w-full flex justify-center items-center">
-      <div className="max-w-[1100px] w-full
-      px-12 max-md:px-0
-      flex justify-center items-center flex-col mx-auto gap-y-8 
-      relative">
-        <div className="dynamic-subheading font-bold font-header">
-          Testimonials
-        </div>
-        <div className="flex flex-col gap-y-[40px] mx-auto w-full">
-          <div className="relative w-full overflow-hidden">
-            {/* First Row */}
-            <Marquee direction="left" className="py-4 max-w-[100%]" pauseOnHover={true}>
-              {firstRowTestimonials.map((testimonial, index) => (
-                <TestimonialCard key={index} testimonial={testimonial} />
-              ))}
-            </Marquee>
-            {/* Second Row */}
-            <Marquee direction="right" className="py-4 max-w-[100%]" pauseOnHover={true}>
-              {secondRowTestimonials.map((testimonial, index) => (
-                <TestimonialCard key={index} testimonial={testimonial} />
-              ))}
-            </Marquee>
-            {/* Edge Fade Effect */}
-            <div className="absolute inset-0 pointer-events-none">
-              <div className="absolute top-0 left-0 w-10 h-full bg-gradient-to-r from-white/90 to-transparent z-10"></div>
-              <div className="absolute top-0 right-0 w-10 h-full bg-gradient-to-l from-white/90 to-transparent z-10"></div>
-            </div>
-          </div>
-        </div>
+<section 
+  data-aos="fade-up" 
+  data-aos-once="true"
+  data-aos-anchor-placement="bottom-bottom" 
+  className="w-full flex justify-center items-center bg-[#FAFAFA]"
+>
+  <div className="max-w-[1100px] w-full px-12 max-md:px-0 flex justify-center items-center flex-col mx-auto gap-y-8 relative">
+    <div className="dynamic-subheading font-bold font-header">Testimonials</div>
+    <div className="flex flex-col gap-y-[40px] mx-auto w-full">
+      
+      {/* First Row */}
+      <div 
+      data-aos="fade-up" 
+      data-aos-once="true"
+      data-aos-delay="200" 
+      className="relative w-full overflow-hidden">
+        <Marquee direction="left" className="py-4 max-w-[100%]" pauseOnHover={true}>
+          {firstRowTestimonials.map((testimonial, index) => (
+            <TestimonialCard key={index} testimonial={testimonial} />
+          ))}
+        </Marquee>
+      </div>
+
+      {/* Second Row */}
+      <div 
+      data-aos="fade-up" 
+      data-aos-delay="400" 
+      data-aos-once="true"
+      className="relative w-full overflow-hidden">
+        <Marquee direction="right" className="py-4 max-w-[100%]" pauseOnHover={true}>
+          {secondRowTestimonials.map((testimonial, index) => (
+            <TestimonialCard key={index} testimonial={testimonial} />
+          ))}
+        </Marquee>
+      </div>
+
+      {/* Edge Fade Effect */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-0 w-10 h-full bg-gradient-to-r from-[#FAFAFA] to-transparent z-10"></div>
+        <div className="absolute top-0 right-0 w-10 h-full bg-gradient-to-l from-[#FAFAFA] to-transparent z-10"></div>
       </div>
     </div>
+  </div>
+</section>
+
   );
 };
 
