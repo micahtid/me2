@@ -57,14 +57,14 @@ const Home = () => {
   }
   
   return (
-    <div className="bg-[#FAFAFA]">
+    <div className="">
       <section className="max-[325px]:hidden">
         {isUserLoaded && isUserRegistered ? (
             <ChatPage />
         ) : isUserLoaded ? (
           <RegisterUser />
         ) : (
-          <div className="overflow-x-hidden">
+          <div className="overflow-x-hidden bg-[#FAFAFA]">
             <NavBar />
             <div className="mt-36 mb-32 max-lg:mt-28">
               <Hero />
@@ -82,7 +82,7 @@ const Home = () => {
           </div>
         )}
       </section>
-      <div className="hidden max-[325px]:inline h-[100vh] w-full">
+      <div className="hidden max-[325px]:inline w-full">
           <p className="p-2">Oops! Me2 isn't yet suited for smaller devices. Please login on a larger device or enlargen your window.</p>
           <img
           src="/roller-skating.svg"
