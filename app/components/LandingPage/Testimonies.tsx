@@ -1,5 +1,6 @@
 import Marquee from 'react-fast-marquee';
 import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
+import { IoChatboxEllipsesOutline } from "react-icons/io5";
 
 import { useEffect } from "react";
 import AOS from 'aos';
@@ -108,8 +109,18 @@ const Testimonies: React.FC = () => {
   data-aos-anchor-placement="bottom-bottom" 
   className="w-full flex justify-center items-center bg-[#FAFAFA]"
 >
-  <div className="max-w-[1100px] w-full px-12 max-md:px-0 flex justify-center items-center flex-col mx-auto gap-y-8 relative">
-    <div className="dynamic-subheading font-bold font-header">Testimonials</div>
+  <div className="max-w-[1700px] w-full px-12 max-md:px-0 flex justify-center items-center flex-col mx-auto gap-y-8 relative">
+
+    <div className="shadow-lg py-1 px-4 rounded-full flex gap-x-4 items-center">
+      <IoChatboxEllipsesOutline />
+      <p className='font-title font-semibold'>Testimonials</p>
+    </div>
+
+    <div className="flex flex-col gap-y-1">
+      <h3 className="dynamic-subheading font-bold font-header">Public Cheers for Us!</h3>
+      <p className='dynamic-text font-header text-center'>Find out what our users have to say about us!</p>
+    </div>
+
     <div className="flex flex-col gap-y-[40px] mx-auto w-full">
       
       {/* First Row */}

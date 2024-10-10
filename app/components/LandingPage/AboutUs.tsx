@@ -9,66 +9,61 @@ import 'aos/dist/aos.css';
 const AboutUs = () => {
   useEffect(() => {
     AOS.init();
-  }, [])
+  }, []);
 
   const cards = [
     {
       icon: PeopleHuggingIcon,
       title: "Find your people",
       description:
-        "Through algorithm based sorthing, all users can find others with similar interests and identities!",
-      iconMarginX: "0",
+        "Aside from Tinder, Me2 is one of the only chat apps available to find your match! Either through our compatbility algorithm or scouring through users yourself, Me2 is one of a kind to find others with similar interests and circumstances."
     },
     {
       icon: ClockIcon,
       title: "Time Efficient",
       description:
-        "Each chat is only open for 24 hours; after which it closes and gives users the chance to accept or decline the option to share socials.",
-      iconMarginX: "0px",
+        "Bad at holding a conversation? Wish you didn't say something? Or did you absolutely love your conversation! Either way, Me2 has personal chats that are only open for 24 hours, after which you have the option to share socials. So we gotchu either way."
     },
     {
       icon: LearnIcon,
       title: "Safety Concerns",
       description:
-        "Me2 allows you to close chats whenever you want! Additionally it does not allow users to share images preventing - you know...",
-      iconMarginX: "0",
+        "Feel uncomfortable? Or like something bad is about to happen? Don't worry! Me2 allows you to close chats whenever. As soon as you feel something is off, click that close button! We also do not have a feature to share media preventing... you know..."
     },
   ];
 
   return (
-    <section 
-    id="about" 
-    data-aos="fade-up"
-    data-aos-once="true"
-    data-aos-anchor-placement="bottom-bottom"
-    className="flex flex-col justify-center bg-primary">
-      <div className="flex justify-center items-center relative">
-      <h3 className="dynamic-subheading font-bold font-header
-      mt-36 mb-20">
-        Why Choose Us?
-      </h3>
+    <section
+      id="about"
+      data-aos="fade-up"
+      data-aos-once="true"
+      data-aos-anchor-placement="bottom-bottom"
+      className="max-w-[1700px] mx-auto w-full px-8 flex flex-col items-center gap-y-24"
+    >
+      <div className="flex flex-col gap-y-1">
+        <p className="text-center dynamic-text font-bold">Why decide to use <span className="text-secondary">us</span>?</p>
+        <h3 className="text-center dynamic-subheading font-title font-semibold">We're Simple and Safe</h3>
       </div>
-      <div className="flex flex-row justify-center gap-x-[15px] mb-36
-      max-lg:flex-col max-lg:items-center max-lg:gap-y-4">
-        {cards.map((card, index) => (
-          <div
-            key={index}
-            className="flex flex-col justify-center items-center h-[325px] 
-            w-[335px] max-xl:w-[300px] max-lg:w-[80vw]
-            bg-[#FAFAFA] rounded-md shadow-md"
-          >
-            <div className="flex items-center justify-center w-full h-[100px] mt-[20px]">
-              <card.icon className={`ml-[${card.iconMarginX}]`} />
-            </div>
-            <p className="text-xl font-semibold h-[35px]
-            flex justify-center items-center mt-[15px]">{card.title}</p>
-            <p className="text-center text-sm max-w-[200px] h-[125px]
-            flex justify-center items-start">
-              {card.description}
-            </p>
+      {cards.map((card, index) => (
+        <div
+          className={`w-full px-8 py-32 dark-gradient rounded-md shadow-lg flex ${
+            index === 1 ? "" : ""
+          }`}
+          key={index}
+        >
+          <div className="max-w-[500px] w-full flex flex-col gap-y-3">
+            <h3 className="text-3xl text-white font-semibold font-title">{card.title}</h3>
+            <p className="text-white">{card.description}</p>
           </div>
-        ))}
-      </div>
+          <div className="relative w-[70%]">
+            <card.icon className="transform scale-[200%] absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+            <card.icon className="transform scale-[50%] absolute left-[150px] -top-[100px] -rotate-[15deg]" />
+            <card.icon className="transform scale-[50%] absolute left-[150px] -bottom-[100px] -rotate-[5deg]" />
+            <card.icon className="transform scale-[50%] absolute right-[150px] -bottom-[100px] rotate-[25deg]" />
+            <card.icon className="transform scale-[50%] absolute right-[150px] -top-[100px] rotate-[2.5deg]" />
+          </div>
+        </div>
+      ))}
     </section>
   );
 };

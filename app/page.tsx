@@ -64,9 +64,9 @@ const Home = () => {
         ) : isUserLoaded ? (
           <RegisterUser />
         ) : (
-          <div>
+          <div className="overflow-x-hidden">
             <NavBar />
-            <div className="mx-10 mt-36 mb-32 max-lg:mt-28">
+            <div className="mt-36 mb-32 max-lg:mt-28">
               <Hero />
             </div>
             <div className="mb-52 mt-72">
