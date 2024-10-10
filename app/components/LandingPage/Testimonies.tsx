@@ -110,17 +110,16 @@ const Testimonies: React.FC = () => {
   data-aos-anchor-placement="bottom-bottom" 
   className="w-full flex justify-center items-center bg-[#FAFAFA]"
 >
-  <div className="max-w-[1500px] w-full px-12 max-md:px-0 flex justify-center items-center flex-col mx-auto gap-y-8 relative">
+  <div className="max-w-[1500px] w-full px-4 flex justify-center items-center flex-col mx-auto gap-y-8">
 
     <Highlight icon={<IoChatboxEllipsesOutline />} title='Testimonials' />
 
     <div className="flex flex-col gap-y-1">
-      <h3 className="dynamic-subheading font-bold font-header">Public Cheers for Us!</h3>
+      <h3 className="dynamic-subheading font-bold font-header text-center">Public Cheers for Us!</h3>
       <p className='dynamic-text font-header text-center'>Find out what our users have to say about us!</p>
     </div>
 
     <div className="flex flex-col gap-y-[40px] mx-auto w-full">
-      
       {/* First Row */}
       <div 
       data-aos="fade-up" 
@@ -145,12 +144,6 @@ const Testimonies: React.FC = () => {
             <TestimonialCard key={index} testimonial={testimonial} />
           ))}
         </Marquee>
-      </div>
-
-      {/* Edge Fade Effect */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-10 h-full bg-gradient-to-r from-[#FAFAFA] to-transparent z-10"></div>
-        <div className="absolute top-0 right-0 w-10 h-full bg-gradient-to-l from-[#FAFAFA] to-transparent z-10"></div>
       </div>
     </div>
   </div>
