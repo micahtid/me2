@@ -14,7 +14,6 @@ import { useData } from "@/providers/DataProvider";
 
 // Component Imports
 import Loader from "../components/Loader";
-import Button from "../components/Button";
 
 // Common Styles
 const selectStyles = {
@@ -108,9 +107,10 @@ const Settings = () => {
     <div className="bg-[#D5E6FF] w-[100vw] h-[100vh] flex justify-center items-center">
       <div className="w-[calc(100vw-8rem)] h-[calc(100vh-4rem)] flex flex-row shadow-md max-xl:w-full max-xl:h-full max-xl:flex-col">
         <div className="w-[500px] h-full bg-[#54ACFD] flex flex-col justify-center items-start gap-y-2 px-16 max-xl:max-w-[100vw] max-xl:w-full max-xl:py-14">
-          <Button className="mb-6 shadow-none text-sm" onClick={() => router.replace("./")}>
+          <button className="mb-6 shadow-none text-sm
+          bg-secondary text-white py-2 px-6 rounded-md" onClick={() => router.replace("./")}>
             <FaHome size={20} color="white" />
-          </Button>
+          </button>
           <h3 className="dynamic-subheading text-white font-semibold">
             Edit Your Information
           </h3>

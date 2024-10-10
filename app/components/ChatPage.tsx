@@ -21,34 +21,43 @@ const ChatPage = () => {
   const { onChange } = useActiveUserChat();
 
   useEffect(() => {
-    onChange(null, "")
-  }, [activeUsers])
-  
+    onChange(null, "");
+  }, [activeUsers]);
+
+  const renderCurrentPage = () => {
+    switch (currentPage) {
+      case "chat":
+        return <ChatSection />;
+      case "requests":
+        return <RequestSection />;
+      case "new people":
+        return <FindSection />;
+      default:
+        return <RoomsSection />;
+    }
+  };
+
   return (
-    <section
-      className="w-full h-[100vh] mx-auto
-      bg-primary/20
-    flex flex-row gap-x-4 p-4
-    max-lg:flex-col"
-    >
-      <div className="my-3 bg-primary rounded-xl py-10
-      max-lg:py-4 max-lg:my-2">
+    <section className="w-full h-[100vh] mx-auto flex flex-row max-lg:flex-col">
+      {/* Quick Links */}
+      <div className="py-8 max-lg:py-0 bg-primary z-20 shadow-xl
+      max-lg:shadow-md">
         <QuickLinks />
       </div>
-      <div className="my-3 bg-primary rounded-xl px-6 pt-12
-      max-lg:my-2">
-        <UserDisplay /> 
+
+      {/* User Display */}
+      <div className="bg-[#F4F6FB] px-6 pt-6 z-10 shadow-xl
+      max-lg:shadow-md max-lg:h-[450px]">
+        <UserDisplay />
       </div>
-      <div className="my-3 flex flex-col gap-y-8 bg-gray-200/10 rounded-xl px-6 pt-12 flex-grow
-      border-[3px] border-gray-200
-      max-lg:my-2 bg-white">
-        {
-          currentPage === "chat" ? 
-          <ChatSection /> : currentPage === "requests" ? <RequestSection /> : currentPage === "new people" ? <FindSection /> : <RoomsSection />
-        }
+
+      {/* Dynamic Content */}
+      <div className="px-6 pt-6 flex-grow max-lg:my-2 bg-white z-0">
+        {renderCurrentPage()}
       </div>
-      <div className="w-full p-1
-      hidden max-lg:inline"/>
+
+      {/* Spacer for Responsive Layout */}
+      <div className="w-full p-1 hidden max-lg:inline" />
     </section>
   );
 };
