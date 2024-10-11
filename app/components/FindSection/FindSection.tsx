@@ -43,9 +43,9 @@ const FindSection = () => {
     }, [users, activeUsers]);
 
     return (
-        <div className="flex flex-col justify-start items-start gap-y-3 max-lg:pb-6 overflow-y-auto no-scrollbar pb-5">
-            <h3 className="text-2xl mb-6 ml-2 font-semibold">Find People</h3>
-            <div className="w-full flex flex-row justify-between items-center gap-x-2 mb-5">
+        <div className="h-full flex flex-col justify-start items-start gap-y-3 max-lg:pb-6 overflow-y-auto no-scrollbar pb-5">
+            <h3 className="text-2xl mb-6 ml-8 font-semibold">Find People</h3>
+            <div className="w-full flex flex-row justify-between items-center gap-x-2 mb-5 px-8">
                 <div className="flex flex-row gap-x-2 mt-[-5px]">
                     <button
                         onClick={() => setSection("filtered")}

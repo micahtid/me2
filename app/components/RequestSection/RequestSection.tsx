@@ -64,9 +64,9 @@ const RequestSection = () => {
   };
 
   return (
-    <div className="ml-2 flex flex-col gap-y-3 overflow-y-auto no-scrollbar pb-5">
-      <h3 className="mb-6 font-semibold text-2xl">Manage Requests</h3>
-      <div className="w-full flex flex-row justify-start items-center gap-x-2 mb-5">
+    <div className="h-full flex flex-col gap-y-3 overflow-y-auto no-scrollbar pb-5">
+      <h3 className="mb-6 ml-8 font-semibold text-2xl">Manage Requests</h3>
+      <div className="w-full flex flex-row justify-start items-center gap-x-2 mb-5 px-8">
         <button
           onClick={() => setSection("sent")}
           className={`bg-gray-100 rounded-lg p-2 text-black/20 text-md font-medium ${section === "sent" ? "text-black/80" : ""}`}

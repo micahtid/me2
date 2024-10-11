@@ -52,7 +52,7 @@ const ChatPage = () => {
       </div>
 
       {/* Dynamic Content */}
-      <div className="px-6 pt-6 flex-grow max-lg:my-2 bg-white z-0">
+      <div className="pt-6 flex-grow max-lg:my-2 bg-white z-0">
         {renderCurrentPage()}
       </div>
 

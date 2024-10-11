@@ -28,7 +28,7 @@ const UserCard: React.FC<UserCardProps> = ({
         <button 
             onClick={onClick} 
             className={twMerge(
-                "flex flex-row justify-start items-center cursor-pointer px-2 py-3 w-full rounded-lg gap-x-5",
+                "flex flex-row justify-start items-center cursor-pointer px-4 py-3 w-full rounded-lg gap-x-5",
                 className
             )}
         >
