@@ -11,6 +11,7 @@ import { useUserModal } from "@/hooks/useUserModal";
 import ChatContainer from "./ChatContainer"
 import MessageForm from "./MessageForm"
 import SocialForm from "./SocialForm"
+import OopsScreen from "../OopsScreen";
 
 const ChatSection = () => {
   const { currentChat, currentUser, isChatComplete } = useActiveUserChat();
@@ -23,9 +24,7 @@ const ChatSection = () => {
 
   if (!currentChat) {
     return (
-      <div className="flex justify-center items-center h-full text-xl">
-        Please select a chat!
-      </div>
+      <OopsScreen message="Uh oh! It's pretty quite here.." />
     )
   }
 

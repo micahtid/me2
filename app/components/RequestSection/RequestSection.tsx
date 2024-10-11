@@ -13,6 +13,7 @@ import { deleteRequest, acceptRequest } from "@/app/utils/requestfunctions";
 
 // Component Imports
 import UserCard from "../UserCard";
+import OopsScreen from "../OopsScreen";
 
 // Fetches users for sent or received requests based on the status
 const getRequestHook = async (
@@ -81,9 +82,7 @@ const RequestSection = () => {
         </button>
       </div>
       {requestList?.length === 0 && (
-        <div className="w-full h-full flex justify-center items-center text-lg mt-[40px]">
-          <p>Oops! No requests right now...</p>
-        </div>
+        <OopsScreen message="Uh oh! No requests right now.." />
       )}
       {requestList?.map((request, index) => (
         <div key={index} className="flex flex-row justify-start items-center w-full user-card">
