@@ -46,7 +46,7 @@ const ChatPage = () => {
       </div>
 
       {/* User Display */}
-      <div className="bg-[#F4F6FB] px-6 pt-6 z-10 shadow-xl
+      <div className="bg-[#F4F6FB] pt-6 z-10 shadow-xl
       max-lg:shadow-md max-lg:h-[450px]">
         <UserDisplay />
       </div>

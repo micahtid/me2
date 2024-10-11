@@ -64,7 +64,7 @@ const QuickLinks: React.FC = () => {
                     <img 
                         src={user?.photoURL || ""} 
                         alt="profile-picture" 
-                        width={65} 
+                        width={50} 
                         className="rounded-full max-lg:w-[50px] max-lg:h-[50px]" 
                     />
                 </button>

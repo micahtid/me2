@@ -24,12 +24,8 @@
     hover:ring-[#B3B3B3] transition-all duration-100;
   }
 
-  .user-card-accent {
-    @apply bg-secondary rounded-lg px-4 py-2 border-2 border-black;
-  }
-
-  .user-card-primary {
-    @apply bg-secondary rounded-lg px-4 py-2 border-2 border-accent;
+  .user-card {
+    @apply px-4 py-2 border-b-[1px] border-black/20;
   }
 
   .social-card {

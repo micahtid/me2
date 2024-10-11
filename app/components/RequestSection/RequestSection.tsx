@@ -14,6 +14,7 @@ import { deleteRequest, acceptRequest } from "@/app/utils/requestfunctions";
 // Component Imports
 import UserCard from "../UserCard";
 
+// Fetches users for sent or received requests based on the status
 const getRequestHook = async (
   requests: DocumentData[] | null | undefined,
   status: string,
@@ -32,7 +33,6 @@ const getRequestHook = async (
 };
 
 const RequestSection = () => {
-  // Section is either "sent" or "received"
   const [section, setSection] = useState("sent");
   const [requestList, setRequestList] = useState<DocumentData[] | null | undefined>([]);
   const { sentRequests, receivedRequests, user } = useData();
@@ -40,17 +40,15 @@ const RequestSection = () => {
   const [sentRequestUsers, setSentRequestUsers] = useState<DocumentData[]>([]);
   const [receivedRequestUsers, setReceivedRequestUsers] = useState<DocumentData[]>([]);
 
+  // Fetches sent and received request users
   useEffect(() => {
     getRequestHook(sentRequests, "sent", setSentRequestUsers);
     getRequestHook(receivedRequests, "received", setReceivedRequestUsers);
   }, [sentRequests, receivedRequests]);
 
+  // Updates displayed request list based on selected section
   useEffect(() => {
-    if (section === "sent") {
-      setRequestList(sentRequestUsers);
-    } else {
-      setRequestList(receivedRequestUsers);
-    }
+    setRequestList(section === "sent" ? sentRequestUsers : receivedRequestUsers);
   }, [section, sentRequestUsers, receivedRequestUsers]);
 
   const handleDeleteRequest = async (chatid: string, index: number) => {
@@ -60,65 +58,57 @@ const RequestSection = () => {
 
   const handleAcceptRequest = async (chatid: string, index: number, request: DocumentData) => {
     await acceptRequest(chatid, user?.uid, request?.uid);
-    setReceivedRequestUsers((prev) => prev.map((req, i) => (i === index ? { ...req, activeState: "active" } : req)));
+    setReceivedRequestUsers((prev) =>
+      prev.map((req, i) => (i === index ? { ...req, activeState: "active" } : req))
+    );
   };
 
   return (
-    <div className="ml-2 flex flex-col gap-y-3
-    overflow-y-auto no-scrollbar pb-5">
+    <div className="ml-2 flex flex-col gap-y-3 overflow-y-auto no-scrollbar pb-5">
       <h3 className="mb-6 font-semibold text-2xl">Manage Requests</h3>
       <div className="w-full flex flex-row justify-start items-center gap-x-2 mb-5">
         <button
           onClick={() => setSection("sent")}
-          className={`bg-gray-100 rounded-lg p-2 text-black/20 text-md font-medium hover:text-black/70 ease-in-out duration-500 ${section === "sent" ? "text-black/80" : ""}`}
+          className={`bg-gray-100 rounded-lg p-2 text-black/20 text-md font-medium ${section === "sent" ? "text-black/80" : ""}`}
         >
           Sent
         </button>
         <button
           onClick={() => setSection("received")}
-          className={`bg-gray-100 rounded-lg p-2 text-black/20 text-md font-medium hover:text-black/70 ease-in-out duration-500 ${section === "received" ? "text-black/80" : ""}`}
+          className={`bg-gray-100 rounded-lg p-2 text-black/20 text-md font-medium ${section === "received" ? "text-black/80" : ""}`}
         >
           Received
         </button>
       </div>
-        {requestList?.length === 0 && (
-          <div className="w-full h-full
-          flex justify-center items-center text-lg mt-[40px]">
-            <p>Oops! No requests right now...</p>
-          </div>
-        )}
-        {requestList?.map((request, index) => (
-          <div key={index} className="flex flex-row justify-start items-center w-full
-          user-card-accent border-secondary">
-            <UserCard
-              onClick={() => {
-                // console.log("Here");
-              }}
-              className="flex-grow"
-              statusClassName="bg-white text-black
-              px-6 py-1 rounded-xl -ml-1 mt-1"
-              status="Compatibility 80%"
-              user={request}
-            />
-            <button
-              className="mr-8"
-              onClick={() => {
-                if (user && request) {
-                  const chatid =
-                    user.uid > request.uid ? user.uid + request.uid : request.uid + user.uid;
-
-                  if (section === "sent") {
-                    handleDeleteRequest(chatid, index);
-                  } else if (section === "received") {
-                    handleAcceptRequest(chatid, index, request);
-                  }
-                }
-              }}
-            >
-              {section === "sent" ? <IoCloseCircleSharp size={25} /> : <FaCheckCircle size={20} />}
-            </button>
-          </div>
-        ))}
+      {requestList?.length === 0 && (
+        <div className="w-full h-full flex justify-center items-center text-lg mt-[40px]">
+          <p>Oops! No requests right now...</p>
+        </div>
+      )}
+      {requestList?.map((request, index) => (
+        <div key={index} className="flex flex-row justify-start items-center w-full user-card">
+          <UserCard
+            onClick={() => {
+              console.log("For future use!")
+            }}
+            className="flex-grow"
+            statusClassName="bg-primary text-black/60 px-6 py-1 rounded-xl -ml-1 mt-1"
+            status="Compatibility 80%"
+            user={request}
+          />
+          <button
+            className="mr-8"
+            onClick={() => {
+              if (user && request) {
+                const chatid = user.uid > request.uid ? user.uid + request.uid : request.uid + user.uid;
+                section === "sent" ? handleDeleteRequest(chatid, index) : handleAcceptRequest(chatid, index, request);
+              }
+            }}
+          >
+            {section === "sent" ? <IoCloseCircleSharp size={25} /> : <FaCheckCircle size={20} />}
+          </button>
+        </div>
+      ))}
     </div>
   );
 };
