@@ -1,0 +1,15 @@
+@keyframes pulse-scale {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 30%;
+    }
+    50% {
+      transform: scale(1.1); 
+      opacity: 100%;
+    }
+  }
+  
+  .pulse-scale-animation {
+    animation: pulse-scale 2s ease-in-out infinite;
+  }
+  
