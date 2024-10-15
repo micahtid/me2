@@ -5,6 +5,8 @@ import { useRoomModal } from "@/hooks/useRoomModal";
 import { roomTags } from "../data";
 import { addRoom, editRoom } from "../utils/roomfunctions";
 import { useData } from "@/providers/DataProvider";
+
+import { ClipLoader } from "react-spinners";
 import Modal from "./Modal";
 import Select from "react-select";
 
@@ -65,6 +67,8 @@ const RoomModal = () => {
   const [startUrl, setStartUrl] = useState<string | null>(null);
   const [joinUrl, setJoinUrl] = useState<string | null>(null);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     setRoomDescription(activeRoom?.description || "");
     setSelectedTags(activeRoom?.tags || []);
@@ -81,10 +85,14 @@ const RoomModal = () => {
     const parsedUserLimit = parseInt(userLimit, 10);
 
     if (roomDescription && selectedTags.length > 0 && !isNaN(parsedUserLimit)) {
+      setIsLoading(true);
+
       try {
         const zoomLinks = await createZoomLink();
         setStartUrl(zoomLinks.start_url);
         setJoinUrl(zoomLinks.join_url);
+
+        // Sometimes a zoomLink is not generating!
 
         if (isNewRoom && startUrl && joinUrl) {
           await addRoom(user?.uid, parsedUserLimit, roomDescription, selectedTags, startUrl, joinUrl);
@@ -103,6 +111,7 @@ const RoomModal = () => {
       console.error("Please fill in all fields correctly.");
     }
 
+    setIsLoading(false);
     onModalClose();
   };
 
@@ -141,12 +150,21 @@ const RoomModal = () => {
         />
         <div className="w-full flex justify-start items-center gap-x-4 mt-8">
           <button
-            className="bg-primary px-4 py-2 rounded-lg"
+            className={`bg-primary px-4 py-2 rounded-lg w-[150px]
+              relative flex justify-center items-center
+              ${isLoading && "bg-gray-800/30"}`}
             onClick={handleSubmit}
           >
-            Confirm
+            {isLoading ? (
+              <>
+                <ClipLoader size={12} className="mr-2" />
+                <p className="text-center">Loading</p>
+              </>
+            ) : (
+              <p className="text-center">Confirm</p>
+            )}
           </button>
-          <button onClick={onModalClose} className="bg-gray-300 px-4 py-2 rounded-lg">
+          <button onClick={onModalClose} className="bg-gray-300 px-4 py-2 rounded-lg w-[150px]">
             Cancel
           </button>
         </div>

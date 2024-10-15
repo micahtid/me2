@@ -88,7 +88,7 @@ const RequestSection = () => {
         <div key={index} className="flex flex-row justify-start items-center w-full user-card">
           <UserCard
             onClick={() => {
-              console.log("For future use!")
+              // console.log("For future use!")
             }}
             className="flex-grow"
             statusClassName="bg-primary text-black/60 px-6 py-1 rounded-xl -ml-1 mt-1"

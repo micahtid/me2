@@ -30,30 +30,26 @@ export const addRoom = async (
     joinUrl: string
 ) => {
     const app = initializeFirebase();
-    const auth = getUserAuth(true);
     const firestore = getFireStore(true);
 
     const users: string[] = [roomId];
 
-    if (auth.currentUser) {
-        const { uid } = auth.currentUser;
-        console.log("Creating room...");
-        try {
-            await addDoc(collection(firestore, "rooms"), {
-                roomId,
-                limit,
-                createdAt: serverTimestamp(),
-                description,
-                tags,
-                users,
-                createdBy: uid,
-                startUrl,
-                joinUrl
-            });
-            console.log("Room successfully created!");
-        } catch (error) {
-            console.error("Error adding room document: ", error);
-        }
+    console.log("Creating room...");
+
+    try {
+        await addDoc(collection(firestore, "rooms"), {
+            roomId,
+            limit,
+            createdAt: serverTimestamp(),
+            description,
+            tags,
+            users,
+            startUrl,
+            joinUrl
+        });
+        console.log("Room successfully created!");
+    } catch (error) {
+        console.error("Error adding room document: ", error);
     }
 };
 

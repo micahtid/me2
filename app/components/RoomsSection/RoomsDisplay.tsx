@@ -67,7 +67,7 @@ const RoomsDisplay = () => {
       {rooms?.map((room, index) => (
         <div
           key={index}
-          className={`w-full border-b-[1px] border-black/40 flex flex-col gap-y-6 ${
+          className={`w-full flex flex-col gap-y-6 ${
             (room.roomId === user?.uid || room.users.includes(user?.uid)) && "bg-primary/30"
           }`}
         >
