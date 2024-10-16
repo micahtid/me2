@@ -10,6 +10,8 @@ import AboutUs from "./components/LandingPage/AboutUs";
 import Testimonies from "./components/LandingPage/Testimonies";
 import Footer from "./components/LandingPage/Footer";
 
+import OopsScreen from "./components/OopsScreen";
+
 // Library Imports
 import { useState, useEffect } from "react";
 
@@ -83,11 +85,7 @@ const Home = () => {
         )}
       </section>
       <div className="hidden max-[325px]:inline w-full">
-          <p className="p-2">Oops! Me2 isn't yet suited for smaller devices. Please login on a larger device or enlargen your window.</p>
-          <img
-          src="/roller-skating.svg"
-          className="mt-5"
-        />
+        <OopsScreen message="Oops! It looks like you're viewing on a small device!" infoClassName="max-[500px]:w-[80%]"/>
       </div>
     </div>
   );
