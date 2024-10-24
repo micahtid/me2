@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, useEffect } from "react";
 
 // Hook Imports
@@ -26,7 +24,7 @@ const UserDisplay = () => {
   const { onModalOpen, setDeleteData } = useConfirmationModal();
 
   const [timeLeft, setTimeLeft] = useState<{ [key: string]: number }>({});
-  const [notifStatus, setNotifStatus] = useState<{ [key: string]: boolean }>({});
+  const [notifStatus, setNotifStatus] = useState<{ [key: string]: number }>({}); // Change to number
 
   const fetchTimeLeft = async (uid1: string, uid2: string) => {
     const chatId = generateChatId(uid1, uid2);
@@ -66,7 +64,7 @@ const UserDisplay = () => {
 
         const chatId = generateChatId(user.uid, u.uid);
         const hoursLeft = timeLeft[chatId] !== undefined ? `${timeLeft[chatId]} Hours` : "Loading...";
-        const notification = notifStatus[chatId] || false;
+        const notificationCount = notifStatus[chatId] || 0; // Assign notif count as number
 
         if (timeLeft[chatId] <= 0) {
           deleteChat(chatId);
@@ -86,7 +84,7 @@ const UserDisplay = () => {
                 changePage("chat");
                 setChatComplete(timeLeft[chatId] <= 12 && timeLeft[chatId] > 0);
               }}
-              notification={notification}
+              notificationCount={notificationCount} // Update the prop here
               activeStatus
               activeStatusClassName={currentUser === u && currentPage === "chat" ? "border-accent" : "border-[#F4F6FB]"}
               className={u.uid === user.uid ? "hidden" : ""}

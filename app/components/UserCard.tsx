@@ -1,12 +1,11 @@
 import { MouseEventHandler } from "react";
 import { DocumentData } from "firebase/firestore";
 import { twMerge } from "tailwind-merge";
-import { IoNotifications } from "react-icons/io5";
 
 interface UserCardProps {
     className?: string;
     statusClassName?: string;
-    notification?: boolean;
+    notificationCount?: number; // Change to hold a number instead of a boolean
     status: string;
     onClick: MouseEventHandler<HTMLButtonElement>;
     user: DocumentData;
@@ -20,7 +19,7 @@ const UserCard: React.FC<UserCardProps> = ({
     user, 
     className, 
     statusClassName, 
-    notification, 
+    notificationCount = 0, // Default notification count to 0
     activeStatus, 
     activeStatusClassName 
 }) => {
@@ -33,13 +32,18 @@ const UserCard: React.FC<UserCardProps> = ({
             )}
         >
             <div className="relative">
-                <IoNotifications 
-                    className={`
-                        absolute top-[1px] -right-[1px] z-10 w-[15px] h-[15px] 
-                        text-yellow-300 bg-yellow-200 rounded-full 
-                        ${notification ? "" : "hidden"}
-                    `}
-                />
+                {/* Display the notification count if it's greater than 0 */}
+                {notificationCount > 0 && (
+                    <div 
+                        className="
+                            absolute top-[-5px] right-[-5px] z-10 w-[20px] h-[20px] 
+                            bg-red-500 text-white text-xs flex justify-center items-center 
+                            rounded-full shadow-lg
+                        "
+                    >
+                        {(notificationCount > 9) ? "9+" : notificationCount}
+                    </div>
+                )}
                 <div className="relative">
                     <img 
                         src={user.pfp} 

@@ -32,7 +32,7 @@ const QuickLinks: React.FC = () => {
                             absolute -bottom-[2px] -right-[2px] 
                             text-yellow-300/80 rounded-full
                             ${receivedRequests?.length === 0 ? "hidden" : ""}
-                            ${currentPage !== "requests" ? "bg-primary" : "bg-white"}
+                            ${currentPage !== "requests" ? "bg-primary" : "bg-[#9EB3CC]"}
                         `}
                     />
                     <IoMail size={32} />
