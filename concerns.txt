@@ -1,0 +1,5 @@
+No Variables
+- No variables for padding, etc... button sizing as well (!)
+
+Rooms Section
+ - Repetitive Code in RoomsSection.tsx and RoomDispaly.tsx 

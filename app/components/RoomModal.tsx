@@ -57,7 +57,7 @@ const createZoomLink = async () => {
 };
 
 const RoomModal = () => {
-  const { isModalOpen, onModalClose, activeRoom, isNewRoom } = useRoomModal();
+  const { isModalOpen, onModalClose, activeRoom, isNewRoom, isUpdated } = useRoomModal();
   const { user } = useData();
 
   const [roomDescription, setRoomDescription] = useState("");
@@ -73,7 +73,7 @@ const RoomModal = () => {
     setRoomDescription(activeRoom?.description || "");
     setSelectedTags(activeRoom?.tags || []);
     setUserLimit(activeRoom?.limit.toString() || "");
-  }, [activeRoom]);
+  }, [activeRoom, isUpdated]);
 
   const onChange = (open: boolean) => {
     if (!open) {
@@ -143,10 +143,15 @@ const RoomModal = () => {
         />
         <input
           type="number"
-          placeholder="User Limit..."
+          placeholder="User Limit... (Max 15)"
           value={userLimit}
-          onChange={(e) => setUserLimit(e.target.value)}
+          onChange={(e) => {
+            const value = Math.min(Number(e.target.value), 15);
+            setUserLimit(value.toString());
+          }}
           className="input-field"
+          max={15} 
+          min={0}
         />
         <div className="w-full flex justify-start items-center gap-x-4 mt-8">
           <button

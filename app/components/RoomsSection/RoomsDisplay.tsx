@@ -5,7 +5,7 @@ import { DocumentData } from "firebase/firestore";
 import { useRoomModal } from "@/hooks/useRoomModal";
 import { deleteRoom, joinRoom, leaveRoom } from "@/app/utils/roomfunctions";
 import { roomTags } from "@/app/data";
-import { FaClock, FaLink } from "react-icons/fa";
+import { FaLink } from "react-icons/fa";
 import { IoEnter, IoExit } from "react-icons/io5";
 import { MdDelete, MdModeEdit, MdStart } from "react-icons/md";
 import RoomUserList from "./RoomUserList";
@@ -15,10 +15,13 @@ const iconStyles = `p-2 bg-black/80 rounded-full text-white`;
 interface RoomButtonProps {
   room: DocumentData;
   user: DocumentData | undefined | null;
+  disabled?: boolean;
 }
 
-const RoomButton: React.FC<RoomButtonProps> = ({ room, user }) => {
+const RoomButton: React.FC<RoomButtonProps> = ({ room, user, disabled }) => {
   const handleButtonClick = () => {
+    if (disabled) return;
+
     if (room.roomId === user?.uid) {
       deleteRoom(room.roomId);
     } else if (room.users.includes(user?.uid)) {
@@ -41,7 +44,7 @@ const RoomButton: React.FC<RoomButtonProps> = ({ room, user }) => {
   };
 
   return (
-    <button onClick={handleButtonClick} className={iconStyles}>
+    <button onClick={handleButtonClick} className={`${iconStyles} ${disabled && 'opacity-50 cursor-not-allowed'}`} disabled={disabled}>
       {renderIcon()}
     </button>
   );
@@ -62,9 +65,18 @@ const RoomsDisplay = () => {
     return differenceInHours;
   };
 
+  const sortedRooms = rooms?.slice().sort((roomA, roomB) => {                                       // Move user's active room to the top of the list (!)
+    const userInRoomA = roomA.roomId === user?.uid || roomA.users.includes(user?.uid);
+    const userInRoomB = roomB.roomId === user?.uid || roomB.users.includes(user?.uid);
+    
+    return userInRoomB - userInRoomA;                                                               // Place user's room before other rooms (!)
+  });
+
+  const userInAnyRoom = sortedRooms?.some((room) => room.roomId === user?.uid || room.users.includes(user?.uid));     // Status if user is currently in any other rooms 
+
   return (
     <div className="flex flex-col gap-y-3 justify-start items-start w-full">
-      {rooms?.map((room, index) => (
+      {sortedRooms?.map((room, index) => (
         <div
           key={index}
           className={`w-full flex flex-col gap-y-6 ${
@@ -102,7 +114,7 @@ const RoomsDisplay = () => {
                   <MdModeEdit />
                 </button>
               )}
-              <RoomButton room={room} user={user} />
+              <RoomButton room={room} user={user} disabled={userInAnyRoom && !(room.roomId === user?.uid || room.users.includes(user?.uid))} />
             </div>
           </div>
           <div className="flex flex-row justify-start items-center gap-x-2 bg-secondary px-8 py-2">
