@@ -7,7 +7,7 @@ export async function POST(request) {
       const meetingDetails = {
         topic: "Meeting Topic",
         type: 2,
-        start_time: "2024-09-04T15:00:00Z",
+        start_time: new Date(Date.now() + 60 * 60 * 1000).toISOString(),
         duration: 60,
         timezone: "Asia/Jakarta",
         password: "123me2",

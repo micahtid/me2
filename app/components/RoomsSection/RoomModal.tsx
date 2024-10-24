@@ -1,14 +1,16 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRoomModal } from "@/hooks/useRoomModal";
-import { roomTags } from "../data";
-import { addRoom, editRoom } from "../utils/roomfunctions";
-import { useData } from "@/providers/DataProvider";
 
 import { ClipLoader } from "react-spinners";
-import Modal from "./Modal";
 import Select from "react-select";
+
+import { addRoom, editRoom } from "@/app/utils/roomfunctions";
+import { useData } from "@/providers/DataProvider";
+import { roomTags } from "@/app/data";
+
+import { useRoomModal } from "@/hooks/useRoomModal";
+import Modal from "../Modal";
 
 const selectStyles = {
   control: (baseStyles: any) => ({
@@ -64,9 +66,6 @@ const RoomModal = () => {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [userLimit, setUserLimit] = useState("");
 
-  const [startUrl, setStartUrl] = useState<string | null>(null);
-  const [joinUrl, setJoinUrl] = useState<string | null>(null);
-
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -83,38 +82,32 @@ const RoomModal = () => {
 
   const handleSubmit = async () => {
     const parsedUserLimit = parseInt(userLimit, 10);
-
+  
     if (roomDescription && selectedTags.length > 0 && !isNaN(parsedUserLimit)) {
       setIsLoading(true);
-
+  
       try {
         const zoomLinks = await createZoomLink();
-        setStartUrl(zoomLinks.start_url);
-        setJoinUrl(zoomLinks.join_url);
-
-        // Sometimes a zoomLink is not generating!
-
-        if (isNewRoom && startUrl && joinUrl) {
-          await addRoom(user?.uid, parsedUserLimit, roomDescription, selectedTags, startUrl, joinUrl);
+        const zoomStartUrl = zoomLinks.start_url;           // Fixed error: use local variables instead of useStates 
+        const zoomJoinUrl = zoomLinks.join_url;             // for both the startUrl and joinUrl
+  
+        if (isNewRoom && zoomStartUrl && zoomJoinUrl) {
+          await addRoom(user?.uid, parsedUserLimit, roomDescription, selectedTags, zoomStartUrl, zoomJoinUrl);
         } else if (activeRoom?.roomId) {
           await editRoom(activeRoom.roomId, parsedUserLimit, roomDescription, selectedTags);
         }
-
-        setRoomDescription("");
-        setSelectedTags([]);
-        setUserLimit("");
-        console.log("Room successfully handled!");
+  
       } catch (error) {
         console.error("Error handling the room: ", error);
+      } finally {
+        setIsLoading(false);
+        onModalClose();
       }
     } else {
-      console.error("Please fill in all fields correctly.");
+      setIsLoading(false);                // Stop loading if an error occured (!)
     }
-
-    setIsLoading(false);
-    onModalClose();
   };
-
+  
   return (
     <Modal title="Manage Room" isOpen={isModalOpen} onChange={onChange}>
       <div className="flex flex-col justify-center items-center gap-y-2">
