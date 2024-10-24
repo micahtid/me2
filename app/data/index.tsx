@@ -3,6 +3,26 @@ import { FaHome } from "react-icons/fa";
 import { BsFillPeopleFill } from "react-icons/bs";
 import { BiSolidHelpCircle } from "react-icons/bi";
 
+export const selectStyles = {
+    control: (baseStyles: any, state: any) => ({
+      ...baseStyles,
+      borderColor: "rgba(198, 203, 210, 0.6)", 
+      borderWidth: "1px",
+      borderRadius: "12px",
+      height: "42.5px",
+      marginTop: "-1px",
+  
+      boxShadow: "none", 
+      '&:hover': {
+        borderColor: "rgba(198, 203, 210, 0.6)", 
+      },
+    }),
+    placeholder: (baseStyles: any) => ({
+      ...baseStyles,
+      color: "#9FA6B2", 
+    })
+  };
+
 export const navItems = [
     { text: 'Home', icon: <FaHome size={20} />, link: '#hero' },
     { text: 'About', icon: <BsFillPeopleFill size={20} />, link: '#about' },
@@ -221,7 +241,6 @@ export const navItems = [
     { value: 'tv', label: 'Tuvalu' },
     { value: 'vu', label: 'Vanuatu' }
 ];
-
 
 export const curriculums = [
     { value: 'us', label: 'US Curriculum (Including AP)' },

@@ -2,7 +2,10 @@
 
 // Library Imports
 import { useState } from "react";
+
 import Select from "react-select";
+import { selectStyles } from "../data";
+
 import { useRouter } from "next/navigation";
 
 // Own Function Imports
@@ -128,18 +131,7 @@ const RegisterUser = () => {
                   setUserLocation(loc.value);
                 }
               }}
-              styles={{
-                control: (baseStyles: any, state: any) => ({
-                  ...baseStyles,
-                  borderColor: "rgba(198, 203, 210, 0.6)",
-                  borderWidth: "2px",
-                  borderRadius: "10px",
-                  height: "45px",
-                  marginTop: "-1px",
-                  color: "rgba(198, 203, 210, 0.6)",
-                  fontSize: "15.5px",
-                }),
-              }}
+              styles={selectStyles}
             />
           </div>
           <Select
@@ -151,18 +143,7 @@ const RegisterUser = () => {
                 setUserCurriculum(curr.value);
               }
             }}
-            styles={{
-              control: (baseStyles: any, state: any) => ({
-                ...baseStyles,
-                borderColor: "rgba(198, 203, 210, 0.6)",
-                borderWidth: "2px",
-                borderRadius: "10px",
-                height: "45px",
-                marginTop: "-1px",
-                color: "rgba(198, 203, 210, 0.6)",
-                fontSize: "15.5px",
-              }),
-            }}
+            styles={selectStyles}
           />
           <Select
             placeholder="Hobbies"
@@ -177,18 +158,7 @@ const RegisterUser = () => {
                 setUserHobbies([]);
               }
             }}
-            styles={{
-              control: (baseStyles: any, state: any) => ({
-                ...baseStyles,
-                borderColor: "rgba(198, 203, 210, 0.6)",
-                borderWidth: "2px",
-                borderRadius: "10px",
-                height: "45px",
-                marginTop: "-1px",
-                color: "rgba(198, 203, 210, 0.6)",
-                fontSize: "15.5px",
-              }),
-            }}
+            styles={selectStyles}
           />
           <p
             className="dynamic-text text-gray-700 italic text-center

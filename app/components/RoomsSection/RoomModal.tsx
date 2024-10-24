@@ -4,26 +4,16 @@ import { useState, useEffect } from "react";
 
 import { ClipLoader } from "react-spinners";
 import Select from "react-select";
+import { selectStyles } from "@/app/data";
 
 import { addRoom, editRoom } from "@/app/utils/roomfunctions";
+
 import { useData } from "@/providers/DataProvider";
 import { roomTags } from "@/app/data";
 
 import { useRoomModal } from "@/hooks/useRoomModal";
 import Modal from "../Modal";
 
-const selectStyles = {
-  control: (baseStyles: any) => ({
-    ...baseStyles,
-    borderColor: "rgba(198, 203, 210, 0.6)",
-    borderWidth: "2px",
-    borderRadius: "10px",
-    height: "45px",
-    marginTop: "-1px",
-    color: "rgba(198, 203, 210, 0.6)",
-    fontSize: "15.5px",
-  }),
-};
 
 const createZoomLink = async () => {
   try {

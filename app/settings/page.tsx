@@ -2,7 +2,10 @@
 
 // Library Imports
 import { useState, useEffect } from "react";
+
 import Select from "react-select";
+import { selectStyles } from "../data";
+
 import { useRouter } from "next/navigation";
 import { DocumentData } from "firebase/firestore";
 import { FaHome } from "react-icons/fa";
@@ -14,20 +17,6 @@ import { useData } from "@/providers/DataProvider";
 
 // Component Imports
 import Loader from "../components/Loader";
-
-// Common Styles
-const selectStyles = {
-  control: (baseStyles: any) => ({
-    ...baseStyles,
-    borderColor: "rgba(198, 203, 210, 0.6)",
-    borderWidth: "2px",
-    borderRadius: "10px",
-    height: "45px",
-    marginTop: "-1px",
-    color: "rgba(198, 203, 210, 0.6)",
-    fontSize: "15.5px",
-  }),
-};
 
 const Settings = () => {
   const router = useRouter();
