@@ -1,4 +1,4 @@
-export async function POST(request) {
+export async function POST(request: Request): Promise<Response> {
   try {
     const url = 'https://zoom.us/oauth/token?grant_type=account_credentials&account_id=Hl1BR9EFRUCVzVJk3FkJIw';
     const credentials = Buffer.from('m1RJcDBLSbqlIjmOR6Nxw:gVcA9ew1NFAvrIkOk0P6VgLjUpVXMhCj').toString('base64');
