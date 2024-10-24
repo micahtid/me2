@@ -1,35 +1,45 @@
-import Button from "../Button";
-import AbstractRects from "./AbstractRects";
-
 import { signIn } from "@/app/utils/databasefunctions";
 
+import { useEffect } from "react";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 const Hero = () => {
+  useEffect(() => {
+    AOS.init();
+  }, []);
+
   return (
-    <section id="hero" className="flex flex-row justify-center items-center gap-x-20
-    max-lg:flex-col">
-      <div className="flex flex-col justify-center items-start max-w-[350px] max-lg:max-w-[400px]
-      max-lg:items-center">
-        <h3 className="dynamic-heading font-bubble font-extrabold uppercase text-white text-left text-shadow-no-blur
-        leading-[65px] max-lg:leading-[60px]
-        max-lg:text-center">The Chat App For Students</h3>
-        <p className="dynamic-text text-gray-700 mt-10 text-left
-        max-lg:text-center">
-          Meet Me2! The chat app designed for students to find other students with similar interests and experiences.
+    <section 
+      id="hero" 
+      className="flex flex-col items-center justify-start gap-y-44 max-md:gap-y-24"
+    >
+      {/* Hero text and button */}
+      <div className="flex flex-col justify-start items-center max-w-[1000px] gap-y-6 mt-20 z-10 px-4">
+        <h3 className="font-title dynamic-heading text-center font-semibold">
+          Meet the<br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00224b] to-[#004696]">
+            Chat App for Students
+          </span>
+        </h3>
+        <p className="text-center font-medium text-xl">
+          The chat app for students. Find partners and others like you!
         </p>
-        <div className="flex justify-end mt-8">
-          <Button
-            className="px-12 py-4 rounded-md
-            text-white font-semibold"
-            onClick={signIn}
-          >
-            Sign Up
-          </Button>
-        </div>
+        <button
+          className="py-3 px-6 text-xl rounded-xl dark-gradient text-white font-medium"
+          onClick={signIn}
+        >
+          Sign Up
+        </button>
       </div>
-      <div className="flex flex-row justify-center items-center
-      max-lg:hidden">
-        <AbstractRects />
-      </div>
+
+      {/* Hero image */}
+      <img 
+        data-aos="fade-up"
+        data-aos-once="true"
+        src="/landing_page_display.png" 
+        className="rounded-lg shadow-xl z-10 sm:px-4" 
+      />
     </section>
   );
 };

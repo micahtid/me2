@@ -2,16 +2,16 @@
 
 // Library Imports
 import { useState } from "react";
+
 import Select from "react-select";
+import { selectStyles } from "../data";
+
 import { useRouter } from "next/navigation";
 
 // Own Function Imports
 import { curriculums, locations, hobbies } from "../data";
 import { addUser } from "../utils/usersfunctions";
 import { getUserAuth, signOut } from "../utils/databasefunctions";
-
-// Component Imports
-import Button from "./Button";
 
 // To Do:
 // Add verification to check for unique username...
@@ -70,20 +70,20 @@ const RegisterUser = () => {
       <div
         className="w-[calc(100vw-8rem)] h-[calc(100vh-4rem)]
       flex flex-row shadow-md
-      max-md:w-full max-md:h-full
-      max-md:flex-col"
+      max-xl:w-full max-xl:h-full
+      max-xl:flex-col"
       >
         <div
           className="w-[500px] h-full bg-[#54ACFD]
         flex flex-col justify-center items-start gap-y-2 px-16
-        max-md:max-w-[100vw] max-md:w-full
-        max-md:py-14
-        max-xl:w-[400px] max-lg:w-[300px]
+        max-xl:max-w-[100vw] max-xl:w-full
+        max-xl:py-14
         "
         >
-          <Button onClick={signOut} className="mb-6 shadow-none text-sm">
+          <button onClick={signOut} className="mb-6 shadow-none
+          bg-secondary text-white py-2 px-6 rounded-md dynamic-text font-semibold">
             Return
-          </Button>
+          </button>
           <h3 className="dynamic-subheading text-white font-semibold">
             Welcome to Me2!
           </h3>
@@ -93,20 +93,20 @@ const RegisterUser = () => {
         </div>
         <form
           onSubmit={handleSubmit}
-          className="flex-grow h-full bg-white px-52 pt-40 pb-20  
+          className="flex-grow h-full bg-white px-52 max-[1920px]:px-24 pt-40 pb-20  
         flex flex-col justify-center items-center gap-y-3 overflow-y-scroll
-        max-md:overflow-y-visible max-md:items-start
+        max-xl:overflow-y-visible max-xl:items-start
         max-xl:px-28 max-lg:px-12"
         >
           <h3
             className="dynamic-subheading font-semibold text-center
-          max-md:text-left"
+          max-xl:text-left"
           >
             Register
           </h3>
           <p
             className="dynamic-text text-gray-700 italic text-center
-          max-md:text-left"
+          max-xl:text-left"
           >
             Me2 ensures your data is kept safe and not used in malpractice.
           </p>
@@ -131,18 +131,7 @@ const RegisterUser = () => {
                   setUserLocation(loc.value);
                 }
               }}
-              styles={{
-                control: (baseStyles: any, state: any) => ({
-                  ...baseStyles,
-                  borderColor: "rgba(198, 203, 210, 0.6)",
-                  borderWidth: "2px",
-                  borderRadius: "10px",
-                  height: "45px",
-                  marginTop: "-1px",
-                  color: "rgba(198, 203, 210, 0.6)",
-                  fontSize: "15.5px",
-                }),
-              }}
+              styles={selectStyles}
             />
           </div>
           <Select
@@ -154,18 +143,7 @@ const RegisterUser = () => {
                 setUserCurriculum(curr.value);
               }
             }}
-            styles={{
-              control: (baseStyles: any, state: any) => ({
-                ...baseStyles,
-                borderColor: "rgba(198, 203, 210, 0.6)",
-                borderWidth: "2px",
-                borderRadius: "10px",
-                height: "45px",
-                marginTop: "-1px",
-                color: "rgba(198, 203, 210, 0.6)",
-                fontSize: "15.5px",
-              }),
-            }}
+            styles={selectStyles}
           />
           <Select
             placeholder="Hobbies"
@@ -180,22 +158,11 @@ const RegisterUser = () => {
                 setUserHobbies([]);
               }
             }}
-            styles={{
-              control: (baseStyles: any, state: any) => ({
-                ...baseStyles,
-                borderColor: "rgba(198, 203, 210, 0.6)",
-                borderWidth: "2px",
-                borderRadius: "10px",
-                height: "45px",
-                marginTop: "-1px",
-                color: "rgba(198, 203, 210, 0.6)",
-                fontSize: "15.5px",
-              }),
-            }}
+            styles={selectStyles}
           />
           <p
             className="dynamic-text text-gray-700 italic text-center
-          max-md:text-left"
+          max-xl:text-left"
           >
             *Fill out at least one of these forms below.
           </p>
@@ -219,7 +186,7 @@ const RegisterUser = () => {
           />
           <div
             className="w-full flex justify-end
-          max-md:justify-start"
+          max-xl:justify-start"
           >
             <button
               className="dynamic-text font-semibold 

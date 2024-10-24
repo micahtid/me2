@@ -1,4 +1,3 @@
-// tailwind.config.ts
 import { Config } from 'tailwindcss';
 
 const config: Config = {
@@ -12,10 +11,12 @@ const config: Config = {
       colors: {
         primary: "#C6E0FF",
         secondary: "#9ECAFF",
+        header: "#00224b",
         accent: "#FFF5DB",
       },
       fontFamily: {
         bubble: ['Rubik', 'sans-serif'],
+        title: ['Poppins', 'sans-serif']
       },
     },
   }

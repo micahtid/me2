@@ -7,14 +7,16 @@ import { initializeFirebase, getUserAuth } from "@/app/utils/databasefunctions";
 import { getUsers, getActiveUsers } from "@/app/utils/usersfunctions";
 import { getRequests } from "@/app/utils/requestfunctions";
 import { Auth, User } from "firebase/auth";
-import { FirebaseApp } from "firebase/app";
+import { getRooms } from "@/app/utils/roomfunctions";
 
 type DataContextType = {
   user: null | undefined | DocumentData;
   users: null | undefined | DocumentData[];
   sentRequests: undefined | null | DocumentData[];
   receivedRequests: undefined | null | DocumentData[];
-  activeUsers: undefined | DocumentData[]; // Added activeUsers
+  activeUsers: undefined | DocumentData[];
+  rooms: undefined | DocumentData[];
+  activeRooms: undefined | DocumentData[];
 };
 
 export const DataContext = createContext<DataContextType | undefined>(
@@ -93,6 +95,42 @@ export const DataContextProvider = (props: Props) => {
 
   ////////////////////////////////////////////
   ////////////////////////////////////////////
+  const getRoomsHook = () => {
+    const [rooms, setRooms] = useState<DocumentData[] | undefined>(undefined); // Initialize with undefined
+
+    useEffect(() => {
+      const unsubscribe = getRooms(setRooms);
+      return () => unsubscribe();
+    }, []);
+
+    return [rooms];
+  }
+
+  const getActiveRooms = (uid: string, rooms: DocumentData[]): DocumentData[] => {
+    const activeRooms: DocumentData[] = [];
+  
+    rooms.forEach((room) => {
+      if (room.users && room.users.includes(uid)) {
+        activeRooms.push(room);
+      }
+    });
+  
+    return activeRooms;
+  };
+
+  
+  const [rooms] = getRoomsHook();
+  const [activeRooms, setActiveRooms] = useState<DocumentData[] | undefined>(undefined);
+  
+  useEffect(() => {
+    if (user?.uid && rooms) {
+      const activeRooms = getActiveRooms(user.uid, rooms);
+      setActiveRooms(activeRooms);
+    }
+  }, [user, rooms])
+
+  ////////////////////////////////////////////
+  ////////////////////////////////////////////
 
   const [sentRequests] = getRequestHook('sent');
   const [receivedRequests] = getRequestHook('received');
@@ -103,7 +141,9 @@ export const DataContextProvider = (props: Props) => {
     users,
     sentRequests,
     receivedRequests,
-    activeUsers // Added activeUsers to the value
+    activeUsers,
+    rooms,
+    activeRooms
   };
 
   return <DataContext.Provider value={value} {...props} />;

@@ -22,9 +22,6 @@ import {
 } from "firebase/firestore";
 import { editSocialStatus } from "@/app/utils/chatfunctions";
 
-// Component Imports
-import Button from "../Button";
-
 interface SocialStatus {
   [key: string]: boolean | null;
 }

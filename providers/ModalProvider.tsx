@@ -2,6 +2,7 @@
 
 import UserModal from "@/app/components/UserModal";
 import ConfirmationModal from "@/app/components/ConfirmationModal";
+import RoomModal from "@/app/components/RoomsSection/RoomModal";
 import { useEffect, useState } from "react";
 
 const ModalProvider = () => {
@@ -16,10 +17,11 @@ const ModalProvider = () => {
   }
 
   return (
-    <>
+    <div className="">
         <UserModal />
         <ConfirmationModal />
-    </>
+        <RoomModal />
+    </div>
   );
 };
 

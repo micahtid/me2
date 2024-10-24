@@ -3,12 +3,14 @@
 import RegisterUser from "./components/RegisterUser";
 import ChatPage from "./components/ChatPage";
 
-import ColorDrop from "./components/LandingPage/ColorDrop";
 import NavBar from "./components/LandingPage/NavBar";
-import Testimonies from "./components/LandingPage/Testimonies";
 import Hero from "./components/LandingPage/Hero";
+import Tutorial from "./components/LandingPage/Tutorial";
 import AboutUs from "./components/LandingPage/AboutUs";
+import Testimonies from "./components/LandingPage/Testimonies";
 import Footer from "./components/LandingPage/Footer";
+
+import OopsScreen from "./components/OopsScreen";
 
 // Library Imports
 import { useState, useEffect } from "react";
@@ -64,10 +66,13 @@ const Home = () => {
         ) : isUserLoaded ? (
           <RegisterUser />
         ) : (
-          <ColorDrop>
+          <div className="overflow-x-hidden bg-[#FAFAFA]">
             <NavBar />
-            <div className="mx-10 mt-36 mb-32 max-lg:mt-28">
+            <div className="mt-36 mb-32 max-lg:mt-28">
               <Hero />
+            </div>
+            <div className="mb-52 mt-72">
+              <Tutorial />
             </div>
             <div className="my-48">
               <AboutUs />
@@ -76,15 +81,11 @@ const Home = () => {
               <Testimonies />
             </div>
             <Footer />
-          </ColorDrop>
+          </div>
         )}
       </section>
-      <div className="hidden max-[325px]:inline">
-          <p className="p-2">Oops! Me2 isn't yet suited for smaller devices. Please login on a larger device or enlargen your window.</p>
-          <img
-          src="/roller-skating.svg"
-          className="mt-5"
-        />
+      <div className="hidden max-[325px]:inline w-full">
+        <OopsScreen message="Oops! It looks like you're viewing on a small device!" infoClassName="max-[500px]:w-[80%]"/>
       </div>
     </div>
   );

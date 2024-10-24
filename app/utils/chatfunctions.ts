@@ -123,33 +123,39 @@ export const editSocialStatus = async (chatid: string, uid: string, status: bool
 
 export const checkNotificationStatus = (
     chatids: string[],
-    uid: string,
-    setNotifStatus: (status: (prevStatus: { [key: string]: boolean }) => { [key: string]: boolean }) => void
+    uid: string, // current user's id
+    setNotifStatus: (status: (prevStatus: { [key: string]: number }) => { [key: string]: number }) => void
   ) => {
     const app = initializeFirebase();
     const firestore = getFireStore(true);
-
+  
     const unsubscribes: (() => void)[] = [];
   
     for (const chatid of chatids) {
-      // Access the messages collection within the chat_data document
-      const messagesCollectionRef = collection(firestore, `chat_data/${chatid}/messages`);
+      const messagesCollectionRef = collection(firestore, `chat_data/${chatid}/messages`);                  // Access the message for each ChatID provided
   
-      // Query to get the last added message document, ordered by createdAt
-      const messagesQuery = query(messagesCollectionRef, orderBy('createdAt', 'desc'), limit(1));
+      const messagesQuery = query(messagesCollectionRef, orderBy('createdAt', 'desc'), limit(10));          // Access the latest 10 messages (in case 9+ for notif. status)
   
       const unsubscribe = onSnapshot(messagesQuery, (messagesSnapshot) => {
         if (messagesSnapshot.empty) {
-          setNotifStatus((prevStatus) => ({ ...prevStatus, [chatid]: false }));
+          setNotifStatus((prevStatus) => ({ ...prevStatus, [chatid]: 0 }));
           return;
         }
   
-        // Assuming we have at least one message, get the latest message document
-        const latestMessageDoc = messagesSnapshot.docs[0];
-        const latestMessageData = latestMessageDoc.data();
+        const messagesDocs = messagesSnapshot.docs;             // Retrieve the message documents (!)
+        let count = 0;
   
-        // Check if the uid matches uid1 in the latest message document
-        setNotifStatus((prevStatus) => ({ ...prevStatus, [chatid]: latestMessageData.uid !== uid }));
+        for (const messageDoc of messagesDocs) {                // Determine who sent last message and how many (!)
+          const messageData = messageDoc.data();
+  
+          if (messageData.uid !== uid) {                        // Update counter if the other user was the one to send the message
+            count += 1;
+          } else {
+            break;
+          }
+        }
+  
+        setNotifStatus((prevStatus) => ({ ...prevStatus, [chatid]: count }));       // Update the notification count for that specific chat (!)
       });
   
       unsubscribes.push(unsubscribe);
@@ -159,3 +165,4 @@ export const checkNotificationStatus = (
       unsubscribes.forEach((unsubscribe) => unsubscribe());
     };
   };
+  
