@@ -23,8 +23,8 @@ const UserDisplay = () => {
   const { user, activeUsers } = useData();
   const { onModalOpen, setDeleteData } = useConfirmationModal();
 
-  const [timeLeft, setTimeLeft] = useState<{ [key: string]: number }>({});
-  const [notifStatus, setNotifStatus] = useState<{ [key: string]: number }>({}); // Change to number
+  const [timeLeft, setTimeLeft] = useState<{ [key: string]: number }>({});              // Store 'time left' for each chat
+  const [notifStatus, setNotifStatus] = useState<{ [key: string]: number }>({});        // Store notification counter for each chat
 
   const fetchTimeLeft = async (uid1: string, uid2: string) => {
     const chatId = generateChatId(uid1, uid2);
@@ -34,7 +34,7 @@ const UserDisplay = () => {
 
   const generateChatId = (uid1: string, uid2: string) => (uid1 > uid2 ? uid1 + uid2 : uid2 + uid1);
 
-  // Display how much time is left on a chat!
+  // Display how much time is left on a chat (!)
   useEffect(() => {
     if (user && activeUsers) {
       activeUsers.forEach((u) => fetchTimeLeft(user.uid, u.uid));
@@ -47,11 +47,10 @@ const UserDisplay = () => {
     }
   }, [user, activeUsers]);
 
-  // Store ChatIDs of each user chat!
   useEffect(() => {
     if (user && activeUsers) {
-      const chatIds = activeUsers.map((u) => generateChatId(user.uid, u.uid));
-      const unsubscribe = checkNotificationStatus(chatIds, user.uid, setNotifStatus);
+      const chatIds = activeUsers.map((u) => generateChatId(user.uid, u.uid));                  // Generate all ChatIds in which the user is currently part of (!)
+      const unsubscribe = checkNotificationStatus(chatIds, user.uid, setNotifStatus);           // Passing the ChatIds (used as keys) to set notification counter (!)
       return () => unsubscribe();
     }
   }, [user, activeUsers]);
@@ -64,7 +63,7 @@ const UserDisplay = () => {
 
         const chatId = generateChatId(user.uid, u.uid);
         const hoursLeft = timeLeft[chatId] !== undefined ? `${timeLeft[chatId]} Hours` : "Loading...";
-        const notificationCount = notifStatus[chatId] || 0; // Assign notif count as number
+        const notificationCount = notifStatus[chatId] || 0;
 
         if (timeLeft[chatId] <= 0) {
           deleteChat(chatId);
@@ -84,7 +83,7 @@ const UserDisplay = () => {
                 changePage("chat");
                 setChatComplete(timeLeft[chatId] <= 12 && timeLeft[chatId] > 0);
               }}
-              notificationCount={notificationCount} // Update the prop here
+              notificationCount={notificationCount}
               activeStatus
               activeStatusClassName={currentUser === u && currentPage === "chat" ? "border-accent" : "border-[#F4F6FB]"}
               className={u.uid === user.uid ? "hidden" : ""}

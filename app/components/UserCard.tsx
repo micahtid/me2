@@ -5,7 +5,7 @@ import { twMerge } from "tailwind-merge";
 interface UserCardProps {
     className?: string;
     statusClassName?: string;
-    notificationCount?: number; // Change to hold a number instead of a boolean
+    notificationCount?: number; 
     status: string;
     onClick: MouseEventHandler<HTMLButtonElement>;
     user: DocumentData;
@@ -19,7 +19,7 @@ const UserCard: React.FC<UserCardProps> = ({
     user, 
     className, 
     statusClassName, 
-    notificationCount = 0, // Default notification count to 0
+    notificationCount = 0, 
     activeStatus, 
     activeStatusClassName 
 }) => {
@@ -32,7 +32,6 @@ const UserCard: React.FC<UserCardProps> = ({
             )}
         >
             <div className="relative">
-                {/* Display the notification count if it's greater than 0 */}
                 {notificationCount > 0 && (
                     <div 
                         className="

@@ -132,11 +132,9 @@ export const checkNotificationStatus = (
     const unsubscribes: (() => void)[] = [];
   
     for (const chatid of chatids) {
-      // Access the messages collection within the chat_data document
-      const messagesCollectionRef = collection(firestore, `chat_data/${chatid}/messages`);
+      const messagesCollectionRef = collection(firestore, `chat_data/${chatid}/messages`);                  // Access the message for each ChatID provided
   
-      // Query to get the last 10 messages ordered by createdAt
-      const messagesQuery = query(messagesCollectionRef, orderBy('createdAt', 'desc'), limit(10));
+      const messagesQuery = query(messagesCollectionRef, orderBy('createdAt', 'desc'), limit(10));          // Access the latest 10 messages (in case 9+ for notif. status)
   
       const unsubscribe = onSnapshot(messagesQuery, (messagesSnapshot) => {
         if (messagesSnapshot.empty) {
@@ -144,25 +142,20 @@ export const checkNotificationStatus = (
           return;
         }
   
-        // Get the message documents
-        const messagesDocs = messagesSnapshot.docs;
+        const messagesDocs = messagesSnapshot.docs;             // Retrieve the message documents (!)
         let count = 0;
   
-        // Iterate through the messages to count consecutive messages from the other user
-        for (const messageDoc of messagesDocs) {
+        for (const messageDoc of messagesDocs) {                // Determine who sent last message and how many (!)
           const messageData = messageDoc.data();
   
-          // If the message is from the other user, increase the count
-          if (messageData.uid !== uid) {
+          if (messageData.uid !== uid) {                        // Update counter if the other user was the one to send the message
             count += 1;
           } else {
-            // If the message is from the current user, stop counting
             break;
           }
         }
   
-        // Update the notification count for the specific chat
-        setNotifStatus((prevStatus) => ({ ...prevStatus, [chatid]: count }));
+        setNotifStatus((prevStatus) => ({ ...prevStatus, [chatid]: count }));       // Update the notification count for that specific chat (!)
       });
   
       unsubscribes.push(unsubscribe);
