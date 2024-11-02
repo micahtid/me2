@@ -3,10 +3,6 @@ import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
 import { IoChatboxEllipsesOutline } from "react-icons/io5";
 import Highlight from './Highlight';
 
-import { useEffect } from "react";
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-
 interface Testimonial {
   name: string;
   role: string;
@@ -95,19 +91,12 @@ const TestimonialCard: React.FC<{ testimonial: Testimonial }> = ({ testimonial }
 );
 
 const Testimonies: React.FC = () => {
-  useEffect(() => {
-    AOS.init();
-  }, [])
-
   const halfIndex = Math.ceil(testimonials.length / 2);
   const firstRowTestimonials = testimonials.slice(0, halfIndex);
   const secondRowTestimonials = testimonials.slice(halfIndex);
 
   return (
 <section 
-  data-aos="fade-up" 
-  data-aos-once="true"
-  data-aos-anchor-placement="bottom-bottom" 
   className="w-full flex justify-center items-center bg-[#FAFAFA]"
 >
   <div className="max-w-[1500px] w-full px-4 flex justify-center items-center flex-col mx-auto gap-y-8">
@@ -122,9 +111,6 @@ const Testimonies: React.FC = () => {
     <div className="flex flex-col gap-y-[40px] mx-auto w-full">
       {/* First Row */}
       <div 
-      data-aos="fade-up" 
-      data-aos-once="true"
-      data-aos-delay="200" 
       className="relative w-full overflow-hidden">
         <Marquee direction="left" className="py-4 max-w-[100%]" pauseOnHover={true}>
           {firstRowTestimonials.map((testimonial, index) => (
@@ -135,9 +121,6 @@ const Testimonies: React.FC = () => {
 
       {/* Second Row */}
       <div 
-      data-aos="fade-up" 
-      data-aos-delay="400" 
-      data-aos-once="true"
       className="relative w-full overflow-hidden">
         <Marquee direction="right" className="py-4 max-w-[100%]" pauseOnHover={true}>
           {secondRowTestimonials.map((testimonial, index) => (

@@ -15,6 +15,7 @@ import FindSection from "./FindSection/FindSection";
 import RequestSection from "./RequestSection/RequestSection";
 import QuickLinks from "./QuickLinks";
 import RoomsSection from "./RoomsSection/RoomsSection";
+import GlobalSection from "./GlobalSection/GlobalSection";
 
 import OopsScreen from "./OopsScreen";
 
@@ -25,7 +26,8 @@ const ChatPage = () => {
 
   useEffect(() => {
     onChange(null, "");
-  }, [activeUsers]);
+    console.log(activeUsers)
+  }, [JSON.stringify(activeUsers?.map((item) => item.activeUsers))]);
 
   const renderCurrentPage = () => {
     switch (currentPage) {
@@ -35,13 +37,15 @@ const ChatPage = () => {
         return <RequestSection />;
       case "new people":
         return <FindSection />;
-      default:
+      case "rooms":
         return <RoomsSection />;
+      default:
+        return <GlobalSection />;
     }
   };
 
   return (
-    <section className="w-full h-[100vh]">
+    <section className="w-full h-[100vh] overflow-hidden">
       <div className="w-full h-full flex flex-row max-lg:flex-col
       max-[500px]:hidden">
         {/* Quick Links */}

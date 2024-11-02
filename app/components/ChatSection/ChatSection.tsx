@@ -9,7 +9,7 @@ import { useUserModal } from "@/hooks/useUserModal";
 
 // Component Imports
 import ChatContainer from "./ChatContainer"
-import MessageForm from "./MessageForm"
+import MessageForm from "../MessageForm"
 import SocialForm from "./SocialForm"
 import OopsScreen from "../OopsScreen";
 
@@ -45,7 +45,7 @@ const ChatSection = () => {
         {isChatComplete ? (
           <SocialForm />
         ) : (
-          <MessageForm setSending={setSending} targetRef={dummy} />
+          <MessageForm setSending={setSending} targetRef={dummy} isGlobalChat={false} />
           // <SocialForm />
         )}
       </div>

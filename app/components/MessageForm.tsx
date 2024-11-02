@@ -1,24 +1,32 @@
 "use client"
 
 import { useState } from "react"
+
 import { sendMessage } from "@/app/utils/chatfunctions";
-import { useActiveUserChat } from "@/hooks/useActiveUserChat"
+import { sendGlobalChatMessage } from "../utils/globalchatfunctions";
+import { useActiveUserChat } from "@/hooks/useActiveUserChat";
+
 import { MdFileUpload } from "react-icons/md";
 import { IoSend } from "react-icons/io5";
 
 interface MessageFormProps {
-    setSending: Function,
+    setSending: Function;
     targetRef: React.RefObject<HTMLDivElement>;
+    isGlobalChat: boolean;
 }
 
-const MessageForm: React.FC<MessageFormProps> = ({ setSending, targetRef }) => {
+const MessageForm: React.FC<MessageFormProps> = ({ setSending, targetRef, isGlobalChat }) => {
   const { currentChat } = useActiveUserChat();
   const [formValue, setFormValue] = useState("");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (formValue) {
-      sendMessage(e, currentChat, formValue, setFormValue, setSending);
+      if (isGlobalChat) {
+        sendGlobalChatMessage(e, formValue, setFormValue, setSending)
+      } else {  
+        sendMessage(e, currentChat, formValue, setFormValue, setSending);
+      }
       setSending(true);
     }
   };

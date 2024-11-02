@@ -140,5 +140,4 @@ export const shuffleArray = (array: DocumentData[]) => {
     }
     return array;
 }
-
 //////////////////////////////

@@ -8,6 +8,7 @@ import { getUsers, getActiveUsers } from "@/app/utils/usersfunctions";
 import { getRequests } from "@/app/utils/requestfunctions";
 import { Auth, User } from "firebase/auth";
 import { getRooms } from "@/app/utils/roomfunctions";
+import { getGlobalChatData } from "@/app/utils/globalchatfunctions";
 
 type DataContextType = {
   user: null | undefined | DocumentData;
@@ -17,6 +18,7 @@ type DataContextType = {
   activeUsers: undefined | DocumentData[];
   rooms: undefined | DocumentData[];
   activeRooms: undefined | DocumentData[];
+  globalChat: undefined | DocumentData[];
 };
 
 export const DataContext = createContext<DataContextType | undefined>(
@@ -95,6 +97,21 @@ export const DataContextProvider = (props: Props) => {
 
   ////////////////////////////////////////////
   ////////////////////////////////////////////
+  const getGlobalChatHook = () => {
+    const [globalChat, setGlobalChat] = useState<DocumentData[] | undefined>(undefined); // Initialize with undefined
+
+    useEffect(() => {
+      const unsubscribe = getGlobalChatData(setGlobalChat);
+      return () => unsubscribe();
+    }, []);
+
+    return [globalChat];
+  }
+
+  const [globalChat] = getGlobalChatHook();
+
+  ////////////////////////////////////////////
+  ////////////////////////////////////////////
   const getRoomsHook = () => {
     const [rooms, setRooms] = useState<DocumentData[] | undefined>(undefined); // Initialize with undefined
 
@@ -143,7 +160,8 @@ export const DataContextProvider = (props: Props) => {
     receivedRequests,
     activeUsers,
     rooms,
-    activeRooms
+    activeRooms,
+    globalChat
   };
 
   return <DataContext.Provider value={value} {...props} />;
