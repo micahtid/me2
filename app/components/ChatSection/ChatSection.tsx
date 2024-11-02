@@ -45,7 +45,7 @@ const ChatSection = () => {
         {isChatComplete ? (
           <SocialForm />
         ) : (
-          <MessageForm setSending={setSending} targetRef={dummy} />
+          <MessageForm setSending={setSending} targetRef={dummy} isGlobalChat={false} />
           // <SocialForm />
         )}
       </div>

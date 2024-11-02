@@ -8,6 +8,7 @@ import { DocumentData } from "firebase/firestore";
 import { getChatData } from "@/app/utils/chatfunctions";
 import { sortMessagesByDate } from "@/app/utils/utilfunctions";
 import { useActiveUserChat } from "@/hooks/useActiveUserChat";
+import { useData } from "@/providers/DataProvider";
 
 // Component Imports
 import ChatMessage from "../ChatMessage";
@@ -22,54 +23,44 @@ interface ChatContainerProps {
 // To Do: Add New Date Divisors
 
 const ChatContainer: React.FC<ChatContainerProps> = ({ sending, setSending, targetRef }) => {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [messages, setMessages] = useState<DocumentData[]>();
-  const { currentChat } = useActiveUserChat();
+  const { globalChat } = useData();
+  console.log(globalChat)
 
   //////////////
   const [dateMessages, setDateMessages] = useState<{date: Date | null, messages: DocumentData[]}[] | null>([]);
   //////////////
 
   useEffect(() => {
-    const unsubscribe = getChatData(currentChat, setMessages, setIsLoaded);
-    return () => unsubscribe();
-  }, [currentChat]);
-
-  useEffect(() => {
     setTimeout(() => {
       targetRef.current?.scrollIntoView({ behavior: "smooth" });
     }, 100);
-  }, [messages]);
+  }, [globalChat]);
 
   useEffect(() => {
-    if (messages) {
-      setDateMessages(sortMessagesByDate(messages));
+    if (globalChat) {
+      setDateMessages(sortMessagesByDate(globalChat));
     }
-  }, [messages])
+  }, [globalChat])
 
   return (
-    <div className="h-full flex flex-col">
-      <div className="flex-1">
-        {isLoaded && (
-          <div className="flex flex-col justify-center gap-y-1">
-            {dateMessages && messages && dateMessages.map((obj, i) => (
-              <div 
-              className="flex flex-col gap-y-2"
-              key={i}>
+    <div className="h-full flex flex-col justify-center gap-y-1">
+        {dateMessages && globalChat && dateMessages.map((obj, i) => (
+            <div 
+            className="flex flex-col gap-y-2"
+            key={i}>
                 <DateDivider>
-                  {obj.date && obj.date.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}
+                    {obj.date && obj.date.toLocaleDateString('en-US', {month: 'long', day: 'numeric'})}
                 </DateDivider>
                 {obj.messages && obj.messages.map((message, j) => (
                     <ChatMessage 
                     key={j}
-                    document={message} className={`${(j + 1 === messages.length && sending) ? "text-gray-400" : ""}`} />
+                    document={message} className={`${(j + 1 === globalChat.length && sending) ? "text-gray-400" : ""}`}>
+
+                    </ChatMessage>
                 ))}
-              </div>
-            ))}
-            <div className="" ref={targetRef}></div>
-          </div>
-        )}
-      </div>
+            </div>
+        ))}
+        <div className="" ref={targetRef}></div>
     </div>
   );
 };

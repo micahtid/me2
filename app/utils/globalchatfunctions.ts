@@ -1,7 +1,7 @@
 import { addDoc, query, orderBy, serverTimestamp, DocumentData, onSnapshot, collection } from "firebase/firestore";
 import { initializeFirebase, getUserAuth, getFireStore } from "./databasefunctions";
 
-export const getGlobalChatData = (setGlobalChatMessages: (msgs: DocumentData[]) => void, setIsLoaded: (loaded: boolean) => void) => {
+export const getGlobalChatData = (setGlobalChatMessages: (msgs: DocumentData[]) => void) => {
     const app = initializeFirebase();
     const firestore = getFireStore(true);
 
@@ -13,7 +13,6 @@ export const getGlobalChatData = (setGlobalChatMessages: (msgs: DocumentData[]) 
             messages.push(doc.data());
         });
         setGlobalChatMessages(messages);
-        setIsLoaded(true);
     });
 
     return unsubscribe;
