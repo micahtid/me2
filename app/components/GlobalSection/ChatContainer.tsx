@@ -43,7 +43,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ sending, setSending, targ
   }, [globalChat])
 
   return (
-    <div className="h-full flex flex-col justify-center gap-y-1">
+    <div className="h-full flex flex-col gap-y-1">
         {dateMessages && globalChat && dateMessages.map((obj, i) => (
             <div 
             className="flex flex-col gap-y-2"
@@ -53,6 +53,7 @@ const ChatContainer: React.FC<ChatContainerProps> = ({ sending, setSending, targ
                 </DateDivider>
                 {obj.messages && obj.messages.map((message, j) => (
                     <ChatMessage 
+                    profilePicture
                     key={j}
                     document={message} className={`${(j + 1 === globalChat.length && sending) ? "text-gray-400" : ""}`}>
 

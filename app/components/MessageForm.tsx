@@ -10,9 +10,9 @@ import { MdFileUpload } from "react-icons/md";
 import { IoSend } from "react-icons/io5";
 
 interface MessageFormProps {
-    setSending: Function,
-    targetRef: React.RefObject<HTMLDivElement>,
-    isGlobalChat: boolean
+    setSending: Function;
+    targetRef: React.RefObject<HTMLDivElement>;
+    isGlobalChat: boolean;
 }
 
 const MessageForm: React.FC<MessageFormProps> = ({ setSending, targetRef, isGlobalChat }) => {
