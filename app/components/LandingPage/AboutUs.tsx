@@ -5,15 +5,7 @@ import { FaQuestion } from "react-icons/fa6";
 
 import Highlight from "./Highlight";
 
-import { useEffect } from "react";
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-
 const AboutUs = () => {
-  useEffect(() => {
-    AOS.init();
-  }, []);
-
   const cards = [
     {
       icon: PeopleHuggingIcon,
@@ -41,9 +33,6 @@ const AboutUs = () => {
   return (
     <section
       id="about"
-      data-aos="fade-up"
-      data-aos-once="true"
-      data-aos-anchor-placement="bottom-bottom"
       className="max-w-[1500px] mx-auto w-full px-4 flex flex-col items-center gap-y-24"
     >
       <Highlight icon={<FaQuestion />} title="Why Decide to Use Us" className="-mb-16" />

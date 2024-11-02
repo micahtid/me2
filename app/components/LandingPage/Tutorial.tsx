@@ -1,7 +1,3 @@
-import { useEffect } from "react";
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-
 import { RiNumber1, RiNumber2, RiNumber3, RiNumber4 } from "react-icons/ri";
 
 const steps = [
@@ -28,15 +24,8 @@ const steps = [
 ];
 
 const Tutorial = () => {
-  useEffect(() => {
-    AOS.init();
-  }, []);
-
   return (
     <section 
-      data-aos="fade-up"
-      data-aos-once="true"
-      data-aos-anchor-placement="bottom-bottom"
       className='w-full py-28 flex justify-center items-center bg-primary relative overflow-hidden'
     >
       {/* Background glow effect */}
