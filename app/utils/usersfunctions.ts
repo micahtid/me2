@@ -60,7 +60,7 @@ export const addUser = async (userName: string, age: number,
         discord,
         snap,
         lastOnline: serverTimestamp(),
-        online : true
+        online : false
       });
     } catch (error) {
       console.error("Error adding document: ", error);

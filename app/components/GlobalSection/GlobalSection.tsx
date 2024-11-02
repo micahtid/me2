@@ -8,12 +8,11 @@ import { useActiveUserChat } from "@/hooks/useActiveUserChat";
 import { useUserModal } from "@/hooks/useUserModal";
 
 // Component Imports
-import ChatContainer from "./ChatContainer"
-import MessageForm from "../MessageForm"
-import SocialForm from "./SocialForm"
+import ChatContainer from "./ChatContainer";
+import MessageForm from "../MessageForm";
 import OopsScreen from "../OopsScreen";
 
-const ChatSection = () => {
+const GlobalSection = () => {
   const { currentChat, currentUser, isChatComplete } = useActiveUserChat();
   const { onChangeCurrentUser, onModalOpen } = useUserModal();
 
@@ -42,15 +41,10 @@ const ChatSection = () => {
         <ChatContainer sending={sending} setSending={setSending} targetRef={dummy} />
       </div>
       <div className="flex-shrink-0">
-        {isChatComplete ? (
-          <SocialForm />
-        ) : (
-          <MessageForm setSending={setSending} targetRef={dummy} />
-          // <SocialForm />
-        )}
+        <MessageForm setSending={setSending} targetRef={dummy} />
       </div>
     </div>
   )
 }
 
-export default ChatSection
+export default GlobalSection

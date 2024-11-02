@@ -8,6 +8,7 @@ import { FaCheckCircle } from "react-icons/fa";
 
 // Own Function Imports
 import { useData } from "@/providers/DataProvider";
+import { useUserModal } from "@/hooks/useUserModal";
 import { getUser } from "@/app/utils/usersfunctions";
 import { deleteRequest, acceptRequest } from "@/app/utils/requestfunctions";
 
@@ -36,7 +37,9 @@ const getRequestHook = async (
 const RequestSection = () => {
   const [section, setSection] = useState("sent");
   const [requestList, setRequestList] = useState<DocumentData[] | null | undefined>([]);
+
   const { sentRequests, receivedRequests, user } = useData();
+  const { onChangeCurrentUser, onModalOpen } = useUserModal();
 
   const [sentRequestUsers, setSentRequestUsers] = useState<DocumentData[]>([]);
   const [receivedRequestUsers, setReceivedRequestUsers] = useState<DocumentData[]>([]);
@@ -87,8 +90,9 @@ const RequestSection = () => {
       {requestList?.map((request, index) => (
         <div key={index} className="flex flex-row justify-start items-center w-full user-card">
           <UserCard
-            onClick={() => {
-              // console.log("For future use!")
+              onClick={() => {
+                onChangeCurrentUser(request);
+                onModalOpen();
             }}
             className="flex-grow"
             statusClassName="bg-primary text-black/60 px-6 py-1 rounded-xl -ml-1 mt-1"

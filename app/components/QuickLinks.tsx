@@ -7,6 +7,7 @@ import { PiSignOutBold } from "react-icons/pi";
 import { HiUsers } from "react-icons/hi";
 import { IoMail, IoNotifications } from "react-icons/io5";
 import { FaVideo } from "react-icons/fa";
+import { AiOutlineGlobal } from "react-icons/ai";
 
 // Own Function Imports
 import { signOut } from "../utils/databasefunctions";
@@ -40,7 +41,8 @@ const QuickLinks: React.FC = () => {
             ), 
             func: () => onChange("requests") 
         },
-        { label: "Rooms", value: "rooms", icon: <FaVideo size={32} />, func: () => onChange("rooms") }
+        { label: "Rooms", value: "rooms", icon: <FaVideo size={32} />, func: () => onChange("rooms") },
+        { label: "Global Chat", value: "global", icon: <AiOutlineGlobal size={32} />, func: () => onChange("global") }
     ];
 
     return (
@@ -73,7 +75,7 @@ const QuickLinks: React.FC = () => {
                         key={index} 
                         onClick={link.func}
                         className={`
-                            flex justify-center items-center gap-x-4 px-4 py-6 w-full
+                            flex justify-center items-center gap-x-4 px-4 py-3 w-full
                             max-lg:gap-x-2 max-lg:px-6 max-lg:py-4
                             ${currentPage === link.value && "bg-black/20 border-l-2 border-black max-lg:border-l-0 max-lg:border-b-2"}
                         `}
