@@ -7,6 +7,7 @@ import NavBar from "./components/LandingPage/NavBar";
 import Hero from "./components/LandingPage/Hero";
 import Tutorial from "./components/LandingPage/Tutorial";
 import AboutUs from "./components/LandingPage/AboutUs";
+import FAQ from "./components/LandingPage/FAQ";
 import Testimonies from "./components/LandingPage/Testimonies";
 import Footer from "./components/LandingPage/Footer";
 
@@ -68,16 +69,19 @@ const Home = () => {
         ) : (
           <div className="overflow-x-hidden bg-[#FAFAFA]">
             <NavBar />
-            <div className="mt-36 mb-32 max-lg:mt-28">
+            <div className="my-[125px] max-lg:mt-28">
               <Hero />
             </div>
-            <div className="mb-52 mt-72">
-              <Tutorial />
-            </div>
-            <div className="my-48">
+            <div className="my-[250px]">
               <AboutUs />
             </div>
-            <div className="my-56">
+            <div className="my-[250px]">
+              <Tutorial />
+            </div>
+            <div className="my-[250px]">
+              <FAQ />
+            </div>
+            <div className="my-[250px]">
               <Testimonies />
             </div>
             <Footer />

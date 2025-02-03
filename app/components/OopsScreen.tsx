@@ -11,7 +11,7 @@ const OopsScreen: React.FC<OopsScreenProps> = ({ message, infoClassName, divClas
     <div className={twMerge(`w-[300px] -mt-20
     max-lg:my-10 max-lg:w-[20%]`, infoClassName)}>
       <img src="/reading-side.svg" alt="Quiet here" className="w-full h-auto" />
-      <h3 className="text-center text-xl font-medium">
+      <h3 className="text-center dynamic-text">
         {message}
       </h3>
     </div>

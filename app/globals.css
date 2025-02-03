@@ -7,6 +7,10 @@
 
 
 @layer components {
+  .default-container {
+    @apply max-w-[1200px] mx-auto w-full px-4
+  }
+
   .dynamic-heading {
     @apply text-7xl max-lg:text-5xl;
   }
@@ -16,7 +20,7 @@
   }
 
   .dynamic-text {
-    @apply text-lg max-lg:text-base;
+    @apply text-xl max-lg:text-lg;
   }
 
   .input-field {

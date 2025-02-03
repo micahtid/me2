@@ -1,51 +1,81 @@
 "use client";
 
+/**
+ * NavBar Component
+ * 
+ * A responsive navigation bar that includes:
+ * - Logo
+ * - Navigation links (desktop only)
+ * - Login button
+ * - Hamburger menu (mobile only)
+ */
+
 import { navItems } from "@/app/data";
 import { RxHamburgerMenu } from "react-icons/rx";
-
+import { FaUser } from "react-icons/fa6";
 import { useState } from "react";
+import { signIn } from "@/app/utils/databasefunctions";
 import NavModal from "./NavModal";
 
-import { signIn } from "@/app/utils/databasefunctions";
-
 const NavBar = () => {
+  // State for mobile menu
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <nav className="w-full">
-      <div className="max-lg:hidden
-      max-w-[1200px] w-full rounded-lg
-      px-8 py-4 bg-black/10 backdrop-blur-[5px]
-      flex flex-row justify-between items-center
-      mt-8 max-xl:max-w-none max-xl:w-[95%]
-       fixed top-0 z-50 left-1/2 transform -translate-x-1/2">
+      {/* Desktop Navigation */}
+      <div className="
+        fixed top-0 z-50 left-1/2 transform -translate-x-1/2
+        mt-8 max-xl:max-w-none max-xl:w-[95%]
+        max-w-[1200px] w-full
+        flex flex-row justify-between items-center
+        rounded-lg px-8 py-4
+        bg-white/70 backdrop-blur-sm
+        border-[1px] border-black/[0.06]
+        shadow-md
+        max-lg:hidden
+      ">
+        {/* Logo Section */}
         <div>
-          <img src="favicon.ico" width={35} className="" />
+          <img 
+            src="favicon.ico" 
+            width={35} 
+            alt="Logo"
+          />
         </div>
+
+        {/* Navigation Links & Login Button */}
         <div className="flex flex-row justify-between items-center gap-x-6">
+          {/* Nav Links */}
           {navItems.map((item, index) => (
-            <a key={index} href={item.link} className="flex flex-row gap-x-2 font-medium text-black">
+            <a 
+              key={index} 
+              href={item.link} 
+              className="font-medium text-black hover:text-black/50 transition-all duration-300"
+            >
               {item.text}
-              <div className="mt-[2px]">{item.icon}</div>
             </a>
           ))}
+
+          {/* Login Button */}
           <button
-            className="bg-header rounded-xl px-4 py-2
-        font-medium text-white shadow-sm"
             onClick={signIn}
+            className="flex justify-center items-center gap-x-3 px-6 py-2
+              bg-header rounded-xl font-medium text-white shadow-sm"
           >
+            <FaUser />
             Log In
           </button>
+        </div>
       </div>
-      </div>
-      <div
-        className="w-full
-    flex justify-end p-4"
-      >
+
+      {/* Mobile Menu Button */}
+      <div className="w-full flex justify-end p-4">
         <button
-          className="p-3 bg-white rounded-lg shadow-lg
-        hidden max-lg:inline ease-in-out duration-500"
           onClick={() => setIsOpen(true)}
+          className="p-3 hidden max-lg:inline bg-white rounded-lg
+            border-[1px] border-black/[0.06] shadow-md ease-in-out duration-500"
+          aria-label="Open mobile menu"
         >
           <RxHamburgerMenu size={20} />
         </button>

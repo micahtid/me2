@@ -1,56 +1,100 @@
-import { footerNotes } from "@/app/data";
+import { FaGithub } from 'react-icons/fa6'
+
+// Organization details configuration
+const organizationInfo = {
+  name: "Me2 Chat App",
+  description: "We're on a mission to connect students around the world. Help us defeat loneliness and make a difference in others' lives.",
+  joinButtonText: "Join Now",
+  joinButtonLink: "/register"
+}
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear()
+
   return (
-    <div
+    <footer 
       id="footer"
-      className="bg-gray-200 px-20 py-20 flex justify-center items-center
-      max-lg:px-4 overflow-x-hidden"
+      className="bg-gray-100"
     >
-      <div
-        className="
-        flex flex-col justify-center items-center gap-y-2
-        max-w-[1100px] w-full
-        max-lg:max-w-[800px]"
-      >
-        <div
-          className="
-          flex flex-row justify-center items-start gap-x-20
-          max-h-[250px] overflow-hidden max-lg:mb-12
-          max-sm:grid max-sm:grid-cols-2 max-sm:max-h-none max-sm:gap-y-14
-          max-[400px]:flex max-[400px]:flex-col max-[400px]:items-start max-[400px]:w-full
-          max-[400px]:ml-16"
-        >
-          {footerNotes.map((col, index) => (
-            <div key={index} className="flex flex-col justify-start items-start gap-y-2
-            max-[400px]:grid max-[400px]:grid-cols-2">
-              <h3 className="uppercase font-header font-bold max-[400px]:text-left
-              max-[400px]:w-[125px]">{col.header}</h3>
-              <div className="max-[400px]:block hidden"></div>
-              {col.links.map((link, index) => (
-                <a key={index} href={link.link} className="text-black/50
-                max-[400px]:text-left max-[400px]:w-[125px] ">
-                  {link.label}
-                </a>
-              ))}
-            </div>
-          ))}
-          <img
-            src="/clumsy.svg"
-            className="w-[500px] opacity-50 max-xl:w-[300px] max-lg:hidden"
-          />
-        </div>
-        <div className="w-full max-lg:w-[550px] max-sm:w-[80%]">
-          <div className="w-full h-[2px] bg-black/50 rounded-full mb-4"></div>
-          <div className="w-full flex flex-row justify-start items-center gap-x-6
-          max-sm:flex-col max-sm:gap-y-1">
-            <p className="text-nowrap overflow-ellipsis text-black/80 text-sm">@2024 Me2, All Rights Reserved</p>
-            <p className="text-black/80 text-sm">Built Using React & NextJS</p>
+      <div className="default-container py-16">
+        <div className="
+          flex 
+          flex-col 
+          items-center 
+          text-center 
+          max-w-2xl 
+          mx-auto 
+          space-y-8
+        ">
+          {/* Organization Info */}
+          <div className="space-y-4">
+            <p className="text-2xl font-bold text-gray-800">
+              {organizationInfo.name}
+            </p>
+            <p className="text-gray-600">
+              {organizationInfo.description}
+            </p>
           </div>
+
+          {/* GitHub Profiles */}
+          <div className="flex gap-x-8">
+            <a
+              href="https://github.com/Not-Micah"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="
+                flex 
+                items-center 
+                gap-x-2
+                text-gray-600 
+                hover:text-header
+                transition-colors
+              "
+            >
+              <FaGithub className="w-6 h-6" />
+              <span className="font-medium">Micah</span>
+            </a>
+            
+            <a
+              href="https://github.com/ebeeyuuu"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="
+                flex 
+                items-center 
+                gap-2 
+                text-gray-600 
+                hover:text-header
+                transition-colors
+              "
+            >
+              <FaGithub className="w-6 h-6" />
+              <span className="font-medium">Ean</span>
+            </a>
+          </div>
+
+          {/* Join Button */}
+          <a 
+            href={organizationInfo.joinButtonLink}
+            className="
+              py-2 px-6 
+              bg-header
+              text-white 
+              font-medium
+              rounded-lg 
+            "
+          >
+            {organizationInfo.joinButtonText}
+          </a>
+
+          {/* Copyright Notice */}
+          <p className="text-gray-500 text-sm">
+            &copy; {currentYear} {organizationInfo.name}. All rights reserved.
+          </p>
         </div>
       </div>
-    </div>
-  );
-};
+    </footer>
+  )
+}
 
-export default Footer;
+export default Footer
