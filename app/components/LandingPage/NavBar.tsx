@@ -75,7 +75,6 @@ const NavBar = () => {
           onClick={() => setIsOpen(true)}
           className="p-3 hidden max-lg:inline bg-white rounded-lg
             border-[1px] border-black/[0.06] shadow-md ease-in-out duration-500"
-          aria-label="Open mobile menu"
         >
           <RxHamburgerMenu size={20} />
         </button>

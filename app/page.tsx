@@ -72,16 +72,16 @@ const Home = () => {
             <div className="my-[125px] max-lg:mt-28">
               <Hero />
             </div>
-            <div className="my-[250px]">
+            <div className="mt-[200px] mb-[125px]">
               <AboutUs />
             </div>
-            <div className="my-[250px]">
+            <div className="my-[100px]">
               <Tutorial />
             </div>
-            <div className="my-[250px]">
+            <div className="my-[150px]">
               <FAQ />
             </div>
-            <div className="my-[250px]">
+            <div className="mt-[250px] mb-[175px]">
               <Testimonies />
             </div>
             <Footer />

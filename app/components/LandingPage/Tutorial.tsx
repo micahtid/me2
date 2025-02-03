@@ -6,12 +6,12 @@ const Tutorial = () => {
       flex 
       justify-center 
       items-center 
-      bg-primary 
+      //bg-primary 
       relative 
       overflow-hidden
     ">
       {/* Background glow effect */}
-      <div className="
+      {/* <div className="
         absolute 
         -left-[400px] 
         top-1/2 
@@ -22,12 +22,12 @@ const Tutorial = () => {
         bg-secondary 
         rounded-full 
         blur-3xl
-      " />
+      " /> */}
 
       <div className="default-container space-y-12">
         {/* Section heading */}
         <h3 className="text-center dynamic-subheading font-semibold">
-          Still Not Convinced?
+          Still Not <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00224b] to-[#004696]">Convinced</span>?
         </h3>
 
         {/* Video container */}
