@@ -37,14 +37,12 @@ const AboutUs = () => {
     return (
         <div 
         id="about"
-        className="space-y-8">
+        className="flex flex-col gap-y-8">
             {/* Header */}
             <div className="default-container space-y-4">
                 <h3 className="max-w-[800px] dynamic-subheading font-semibold">
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00224b] to-[#004696]">
                     Find Others
-                    </span> {" "}
-                    Instantly & Start Chatting
+                    Instantly & Start Chatting📱
                 </h3>
                 <p className='dynamic-text'>
                 Let our custom algorithm match you with people who have high compatibility ratings. 
@@ -54,7 +52,7 @@ const AboutUs = () => {
             </div>
 
             {/* Category Selection */}
-            <div className="default-container flex flex-wrap gap-6">
+            <div className="default-container flex flex-wrap gap-6 mb-8">
                 {about.map((item, index) => {
                     const Icon = iconMap[item.icon as keyof typeof iconMap]
                     return (

@@ -32,8 +32,7 @@ const Testimonies = () => {
         <div className="default-container space-y-12">
             <div className="space-y-4">
                 <h3 className="dynamic-subheading font-semibold text-center">
-                  Our {" "}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00224b] to-[#004696]">Wall of Love</span>
+                  Our Wall of Love ❤️
                 </h3>
                 <p className="dynamic-text text-center">
                     Read what our user have to say about Me2.

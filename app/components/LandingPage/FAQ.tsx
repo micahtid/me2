@@ -51,10 +51,12 @@ const FAQ = () => {
                     {/* Left Column - Header Section */}
                     <div className="space-y-4">
                         <h3 className="dynamic-subheading font-semibold">
-                            Frequently Asked Questions
+                            Frequently Asked Questions☝️
                         </h3>
-                        <p className="dynamic-text">
-                            Have another question? Contact me on Twitter or by email.
+                        <p className="dynamic-text text-black/80">
+                            Have another question? Contact us by{" "}
+                            <a href="mailto:micahtid@gmail.com" className="underline"
+                            > email</a>.
                         </p>
                     </div>
 
@@ -102,7 +104,7 @@ const FAQ = () => {
                                             transition={{ duration: 0.2 }}
                                             className="overflow-hidden"
                                         >
-                                            <p className="dynamic-text pb-4 text-gray-600">
+                                            <p className="pb-4 text-black/80">
                                                 {faq.answer}
                                             </p>
                                         </motion.div>

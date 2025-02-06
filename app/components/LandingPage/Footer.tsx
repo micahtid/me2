@@ -75,7 +75,7 @@ const Footer = () => {
 
           {/* Join Button */}
           <a 
-            href={organizationInfo.joinButtonLink}
+            href="https://me2-register.vercel.app/"
             className="
               py-2 px-6 
               bg-header

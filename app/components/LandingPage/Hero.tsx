@@ -61,7 +61,7 @@ const Hero = () => {
         grid grid-cols-1 lg:grid-cols-[0.8fr,1.2fr]
         gap-y-12 lg:gap-x-12
         items-center
-        pt-[250px] pb-[225px]
+        pt-[250px] pb-[225px] max-lg:pt-[100px]
       "
     >
       {/* Hero Content */}
@@ -82,7 +82,7 @@ const Hero = () => {
             bg-clip-text bg-gradient-to-r from-[#00224b] to-[#004696]
           ">
             Chat App for Students
-          </span>
+          </span>👋
         </h3>
 
         {/* Hero description */}
@@ -96,8 +96,9 @@ const Hero = () => {
         </p>
 
         {/* CTA Button */}
-        <button
-          onClick={() => signIn()}
+        <a
+          // onClick={() => signIn()}
+          href="https://me2-register.vercel.app/"
           className="
             flex flex-row items-center justify-center gap-x-2 
             px-6 py-3 
@@ -110,7 +111,7 @@ const Hero = () => {
         >
           <PiPencilSimpleFill className="text-lg" />
           Get Started
-        </button>
+        </a>
       </div>
 
       {/* Hero Image Container */}

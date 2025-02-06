@@ -27,7 +27,7 @@ const Tutorial = () => {
       <div className="default-container space-y-12">
         {/* Section heading */}
         <h3 className="text-center dynamic-subheading font-semibold">
-          Still Not <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00224b] to-[#004696]">Convinced</span>?
+          Still Not Convinced? 📹
         </h3>
 
         {/* Video container */}
