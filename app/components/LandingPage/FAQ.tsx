@@ -40,7 +40,7 @@ const FAQ = () => {
     }
 
     return (
-        <WithBackground color="#C6E0FF" tiltDegree={-2} borderHeight={40}>
+        <WithBackground color="#DDEEFF" tiltDegree={-2} borderHeight={40}>
             <div className="default-container py-24">
                 <div className="
                     grid 

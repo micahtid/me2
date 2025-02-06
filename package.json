@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mezh-hq/react-gridlines": "^1.0.1",
     "@radix-ui/react-dialog": "^1.0.5",
     "aos": "^2.3.4",
     "date-fns": "^3.6.0",

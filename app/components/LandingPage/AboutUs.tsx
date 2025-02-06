@@ -12,24 +12,24 @@ const iconMap = {
 
 export const about = [
     {
-        title: "Students",
+        title: "Chat Platform",
         icon: "FaGraduationCap",
         points: [
-            "Match with students from your school",
-            "Find others with similar interests",
-            "Connect with people in your courses",
-        ]
+            "Match with those of similar interests and hobbies",
+            "Match with those of similar curriculum",
+            "Match with those of similar geographical location",
+        ],
     },
     {
-        title: "Community",
+        title: "Video Platform",
         icon: "FaPeopleGroup",
         points: [
-            "Join study groups",
-            "Meet new friends",
-            "Build lasting connections",
-        ]
+            "Create virtual study rooms",
+            "Filter virtual study rooms",
+            "Join virtual study rooms",
+        ],
     },
-]
+];
 
 const AboutUs = () => {
     const [activeIndex, setActiveIndex] = useState(0)
@@ -75,7 +75,7 @@ const AboutUs = () => {
             </div>
 
             {/* Content Points */}
-            <WithBackground color="#F1F1F1" tiltDegree={-2} borderHeight={40}>
+            <WithBackground color="#F9F9F9" tiltDegree={-2} borderHeight={40}>
                 <div className="py-20">
                     <div className="default-container space-y-4">
                         <AnimatePresence mode="wait">

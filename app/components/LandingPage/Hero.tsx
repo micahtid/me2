@@ -1,3 +1,4 @@
+// External dependencies
 import { signIn } from "@/app/utils/databasefunctions";
 import { PiPencilSimpleFill } from "react-icons/pi";
 
@@ -60,6 +61,7 @@ const Hero = () => {
         grid grid-cols-1 lg:grid-cols-[0.8fr,1.2fr]
         gap-y-12 lg:gap-x-12
         items-center
+        pt-[250px] pb-[225px]
       "
     >
       {/* Hero Content */}
