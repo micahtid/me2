@@ -10,6 +10,7 @@ import AboutUs from "./components/LandingPage/AboutUs";
 import FAQ from "./components/LandingPage/FAQ";
 import Testimonies from "./components/LandingPage/Testimonies";
 import Footer from "./components/LandingPage/Footer";
+import LoadIn from "./components/LandingPage/LoadIn";
 
 import OopsScreen from "./components/OopsScreen";
 
@@ -21,6 +22,8 @@ import { useData } from "@/providers/DataProvider";
 import { signIn } from "./utils/databasefunctions";
 import { checkUser } from "./utils/utilfunctions";
 import { setUserOnline } from "./utils/usersfunctions";
+
+import Lenis from "lenis";
 
 import Loader from "./components/Loader";
 import useIsTabActive from "../hooks/useActiveTab";
@@ -55,6 +58,15 @@ const Home = () => {
   }, [status, user])
   ////////////////////////////////////
 
+  useEffect(() => {
+    const lenis = new Lenis();
+    const raf = (time: any) => {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+  }, [])
+
   if (isUserLoaded === null || isUserRegistered === null) {
     return <Loader />;
   }
@@ -69,21 +81,21 @@ const Home = () => {
         ) : (
           <div className="overflow-x-hidden bg-[#FAFAFA]">
             <NavBar />
-            <div className="my-[125px] max-lg:mt-28">
+            <LoadIn className="my-[225px] max-lg:mt-28">
               <Hero />
-            </div>
-            <div className="mt-[200px] mb-[125px]">
+            </LoadIn>
+            <LoadIn className="mt-[300px] mb-[125px]">
               <AboutUs />
-            </div>
-            <div className="my-[100px]">
+            </LoadIn>
+            <LoadIn className="my-[175px]">
               <Tutorial />
-            </div>
-            <div className="my-[150px]">
+            </LoadIn>
+            <LoadIn className="my-[175px]">
               <FAQ />
-            </div>
-            <div className="mt-[250px] mb-[175px]">
+            </LoadIn>
+            <LoadIn className="mt-[250px] mb-[175px]">
               <Testimonies />
-            </div>
+            </LoadIn>
             <Footer />
           </div>
         )}

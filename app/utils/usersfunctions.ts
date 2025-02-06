@@ -157,7 +157,6 @@ export const editUser = async (uid: string, userName: string, age: number, curr:
   }
 };
 
-
 export const setUserOnline = async (uid: string, status: boolean) => {
   const app = initializeFirebase
   const auth = getUserAuth(true);
