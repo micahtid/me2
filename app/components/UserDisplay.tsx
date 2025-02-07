@@ -57,7 +57,7 @@ const UserDisplay = () => {
 
   return (
     <div className="flex flex-col justify-start items-start gap-y-3 min-w-[350px] h-full overflow-y-auto no-scrollbar max-lg:pb-6">
-      <h3 className="text-2xl mb-6 ml-8 font-semibold">Chats</h3>
+      <h3 className="text-2xl mb-6 ml-8 font-semibold tracking-tight">Chats</h3>
       {activeUsers?.map((u) => {
         if (!user) return null;
 
@@ -74,8 +74,11 @@ const UserDisplay = () => {
         return (
           <div
             key={u.uid}
-            className={`flex flex-row justify-between items-center gap-x-2 w-full user-card 
-              ${currentUser === u && currentPage === "chat" ? "bg-accent" : ""}`}
+            className={`
+              flex flex-row justify-between items-center gap-x-2 w-full user-card 
+              transition-all duration-200 hover:bg-black/5
+              ${currentUser === u && currentPage === "chat" ? "bg-accent shadow-sm" : ""}
+            `}
           >
             <UserCard
               onClick={() => {
@@ -87,18 +90,18 @@ const UserDisplay = () => {
               activeStatus
               activeStatusClassName={currentUser === u && currentPage === "chat" ? "border-accent" : "border-[#F4F6FB]"}
               className={u.uid === user.uid ? "hidden" : ""}
-              statusClassName="bg-white text-gray-700 px-6 py-1 rounded-xl -ml-1 mt-1"
+              statusClassName="bg-white/80 backdrop-blur-sm text-gray-700 px-6 py-1.5 rounded-xl -ml-1 mt-1 shadow-sm"
               status={hoursLeft}
               user={u}
             />
             <button
-              className="mr-2"
+              className="mr-2 p-2 rounded-full hover:bg-black/5 transition-colors duration-200"
               onClick={() => {
                 setDeleteData({ uid1: user.uid, uid2: u.uid, userName: u.userName });
                 onModalOpen();
               }}
             >
-              <IoIosClose size={30} />
+              <IoIosClose size={30} className="text-black/60 hover:text-black transition-colors duration-200" />
             </button>
           </div>
         );

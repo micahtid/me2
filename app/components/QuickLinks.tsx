@@ -61,13 +61,14 @@ const QuickLinks: React.FC = () => {
                     className="
                         mb-10 max-lg:mb-0 max-lg:mr-6
                         flex justify-center items-center
+                        hover:scale-105 transition-transform duration-200
                     "
                 >
                     <img 
                         src={user?.photoURL || ""} 
                         alt="profile-picture" 
                         width={50} 
-                        className="rounded-full max-lg:w-[50px] max-lg:h-[50px]" 
+                        className="rounded-full max-lg:w-[50px] max-lg:h-[50px] shadow-md ring-2 ring-black/5" 
                     />
                 </button>
                 {links.map((link, index) => (
@@ -77,10 +78,17 @@ const QuickLinks: React.FC = () => {
                         className={`
                             flex justify-center items-center gap-x-4 px-4 py-3 w-full
                             max-lg:gap-x-2 max-lg:px-6 max-lg:py-4
-                            ${currentPage === link.value && "bg-black/20 border-l-2 border-black max-lg:border-l-0 max-lg:border-b-2"}
+                            transition-all duration-200 hover:bg-black/10
+                            ${currentPage === link.value ? 
+                                "bg-black/10 border-l-2 border-black max-lg:border-l-0 max-lg:border-b-2 shadow-sm" : 
+                                "max-lg:hover:translate-x-0 max-lg:hover:translate-y-1"}
                         `}
                     >
-                        <div className="p-2 rounded-lg text-black/80">
+                        <div className={`
+                            p-2 rounded-lg
+                            ${currentPage === link.value ? 'text-black' : 'text-black/60'}
+                            transition-colors duration-200
+                        `}>
                             {link.icon}
                         </div>
                     </button>
@@ -90,10 +98,11 @@ const QuickLinks: React.FC = () => {
                 onClick={signOut}
                 className="
                     flex justify-center items-center w-full px-4 gap-x-4
-                    max-lg:justify-start
+                    max-lg:justify-start hover:text-red-500
+                    transition-colors duration-200
                 "
             >
-                <div className="text-black/80">
+                <div className="text-black/80 hover:scale-105 transition-transform duration-200">
                     <PiSignOutBold size={32} />
                 </div>
             </button>

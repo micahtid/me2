@@ -111,22 +111,22 @@ const RoomsDisplay = () => {
       {sortedRooms?.map((room, index) => (
         <div
           key={index}
-          className={`w-full flex flex-col gap-y-6 ${
-            (room.roomId === user?.uid || room.users.includes(user?.uid)) && "bg-primary/30"
+          className={`w-full flex flex-col gap-y-6 rounded-lg shadow-sm ${
+            (room.roomId === user?.uid || room.users.includes(user?.uid)) ? "bg-primary/30" : "bg-gray-200/[25%]"
           }`}
         >
-
           <div className="flex justify-between w-full items-start gap-x-4 pl-8 pr-16 pt-6">
-            <div>
-              <h3 className="text-xl font-semibold">{room.description}</h3>
-              <p className="text-gray-400 mb-2">Created {getHoursAgo(room.createdAt)} hours ago</p>
+            <div className="flex-grow">
+              <div className="flex flex-row items-center gap-x-3 mb-2">
+                <h3 className="text-xl font-semibold">{room.description}</h3>
+                <p className="text-gray-400 text-sm">Created {getHoursAgo(room.createdAt)} hours ago</p>
+              </div>
               <div className="text-gray-600">
                 <RoomUserList display={`${room.users.length}/${room.limit} Users`} users={users} roomUserIds={room.users} />
               </div>
             </div>
 
-            <div className="flex justify-center items-center gap-x-2">
-
+            <div className="flex justify-center items-center gap-x-2 ml-auto">
               {room.roomId === user?.uid && (
                 <a target="_blank" href={room.startUrl} className={twMerge(iconStyles, 'relative group')}>
                   <ToolTip message="Start Room" className="opacity-0 group-hover:opacity-100" />
@@ -159,7 +159,7 @@ const RoomsDisplay = () => {
             </div>
           </div>
 
-          <div className="flex flex-row justify-start items-center gap-x-2 bg-secondary px-8 py-2">
+          <div className="flex flex-row justify-start items-center gap-x-2 bg-secondary px-8 py-2 rounded-b-lg">
             {room.tags.map((tag: string, index: number) => (
               <div key={index} className="font-medium bg-white/50 px-2 py-1 rounded-lg">
                 {roomTags.find((roomTag) => roomTag.value === tag)?.label || tag}

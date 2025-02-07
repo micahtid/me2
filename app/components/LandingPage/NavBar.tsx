@@ -58,15 +58,15 @@ const NavBar = () => {
           ))}
 
           {/* Login Button */}
-          <a
-            // onClick={signIn}
-            href="https://me2-register.vercel.app/"
+          <button
+            onClick={signIn}
+            // href="https://me2-register.vercel.app/"
             className="flex justify-center items-center gap-x-3 px-6 py-2
               bg-header rounded-xl font-medium text-white shadow-sm"
           >
             <FaUser />
             Log In
-          </a>
+          </button>
         </div>
       </div>
 

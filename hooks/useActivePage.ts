@@ -6,6 +6,6 @@ interface activePage {
 }
 
 export const useActivePage= create<activePage>((set) => ({
-  currentPage: "",
+  currentPage: "global",
   onChange: (newPage: string) => set({ currentPage: newPage }),
 }));
