@@ -9,8 +9,7 @@ interface OopsScreenProps {
 const OopsScreen: React.FC<OopsScreenProps> = ({ message, infoClassName, divClassName }) => (
   <div className={twMerge(`
     flex justify-center items-center 
-    w-full h-full
-  `, divClassName)}>
+    w-full h-full`, divClassName)}>
     <div className={twMerge(`
       flex flex-col items-center
       w-full max-w-[450px] -mt-20
