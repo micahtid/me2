@@ -9,10 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mezh-hq/react-gridlines": "^1.0.1",
     "@radix-ui/react-dialog": "^1.0.5",
     "aos": "^2.3.4",
     "date-fns": "^3.6.0",
     "firebase": "^10.12.1",
+    "framer-motion": "^12.0.6",
+    "lenis": "^1.1.20",
     "next": "^14.2.14",
     "react": "^18",
     "react-dom": "^18",

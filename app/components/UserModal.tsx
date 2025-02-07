@@ -34,12 +34,16 @@ const UserModal = () => {
   return (
     <Modal isOpen={isModalOpen} onChange={onChange}>
       <div className="flex flex-col w-full justify-start gap-y-2">
-        <div className="flex flex-row items-center justify-start gap-x-5
-        w-full mb-4">
-          <img src={currentUser?.pfp} width={40} className="rounded-full" alt="" />
+        <div className="flex flex-row items-center justify-start gap-x-5 w-full mb-4">
+          <img 
+            src={currentUser?.pfp} 
+            width={40} 
+            className="rounded-full shadow-md ring-2 ring-black/5" 
+            alt="" 
+          />
           <div className="flex flex-col justify-center items-start">
-            <h3 className="text-2xl">{currentUser?.userName}</h3>
-            <p className="text-sm text-gray-500">
+            <h3 className="text-2xl font-semibold">{currentUser?.userName}</h3>
+            <p className={`text-sm ${currentUser?.online ? 'text-green-500 font-medium' : 'text-gray-500'}`}>
               {currentUser?.online ? 
               `Online` 
               : `Active ${formatDistanceToNow(convertTimestampToDate(currentUser?.lastOnline), { addSuffix: true })}`}
@@ -48,33 +52,41 @@ const UserModal = () => {
         </div>
         <div className="flex flex-row gap-x-2">
           <div className="flex flex-row gap-x-2 justify-start items-center
-          flex-grow border-2 border-primary px-2 py-1 rounded-lg">
-            <FaClock />
-            <p className="">Age {currentUser?.age}</p>
+          flex-grow bg-gray-50 hover:bg-gray-100 transition-colors duration-200 px-2 py-1 rounded-lg shadow-sm">
+            <FaClock className="text-gray-600" />
+            <p className="font-medium">Age {currentUser?.age}</p>
           </div>
           <div className="flex flex-row gap-x-2 justify-start items-center
-          flex-grow border-2 border-primary px-2 py-1 rounded-lg">
-            <FaLocationDot />
-            <p className="">Location: {locationLabel}</p>
+          flex-grow bg-gray-50 hover:bg-gray-100 transition-colors duration-200 px-2 py-1 rounded-lg shadow-sm">
+            <FaLocationDot className="text-gray-600" />
+            <p className="font-medium">Location: {locationLabel}</p>
           </div>
         </div>
         <div className="flex flex-row gap-x-2 justify-start items-center
-        bg-primary px-2 py-2 rounded-lg">
-          <FaSchoolFlag />
-          <p className="text-nowrap overflow-hidden">Curriculum: {curriculumLabel}</p>
+        bg-primary/20 hover:bg-primary/30 transition-colors duration-200 px-2 py-2 rounded-lg shadow-sm">
+          <FaSchoolFlag className="text-gray-600" />
+          <p className="text-nowrap overflow-hidden font-medium">Curriculum: {curriculumLabel}</p>
         </div>
-        <div className="flex flex-col
-        bg-primary px-2 py-2 rounded-lg">
+        <div className="flex flex-col bg-primary/20 hover:bg-primary/30 transition-colors duration-200 px-2 py-2 rounded-lg shadow-sm">
           <div className="flex flex-row gap-x-2 justify-start items-center">
-            <FaRegSmile />
-            <p className="">Hobbies: </p>
+            <FaRegSmile className="text-gray-600" />
+            <p className="font-medium">Hobbies: </p>
           </div>
-          <div className="flex flex-row gap-x-2 flex-wrap">
-            {hobbiesLabels.map((hobby: string, index: number) => (
-              <p key={index} className="text-right">
-                {hobby};
-              </p>
+          <div className="flex flex-row gap-1 flex-wrap mt-1">
+            {hobbiesLabels.slice(0, 10).map((hobby: string, index: number) => (
+              <span 
+                key={index} 
+                className="bg-black/[5%] px-2 py-0.5 rounded-md text-sm font-medium"
+              >
+                {hobby}
+                {index < hobbiesLabels.length - 1 && index < 9 ? "," : ""}
+              </span>
             ))}
+            {hobbiesLabels.length > 10 && 
+              <span className="text-sm text-gray-500">
+                +{hobbiesLabels.length - 10} more
+              </span>
+            }
           </div>
         </div>
       </div>

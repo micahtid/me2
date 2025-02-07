@@ -2,7 +2,6 @@ import { setDoc, addDoc, query, where, serverTimestamp, doc, DocumentData, onSna
 import { initializeFirebase, getUserAuth, getFireStore } from "./databasefunctions";
 import { addUserToUserChats } from "./usersfunctions";
 
-
 export const createRequest = async (chatid: string, uid1: string, uid2: string) => {
     const app = initializeFirebase;
     const firestore = getFireStore(true);

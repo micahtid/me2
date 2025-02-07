@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Me2",
-  description: "The chat app for students by students. Through an algorithm based sorting, users are matched with others with similar interests they can chat with.",
+  description: "The chat app for students by students. Through algorithm based sorting, users are matched with others with similar interests they can chat with.",
 };
 
 export default function RootLayout({

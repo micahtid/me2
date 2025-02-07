@@ -60,7 +60,7 @@ export const addUser = async (userName: string, age: number,
         discord,
         snap,
         lastOnline: serverTimestamp(),
-        online : false
+        online : true
       });
     } catch (error) {
       console.error("Error adding document: ", error);
@@ -156,7 +156,6 @@ export const editUser = async (uid: string, userName: string, age: number, curr:
     console.error(`No user found with UID ${uid}.`);
   }
 };
-
 
 export const setUserOnline = async (uid: string, status: boolean) => {
   const app = initializeFirebase
