@@ -92,20 +92,20 @@ const Home = () => {
   }, [isTabActive, user]);
 
   // Initialize smooth scrolling!
-  useEffect(() => {
-    const lenis = new Lenis();
+  // useEffect(() => {
+  //   const lenis = new Lenis();
     
-    const animate = (time: number) => {
-      lenis.raf(time);
-      requestAnimationFrame(animate);
-    };
+  //   const animate = (time: number) => {
+  //     lenis.raf(time);
+  //     requestAnimationFrame(animate);
+  //   };
 
-    requestAnimationFrame(animate);
+  //   requestAnimationFrame(animate);
     
-    return () => {
-      lenis.destroy();
-    };
-  }, []);
+  //   return () => {
+  //     lenis.destroy();
+  //   };
+  // }, []);
 
   // Show Loader while checking UserStatus
   if (isUserLoaded === null || isUserRegistered === null) {
