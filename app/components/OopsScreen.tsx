@@ -7,11 +7,22 @@ interface OopsScreenProps {
 }
 
 const OopsScreen: React.FC<OopsScreenProps> = ({ message, infoClassName, divClassName }) => (
-  <div className={twMerge(`flex justify-center items-center w-full h-full`, divClassName)}>
-    <div className={twMerge(`w-[300px] -mt-20
-    max-lg:my-10 max-lg:w-[20%]`, infoClassName)}>
-      <img src="/reading-side.svg" alt="Quiet here" className="w-full h-auto" />
-      <h3 className="text-center dynamic-text">
+  <div className={twMerge(`
+    flex justify-center items-center 
+    w-full h-full`, divClassName)}>
+    <div className={twMerge(`
+      flex flex-col items-center
+      w-full max-w-[450px] -mt-20
+      px-4
+    `, infoClassName)}>
+      <div className="w-full max-w-[300px]">
+        <img 
+          src="/reading-side.svg" 
+          alt="Quiet here" 
+          className="w-full h-auto mb-6" 
+        />
+      </div>
+      <h3 className="text-center text-xl font-medium text-gray-700">
         {message}
       </h3>
     </div>
