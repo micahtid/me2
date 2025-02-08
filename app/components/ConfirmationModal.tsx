@@ -2,16 +2,13 @@
 
 import { useConfirmationModal } from "@/hooks/useConfirmationModal";
 import Modal from "./Modal";
-
+import { IoWarningOutline } from "react-icons/io5";
 import { deleteChat } from "../utils/chatfunctions";
 import { removeUserFromUserChats } from "../utils/usersfunctions";
 
 const ConfirmationModal = () => {
-    const { isModalOpen, onModalClose, onModalOpen, deleteData } = useConfirmationModal();
-
-    const uid1 = deleteData?.uid1;
-    const uid2 = deleteData?.uid2;
-    const userName = deleteData?.userName;
+    const { isModalOpen, onModalClose, deleteData } = useConfirmationModal();
+    const { uid1, uid2, userName } = deleteData || {};
 
     const onChange = (open: boolean) => {
         if (!open) {
@@ -19,32 +16,70 @@ const ConfirmationModal = () => {
         }
     }
 
-  return (
-    <Modal title="Confirmation" isOpen={isModalOpen} onChange={onChange}>
-        <div className="flex flex-col justify-start items-center gap-y-4">
-            <p className="text-left">Are you sure you want to close your chat with 
-                <span className="font-semibold"> {userName}</span>?</p>
-            <div className="flex justify-row w-full gap-x-2">
-                <button className="px-4 py-1 bg-accent
-                rounded-lg" onClick={() => {
-                    if (uid1 && uid2) {
-                        const chatid =
-                        uid1 > uid2 ? uid1 + uid2 : uid2 + uid1;
+    const handleDelete = () => {
+        if (uid1 && uid2) {
+            const chatid = uid1 > uid2 ? uid1 + uid2 : uid2 + uid1;
+            deleteChat(chatid);
+            removeUserFromUserChats(uid1, uid2);
+            removeUserFromUserChats(uid2, uid1);
+            onModalClose();
+        }
+    }
 
-                        deleteChat(chatid);
-                        removeUserFromUserChats(uid1, uid2);
-                        removeUserFromUserChats(uid2, uid1);
-                        onModalClose();
-                    }
-                }}>Yes</button>
-                <button className="px-4 py-1 bg-secondary
-                rounded-lg" onClick={() => {
-                    onModalClose();
-                }}>No</button>
+    return (
+        <Modal 
+            title="Close Chat" 
+            isOpen={isModalOpen} 
+            onChange={onChange}
+        >
+            <div className="flex flex-col items-center gap-y-6 px-2">
+                {/* Warning Icon */}
+                <div className="
+                    w-16 h-16 
+                    flex items-center justify-center 
+                    bg-red-50 rounded-full
+                ">
+                    <IoWarningOutline className="w-8 h-8 text-red-500" />
+                </div>
+
+                {/* Message */}
+                <p className="text-gray-500 text-center">
+                    Are you sure you want to close your chat with
+                    <span className="font-medium text-gray-900"> {userName}</span>?
+                </p>
+
+                {/* Buttons */}
+                <div className="flex gap-x-3 w-full">
+                    <button 
+                        onClick={onModalClose}
+                        className="
+                            flex-1 px-4 py-2.5
+                            border border-gray-300
+                            text-gray-700 font-medium
+                            rounded-lg
+                            hover:bg-gray-50
+                            transition-colors duration-200
+                        "
+                    >
+                        Cancel
+                    </button>
+                    <button 
+                        onClick={handleDelete}
+                        className="
+                            flex-1 px-4 py-2.5
+                            bg-red-500 
+                            text-white font-medium
+                            rounded-lg
+                            hover:bg-red-600
+                            transition-colors duration-200
+                        "
+                    >
+                        Close Chat
+                    </button>
+                </div>
             </div>
-        </div>
-    </Modal>
-  )
+        </Modal>
+    );
 }
 
 export default ConfirmationModal;

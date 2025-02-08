@@ -1,19 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
-
 import { ClipLoader } from "react-spinners";
 import Select from "react-select";
+import { IoVideocamOutline } from "react-icons/io5";
 import { selectStyles } from "@/app/data";
-
 import { addRoom, editRoom } from "@/app/utils/roomfunctions";
-
 import { useData } from "@/providers/DataProvider";
 import { roomTags } from "@/app/data";
-
 import { useRoomModal } from "@/hooks/useRoomModal";
 import Modal from "../Modal";
-
 
 const createZoomLink = async () => {
   try {
@@ -55,7 +51,6 @@ const RoomModal = () => {
   const [roomDescription, setRoomDescription] = useState("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [userLimit, setUserLimit] = useState("");
-
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -78,8 +73,8 @@ const RoomModal = () => {
   
       try {
         const zoomLinks = await createZoomLink();
-        const zoomStartUrl = zoomLinks.start_url;           // Fixed error: use local variables instead of useStates 
-        const zoomJoinUrl = zoomLinks.join_url;             // for both the startUrl and joinUrl
+        const zoomStartUrl = zoomLinks.start_url;
+        const zoomJoinUrl = zoomLinks.join_url;
   
         if (isNewRoom && zoomStartUrl && zoomJoinUrl) {
           await addRoom(user?.uid, parsedUserLimit, roomDescription, selectedTags, zoomStartUrl, zoomJoinUrl);
@@ -93,69 +88,105 @@ const RoomModal = () => {
         setIsLoading(false);
         onModalClose();
       }
-    } else {
-      setIsLoading(false);                // Stop loading if an error occured (!)
     }
   };
   
   return (
-    <Modal title="Manage Room" isOpen={isModalOpen} onChange={onChange}>
-      <div className="flex flex-col justify-center items-center gap-y-2">
-        <input
-          type="text"
-          placeholder="Room Description..."
-          value={roomDescription}
-          onChange={(e) => setRoomDescription(e.target.value)}
-          className="input-field"
-        />
-        <Select
-          className="w-full"
-          options={roomTags}
-          isMulti
-          placeholder="Relevant Tags..."
-          value={roomTags.filter((tag) => selectedTags.includes(tag.value))}
-          onChange={(tags) => {
-            if (tags) {
-              const addedTags = tags.map((tag) => tag.value);
-              setSelectedTags(addedTags);
-            } else {
-              setSelectedTags([]);
-            }
-          }}
-          styles={selectStyles}
-        />
-        <input
-          type="number"
-          placeholder="User Limit... (Max 15)"
-          value={userLimit}
-          onChange={(e) => {
-            const value = Math.min(Number(e.target.value), 15);
-            setUserLimit(value.toString());
-          }}
-          className="input-field"
-          max={15} 
-          min={0}
-        />
-        <div className="w-full flex justify-start items-center gap-x-4 mt-8">
-          <button
-            className={`bg-primary px-4 py-2 rounded-lg w-[150px]
-              relative flex justify-center items-center
-              ${isLoading && "bg-gray-800/30"}`}
-            onClick={handleSubmit}
-          >
-            {isLoading ? (
-              <>
-                <ClipLoader size={12} className="mr-2" />
-                <p className="text-center">Loading</p>
-              </>
-            ) : (
-              <p className="text-center">Confirm</p>
-            )}
-          </button>
-          <button onClick={onModalClose} className="bg-gray-300 px-4 py-2 rounded-lg w-[150px]">
-            Cancel
-          </button>
+    <Modal 
+      title={isNewRoom ? "Create Study Room" : "Edit Study Room"} 
+      isOpen={isModalOpen} 
+      onChange={onChange}
+    >
+      <div className="flex flex-col gap-y-6">
+        {/* Icon */}
+        <div className="flex justify-center">
+          <div className="
+            w-16 h-16 
+            flex items-center justify-center 
+            bg-primary/30 rounded-full
+          ">
+            <IoVideocamOutline className="w-8 h-8 text-secondary" />
+          </div>
         </div>
+
+        {/* Form Fields */}
+        <div className="space-y-4">
+          {/* Description */}
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-gray-700">
+              Room Description
+            </label>
+            <textarea
+              value={roomDescription}
+              onChange={(e) => setRoomDescription(e.target.value)}
+              placeholder="What will you be studying?"
+              className="
+                w-full px-3 py-2
+                border border-gray-300 
+                outline-none
+                rounded-xl
+                min-h-[100px]
+                resize-none
+              "
+            />
+          </div>
+
+          {/* Tags */}
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-gray-700">
+              Study Tags
+            </label>
+            <Select
+              isMulti
+              options={roomTags}
+              value={roomTags.filter(tag => selectedTags.includes(tag.value))}
+              onChange={(tags) => setSelectedTags(tags.map(tag => tag.value))}
+              styles={selectStyles}
+              placeholder="Select study tags..."
+            />
+          </div>
+
+          {/* User Limit */}
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-gray-700">
+              User Limit
+            </label>
+            <input
+              type="number"
+              value={userLimit}
+              onChange={(e) => setUserLimit(e.target.value)}
+              placeholder="How many students?"
+              min="1"
+              className="
+                w-full px-3 py-2
+                rounded-xl
+                border border-gray-300 
+                outline-none
+              "
+            />
+          </div>
+        </div>
+
+        {/* Submit Button */}
+        <button
+          onClick={handleSubmit}
+          disabled={isLoading}
+          className="
+            w-full px-4 py-2.5
+            bg-secondary text-white font-medium
+            rounded-lg
+            hover:bg-primary/90
+            transition-colors duration-200
+            disabled:opacity-50 disabled:cursor-not-allowed
+            flex items-center justify-center
+          "
+        >
+          {isLoading ? (
+            <ClipLoader size={20} color="#FFFFFF" />
+          ) : (
+            isNewRoom ? "Create Room" : "Save Changes"
+          )}
+        </button>
       </div>
     </Modal>
   );

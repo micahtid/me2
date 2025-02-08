@@ -3,10 +3,8 @@
 import { useUserModal } from "@/hooks/useUserModal";
 import Modal from "./Modal";
 import { hobbies, curriculums, locations } from "../data";
-
-import { FaClock, FaLocationDot, FaSchoolFlag  } from "react-icons/fa6";
+import { FaClock, FaLocationDot, FaSchoolFlag } from "react-icons/fa6";
 import { FaRegSmile } from "react-icons/fa";
-
 import { formatDistanceToNow } from 'date-fns';
 import { convertTimestampToDate } from "../utils/utilfunctions";
 
@@ -33,60 +31,116 @@ const UserModal = () => {
 
   return (
     <Modal isOpen={isModalOpen} onChange={onChange}>
-      <div className="flex flex-col w-full justify-start gap-y-2">
-        <div className="flex flex-row items-center justify-start gap-x-5 w-full mb-4">
+      <div className="flex flex-col w-full gap-y-2">
+        {/* Profile Header */}
+        <div className="flex items-center gap-x-4 mb-4">
           <img 
             src={currentUser?.pfp} 
-            width={40} 
-            className="rounded-full shadow-md ring-2 ring-black/5" 
-            alt="" 
+            width={56} 
+            height={56}
+            className="
+              rounded-full shadow-md 
+              ring-2 ring-black/5
+              object-cover
+            " 
+            alt="Profile" 
           />
-          <div className="flex flex-col justify-center items-start">
-            <h3 className="text-2xl font-semibold">{currentUser?.userName}</h3>
-            <p className={`text-sm ${currentUser?.online ? 'text-green-500 font-medium' : 'text-gray-500'}`}>
-              {currentUser?.online ? 
-              `Online` 
-              : `Active ${formatDistanceToNow(convertTimestampToDate(currentUser?.lastOnline), { addSuffix: true })}`}
+          <div className="flex-1">
+            <h3 className="text-xl font-semibold text-gray-900">
+              {currentUser?.userName}
+            </h3>
+            <p className={`
+              text-sm mt-0.5
+              ${currentUser?.online 
+                ? 'text-green-500 font-medium' 
+                : 'text-gray-500'
+              }`}
+            >
+              {currentUser?.online 
+                ? 'Online' 
+                : `Active ${formatDistanceToNow(
+                    convertTimestampToDate(currentUser?.lastOnline), 
+                    { addSuffix: true }
+                  )}`
+              }
             </p>
           </div>
         </div>
-        <div className="flex flex-row gap-x-2">
-          <div className="flex flex-row gap-x-2 justify-start items-center
-          flex-grow bg-gray-50 hover:bg-gray-100 transition-colors duration-200 px-2 py-1 rounded-lg shadow-sm">
-            <FaClock className="text-gray-600" />
-            <p className="font-medium">Age {currentUser?.age}</p>
+
+        {/* Info Cards */}
+        <div className="grid grid-cols-2 gap-2">
+          <div className="
+            flex items-center gap-x-2 p-3
+            bg-gray-100 rounded-xl
+            transition-colors duration-200
+            hover:bg-gray-100
+          ">
+            <FaClock className="text-gray-600 flex-shrink-0" />
+            <p className="font-medium text-gray-700 truncate">
+              Age {currentUser?.age}
+            </p>
           </div>
-          <div className="flex flex-row gap-x-2 justify-start items-center
-          flex-grow bg-gray-50 hover:bg-gray-100 transition-colors duration-200 px-2 py-1 rounded-lg shadow-sm">
-            <FaLocationDot className="text-gray-600" />
-            <p className="font-medium">Location: {locationLabel}</p>
+
+          <div className="
+            flex items-center gap-x-2 p-3
+            bg-gray-100 rounded-xl
+            transition-colors duration-200
+            hover:bg-gray-100
+          ">
+            <FaLocationDot className="text-gray-600 flex-shrink-0" />
+            <p className="font-medium text-gray-700 truncate">
+              {locationLabel}
+            </p>
           </div>
         </div>
-        <div className="flex flex-row gap-x-2 justify-start items-center
-        bg-primary/20 hover:bg-primary/30 transition-colors duration-200 px-2 py-2 rounded-lg shadow-sm">
-          <FaSchoolFlag className="text-gray-600" />
-          <p className="text-nowrap overflow-hidden font-medium">Curriculum: {curriculumLabel}</p>
+
+        {/* Curriculum Section */}
+        <div className="
+          flex items-center gap-x-2 p-3
+          bg-primary/50 rounded-xl
+          transition-colors duration-200
+          hover:bg-primary/30
+        ">
+          <FaSchoolFlag className="text-gray-600 flex-shrink-0" />
+          <p className="font-medium text-gray-700 truncate">
+            {curriculumLabel}
+          </p>
         </div>
-        <div className="flex flex-col bg-primary/20 hover:bg-primary/30 transition-colors duration-200 px-2 py-2 rounded-lg shadow-sm">
-          <div className="flex flex-row gap-x-2 justify-start items-center">
-            <FaRegSmile className="text-gray-600" />
-            <p className="font-medium">Hobbies: </p>
+
+        {/* Hobbies Section */}
+        <div className="
+          p-3 space-y-2
+          bg-primary/50 rounded-xl
+          transition-colors duration-200
+          hover:bg-primary/30
+        ">
+          <div className="flex items-center gap-x-2">
+            <FaRegSmile className="text-gray-600 flex-shrink-0" />
+            <p className="font-medium text-gray-700">Hobbies</p>
           </div>
-          <div className="flex flex-row gap-1 flex-wrap mt-1">
+          
+          <div className="flex flex-wrap gap-1.5">
             {hobbiesLabels.slice(0, 10).map((hobby: string, index: number) => (
               <span 
                 key={index} 
-                className="bg-black/[5%] px-2 py-0.5 rounded-md text-sm font-medium"
+                className="
+                  px-2.5 py-1
+                  bg-black/[7%] rounded-lg
+                  text-sm font-medium text-gray-700
+                "
               >
                 {hobby}
                 {index < hobbiesLabels.length - 1 && index < 9 ? "," : ""}
               </span>
             ))}
-            {hobbiesLabels.length > 10 && 
-              <span className="text-sm text-gray-500">
+            {hobbiesLabels.length > 10 && (
+              <span className="
+                text-sm text-gray-500
+                px-2 py-1
+              ">
                 +{hobbiesLabels.length - 10} more
               </span>
-            }
+            )}
           </div>
         </div>
       </div>
@@ -95,26 +149,3 @@ const UserModal = () => {
 };
 
 export default UserModal;
-
-{/* <div className="grid grid-cols-2 items-center px-4">
-<p>Age ⏳</p>
-<p className="text-right">{currentUser?.age}</p>
-</div>
-<div className="grid grid-cols-2 items-start px-4">
-<p>Curriculum 📓</p>
-<p className="text-right">{curriculumLabel}</p>
-</div>
-<div className="grid grid-cols-2 items-start px-4">
-<p>Location 📍</p>
-<p className="text-right">{locationLabel}</p>
-</div>
-<div className="grid grid-cols-2 items-start px-4">
-<p>Hobbies 🎨</p>
-<div className="flex flex-col items-end">
-  {hobbiesLabels.map((hobby: string, index: number) => (
-    <p key={index} className="text-right">
-      {hobby}
-    </p>
-  ))}
-</div>
-</div> */}
