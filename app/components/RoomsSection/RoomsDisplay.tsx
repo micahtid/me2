@@ -53,11 +53,11 @@ const RoomButton: React.FC<RoomButtonProps> = ({ room, user, disabled }) => {
 
   const renderIcon = () => {
     if (room.roomId === user?.uid) {
-      return <MdDelete />;
+      return <MdDelete size={20} />;
     } else if (room.users.includes(user?.uid)) {
-      return <IoExit />;
+      return <IoExit size={20} />;
     } else {
-      return <IoEnter />;
+      return <IoEnter size={20} />;
     }
   };
 
@@ -74,7 +74,12 @@ const RoomButton: React.FC<RoomButtonProps> = ({ room, user, disabled }) => {
   return (
     <button 
     onClick={handleButtonClick} 
-    className={twMerge(iconStyles, 'relative group')} 
+    className={twMerge(
+      'p-2.5 bg-black/80 hover:bg-black rounded-xl text-white transition-colors duration-200',
+      'relative group mr-6',
+      'flex items-center justify-center',
+      disabled && 'opacity-50 cursor-not-allowed hover:bg-black/80'
+    )} 
     disabled={disabled}>
       <ToolTip message={getToolTipMessage()} className="opacity-0 group-hover:opacity-100" />
       {renderIcon()}
@@ -111,39 +116,71 @@ const RoomsDisplay = () => {
       {sortedRooms?.map((room, index) => (
         <div
           key={index}
-          className={`w-full flex flex-col gap-y-6 rounded-lg shadow-sm ${
-            (room.roomId === user?.uid || room.users.includes(user?.uid)) ? "bg-primary/30" : "bg-gray-200/[25%]"
-          }`}
+          className={`
+            w-full flex flex-col gap-y-4
+            rounded-xl shadow-sm
+            ${room.roomId === user?.uid || room.users.includes(user?.uid) 
+              ? "bg-primary/50" 
+              : "bg-gray-100"
+            }
+          `}
         >
-          <div className="flex justify-between w-full items-start gap-x-4 pl-8 pr-16 pt-6">
+          <div className="flex justify-between w-full items-start gap-x-4 px-8 pt-6">
             <div className="flex-grow">
-              <div className="flex flex-row items-center gap-x-3 mb-2">
-                <h3 className="text-xl font-semibold">{room.description}</h3>
-                <p className="text-gray-400 text-sm">Created {getHoursAgo(room.createdAt)} hours ago</p>
+              <div className="flex flex-row items-center gap-x-3 mb-3">
+                <h3 className="text-lg font-semibold text-gray-900">{room.description}</h3>
+                <span className="
+                  px-2 py-1 
+                  bg-black/[7%] rounded-lg 
+                  text-sm font-medium text-gray-600
+                ">
+                  {getHoursAgo(room.createdAt)}h ago
+                </span>
               </div>
               <div className="text-gray-600">
-                <RoomUserList display={`${room.users.length}/${room.limit} Users`} users={users} roomUserIds={room.users} />
+                <RoomUserList 
+                  display={`${room.users.length}/${room.limit} Users`} 
+                  users={users} 
+                  roomUserIds={room.users} 
+                />
               </div>
             </div>
 
-            <div className="flex justify-center items-center gap-x-2 ml-auto">
+            <div className="flex justify-center items-center gap-x-2 ml-auto mr-6">
               {room.roomId === user?.uid && (
-                <a target="_blank" href={room.startUrl} className={twMerge(iconStyles, 'relative group')}>
+                <a 
+                  target="_blank" 
+                  href={room.startUrl} 
+                  className={twMerge(
+                    'p-2.5 bg-black/80 hover:bg-black rounded-xl text-white transition-colors duration-200',
+                    'relative group flex items-center justify-center'
+                  )}
+                >
                   <ToolTip message="Start Room" className="opacity-0 group-hover:opacity-100" />
-                  <MdStart />
+                  <MdStart size={20} />
                 </a>
               )}
 
               {room.users.includes(user?.uid) && room.roomId !== user?.uid && (
-                <a target="_blank" href={room.joinUrl} className={twMerge(iconStyles, 'relative group')}>
+                <a 
+                  target="_blank" 
+                  href={room.joinUrl} 
+                  className={twMerge(
+                    'p-2.5 bg-black/80 hover:bg-black rounded-xl text-white transition-colors duration-200',
+                    'relative group flex items-center justify-center'
+                  )}
+                >
                   <ToolTip message="Join Room" className="opacity-0 group-hover:opacity-100" />
-                  <FaLink />
+                  <FaLink size={20} />
                 </a>
               )}
 
               {room.roomId === user?.uid && (
                 <button
-                  className={twMerge(iconStyles, 'relative group')}
+                  className={twMerge(
+                    'p-2.5 bg-black/80 hover:bg-black rounded-xl text-white transition-colors duration-200',
+                    'relative group flex items-center justify-center'
+                  )}
                   onClick={() => {
                     setActiveRoom(room);
                     setIsNewRoom(false);
@@ -151,7 +188,7 @@ const RoomsDisplay = () => {
                   }}
                 >
                   <ToolTip message="Edit Room" className="opacity-0 group-hover:opacity-100" />
-                  <MdModeEdit />
+                  <MdModeEdit size={20} />
                 </button>
               )}
 
@@ -159,11 +196,18 @@ const RoomsDisplay = () => {
             </div>
           </div>
 
-          <div className="flex flex-row justify-start items-center gap-x-2 bg-secondary px-8 py-2 rounded-b-lg">
+          <div className="flex flex-wrap gap-2 px-8 pb-6">
             {room.tags.map((tag: string, index: number) => (
-              <div key={index} className="font-medium bg-white/50 px-2 py-1 rounded-lg">
+              <span 
+                key={index} 
+                className="
+                  px-3 py-1.5
+                  bg-black/[7%] rounded-lg
+                  text-sm font-medium text-gray-700
+                "
+              >
                 {roomTags.find((roomTag) => roomTag.value === tag)?.label || tag}
-              </div>
+              </span>
             ))}
           </div>
         </div>

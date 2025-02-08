@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { signOut } from "../utils/databasefunctions";
 
 // Hooks
@@ -22,11 +22,43 @@ const ChatPage = () => {
   const { currentPage } = useActivePage();
   const { activeUsers } = useData();
   const { onChange } = useActiveUserChat();
+  const [userDisplayWidth, setUserDisplayWidth] = useState(400); // Default width
+  const [isResizing, setIsResizing] = useState(false);
 
   useEffect(() => {
     onChange(null, "");
     console.log(activeUsers)
   }, [JSON.stringify(activeUsers?.map((item) => item.activeUsers))]);
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsResizing(true);
+    e.preventDefault();
+  };
+
+  const handleMouseUp = () => {
+    setIsResizing(false);
+  };
+
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    if (!isResizing) return;
+
+    const newWidth = e.clientX - 100; // 100 is the QuickLinks width
+    // Constrain width between 200px and a reasonable maximum
+    const constrainedWidth = Math.max(200, Math.min(newWidth, window.innerWidth - 600));
+    setUserDisplayWidth(constrainedWidth);
+  }, [isResizing]);
+
+  useEffect(() => {
+    if (isResizing) {
+      window.addEventListener('mousemove', handleMouseMove);
+      window.addEventListener('mouseup', handleMouseUp);
+    }
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [isResizing, handleMouseMove]);
 
   const renderCurrentPage = () => {
     switch (currentPage) {
@@ -48,17 +80,25 @@ const ChatPage = () => {
       {/* Desktop Layout */}
       <div className="w-full h-full hidden lg:flex flex-row">
         {/* Navigation */}
-        <div className="py-8 bg-primary z-20 shadow-xl">
+        <div className="w-[100px] py-8 bg-primary z-20 shadow-xl flex-shrink-0">
           <QuickLinks />
         </div>
 
         {/* User List */}
-        <div className="bg-[#F4F6FB] pt-6 z-10 shadow-xl">
+        <div 
+          style={{ width: userDisplayWidth }} 
+          className="bg-[#F4F6FB] pt-6 z-10 shadow-xl flex-shrink-0 overflow-hidden relative"
+        >
           <UserDisplay />
+          {/* Resize Handle */}
+          <div
+            className="absolute top-0 right-0 w-1 h-full cursor-col-resize hover:bg-blue-500/20 active:bg-blue-500/40"
+            onMouseDown={handleMouseDown}
+          />
         </div>
 
         {/* Main Content */}
-        <div className="pt-6 flex-grow bg-white z-0">
+        <div className="pt-6 flex-grow bg-white z-0 min-w-[500px]">
           {renderCurrentPage()}
         </div>
       </div>
