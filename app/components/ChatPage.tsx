@@ -22,7 +22,7 @@ const ChatPage = () => {
   const { currentPage } = useActivePage();
   const { activeUsers } = useData();
   const { onChange } = useActiveUserChat();
-  const [userDisplayWidth, setUserDisplayWidth] = useState(400); // Default width
+  const [userDisplayWidth, setUserDisplayWidth] = useState(400); // Default width of 400px!
   const [isResizing, setIsResizing] = useState(false);
 
   useEffect(() => {
