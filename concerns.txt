@@ -1,5 +1,7 @@
-No Variables
-- No variables for padding, etc... button sizing as well (!)
+Consitency
+- No variables for padding & margins!
+  - Button styles are also inconsitent!
 
-Rooms Section
- - Repetitive Code in RoomsSection.tsx and RoomDispaly.tsx 
+Repetition
+- Reptitive code in RoomSections.tsx and RoomDisplay.tsx
+- Repeitive code in ChatContainer.tsx (ChatSection) and ChatContainer.tsx (GlobalSection)

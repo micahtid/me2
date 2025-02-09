@@ -72,62 +72,66 @@ const SocialForm = () => {
   // console.log(socialStatus)
 
   return (
-    <div
-      className="bg-primary p-4 mt-8 rounded-lg drop-shadow-sm
-    flex flex-col justify-start items-start gap-y-4"
-    >
+    <div className="bg-white/80 backdrop-blur-sm p-6 mt-8 rounded-xl shadow-md border border-gray-100
+    flex flex-col justify-start items-start gap-y-4">
       {socialStatus[user?.uid] && socialStatus[currentUser?.uid] ? (
-        <p className="text-xs text-gray-500">
-          Both users have agreed to share socials. <br />
-          Please <span className="italic">store these socials</span> from{" "}
-          <span className="underline">{currentUser?.userName}</span> if you'd
-          like to stay in touch.
+        <p className="text-sm text-gray-600 leading-relaxed">
+          Both users have agreed to share socials.{" "}
+          <span className="font-medium text-black/60">Please save these details</span> from{" "}
+          <span className="font-semibold text-black/60">{currentUser?.userName}</span>{" "}
+          if you'd like to stay in touch.
         </p>
       ) : (
-        <p className="text-xs text-gray-500">
-          * The chat has been open <span className="italic">for 24 hours</span>{" "}
-          and is now <span className="underline">closed</span>. <br />
-          Would you like to share socials? <span className="italic">Click to edit status!</span>
+        <p className="text-sm text-gray-600 leading-relaxed">
+          The chat has been open for{" "}
+          <span className="font-medium text-black/80 underline">24 hours</span>{" "}
+          and is now closed. Would you like to share socials?{" "}
+          <span className="font-medium text-black/80 underline animate-pulse">Click to update your preference!</span>
         </p>
       )}
       {socialStatus[user?.uid] && socialStatus[currentUser?.uid] ? (
-        <div className="flex flex-col justify-start items-start gap-y-2 w-full">
-          {
-            currentUser?.discord && (
-              <div className="social-card bg-[#7785CC]">
-                <FaDiscord size={20} color="white" />
-                <p className="text-white">{currentUser?.discord}</p>
+        <div className="flex flex-col justify-start items-start gap-y-3 w-full">
+          {currentUser?.discord && (
+            <div className="group w-full p-3 bg-gradient-to-r from-[#7785CC] to-[#5865F2] rounded-lg 
+            flex items-center gap-x-3 cursor-pointer">
+              <div className="p-2 bg-white/10 rounded-lg">
+                <FaDiscord size={24} className="text-white" />
               </div>
-            )
-          }
-          {
-            currentUser?.instagram && (
-              <div className="social-card bg-[#E1306C]">
-                <FaInstagram size={20} color="white" />
-                <p className="text-white">{currentUser?.instagram}</p>
-              </div>  
-            )
-          }
-          {
-            currentUser?.snap && (
-              <div className="social-card bg-[#FFFC00]">
-                <FaSnapchatGhost size={20} color="white" />
-                <p className="text-white">{currentUser?.snap}</p>
+              <p className="text-white font-medium">{currentUser?.discord}</p>
+            </div>
+          )}
+          {currentUser?.instagram && (
+            <div className="group w-full p-3 bg-gradient-to-r from-[#E1306C] to-[#F77737] rounded-lg 
+            flex items-center gap-x-3 cursor-pointer">
+              <div className="p-2 bg-white/10 rounded-lg">
+                <FaInstagram size={24} className="text-white" />
               </div>
-            )
-          }
+              <p className="text-white font-medium">{currentUser?.instagram}</p>
+            </div>
+          )}
+          {currentUser?.snap && (
+            <div className="group w-full p-3 bg-gradient-to-r from-[#FFFC00] to-[#FFE600] rounded-lg 
+            flex items-center gap-x-3 cursor-pointer">
+              <div className="p-2 bg-black/10 rounded-lg">
+                <FaSnapchatGhost size={24} className="text-black" />
+              </div>
+              <p className="text-black font-medium">{currentUser?.snap}</p>
+            </div>
+          )}
         </div>
       ) : (
-        <div className="flex flex-row justify-start items-center gap-x-4">
-          <button className="flex flex-col justify-center items-center gap-y-2"
-          onClick={() => editSocialStatus(currentChat, user?.uid, !socialStatus[user?.uid])}
+        <div className="flex flex-row justify-start items-center gap-x-6 w-full p-2">
+          <button 
+            className="flex flex-col justify-center items-center gap-y-3"
+            onClick={() => editSocialStatus(currentChat, user?.uid, !socialStatus[user?.uid])}
           >
-            <div className="bg-gray-500/10 rounded-full p-2">{u1Icon}</div>
-            <p className="text-xs text-gray-600">You</p>
+            <div className="bg-gray-100 rounded-full p-3 shadow-md">{u1Icon}</div>
+            <p className="text-sm font-medium text-gray-700">You</p>
           </button>
-          <div className="flex flex-col justify-center items-center gap-y-2">
-            <div className="bg-gray-500/10 rounded-full p-2">{u2Icon}</div>
-            <p className="text-xs text-gray-600">{currentUser?.userName}</p>
+          <div className="h-[80px] w-[2px] bg-gray-200 rounded-full"></div>
+          <div className="flex flex-col justify-center items-center gap-y-3">
+            <div className="bg-gray-100 rounded-full p-3 shadow-md">{u2Icon}</div>
+            <p className="text-sm font-medium text-gray-700">{currentUser?.userName}</p>
           </div>
         </div>
       )}
