@@ -135,9 +135,9 @@ const Home = () => {
           </GridLines>
         </LoadIn>
         <LoadIn className="my-[150px]"><AboutUs /></LoadIn>
-        <LoadIn className="my-[150px]"><Tutorial /></LoadIn>
-        <LoadIn className="my-[150px]"><FAQ /></LoadIn>
-        <LoadIn className="mt-[250px] mb-[150px]"><Testimonies /></LoadIn>
+        <LoadIn className="my-[125px]"><Tutorial /></LoadIn>
+        <LoadIn className="my-[125px]"><FAQ /></LoadIn>
+        <LoadIn className="mt-[200px] mb-[150px]"><Testimonies /></LoadIn>
         <Footer />
       </div>
     );

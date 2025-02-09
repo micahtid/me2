@@ -1,121 +1,116 @@
-'use client'
+"use client";
 
 import { useState } from 'react'
 import { IoAdd } from 'react-icons/io5'
 import { motion, AnimatePresence } from 'framer-motion'
-import WithBackground from "./WithBackground"
 
-// FAQ data configuration
 const FAQs = [
     {
-        question: "Is this service free to use, and is my data private?",
-        answer: "Yes, this service is completely free with no hidden charges. We do not store any personal information—your privacy is a top priority."
+        question: "What is Me2?",
+        answer: "Me2 is a platform designed to help students connect with others who share similar academic interests, goals, and study habits. It provides a safe and efficient way to find study partners and build meaningful academic connections."
     },
     {
-        question: "How do chats work? Do they stay open forever?",
-        answer: "Once a user accepts a chat request, the chat room is open for 48 hours. You can close it anytime, and after the chat ends, you'll have the option to share social media through Me2, which you can accept or decline."
+        question: "How does matching work?",
+        answer: "Our algorithm matches you based on several factors including your academic interests, study preferences, and location. When you find a potential match, you can send a connection request to start chatting."
     },
     {
-        question: "What is the age requirement to use this service?",
-        answer: "This platform is designed for students aged 12 to 22."
+        question: "Is Me2 free to use?",
+        answer: "Yes, Me2 is completely free to use for all students. We believe in making education and connections accessible to everyone."
     },
     {
-        question: "Is this project open-source?",
-        answer: "Yes, this project is open-source. Check out our developers at the bottom of the page for more details."
+        question: "How long do chat rooms last?",
+        answer: "Chat rooms are active for 48 hours after a connection is made. This encourages meaningful interactions while maintaining privacy and safety."
     }
 ];
-
-// Animation variants for FAQ answers
-const answerVariants = {
-    initial: { height: 0, opacity: 0 },
-    animate: { height: 'auto', opacity: 1 },
-    exit: { height: 0, opacity: 0 }
-}
 
 const FAQ = () => {
     const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
-    const toggleFAQ = (index: number) => {
-        setActiveIndex(activeIndex === index ? null : index)
-    }
-
     return (
-        <WithBackground color="#DDEEFF" tiltDegree={-2} borderHeight={40}>
-            <div className="default-container py-24">
-                <div className="
-                    grid 
-                    xl:grid-cols-[40%_60%] 
-                    lg:grid-cols-[40%_60%] 
-                    gap-8
-                ">
-                    {/* Left Column - Header Section */}
-                    <div className="space-y-4">
+        <div className="relative py-24 bg-gradient-to-b from-white to-gray-50">
+            <div className="absolute inset-0 bg-grid-black/[0.02] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
+            
+            <div className="relative default-container">
+                <div className="grid grid-cols-[35%_1fr] gap-12 max-[1200px]:grid-cols-1">
+                    {/* Header Section */}
+                    <div className="space-y-5">
                         <h3 className="dynamic-subheading font-semibold">
                             Frequently Asked Questions☝️
                         </h3>
-                        <p className="dynamic-text text-black/80">
-                            Have another question? Contact us by{" "}
-                            <a href="mailto:micahtid@gmail.com" className="underline"
-                            > email</a>.
+                        <p className="dynamic-text text-black/70">
+                            Have another question? Contact me by{" "}
+                            <a href="mailto:micahtid@gmail.com" className="underline">
+                                email
+                            </a>.
                         </p>
                     </div>
 
-                    {/* Right Column - FAQ Items */}
-                    <div className="space-y-2">
+                    {/* FAQ Items */}
+                    <div className="space-y-3">
                         {FAQs.map((faq, index) => (
-                            <div key={index}>
-                                {/* FAQ Question Header */}
-                                <div
-                                    onClick={() => toggleFAQ(index)}
-                                    className="
-                                        flex 
-                                        justify-between 
-                                        items-center 
-                                        space-x-4 
-                                        py-4 
-                                        cursor-pointer 
-                                        border-t 
-                                        border-black/20
-                                        ${activeIndex === index ? 'text-primary' : 'text-gray-900'}
-                                    "
-                                >
-                                    <p className="dynamic-text font-medium">
-                                        {faq.question}
-                                    </p>
-                                    
-                                    {/* Animated Plus/Minus Icon */}
-                                    <div className={`
-                                        transition-transform 
-                                        duration-200
-                                        ${activeIndex === index ? 'rotate-45' : 'rotate-0'}
-                                    `}>
-                                        <IoAdd className="w-5 h-5" />
+                            <motion.div 
+                                key={index}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: index * 0.1 }}
+                            >
+                                <div className={`
+                                    rounded-xl overflow-hidden border border-gray-100
+                                    ${activeIndex === index ? 'bg-primary/[50%]' : 'bg-white'}
+                                    transition-all duration-300
+                                `}>
+                                    {/* Question Header */}
+                                    <div
+                                        onClick={() => setActiveIndex(activeIndex === index ? null : index)}
+                                        className={`
+                                            flex justify-between items-center p-5
+                                            cursor-pointer
+                                            transition-colors duration-300
+                                            ${activeIndex === index 
+                                                ? 'text-header' 
+                                                : 'text-gray-600 hover:text-gray-900'
+                                            }
+                                        `}
+                                    >
+                                        <p className="font-medium">
+                                            {faq.question}
+                                        </p>
+                                        
+                                        <div className={`
+                                            p-2 rounded-lg
+                                            transition-all duration-300
+                                            ${activeIndex === index 
+                                                ? 'bg-primary/[30%] rotate-45' 
+                                                : 'bg-gray-50'
+                                            }
+                                        `}>
+                                            <IoAdd className="w-4 h-4" />
+                                        </div>
                                     </div>
+                                    
+                                    {/* Answer Section */}
+                                    <AnimatePresence>
+                                        {activeIndex === index && (
+                                            <motion.div
+                                                initial={{ height: 0, opacity: 0 }}
+                                                animate={{ height: 'auto', opacity: 1 }}
+                                                exit={{ height: 0, opacity: 0 }}
+                                                transition={{ duration: 0.3 }}
+                                                className="overflow-hidden"
+                                            >
+                                                <p className="px-5 pb-5 text-black/70">
+                                                    {faq.answer}
+                                                </p>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
                                 </div>
-                                
-                                {/* Animated Answer Section */}
-                                <AnimatePresence>
-                                    {activeIndex === index && (
-                                        <motion.div
-                                            variants={answerVariants}
-                                            initial="initial"
-                                            animate="animate"
-                                            exit="exit"
-                                            transition={{ duration: 0.2 }}
-                                            className="overflow-hidden"
-                                        >
-                                            <p className="pb-4 text-black/80">
-                                                {faq.answer}
-                                            </p>
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
-                            </div>
+                            </motion.div>
                         ))}
                     </div>
                 </div>
             </div>
-        </WithBackground>
+        </div>
     )
 }
 
