@@ -16,6 +16,7 @@ import RequestSection from "./RequestSection/RequestSection";
 import QuickLinks from "./QuickLinks";
 import RoomsSection from "./RoomsSection/RoomsSection";
 import GlobalSection from "./GlobalSection/GlobalSection";
+import SettingsSection from "./SettingsSection/SettingsSection";
 import OopsScreen from "./OopsScreen";
 
 const ChatPage = () => {
@@ -27,7 +28,7 @@ const ChatPage = () => {
 
   useEffect(() => {
     onChange(null, "");
-    console.log(activeUsers)
+    console.log(activeUsers);
   }, [JSON.stringify(activeUsers?.map((item) => item.activeUsers))]);
 
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -39,24 +40,30 @@ const ChatPage = () => {
     setIsResizing(false);
   };
 
-  const handleMouseMove = useCallback((e: MouseEvent) => {
-    if (!isResizing) return;
+  const handleMouseMove = useCallback(
+    (e: MouseEvent) => {
+      if (!isResizing) return;
 
-    const newWidth = e.clientX - 100; // 100 is the QuickLinks width
-    // Constrain width between 200px and a reasonable maximum
-    const constrainedWidth = Math.max(200, Math.min(newWidth, window.innerWidth - 600));
-    setUserDisplayWidth(constrainedWidth);
-  }, [isResizing]);
+      const newWidth = e.clientX - 100; // 100 is the QuickLinks width
+      // Constrain width between 200px and a reasonable maximum
+      const constrainedWidth = Math.max(
+        200,
+        Math.min(newWidth, window.innerWidth - 600),
+      );
+      setUserDisplayWidth(constrainedWidth);
+    },
+    [isResizing],
+  );
 
   useEffect(() => {
     if (isResizing) {
-      window.addEventListener('mousemove', handleMouseMove);
-      window.addEventListener('mouseup', handleMouseUp);
+      window.addEventListener("mousemove", handleMouseMove);
+      window.addEventListener("mouseup", handleMouseUp);
     }
 
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseup', handleMouseUp);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
     };
   }, [isResizing, handleMouseMove]);
 
@@ -70,6 +77,8 @@ const ChatPage = () => {
         return <FindSection />;
       case "rooms":
         return <RoomsSection />;
+      case "settings":
+        return <SettingsSection />;
       default:
         return <GlobalSection />;
     }
@@ -85,18 +94,21 @@ const ChatPage = () => {
         </div>
 
         {/* User List */}
-        <div 
-          style={{ width: userDisplayWidth }} 
-          className="bg-[#F4F6FB] pt-6 z-10 shadow-xl flex-shrink-0 overflow-hidden relative"
-        >
-          <UserDisplay />
-          {/* Resize Handle */}
+        {currentPage == "settings" ? (
+          <div></div>
+        ) : (
           <div
-            className="absolute top-0 right-0 w-1 h-full cursor-col-resize hover:bg-blue-500/20 active:bg-blue-500/40"
-            onMouseDown={handleMouseDown}
-          />
-        </div>
-
+            style={{ width: userDisplayWidth }}
+            className="bg-[#F4F6FB] pt-6 z-10 flex-shrink-0 overflow-hidden relative"
+          >
+            <UserDisplay />
+            {/* Resize Handle */}
+            <div
+              className="absolute top-0 right-0 w-1 h-full cursor-col-resize hover:bg-blue-500/20 active:bg-blue-500/40"
+              onMouseDown={handleMouseDown}
+            />
+          </div>
+        )}
         {/* Main Content */}
         <div className="pt-6 flex-grow bg-white z-0 min-w-[500px]">
           {renderCurrentPage()}
@@ -105,8 +117,8 @@ const ChatPage = () => {
 
       {/* Tablet and Mobile Layout */}
       <div className="lg:hidden flex flex-col items-center justify-center w-full h-full">
-        <OopsScreen 
-          message="Me2 is designed for larger screens. Please use a desktop browser." 
+        <OopsScreen
+          message="Me2 is designed for larger screens. Please use a desktop browser."
           divClassName="h-min"
         />
         <button

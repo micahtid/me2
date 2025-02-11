@@ -1,6 +1,6 @@
 /**
  * NavModal Component
- * 
+ *
  * A mobile navigation modal that slides in from the right.
  * Includes:
  * - Close button
@@ -12,23 +12,23 @@ import { navItems } from "@/app/data";
 import { IoMdClose } from "react-icons/io";
 
 interface NavModalProps {
-    isOpen: boolean;
-    setIsOpen: Function;
+  isOpen: boolean;
+  setIsOpen: Function;
 }
 
 const NavModal: React.FC<NavModalProps> = ({ isOpen, setIsOpen }) => {
   return (
-    <nav 
+    <nav
       className={`
-        fixed top-0 right-0 h-[100vh] w-[300px]
+        fixed top-0 right-0 h-[100vh] w-[200px]
         flex flex-col justify-start items-end p-8
-        bg-black/10 backdrop-blur-[10px] z-50
+        bg-white border-l-gray-400 border-2 shadow-gray-500 shadow-lg z-50
         transform transition-transform duration-300 ease-in-out
         ${isOpen ? "translate-x-0" : "translate-x-full"}
       `}
     >
       {/* Close Button */}
-      <button 
+      <button
         onClick={() => setIsOpen(false)}
         className="mb-12 font-semibold text-xl
           hover:rotate-90 transition-transform duration-300"
@@ -40,11 +40,10 @@ const NavModal: React.FC<NavModalProps> = ({ isOpen, setIsOpen }) => {
       {/* Navigation Links */}
       <div className="w-full flex flex-col gap-y-2 items-end">
         {navItems.map((item, index) => (
-          <a 
+          <a
             key={index}
             href={item.link}
             className="w-[200px] pt-4 text-right dynamic-text
-              border-t-[1px] border-black/80
               hover:pr-4 transition-all duration-300"
           >
             {item.text}

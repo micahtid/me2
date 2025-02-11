@@ -20,7 +20,7 @@ import OopsScreen from "../OopsScreen";
 const getRequestHook = async (
   requests: DocumentData[] | null | undefined,
   status: string,
-  setUsers: Function
+  setUsers: Function,
 ) => {
   const userData: DocumentData[] = [];
   const index = status === "sent" ? 1 : status === "received" ? 0 : -1;
@@ -36,13 +36,17 @@ const getRequestHook = async (
 
 const RequestSection = () => {
   const [section, setSection] = useState("sent");
-  const [requestList, setRequestList] = useState<DocumentData[] | null | undefined>([]);
+  const [requestList, setRequestList] = useState<
+    DocumentData[] | null | undefined
+  >([]);
 
   const { sentRequests, receivedRequests, user } = useData();
   const { onChangeCurrentUser, onModalOpen } = useUserModal();
 
   const [sentRequestUsers, setSentRequestUsers] = useState<DocumentData[]>([]);
-  const [receivedRequestUsers, setReceivedRequestUsers] = useState<DocumentData[]>([]);
+  const [receivedRequestUsers, setReceivedRequestUsers] = useState<
+    DocumentData[]
+  >([]);
 
   // Fetches sent and received request users
   useEffect(() => {
@@ -52,7 +56,9 @@ const RequestSection = () => {
 
   // Updates displayed request list based on selected section
   useEffect(() => {
-    setRequestList(section === "sent" ? sentRequestUsers : receivedRequestUsers);
+    setRequestList(
+      section === "sent" ? sentRequestUsers : receivedRequestUsers,
+    );
   }, [section, sentRequestUsers, receivedRequestUsers]);
 
   const handleDeleteRequest = async (chatid: string, index: number) => {
@@ -60,16 +66,22 @@ const RequestSection = () => {
     setSentRequestUsers((prev) => prev.filter((_, i) => i !== index));
   };
 
-  const handleAcceptRequest = async (chatid: string, index: number, request: DocumentData) => {
+  const handleAcceptRequest = async (
+    chatid: string,
+    index: number,
+    request: DocumentData,
+  ) => {
     await acceptRequest(chatid, user?.uid, request?.uid);
     setReceivedRequestUsers((prev) =>
-      prev.map((req, i) => (i === index ? { ...req, activeState: "active" } : req))
+      prev.map((req, i) =>
+        i === index ? { ...req, activeState: "active" } : req,
+      ),
     );
   };
 
   return (
     <div className="h-full flex flex-col gap-y-3 overflow-y-auto no-scrollbar pb-5">
-      <h3 className="mb-6 ml-8 font-semibold text-2xl">Manage Requests</h3>
+      <h3 className="mb-6 ml-8 mt-4 font-semibold text-2xl">Manage Requests</h3>
       <div className="w-full flex flex-row justify-start items-center gap-x-2 mb-5 px-8">
         <button
           onClick={() => setSection("sent")}
@@ -88,11 +100,14 @@ const RequestSection = () => {
         <OopsScreen message="Uh oh! No requests right now.." />
       )}
       {requestList?.map((request, index) => (
-        <div key={index} className="flex flex-row justify-start items-center w-full user-card">
+        <div
+          key={index}
+          className="flex flex-row justify-start items-center w-full user-card"
+        >
           <UserCard
-              onClick={() => {
-                onChangeCurrentUser(request);
-                onModalOpen();
+            onClick={() => {
+              onChangeCurrentUser(request);
+              onModalOpen();
             }}
             className="flex-grow"
             statusClassName="bg-primary text-black/60 px-6 py-1 rounded-xl -ml-1 mt-1"
@@ -103,12 +118,21 @@ const RequestSection = () => {
             className="mr-8"
             onClick={() => {
               if (user && request) {
-                const chatid = user.uid > request.uid ? user.uid + request.uid : request.uid + user.uid;
-                section === "sent" ? handleDeleteRequest(chatid, index) : handleAcceptRequest(chatid, index, request);
+                const chatid =
+                  user.uid > request.uid
+                    ? user.uid + request.uid
+                    : request.uid + user.uid;
+                section === "sent"
+                  ? handleDeleteRequest(chatid, index)
+                  : handleAcceptRequest(chatid, index, request);
               }
             }}
           >
-            {section === "sent" ? <IoCloseCircleSharp size={25} /> : <FaCheckCircle size={20} />}
+            {section === "sent" ? (
+              <IoCloseCircleSharp size={25} />
+            ) : (
+              <FaCheckCircle size={20} />
+            )}
           </button>
         </div>
       ))}

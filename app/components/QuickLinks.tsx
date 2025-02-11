@@ -18,7 +18,7 @@ import { useActivePage } from "@/hooks/useActivePage";
 const ICON_SIZES = {
   base: 32,
   notification: 18,
-  mobile: 28
+  mobile: 28,
 };
 
 interface QuickLink {
@@ -34,21 +34,25 @@ const QuickLinks: React.FC = () => {
   const { user, receivedRequests } = useData();
 
   const links: QuickLink[] = [
-    { 
-      label: "Chats", 
-      value: "chat", 
-      icon: <BsChatFill className="w-8 h-8 max-lg:w-7 max-lg:h-7 max-md:w-6 max-md:h-6" />, 
-      func: () => onChange("chat") 
+    {
+      label: "Chats",
+      value: "chat",
+      icon: (
+        <BsChatFill className="w-8 h-8 max-lg:w-7 max-lg:h-7 max-md:w-6 max-md:h-6" />
+      ),
+      func: () => onChange("chat"),
     },
-    { 
-      label: "Find", 
-      value: "new people", 
-      icon: <HiUsers className="w-8 h-8 max-lg:w-7 max-lg:h-7 max-md:w-6 max-md:h-6" />, 
-      func: () => onChange("new people") 
+    {
+      label: "Find",
+      value: "new people",
+      icon: (
+        <HiUsers className="w-8 h-8 max-lg:w-7 max-lg:h-7 max-md:w-6 max-md:h-6" />
+      ),
+      func: () => onChange("new people"),
     },
-    { 
+    {
       label: "Requests",
-      value: "requests", 
+      value: "requests",
       icon: (
         <div className="relative">
           <IoNotifications
@@ -62,59 +66,67 @@ const QuickLinks: React.FC = () => {
           />
           <IoMail className="w-8 h-8 max-lg:w-7 max-lg:h-7 max-md:w-6 max-md:h-6" />
         </div>
-      ), 
-      func: () => onChange("requests") 
+      ),
+      func: () => onChange("requests"),
     },
-    { 
-      label: "Rooms", 
-      value: "rooms", 
-      icon: <FaVideo className="w-8 h-8 max-lg:w-7 max-lg:h-7 max-md:w-6 max-md:h-6" />, 
-      func: () => onChange("rooms") 
+    {
+      label: "Rooms",
+      value: "rooms",
+      icon: (
+        <FaVideo className="w-8 h-8 max-lg:w-7 max-lg:h-7 max-md:w-6 max-md:h-6" />
+      ),
+      func: () => onChange("rooms"),
     },
-    { 
-      label: "Global Chat", 
-      value: "global", 
-      icon: <AiOutlineGlobal className="w-8 h-8 max-lg:w-7 max-lg:h-7 max-md:w-6 max-md:h-6" />, 
-      func: () => onChange("global") 
-    }
+    {
+      label: "Global Chat",
+      value: "global",
+      icon: (
+        <AiOutlineGlobal className="w-8 h-8 max-lg:w-7 max-lg:h-7 max-md:w-6 max-md:h-6" />
+      ),
+      func: () => onChange("global"),
+    },
   ];
 
   return (
-    <nav className="
+    <nav
+      className="
       flex flex-col justify-between items-center gap-y-10 h-full
       max-lg:flex-row max-lg:justify-start max-lg:gap-x-4
       max-lg:overflow-x-scroll no-scrollbar max-lg:px-4
-    ">
-      <div className="
+    "
+    >
+      <div
+        className="
         flex flex-col justify-start items-center gap-y-2
         max-lg:flex-row max-lg:gap-x-4
         w-[100px] max-lg:w-auto
-      ">
+      "
+      >
         {/* Profile Picture */}
-        <button 
-          onClick={() => router.replace('./settings')} 
+        <button
+          onClick={() => onChange("settings")}
           className="
             mb-8 max-lg:mb-0 max-lg:mr-6 max-lg:w-[500px]
             flex justify-center items-center
             hover:scale-105 transition-transform duration-200
           "
         >
-          <img 
-            src={user?.photoURL || ""} 
-            alt="profile-picture" 
+          <img
+            src={user?.photoURL || ""}
+            alt="profile-picture"
             className="
               w-[50px] h-[50px] 
               max-lg:w-[45px] max-lg:h-[45px] 
               max-md:w-[40px] max-md:h-[40px]
               rounded-full shadow-md ring-2 ring-black/5
-            " 
+            "
           />
         </button>
 
         {/* Navigation Links */}
         {links.map((link, index) => (
-          <button 
-            key={index} 
+          <button
+            key={index}
             onClick={link.func}
             className={`
               flex justify-center items-center gap-x-4
@@ -122,17 +134,21 @@ const QuickLinks: React.FC = () => {
               max-lg:gap-x-2 max-lg:px-6 max-lg:py-4
               max-md:px-4 max-md:py-3
               transition-all duration-200 
-              hover:bg-black/10
-              ${currentPage === link.value ? 
-                "bg-black/10 border-l-2 border-black max-lg:border-l-0 max-lg:border-b-2 shadow-sm" : 
-                "max-lg:hover:translate-y-1"}
+              hover:bg-[#e5f1ff]
+              ${
+                currentPage === link.value
+                  ? "bg-[#f4f6fb] border-l-2 border-[#f4f6fb] max-lg:border-l-0 max-lg:border-b-2 shadow-sm"
+                  : "max-lg:hover:translate-y-1"
+              }
             `}
           >
-            <div className={`
+            <div
+              className={`
               p-2 rounded-lg
-              ${currentPage === link.value ? 'text-black' : 'text-black/60'}
+              ${currentPage === link.value ? "text-black" : "text-black/60"}
               transition-colors duration-200
-            `}>
+            `}
+            >
               {link.icon}
             </div>
           </button>
@@ -140,7 +156,7 @@ const QuickLinks: React.FC = () => {
       </div>
 
       {/* Sign Out Button */}
-      <button 
+      <button
         onClick={signOut}
         className="
           flex justify-center items-center w-full 

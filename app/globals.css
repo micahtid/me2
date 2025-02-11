@@ -12,7 +12,7 @@
   }
 
   .dynamic-heading {
-    @apply text-7xl max-lg:text-5xl;
+    @apply text-6xl max-lg:text-5xl max-md:text-4xl;
   }
 
   .dynamic-subheading {
@@ -20,7 +20,7 @@
   }
 
   .dynamic-text {
-    @apply text-xl max-lg:text-lg;
+    @apply text-lg max-lg:text-base max-md:text-sm;
   }
 
   .input-field {

@@ -6,7 +6,7 @@ const Blobs = () => {
   return (
     <div className="absolute inset-0">
       {/* Top blob */}
-      <svg 
+      <svg
         className="absolute left-[20%] -top-[25%] w-[60%]"
         viewBox="0 0 200 200"
         xmlns="http://www.w3.org/2000/svg"
@@ -18,9 +18,9 @@ const Blobs = () => {
           transform="translate(100 100)"
         />
       </svg>
-      
+
       {/* Right blob */}
-      <svg 
+      <svg
         className="absolute -right-[15%] -top-[10%] w-[55%]"
         viewBox="0 0 200 200"
         xmlns="http://www.w3.org/2000/svg"
@@ -32,9 +32,9 @@ const Blobs = () => {
           transform="translate(100 100)"
         />
       </svg>
-      
+
       {/* Left blob */}
-      <svg 
+      <svg
         className="absolute -bottom-[23.5%] -left-[14.5%] w-[50%]"
         viewBox="0 0 200 200"
         xmlns="http://www.w3.org/2000/svg"
@@ -52,47 +52,57 @@ const Blobs = () => {
 
 const Hero = () => {
   return (
-    <section 
+    <section
       id="hero"
       className="
         relative 
         w-full
         default-container
-        grid grid-cols-1 lg:grid-cols-[0.8fr,1.2fr]
+        grid grid-cols-1 lg:grid-cols-[0.9fr,1.1fr]
         gap-y-12 lg:gap-x-12
         items-center
         pt-[250px] pb-[225px] max-lg:pt-[100px]
       "
     >
       {/* Hero Content */}
-      <div className="
+      <div
+        className="
         flex flex-col items-center lg:items-start
         gap-y-4
         order-first
-      ">
+      "
+      >
         {/* Hero heading */}
-        <h3 className="
+        <h3
+          className="
           font-title font-semibold 
           text-center lg:text-left
-          dynamic-subheading
-        ">
-          Meet the<br />
-          <span className="
+          dynamic-heading
+        "
+        >
+          Meet the
+          <br />
+          <span
+            className="
             text-transparent 
             bg-clip-text bg-gradient-to-r from-[#00224b] to-[#004696]
-          ">
+          "
+          >
             Chat App for Students
-          </span>👋
+          </span>{" "}
+          👋
         </h3>
 
         {/* Hero description */}
-        <p className="
+        <p
+          className="
           text-center lg:text-left
           dynamic-text 
-          max-w-[800px] mb-2
-        ">
-          A platform to connect students with similar interests. 
-          Chat with others, find new friends, and more!
+          max-w-[650px] mb-2
+        "
+        >
+          A platform to connect students with similar interests. Chat with
+          others, find new friends, and more!
         </p>
 
         {/* CTA Button */}
@@ -104,21 +114,21 @@ const Hero = () => {
             px-6 py-3 
             font-medium text-white 
             bg-header
-            rounded-xl 
+            rounded-2xl 
             hover:shadow-lg hover:scale-105
             transition-all duration-300
           "
         >
-          <PiPencilSimpleFill className="text-lg" />
           Get Started
+          <PiPencilSimpleFill className="text-lg" />
         </a>
       </div>
 
       {/* Hero Image Container */}
       <div className="relative lg:ml-8 order-last">
         <Blobs />
-        <img 
-          src="/landing_page_display.png" 
+        <img
+          src="/landing_page_display.png"
           alt="Landing page display"
           className="
             rounded-lg 
@@ -126,7 +136,7 @@ const Hero = () => {
             w-full
             relative
             z-10
-          " 
+          "
         />
       </div>
     </section>
