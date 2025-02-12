@@ -59,9 +59,9 @@ const QuickLinks: React.FC = () => {
             className={`
               absolute -bottom-[2px] -right-[2px] 
               w-[18px] h-[18px] max-lg:w-4 max-lg:h-4 max-md:w-3 max-md:h-3
-              text-yellow-300/80 rounded-full
+              text-yellow-400 rounded-full
               ${receivedRequests?.length === 0 ? "hidden" : ""}
-              ${currentPage !== "requests" ? "bg-primary" : "bg-[#9EB3CC]"}
+              ${currentPage !== "requests" ? "bg-primary" : "bg-[#F4F6FB]"}
             `}
           />
           <IoMail className="w-8 h-8 max-lg:w-7 max-lg:h-7 max-md:w-6 max-md:h-6" />
@@ -97,7 +97,7 @@ const QuickLinks: React.FC = () => {
     >
       <div
         className="
-        flex flex-col justify-start items-center gap-y-2
+        flex flex-col justify-start items-center 
         max-lg:flex-row max-lg:gap-x-4
         w-[100px] max-lg:w-auto
       "
@@ -130,11 +130,11 @@ const QuickLinks: React.FC = () => {
             onClick={link.func}
             className={`
               flex justify-center items-center gap-x-4
-              px-4 py-3 w-full
-              max-lg:gap-x-2 max-lg:px-6 max-lg:py-4
-              max-md:px-4 max-md:py-3
-              transition-all duration-200 
-              hover:bg-[#e5f1ff]
+              px-4 py-4 w-full
+              max-lg:gap-x-2 max-lg:px-6 max-lg:py-5
+              max-md:px-4 max-md:py-4
+              transition-all duration-300 
+              hover:bg-[#f4f6fb]
               ${
                 currentPage === link.value
                   ? "bg-[#f4f6fb] border-l-2 border-[#f4f6fb] max-lg:border-l-0 max-lg:border-b-2 shadow-sm"
@@ -145,7 +145,7 @@ const QuickLinks: React.FC = () => {
             <div
               className={`
               p-2 rounded-lg
-              ${currentPage === link.value ? "text-black" : "text-black/60"}
+              ${currentPage === link.value ? "text-black" : "text-black/80"}
               transition-colors duration-200
             `}
             >

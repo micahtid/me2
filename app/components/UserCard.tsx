@@ -35,10 +35,10 @@ const UserCard: React.FC<UserCardProps> = ({
         {notificationCount > 0 && (
           <div
             className="
-                            absolute top-[-5px] right-[-5px] z-10 w-[20px] h-[20px] 
-                            bg-red-500 text-white text-xs flex justify-center items-center 
-                            rounded-full shadow-lg
-                        "
+                        absolute top-[-5px] right-[-5px] z-10 w-[20px] h-[20px] 
+                        bg-red-500 text-white text-xs flex justify-center items-center 
+                        rounded-full shadow-lg
+                    "
           >
             {notificationCount > 9 ? "9+" : notificationCount}
           </div>

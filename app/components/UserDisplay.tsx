@@ -90,7 +90,7 @@ const UserDisplay = () => {
             className={`
               flex flex-row justify-between items-center gap-x-2 w-full user-card 
               transition-all duration-200 hover:bg-black/5
-              ${currentUser === u && currentPage === "chat" ? "bg-accent shadow-sm" : ""}
+              ${currentUser === u && currentPage === "chat" ? "bg-accent/50" : ""}
             `}
           >
             <UserCard
@@ -107,7 +107,7 @@ const UserDisplay = () => {
                   : "border-[#F4F6FB]"
               }
               className={u.uid === user.uid ? "hidden" : ""}
-              statusClassName="bg-white/80 backdrop-blur-sm text-gray-700 px-4 py-0.5 rounded-2xl -ml-1 mt-1 shadow-sm"
+              statusClassName="bg-white/80 backdrop-blur-sm text-gray-700 px-4 py-0.5 rounded-2xl -ml-1 mt-1"
               status={hoursLeft}
               user={u}
             />

@@ -99,7 +99,7 @@ const ChatPage = () => {
         ) : (
           <div
             style={{ width: userDisplayWidth }}
-            className="bg-[#F4F6FB] pt-6 z-10 flex-shrink-0 overflow-hidden relative"
+            className="bg-[#F5F6FB] pt-6 z-10 flex-shrink-0 overflow-hidden relative"
           >
             <UserDisplay />
             {/* Resize Handle */}
