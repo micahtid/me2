@@ -31,7 +31,7 @@ const Testimonies = () => {
                 {/* Header Section */}
                 <div className="max-w-2xl mx-auto space-y-5 text-center">
                     <h3 className="dynamic-subheading font-semibold">
-                        Our Wall of Love ❤️
+                        Our Wall of Love
                     </h3>
                     <p className="dynamic-text text-black/70">
                         Read what our users have to say about Me2.
@@ -49,7 +49,7 @@ const Testimonies = () => {
                             className="group"
                         >
                             <div className="h-full p-8 rounded-2xl bg-white border border-gray-100 shadow-sm 
-                                         hover:drop-shadow-lg transition-all duration-300 hover:-translate-y-1">
+                                         transition-all duration-300 hover:-translate-y-4">
                                 <div className="flex flex-col h-full">
                                     {/* Quote Icon */}
                                     <div className="mb-4">

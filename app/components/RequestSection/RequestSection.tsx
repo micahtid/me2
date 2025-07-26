@@ -11,6 +11,7 @@ import { useData } from "@/providers/DataProvider";
 import { useUserModal } from "@/hooks/useUserModal";
 import { getUser } from "@/app/utils/usersfunctions";
 import { deleteRequest, acceptRequest } from "@/app/utils/requestfunctions";
+import { getCompatibility } from "@/app/utils/utilfunctions";
 
 // Component Imports
 import UserCard from "../UserCard";
@@ -38,7 +39,7 @@ const RequestSection = () => {
   const [section, setSection] = useState("sent");
   const [requestList, setRequestList] = useState<DocumentData[] | null | undefined>([]);
 
-  const { sentRequests, receivedRequests, user } = useData();
+  const { sentRequests, receivedRequests, user, users } = useData();
   const { onChangeCurrentUser, onModalOpen } = useUserModal();
 
   const [sentRequestUsers, setSentRequestUsers] = useState<DocumentData[]>([]);
@@ -96,7 +97,13 @@ const RequestSection = () => {
             }}
             className="flex-grow"
             statusClassName="bg-primary text-black/60 px-6 py-1 rounded-xl -ml-1 mt-1"
-            status="Compatibility 80%"
+            status={`Compatibility: ${(() => {
+              if (!users || !user) return "?";
+              const fullUser = users.find((u) => u.uid === user.uid);
+              if (!fullUser) return "?";
+              const compat = getCompatibility(fullUser, request);
+              return isNaN(compat) ? "?" : Math.round(compat * 100);
+            })()}%`}
             user={request}
           />
           <button

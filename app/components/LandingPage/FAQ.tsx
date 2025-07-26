@@ -35,7 +35,7 @@ const FAQ = () => {
                     {/* Header Section */}
                     <div className="space-y-5">
                         <h3 className="dynamic-subheading font-semibold">
-                            Frequently Asked Questions☝️
+                            Frequently Asked Questions
                         </h3>
                         <p className="dynamic-text text-black/70">
                             Have another question? Contact me by{" "}

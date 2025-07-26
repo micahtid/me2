@@ -27,7 +27,7 @@ const Tutorial = () => {
       <div className="default-container space-y-12">
         {/* Section heading */}
         <h3 className="text-center dynamic-subheading font-semibold">
-          Still Not Convinced? 📹
+          Still Not Convinced?
         </h3>
 
         {/* Video container */}
@@ -42,7 +42,7 @@ const Tutorial = () => {
         ">
           <iframe
             className="absolute inset-0 w-full h-full"
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+            src="https://youtu.be/RHDoPBe6Rxw"
             title="Product Demo Video"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen

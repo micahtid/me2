@@ -41,7 +41,7 @@ const AboutUs = () => {
                 {/* Header Section */}
                 <div className="relative space-y-5 max-w-2xl mx-auto text-center">
                     <h3 className="dynamic-subheading font-semibold">
-                        Find Others Instantly & Start Chatting📱
+                        Find Others <span className="text-header underline">Instantly</span> & Start Chatting
                     </h3>
                     <p className="dynamic-text text-black/70">
                         Let our custom algorithm match you with people who have high compatibility ratings. 

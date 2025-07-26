@@ -56,11 +56,12 @@ export const getTimeLeft = async (chatid: string) => {
 };
 
 export const getCompatibility = (user1: DocumentData, user2: DocumentData) => {
+    if (!user1 || !user2) return 0;
     const areaPercentage = user1.location === user2.location ? 1 : 0.25;
     const academicPercentage = user1.curr === user2.curr ? 1 : 0.25;
 
     const hobbiesPercentage = ((list1: string[], list2: string[]) =>
-        (common => common === 0 ? 0 : common === 1 ? 0.7 : 0.7 + (common - 1) * 0.1)(list1.filter(item => list2.includes(item)).length))(user1.hobbies, user2.hobbies);
+        (common => common === 0 ? 0 : common === 1 ? 0.7 : 0.7 + (common - 1) * 0.1)((Array.isArray(list1) && Array.isArray(list2)) ? list1.filter(item => list2.includes(item)).length : 0))(user1.hobbies, user2.hobbies);
 
     const agePercentage = ((age1: number, age2: number) => {
         const ageDifference = Math.abs(age1 - age2);
