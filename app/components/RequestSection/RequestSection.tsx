@@ -86,7 +86,7 @@ const RequestSection = () => {
         </button>
       </div>
       {requestList?.length === 0 && (
-        <OopsScreen message="Uh oh! No requests right now.." />
+        <OopsScreen message="Uh oh! No requests right now..." />
       )}
       {requestList?.map((request, index) => (
         <div key={index} className="flex flex-row justify-start items-center w-full user-card">

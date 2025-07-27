@@ -42,7 +42,7 @@ const Tutorial = () => {
         ">
           <iframe
             className="absolute inset-0 w-full h-full"
-            src="https://youtu.be/RHDoPBe6Rxw"
+            src="https://www.youtube.com/embed/RHDoPBe6Rxw"
             title="Product Demo Video"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
