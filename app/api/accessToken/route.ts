@@ -1,7 +1,11 @@
 export async function POST(request: Request): Promise<Response> {
   try {
-    const url = 'https://zoom.us/oauth/token?grant_type=account_credentials&account_id=Hl1BR9EFRUCVzVJk3FkJIw';
-    const credentials = Buffer.from('m1RJcDBLSbqlIjmOR6Nxw:gVcA9ew1NFAvrIkOk0P6VgLjUpVXMhCj').toString('base64');
+    const accountId = process.env.ZOOM_ACCOUNT_ID;
+    const clientId = process.env.ZOOM_CLIENT_ID;
+    const clientSecret = process.env.ZOOM_CLIENT_SECRET;
+    
+    const url = `https://zoom.us/oauth/token?grant_type=account_credentials&account_id=${accountId}`;
+    const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
 
     const response = await fetch(url, {
       method: 'POST',
