@@ -16,7 +16,8 @@ Key functions:
 ## Screenshots
 | Dashboard | Chat | Study Room |
 |-----------|------|------------|
-| ![](https://micahtid.vercel.app/me2/1.jpg) | ![](https://micahtid.vercel.app/me2/2.jpg) | ![](https://micahtid.vercel.app/me2/3.jpg) |
+| <img src="https://micahtid.vercel.app/me2/1.jpg" width="300"/> | <img src="https://micahtid.vercel.app/me2/2.jpg" width="300"/> | <img src="https://micahtid.vercel.app/me2/3.jpg" width="300"/> |
+
 
 
 
