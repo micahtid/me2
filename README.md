@@ -5,16 +5,16 @@
 
 
 ## Overview
-Me2 is a student-only chat app using a compatibility algorithm to match peers with similar profiles.  
+Me2 is a student-only chat app featuring a custom compatibility algorithm to match peers with similar profiles.  
 Key functions:
-- Send chat requests to matched users
-- Join study rooms for collaboration
-- Connect via Zoom
+- Send private chat requests to matched users
+- Participate in global chat rooms
+- Join subject related study rooms via Zoom
 
 
 
 ## Screenshots
-| Dashboard | Chat | Study Room |
+| Dashboard | User Matching | Chat Room |
 |-----------|------|------------|
 | <img src="https://micahtid.vercel.app/me2/1.jpg" width="300"/> | <img src="https://micahtid.vercel.app/me2/2.jpg" width="300"/> | <img src="https://micahtid.vercel.app/me2/3.jpg" width="300"/> |
 
@@ -22,7 +22,7 @@ Key functions:
 
 
 ## Tech Stack
-- **Frontend:** React, Tailwind CSS  
+- **Frontend:** React, Next.js, Tailwind CSS  
 - **Backend:** Node.js, Firebase  
 - **Integration:** Zoom API
 
