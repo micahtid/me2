@@ -72,14 +72,14 @@ const RoomButton: React.FC<RoomButtonProps> = ({ room, user, disabled }) => {
   }
 
   return (
-    <button 
-    onClick={handleButtonClick} 
+    <button
+    onClick={handleButtonClick}
     className={twMerge(
-      'p-2.5 bg-black/80 hover:bg-black rounded-xl text-white transition-colors duration-200',
+      'p-2.5 bg-black/80 hover:bg-black rounded-xl text-white transition-all duration-200 hover:scale-110',
       'relative group mr-6',
       'flex items-center justify-center',
-      disabled && 'opacity-50 cursor-not-allowed hover:bg-black/80'
-    )} 
+      disabled && 'opacity-50 cursor-not-allowed hover:bg-black/80 hover:scale-100'
+    )}
     disabled={disabled}>
       <ToolTip message={getToolTipMessage()} className="opacity-0 group-hover:opacity-100" />
       {renderIcon()}
@@ -118,10 +118,10 @@ const RoomsDisplay = () => {
           key={index}
           className={`
             w-full flex flex-col gap-y-4
-            rounded-xl shadow-sm
-            ${room.roomId === user?.uid || room.users.includes(user?.uid) 
-              ? "bg-primary/50" 
-              : "bg-gray-100"
+            rounded-2xl border-2 transition-all duration-200
+            ${room.roomId === user?.uid || room.users.includes(user?.uid)
+              ? "bg-primary/50 border-secondary/40"
+              : "bg-white border-gray-200 hover:border-primary/30"
             }
           `}
         >
@@ -130,9 +130,9 @@ const RoomsDisplay = () => {
               <div className="flex flex-row items-center gap-x-3 mb-3">
                 <h3 className="text-lg font-semibold text-gray-900">{room.description}</h3>
                 <span className="
-                  px-2 py-1 
-                  bg-black/[7%] rounded-lg 
-                  text-sm font-medium text-gray-600
+                  px-3 py-1.5
+                  bg-white border border-gray-200 rounded-lg
+                  text-sm font-semibold text-gray-600
                 ">
                   {getHoursAgo(room.createdAt)}h ago
                 </span>
@@ -148,11 +148,11 @@ const RoomsDisplay = () => {
 
             <div className="flex justify-center items-center gap-x-2 ml-auto mr-6">
               {room.roomId === user?.uid && (
-                <a 
-                  target="_blank" 
-                  href={room.startUrl} 
+                <a
+                  target="_blank"
+                  href={room.startUrl}
                   className={twMerge(
-                    'p-2.5 bg-black/80 hover:bg-black rounded-xl text-white transition-colors duration-200',
+                    'p-2.5 bg-black/80 hover:bg-black rounded-xl text-white transition-all duration-200 hover:scale-110',
                     'relative group flex items-center justify-center'
                   )}
                 >
@@ -162,11 +162,11 @@ const RoomsDisplay = () => {
               )}
 
               {room.users.includes(user?.uid) && room.roomId !== user?.uid && (
-                <a 
-                  target="_blank" 
-                  href={room.joinUrl} 
+                <a
+                  target="_blank"
+                  href={room.joinUrl}
                   className={twMerge(
-                    'p-2.5 bg-black/80 hover:bg-black rounded-xl text-white transition-colors duration-200',
+                    'p-2.5 bg-black/80 hover:bg-black rounded-xl text-white transition-all duration-200 hover:scale-110',
                     'relative group flex items-center justify-center'
                   )}
                 >
@@ -178,7 +178,7 @@ const RoomsDisplay = () => {
               {room.roomId === user?.uid && (
                 <button
                   className={twMerge(
-                    'p-2.5 bg-black/80 hover:bg-black rounded-xl text-white transition-colors duration-200',
+                    'p-2.5 bg-black/80 hover:bg-black rounded-xl text-white transition-all duration-200 hover:scale-110',
                     'relative group flex items-center justify-center'
                   )}
                   onClick={() => {
@@ -198,12 +198,13 @@ const RoomsDisplay = () => {
 
           <div className="flex flex-wrap gap-2 px-8 pb-6">
             {room.tags.map((tag: string, index: number) => (
-              <span 
-                key={index} 
+              <span
+                key={index}
                 className="
                   px-3 py-1.5
-                  bg-black/[7%] rounded-lg
-                  text-sm font-medium text-gray-700
+                  bg-white border border-gray-200 rounded-lg
+                  text-sm font-semibold text-gray-700
+                  hover:border-primary/40 hover:bg-primary/5 transition-all duration-200
                 "
               >
                 {roomTags.find((roomTag) => roomTag.value === tag)?.label || tag}

@@ -1,10 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  body {
+    font-family: 'Sora', sans-serif;
+  }
+}
 
 @layer components {
   .default-container {
@@ -38,6 +44,46 @@
   .dynamic-svg {
     @apply w-[500px] max-lg:w-[450px] max-md:w-[400px] max-sm:w-[300px] max-[450px]:w-[250px]
     opacity-15
+  }
+
+  /* Section Tabs */
+  .section-tab {
+    @apply rounded-lg px-3 py-1.5 text-sm font-medium transition-all duration-200 border;
+  }
+
+  .section-tab-active {
+    @apply bg-primary/30 border-primary/50 text-header;
+  }
+
+  .section-tab-inactive {
+    @apply bg-white border-gray-200 text-gray-600 hover:border-primary/40 hover:bg-primary/5 hover:text-header;
+  }
+
+  /* Badges & Status Labels */
+  .badge-small {
+    @apply bg-white border border-gray-200 text-gray-700 font-medium text-xs px-3 py-1 rounded-lg;
+  }
+
+  .badge-compatibility {
+    @apply bg-primary text-black/70 font-medium text-xs px-3 py-1 rounded-lg border border-secondary/40;
+  }
+
+  /* Info Cards */
+  .info-card {
+    @apply bg-white border border-gray-200 rounded-lg p-2.5 transition-all duration-200 hover:border-primary/40 hover:bg-primary/5;
+  }
+
+  .info-card-primary {
+    @apply bg-primary/30 border border-primary/50 rounded-lg p-2.5 transition-all duration-200 hover:bg-primary/40 hover:border-primary/60;
+  }
+
+  /* Buttons */
+  .btn-icon {
+    @apply p-2.5 bg-black/80 hover:bg-black rounded-xl text-white transition-all duration-200 hover:scale-110;
+  }
+
+  .btn-primary-small {
+    @apply px-3 py-2 bg-primary border border-secondary/40 text-header font-medium text-sm rounded-lg transition-all duration-200 hover:bg-primary/80 hover:border-secondary;
   }
 }
 

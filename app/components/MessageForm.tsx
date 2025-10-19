@@ -36,12 +36,12 @@ const MessageForm: React.FC<MessageFormProps> = ({ setSending, targetRef, isGlob
       <div className="
         w-full
         flex items-center
-        bg-black/[2.5%]
+        bg-white
         rounded-2xl
-        shadow-sm
         px-4 py-2.5
-        border border-black/20
-        transition duration-200
+        border-2 border-gray-200
+        transition-all duration-200
+        focus-within:border-primary focus-within:bg-primary/5
       ">
         <input
           type="text"
@@ -55,14 +55,15 @@ const MessageForm: React.FC<MessageFormProps> = ({ setSending, targetRef, isGlob
             placeholder:text-gray-400
           "
         />
-        <button 
+        <button
           type="submit"
           className="
-            p-2
+            p-2.5
             bg-blue-500/80 text-white
-            rounded-lg
+            rounded-xl
             disabled:opacity-60
             disabled:cursor-not-allowed
+            hover:bg-blue-500 hover:scale-110 transition-all duration-200
           "
           disabled={!formValue}
         >

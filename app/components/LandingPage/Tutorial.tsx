@@ -1,44 +1,32 @@
 const Tutorial = () => {
   return (
     <section className="
-      w-full 
-      py-28 
-      flex 
-      justify-center 
-      items-center 
-      //bg-primary 
-      relative 
+      w-full
+      py-12 sm:py-16 md:py-24 lg:py-32
+      flex
+      justify-center
+      items-center
+      relative
       overflow-hidden
+      bg-white
     ">
-      {/* Background glow effect */}
-      {/* <div className="
-        absolute 
-        -left-[400px] 
-        top-1/2 
-        transform 
-        -translate-y-1/2 
-        w-[1000px] 
-        h-[1000px] 
-        bg-secondary 
-        rounded-full 
-        blur-3xl
-      " /> */}
-
-      <div className="default-container space-y-12">
+      <div className="px-6 sm:px-8 md:px-10 lg:px-12 max-w-7xl mx-auto w-full space-y-10 sm:space-y-12">
         {/* Section heading */}
-        <h3 className="text-center dynamic-subheading font-semibold">
+        <h3 className="text-center font-bold text-3xl lg:text-5xl tracking-tight">
           Still Not Convinced?
         </h3>
 
         {/* Video container */}
         <div className="
-          relative 
-          max-w-[1000px] 
-          mx-auto 
-          aspect-video 
-          rounded-xl 
-          overflow-hidden 
+          relative
+          max-w-[1000px]
+          mx-auto
+          aspect-video
+          rounded-2xl
+          overflow-hidden
           bg-gray-100
+          shadow-md
+          border border-gray-200
         ">
           <iframe
             className="absolute inset-0 w-full h-full"

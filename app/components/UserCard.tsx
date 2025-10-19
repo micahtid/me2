@@ -24,31 +24,31 @@ const UserCard: React.FC<UserCardProps> = ({
     activeStatusClassName 
 }) => {
     return ( 
-        <button 
-            onClick={onClick} 
+        <button
+            onClick={onClick}
             className={twMerge(
-                "flex flex-row justify-start items-center cursor-pointer px-4 py-3 w-full rounded-lg gap-x-5",
+                "flex flex-row justify-start items-center cursor-pointer px-5 py-3.5 w-full rounded-xl gap-x-5 transition-all duration-200 group",
                 className
             )}
         >
             <div className="relative">
                 {notificationCount > 0 && (
-                    <div 
+                    <div
                         className="
-                            absolute top-[-5px] right-[-5px] z-10 w-[20px] h-[20px] 
-                            bg-red-500 text-white text-xs flex justify-center items-center 
-                            rounded-full shadow-lg
+                            absolute top-[-5px] right-[-5px] z-10 w-[20px] h-[20px]
+                            bg-red-500 text-white text-xs font-semibold flex justify-center items-center
+                            rounded-full border-2 border-white
                         "
                     >
                         {(notificationCount > 9) ? "9+" : notificationCount}
                     </div>
                 )}
                 <div className="relative">
-                    <img 
-                        src={user.pfp} 
-                        alt="profile-picture" 
-                        width={40} 
-                        className="rounded-full shadow-lg" 
+                    <img
+                        src={user.pfp}
+                        alt="profile-picture"
+                        width={40}
+                        className="rounded-full border-2 border-gray-200 group-hover:border-primary/40 transition-all duration-200"
                     />
                     <div 
                         className={twMerge(

@@ -52,46 +52,51 @@ const Blobs = () => {
 
 const Hero = () => {
   return (
-    <section 
+    <section
       id="hero"
       className="
-        relative 
+        relative
         w-full
-        default-container
+        px-6 sm:px-8 md:px-10 lg:px-12
+        max-w-7xl mx-auto
         grid grid-cols-1 lg:grid-cols-[0.8fr,1.2fr]
         gap-y-12 lg:gap-x-12
         items-center
-        pt-[250px] pb-[225px] max-lg:pt-[100px]
+        pt-40 md:pt-48 pb-16 md:pb-24
       "
     >
       {/* Hero Content */}
       <div className="
         flex flex-col items-center lg:items-start
-        gap-y-4
+        gap-y-5 sm:gap-y-6
         order-first
       ">
         {/* Hero heading */}
-        <h3 className="
-          font-title font-semibold 
+        <h1 className="
+          font-title font-bold
           text-center lg:text-left
-          dynamic-subheading
+          text-3xl lg:text-5xl
+          tracking-tight
+          leading-tight
         ">
           Meet the<br />
           <span className="
-            text-transparent 
+            text-transparent
             bg-clip-text bg-gradient-to-r from-[#00224b] to-[#004696]
           ">
             Chat App for Students
           </span>👋
-        </h3>
+        </h1>
 
         {/* Hero description */}
         <p className="
           text-center lg:text-left
-          dynamic-text 
-          max-w-[800px] mb-2
+          text-sm sm:text-base lg:text-lg
+          text-gray-600
+          max-w-[800px]
+          leading-relaxed
         ">
-          A platform to connect students with similar interests. 
+          A platform to connect students with similar interests.
           Chat with others, find new friends, and more!
         </p>
 
@@ -100,13 +105,13 @@ const Hero = () => {
           // onClick={() => signIn()}
           href="https://me2-register.vercel.app/"
           className="
-            flex flex-row items-center justify-center gap-x-2 
-            px-6 py-3 
-            font-medium text-white 
+            flex flex-row items-center justify-center gap-x-2.5
+            px-6 sm:px-7 py-3 sm:py-3.5
+            font-semibold text-white text-sm sm:text-base
             bg-header
-            rounded-xl 
-            hover:shadow-lg hover:scale-105
-            transition-all duration-300
+            rounded-xl
+            hover:bg-[#004696] hover:opacity-95
+            transition-all duration-200
           "
         >
           <PiPencilSimpleFill className="text-lg" />
@@ -117,16 +122,16 @@ const Hero = () => {
       {/* Hero Image Container */}
       <div className="relative lg:ml-8 order-last">
         <Blobs />
-        <img 
-          src="/landing_page_display.png" 
+        <img
+          src="/landing_page_display.png"
           alt="Landing page display"
           className="
-            rounded-lg 
-            shadow-xl 
+            rounded-2xl
+            shadow-md
             w-full
             relative
             z-10
-          " 
+          "
         />
       </div>
     </section>

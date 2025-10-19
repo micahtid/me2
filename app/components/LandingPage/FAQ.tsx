@@ -27,67 +27,67 @@ const FAQ = () => {
     const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
     return (
-        <div className="relative py-24 bg-gradient-to-b from-white to-gray-50">
-            <div className="absolute inset-0 bg-grid-black/[0.02] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
-            
-            <div className="relative default-container">
-                <div className="grid grid-cols-[35%_1fr] gap-12 max-[1200px]:grid-cols-1">
+        <div className="relative py-12 sm:py-16 md:py-24 lg:py-32 bg-gradient-to-b from-white to-gray-50">
+            <div className="absolute inset-0 bg-grid-black/[0.015] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
+
+            <div className="relative px-6 sm:px-8 md:px-10 lg:px-12 max-w-7xl mx-auto">
+                <div className="grid grid-cols-1 lg:grid-cols-[35%_1fr] gap-8 sm:gap-12">
                     {/* Header Section */}
-                    <div className="space-y-5">
-                        <h3 className="dynamic-subheading font-semibold">
+                    <div className="space-y-4 sm:space-y-5 text-center lg:text-left">
+                        <h3 className="font-bold text-3xl lg:text-5xl tracking-tight">
                             Frequently Asked Questions
                         </h3>
-                        <p className="dynamic-text text-black/70">
+                        <p className="text-sm sm:text-base lg:text-lg text-gray-600">
                             Have another question? Contact me by{" "}
-                            <a href="mailto:micahtid@gmail.com" className="underline">
+                            <a href="mailto:micahtid@gmail.com" className="text-header underline transition-all duration-200">
                                 email
                             </a>.
                         </p>
                     </div>
 
                     {/* FAQ Items */}
-                    <div className="space-y-3">
+                    <div className="space-y-3 sm:space-y-4">
                         {FAQs.map((faq, index) => (
-                            <motion.div 
+                            <motion.div
                                 key={index}
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.1 }}
+                                initial={{ opacity: 0, scale: 0.98 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ delay: index * 0.08, duration: 0.2 }}
                             >
                                 <div className={`
-                                    rounded-xl overflow-hidden border border-gray-100
-                                    ${activeIndex === index ? 'bg-primary/[50%]' : 'bg-white'}
-                                    transition-all duration-300
+                                    rounded-xl overflow-hidden border
+                                    ${activeIndex === index ? 'bg-primary/40 border-secondary/50' : 'bg-white border-gray-100'}
+                                    transition-all duration-200
                                 `}>
                                     {/* Question Header */}
                                     <div
                                         onClick={() => setActiveIndex(activeIndex === index ? null : index)}
                                         className={`
-                                            flex justify-between items-center p-5
+                                            flex justify-between items-center p-4 sm:p-5
                                             cursor-pointer
-                                            transition-colors duration-300
-                                            ${activeIndex === index 
-                                                ? 'text-header' 
-                                                : 'text-gray-600 hover:text-gray-900'
+                                            transition-colors duration-200
+                                            ${activeIndex === index
+                                                ? 'text-header'
+                                                : 'text-gray-700 hover:text-header'
                                             }
                                         `}
                                     >
-                                        <p className="font-medium">
+                                        <p className="font-semibold text-sm sm:text-base">
                                             {faq.question}
                                         </p>
-                                        
+
                                         <div className={`
-                                            p-2 rounded-lg
-                                            transition-all duration-300
-                                            ${activeIndex === index 
-                                                ? 'bg-primary/[30%] rotate-45' 
-                                                : 'bg-gray-50'
+                                            p-2 rounded-lg flex-shrink-0 ml-4
+                                            transition-all duration-200
+                                            ${activeIndex === index
+                                                ? 'bg-secondary/40 rotate-45'
+                                                : 'bg-gray-100'
                                             }
                                         `}>
                                             <IoAdd className="w-4 h-4" />
                                         </div>
                                     </div>
-                                    
+
                                     {/* Answer Section */}
                                     <AnimatePresence>
                                         {activeIndex === index && (
@@ -95,10 +95,10 @@ const FAQ = () => {
                                                 initial={{ height: 0, opacity: 0 }}
                                                 animate={{ height: 'auto', opacity: 1 }}
                                                 exit={{ height: 0, opacity: 0 }}
-                                                transition={{ duration: 0.3 }}
+                                                transition={{ duration: 0.2 }}
                                                 className="overflow-hidden"
                                             >
-                                                <p className="px-5 pb-5 text-black/70">
+                                                <p className="px-4 sm:px-5 pb-4 sm:pb-5 text-sm sm:text-base text-gray-700 leading-relaxed">
                                                     {faq.answer}
                                                 </p>
                                             </motion.div>

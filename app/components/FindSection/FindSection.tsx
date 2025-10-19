@@ -49,27 +49,25 @@ const FindSection = () => {
                 <div className="flex flex-row gap-x-2 mt-[-5px]">
                     <button
                         onClick={() => setSection("filtered")}
-                        className={`bg-gray-100 rounded-lg p-2 text-black/20 text-md font-medium
-                            ${section === "filtered" ? "text-black/80" : ""}`}
+                        className={`section-tab ${section === "filtered" ? "section-tab-active" : "section-tab-inactive"}`}
                     >
                         Filtered Users
                     </button>
                     <button
                         onClick={() => setSection("all")}
-                        className={`bg-gray-100 rounded-lg p-2 text-black/20 text-md font-medium
-                            ${section === "all" ? "text-black/80" : ""}`}
+                        className={`section-tab ${section === "all" ? "section-tab-active" : "section-tab-inactive"}`}
                     >
                         All Users
                     </button>
                 </div>
-                <button 
-                    className="mr-2 bg-gray-200 rounded-lg p-2 flex justify-center items-center"
+                <button
+                    className="mr-2 bg-white border border-gray-200 rounded-lg p-2 flex justify-center items-center hover:border-primary/40 hover:bg-primary/5 transition-all duration-200 group"
                     onClick={() => {
                         const shuffledArr = shuffleArray([...filteredUsers]);
                         setFilteredUsers(shuffledArr);
                     }}
                 >
-                    <FaDice size={30} className="text-black" />
+                    <FaDice size={20} className="text-gray-600 group-hover:text-header transition-colors duration-200" />
                 </button>
             </div>
             {filteredUsers && filteredUsers.map((u, index) => {
@@ -99,7 +97,7 @@ const FindSection = () => {
                                     onModalOpen();
                                 }}
                                 className="flex-grow"
-                                statusClassName="bg-primary text-black/60 px-6 py-1 rounded-[20px] -ml-1 mt-1"
+                                statusClassName="bg-primary text-black/70 font-medium text-xs px-3 py-1 rounded-lg -ml-1 mt-1 border border-secondary/40"
                                 status={`Compatibility: ${Math.round(compatibility * 100)}%`}
                                 user={u}
                             />

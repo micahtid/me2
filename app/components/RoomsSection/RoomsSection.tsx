@@ -25,13 +25,14 @@ const RoomsSection = () => {
       <h3 className="ml-8 text-2xl mb-2 font-semibold">Study Rooms</h3>
       <button
         className={`
-          ml-8 mb-4 px-4 py-2.5
-          bg-primary/50 hover:bg-primary/30
-          text-black/80 font-medium 
-          rounded-xl
-          transition-colors duration-200
+          ml-8 mb-4 px-3 py-2
+          bg-primary border border-secondary/40
+          text-header font-medium text-sm
+          rounded-lg
+          transition-all duration-200
           flex items-center gap-x-2
-          ${disabled && 'opacity-50 cursor-not-allowed hover:bg-primary/50'}
+          hover:bg-primary/80 hover:border-secondary
+          ${disabled && 'opacity-50 cursor-not-allowed hover:bg-primary hover:border-secondary/40'}
         `}
         disabled={disabled}
         onClick={() => {
@@ -41,7 +42,7 @@ const RoomsSection = () => {
           onModalOpen();
         }}
       >
-        <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 6V18M18 12H6" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
         </svg>
         Create Room

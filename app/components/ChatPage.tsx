@@ -42,7 +42,7 @@ const ChatPage = () => {
   const handleMouseMove = useCallback((e: MouseEvent) => {
     if (!isResizing) return;
 
-    const newWidth = e.clientX - 100; // 100 is the QuickLinks width
+    const newWidth = e.clientX - 64; // 64 is the QuickLinks width
     // Constrain width between 200px and a reasonable maximum
     const constrainedWidth = Math.max(200, Math.min(newWidth, window.innerWidth - 600));
     setUserDisplayWidth(constrainedWidth);
@@ -80,7 +80,7 @@ const ChatPage = () => {
       {/* Desktop Layout */}
       <div className="w-full h-full hidden lg:flex flex-row">
         {/* Navigation */}
-        <div className="w-[100px] py-8 bg-primary z-20 shadow-xl flex-shrink-0">
+        <div className="w-[64px] py-6 bg-primary z-20 border-r border-gray-200 flex-shrink-0">
           <QuickLinks />
         </div>
 
@@ -105,16 +105,16 @@ const ChatPage = () => {
 
       {/* Tablet and Mobile Layout */}
       <div className="lg:hidden flex flex-col items-center justify-center w-full h-full">
-        <OopsScreen 
-          message="Me2 is designed for larger screens. Please use a desktop browser." 
+        <OopsScreen
+          message="Screen Too Small!"
           divClassName="h-min"
         />
         <button
           className="
-            px-6 py-2 mt-6
-            bg-header text-white font-medium 
-            rounded-lg shadow-xl
-            hover:bg-header/90 transition-colors duration-200
+            px-5 py-2.5 mt-6
+            bg-[#00224b] text-white font-semibold text-sm
+            rounded-xl
+            hover:bg-[#004696] hover:opacity-95 transition-all duration-200
           "
           onClick={signOut}
         >
