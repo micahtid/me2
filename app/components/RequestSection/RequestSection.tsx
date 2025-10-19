@@ -74,13 +74,13 @@ const RequestSection = () => {
       <div className="w-full flex flex-row justify-start items-center gap-x-2 mb-5 px-8">
         <button
           onClick={() => setSection("sent")}
-          className={`bg-gray-100 rounded-lg p-2 text-black/20 text-md font-medium ${section === "sent" ? "text-black/80" : ""}`}
+          className={`section-tab ${section === "sent" ? "section-tab-active" : "section-tab-inactive"}`}
         >
           Sent
         </button>
         <button
           onClick={() => setSection("received")}
-          className={`bg-gray-100 rounded-lg p-2 text-black/20 text-md font-medium ${section === "received" ? "text-black/80" : ""}`}
+          className={`section-tab ${section === "received" ? "section-tab-active" : "section-tab-inactive"}`}
         >
           Received
         </button>
@@ -96,7 +96,7 @@ const RequestSection = () => {
                 onModalOpen();
             }}
             className="flex-grow"
-            statusClassName="bg-primary text-black/60 px-6 py-1 rounded-xl -ml-1 mt-1"
+            statusClassName="bg-primary text-black/70 font-medium text-xs px-3 py-1 rounded-lg -ml-1 mt-1 border border-secondary/40"
             status={`Compatibility: ${(() => {
               if (!users || !user) return "?";
               const fullUser = users.find((u) => u.uid === user.uid);

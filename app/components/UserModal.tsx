@@ -31,35 +31,34 @@ const UserModal = () => {
 
   return (
     <Modal isOpen={isModalOpen} onChange={onChange}>
-      <div className="flex flex-col w-full gap-y-2">
+      <div className="flex flex-col w-full gap-y-3">
         {/* Profile Header */}
-        <div className="flex items-center gap-x-4 mb-4">
-          <img 
-            src={currentUser?.pfp} 
-            width={56} 
+        <div className="flex items-center gap-x-4 mb-2">
+          <img
+            src={currentUser?.pfp}
+            width={56}
             height={56}
             className="
-              rounded-full shadow-md 
-              ring-2 ring-black/5
+              rounded-full border-2 border-gray-200
               object-cover
-            " 
-            alt="Profile" 
+            "
+            alt="Profile"
           />
           <div className="flex-1">
-            <h3 className="text-xl font-semibold text-gray-900">
+            <h3 className="text-lg font-semibold text-gray-900">
               {currentUser?.userName}
             </h3>
             <p className={`
-              text-sm mt-0.5
-              ${currentUser?.online 
-                ? 'text-green-500 font-medium' 
+              text-xs mt-1 font-medium
+              ${currentUser?.online
+                ? 'text-green-500'
                 : 'text-gray-500'
               }`}
             >
-              {currentUser?.online 
-                ? 'Online' 
+              {currentUser?.online
+                ? 'Online'
                 : `Active ${formatDistanceToNow(
-                    convertTimestampToDate(currentUser?.lastOnline), 
+                    convertTimestampToDate(currentUser?.lastOnline),
                     { addSuffix: true }
                   )}`
               }
@@ -70,25 +69,25 @@ const UserModal = () => {
         {/* Info Cards */}
         <div className="grid grid-cols-2 gap-2">
           <div className="
-            flex items-center gap-x-2 p-3
-            bg-gray-100 rounded-xl
-            transition-colors duration-200
-            hover:bg-gray-100
+            flex items-center gap-x-2 p-2.5
+            bg-white border border-gray-200 rounded-lg
+            transition-all duration-200
+            hover:border-primary/40 hover:bg-primary/5
           ">
-            <FaClock className="text-gray-600 flex-shrink-0" />
-            <p className="font-medium text-gray-700 truncate">
+            <FaClock className="text-gray-600 flex-shrink-0 w-4 h-4" />
+            <p className="font-medium text-sm text-gray-700 truncate">
               Age {currentUser?.age}
             </p>
           </div>
 
           <div className="
-            flex items-center gap-x-2 p-3
-            bg-gray-100 rounded-xl
-            transition-colors duration-200
-            hover:bg-gray-100
+            flex items-center gap-x-2 p-2.5
+            bg-white border border-gray-200 rounded-lg
+            transition-all duration-200
+            hover:border-primary/40 hover:bg-primary/5
           ">
-            <FaLocationDot className="text-gray-600 flex-shrink-0" />
-            <p className="font-medium text-gray-700 truncate">
+            <FaLocationDot className="text-gray-600 flex-shrink-0 w-4 h-4" />
+            <p className="font-medium text-sm text-gray-700 truncate">
               {locationLabel}
             </p>
           </div>
@@ -96,37 +95,38 @@ const UserModal = () => {
 
         {/* Curriculum Section */}
         <div className="
-          flex items-center gap-x-2 p-3
-          bg-primary/50 rounded-xl
-          transition-colors duration-200
-          hover:bg-primary/30
+          flex items-center gap-x-2 p-2.5
+          bg-primary/30 border border-primary/50 rounded-lg
+          transition-all duration-200
+          hover:bg-primary/40 hover:border-primary/60
         ">
-          <FaSchoolFlag className="text-gray-600 flex-shrink-0" />
-          <p className="font-medium text-gray-700 truncate">
+          <FaSchoolFlag className="text-header flex-shrink-0 w-4 h-4" />
+          <p className="font-medium text-sm text-header truncate">
             {curriculumLabel}
           </p>
         </div>
 
         {/* Hobbies Section */}
         <div className="
-          p-3 space-y-2
-          bg-primary/50 rounded-xl
-          transition-colors duration-200
-          hover:bg-primary/30
+          p-3 space-y-2.5
+          bg-primary/30 border border-primary/50 rounded-lg
+          transition-all duration-200
+          hover:bg-primary/40 hover:border-primary/60
         ">
           <div className="flex items-center gap-x-2">
-            <FaRegSmile className="text-gray-600 flex-shrink-0" />
-            <p className="font-medium text-gray-700">Hobbies</p>
+            <FaRegSmile className="text-header flex-shrink-0 w-4 h-4" />
+            <p className="font-medium text-sm text-header">Hobbies</p>
           </div>
-          
+
           <div className="flex flex-wrap gap-1.5">
             {hobbiesLabels.slice(0, 10).map((hobby: string, index: number) => (
-              <span 
-                key={index} 
+              <span
+                key={index}
                 className="
                   px-2.5 py-1
-                  bg-black/[7%] rounded-lg
-                  text-sm font-medium text-gray-700
+                  bg-white border border-gray-200 rounded-lg
+                  text-xs font-medium text-gray-700
+                  hover:border-primary/40 hover:bg-primary/5 transition-all duration-200
                 "
               >
                 {hobby}
@@ -135,7 +135,7 @@ const UserModal = () => {
             ))}
             {hobbiesLabels.length > 10 && (
               <span className="
-                text-sm text-gray-500
+                text-xs text-gray-500 font-medium
                 px-2 py-1
               ">
                 +{hobbiesLabels.length - 10} more

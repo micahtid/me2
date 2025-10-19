@@ -90,18 +90,18 @@ const UserDisplay = () => {
               activeStatus
               activeStatusClassName={currentUser === u && currentPage === "chat" ? "border-accent" : "border-[#F4F6FB]"}
               className={u.uid === user.uid ? "hidden" : ""}
-              statusClassName="bg-white/80 backdrop-blur-sm text-gray-700 px-6 py-1.5 rounded-xl -ml-1 mt-1 shadow-sm"
+              statusClassName="bg-white border border-gray-200 text-gray-700 font-medium text-xs px-3 py-1 rounded-lg -ml-1 mt-1"
               status={hoursLeft}
               user={u}
             />
             <button
-              className="mr-2 p-2 rounded-full hover:bg-black/5 transition-colors duration-200"
+              className="mr-3 p-1.5 rounded-lg hover:bg-red-50 transition-all duration-200 group"
               onClick={() => {
                 setDeleteData({ uid1: user.uid, uid2: u.uid, userName: u.userName });
                 onModalOpen();
               }}
             >
-              <IoIosClose size={30} className="text-black/60 hover:text-black transition-colors duration-200" />
+              <IoIosClose size={24} className="text-gray-400 group-hover:text-red-500 transition-colors duration-200" />
             </button>
           </div>
         );
