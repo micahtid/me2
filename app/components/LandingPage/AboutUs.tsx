@@ -34,24 +34,24 @@ const AboutUs = () => {
     const [activeIndex, setActiveIndex] = useState(0)
 
     return (
-        <div className="relative py-24 bg-gradient-to-b from-white to-gray-50" id="about">
-            <div className="absolute inset-0 bg-grid-black/[0.02] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
-            
-            <div className="relative default-container space-y-12">
+        <div className="relative py-12 sm:py-16 md:py-24 lg:py-32 bg-gradient-to-b from-white via-primary/[0.03] to-white" id="about">
+            <div className="absolute inset-0 bg-grid-black/[0.015] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
+
+            <div className="relative px-6 sm:px-8 md:px-10 lg:px-12 max-w-7xl mx-auto space-y-10 sm:space-y-12 md:space-y-16">
                 {/* Header Section */}
-                <div className="relative space-y-5 max-w-2xl mx-auto text-center">
-                    <h3 className="dynamic-subheading font-semibold">
-                        Find Others <span className="text-header underline">Instantly</span> & Start Chatting
+                <div className="relative space-y-4 sm:space-y-5 max-w-3xl mx-auto text-center">
+                    <h3 className="font-bold text-3xl lg:text-5xl tracking-tight">
+                        Find Others <span className="text-black">Instantly</span> & Start Chatting
                     </h3>
-                    <p className="dynamic-text text-black/70">
-                        Let our custom algorithm match you with people who have high compatibility ratings. 
-                        Send a request, start chatting for 48 hours before the chat room closes. 
+                    <p className="text-sm sm:text-base lg:text-lg text-gray-600 leading-relaxed">
+                        Let our custom algorithm match you with people who have high compatibility ratings.
+                        Send a request, start chatting for 48 hours before the chat room closes.
                         It&apos;s that simple. Find someone like you.
                     </p>
                 </div>
 
                 {/* Category Selection */}
-                <div className="flex flex-wrap justify-center gap-3">
+                <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
                     {about.map((item, index) => {
                         const Icon = iconMap[item.icon as keyof typeof iconMap]
                         return (
@@ -59,46 +59,48 @@ const AboutUs = () => {
                                 key={index}
                                 onClick={() => setActiveIndex(index)}
                                 className={`
-                                    flex items-center space-x-2.5 px-6 py-2
-                                    rounded-xl transition-all duration-300
-                                    ${activeIndex === index 
-                                        ? 'bg-primary/50 text-header' 
-                                        : 'hover:bg-gray-50 text-gray-500 hover:text-gray-900'
+                                    flex items-center space-x-2.5 px-5 sm:px-6 py-2.5 sm:py-3
+                                    rounded-xl transition-all duration-200
+                                    border-2
+                                    ${activeIndex === index
+                                        ? 'bg-primary border-secondary text-header shadow-sm'
+                                        : 'bg-white border-gray-200 text-gray-600 hover:border-primary hover:bg-primary/10 hover:text-header'
                                     }
                                 `}
                             >
                                 <Icon className="w-5 h-5" />
-                                <span className="font-medium text-base">{item.title}</span>
+                                <span className="font-semibold text-sm sm:text-base">{item.title}</span>
                             </button>
                         )
                     })}
                 </div>
-                
+
                 {/* Content Points */}
-                <div className="relative">
+                <div className="relative pt-4">
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={activeIndex}
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -10 }}
-                            transition={{ duration: 0.3 }}
-                            className="grid grid-cols-3 gap-4 max-[1200px]:grid-cols-1"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6"
                         >
                             {about[activeIndex].points.map((point, index) => (
-                                <motion.div 
-                                    key={index} 
-                                    initial={{ opacity: 0, x: -20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: index * 0.1 }}
-                                    className="flex items-center space-x-4 p-6 rounded-xl bg-white shadow-sm 
-                                    group transition-color duration-300 hover:bg-secondary/50"
+                                <motion.div
+                                    key={index}
+                                    initial={{ opacity: 0, scale: 0.95 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    transition={{ delay: index * 0.08, duration: 0.2 }}
+                                    className="flex items-center space-x-4 p-5 sm:p-6 rounded-2xl bg-white border border-gray-100
+                                    shadow-sm hover:shadow-md hover:border-primary/30
+                                    group transition-all duration-200"
                                 >
-                                    <div className="flex-shrink-0 p-2 bg-primary/20 rounded-lg
-                                    transition-color duration-300 group-hover:bg-white/50">
+                                    <div className="flex-shrink-0 p-2.5 bg-primary/30 rounded-xl
+                                    transition-all duration-200 group-hover:bg-secondary/40 group-hover:scale-105">
                                         <FaCheck className="w-4 h-4 text-header" />
                                     </div>
-                                    <p className="text-black/70">
+                                    <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
                                         {point}
                                     </p>
                                 </motion.div>

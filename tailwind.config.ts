@@ -16,7 +16,8 @@ const config: Config = {
       },
       fontFamily: {
         bubble: ['Rubik', 'sans-serif'],
-        title: ['Poppins', 'sans-serif']
+        title: ['Poppins', 'sans-serif'],
+        sans: ['Sora', 'sans-serif']
       },
     },
   }
