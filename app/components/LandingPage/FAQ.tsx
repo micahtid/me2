@@ -39,9 +39,9 @@ const FAQ = () => {
                         </h3>
                         <p className="text-sm sm:text-base lg:text-lg text-gray-600">
                             Have another question? Contact me by{" "}
-                            <a href="mailto:micahtid@gmail.com" className="text-header underline transition-all duration-200">
-                                email
-                            </a>.
+                            <a href="mailto:micahtid@gmail.com" className="underline transition-all duration-200">
+                                email.
+                            </a>
                         </p>
                     </div>
 

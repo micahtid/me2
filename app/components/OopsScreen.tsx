@@ -4,9 +4,10 @@ interface OopsScreenProps {
     message: string;
     infoClassName?: string;
     divClassName?: string;
+    hideWarning?: boolean;
 }
 
-const OopsScreen: React.FC<OopsScreenProps> = ({ message, infoClassName, divClassName }) => (
+const OopsScreen: React.FC<OopsScreenProps> = ({ message, infoClassName, divClassName, hideWarning }) => (
   <div className={twMerge(`
     flex justify-center items-center
     w-full h-full`, divClassName)}>
@@ -28,9 +29,11 @@ const OopsScreen: React.FC<OopsScreenProps> = ({ message, infoClassName, divClas
         <h3 className="text-xl font-bold text-gray-900 text-center w-full">
           {message}
         </h3>
-        <p className="text-sm text-gray-600 max-w-[280px] text-center mx-auto leading-relaxed">
-          Please switch to a larger device for the best experience.
-        </p>
+        {!hideWarning && (
+          <p className="text-sm text-gray-600 max-w-[280px] text-center mx-auto leading-relaxed">
+            Please switch to a larger device for the best experience.
+          </p>
+        )}
       </div>
     </div>
   </div>

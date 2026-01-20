@@ -21,11 +21,11 @@ const RoomsSection = () => {
   }, [rooms, user]);
 
   return (
-    <div className="h-full flex flex-col justify-start items-start gap-y-3 max-lg:pb-6 overflow-y-auto no-scrollbar pb-5 w-full">
-      <h3 className="ml-8 text-2xl mb-2 font-semibold">Study Rooms</h3>
+    <div className="h-full flex flex-col justify-start items-start gap-y-3 max-lg:pb-6 overflow-y-auto no-scrollbar pb-5 w-full px-8">
+      <h3 className="text-2xl font-semibold mb-6">Study Rooms</h3>
       <button
         className={`
-          ml-8 mb-4 px-3 py-2
+          mb-4 px-3 py-2
           bg-primary border border-secondary/40
           text-header font-medium text-sm
           rounded-lg

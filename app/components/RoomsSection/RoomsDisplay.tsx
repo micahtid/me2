@@ -75,8 +75,8 @@ const RoomButton: React.FC<RoomButtonProps> = ({ room, user, disabled }) => {
     <button
     onClick={handleButtonClick}
     className={twMerge(
-      'p-2.5 bg-black/80 hover:bg-black rounded-xl text-white transition-all duration-200 hover:scale-110',
-      'relative group mr-6',
+      'p-2.5 bg-black/80 hover:bg-black rounded-xl text-white transition-all duration-200',
+      'relative group',
       'flex items-center justify-center',
       disabled && 'opacity-50 cursor-not-allowed hover:bg-black/80 hover:scale-100'
     )}
@@ -121,7 +121,7 @@ const RoomsDisplay = () => {
             rounded-2xl border-2 transition-all duration-200
             ${room.roomId === user?.uid || room.users.includes(user?.uid)
               ? "bg-primary/50 border-secondary/40"
-              : "bg-white border-gray-200 hover:border-primary/30"
+              : "bg-white border-gray-200"
             }
           `}
         >
@@ -146,13 +146,13 @@ const RoomsDisplay = () => {
               </div>
             </div>
 
-            <div className="flex justify-center items-center gap-x-2 ml-auto mr-6">
+            <div className="flex justify-center items-center gap-x-2">
               {room.roomId === user?.uid && (
                 <a
                   target="_blank"
                   href={room.startUrl}
                   className={twMerge(
-                    'p-2.5 bg-black/80 hover:bg-black rounded-xl text-white transition-all duration-200 hover:scale-110',
+                    'p-2.5 bg-black/80 hover:bg-black rounded-xl text-white transition-all duration-200',
                     'relative group flex items-center justify-center'
                   )}
                 >
@@ -164,9 +164,8 @@ const RoomsDisplay = () => {
               {room.users.includes(user?.uid) && room.roomId !== user?.uid && (
                 <a
                   target="_blank"
-                  href={room.joinUrl}
                   className={twMerge(
-                    'p-2.5 bg-black/80 hover:bg-black rounded-xl text-white transition-all duration-200 hover:scale-110',
+                    'p-2.5 bg-black/80 hover:bg-black rounded-xl text-white transition-all duration-200',
                     'relative group flex items-center justify-center'
                   )}
                 >
@@ -178,7 +177,7 @@ const RoomsDisplay = () => {
               {room.roomId === user?.uid && (
                 <button
                   className={twMerge(
-                    'p-2.5 bg-black/80 hover:bg-black rounded-xl text-white transition-all duration-200 hover:scale-110',
+                    'p-2.5 bg-black/80 hover:bg-black rounded-xl text-white transition-all duration-200',
                     'relative group flex items-center justify-center'
                   )}
                   onClick={() => {
@@ -204,7 +203,6 @@ const RoomsDisplay = () => {
                   px-3 py-1.5
                   bg-white border border-gray-200 rounded-lg
                   text-sm font-semibold text-gray-700
-                  hover:border-primary/40 hover:bg-primary/5 transition-all duration-200
                 "
               >
                 {roomTags.find((roomTag) => roomTag.value === tag)?.label || tag}

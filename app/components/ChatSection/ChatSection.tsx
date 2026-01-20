@@ -24,7 +24,7 @@ const ChatSection = () => {
 
   if (!currentChat) {
     return (
-      <OopsScreen message="Uh oh! It's pretty quite here..." />
+      <OopsScreen message="Uh oh! It's pretty quite here..." hideWarning />
     )
   }
 

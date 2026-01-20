@@ -69,9 +69,9 @@ const RequestSection = () => {
   };
 
   return (
-    <div className="h-full flex flex-col gap-y-3 overflow-y-auto no-scrollbar pb-5">
-      <h3 className="mb-6 ml-8 font-semibold text-2xl">Manage Requests</h3>
-      <div className="w-full flex flex-row justify-start items-center gap-x-2 mb-5 px-8">
+    <div className="h-full flex flex-col gap-y-3 overflow-y-auto no-scrollbar pb-5 px-8">
+      <h3 className="text-2xl font-semibold mb-6">Manage Requests</h3>
+      <div className="w-full flex flex-row justify-start items-center gap-x-2 mb-5">
         <button
           onClick={() => setSection("sent")}
           className={`section-tab ${section === "sent" ? "section-tab-active" : "section-tab-inactive"}`}
@@ -86,7 +86,7 @@ const RequestSection = () => {
         </button>
       </div>
       {requestList?.length === 0 && (
-        <OopsScreen message="Uh oh! No requests right now..." />
+        <OopsScreen message="Uh oh! No requests right now..." hideWarning />
       )}
       {requestList?.map((request, index) => (
         <div key={index} className="flex flex-row justify-start items-center w-full user-card">

@@ -80,7 +80,7 @@ const ChatPage = () => {
       {/* Desktop Layout */}
       <div className="w-full h-full hidden lg:flex flex-row">
         {/* Navigation */}
-        <div className="w-[64px] py-6 bg-primary z-20 border-r border-gray-200 flex-shrink-0">
+        <div className="w-[80px] py-6 bg-primary z-20 border-r border-gray-200 flex-shrink-0">
           <QuickLinks />
         </div>
 

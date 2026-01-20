@@ -16,9 +16,9 @@ const GlobalSection = () => {
   return (
     <div className="flex flex-col h-full w-full px-8 pb-4 overflow-hidden
     bg-white">
-        <button className="text-2xl font-medium text-left">
+        <h3 className="text-2xl font-semibold mb-6">
             Global Chat
-        </button>
+        </h3>
       <div className="flex-1 overflow-y-auto no-scrollbar mb-4">
         <ChatContainer sending={sending} setSending={setSending} targetRef={dummy} />
       </div>

@@ -64,7 +64,7 @@ const AboutUs = () => {
                                     border-2
                                     ${activeIndex === index
                                         ? 'bg-primary border-secondary text-header shadow-sm'
-                                        : 'bg-white border-gray-200 text-gray-600 hover:border-primary hover:bg-primary/10 hover:text-header'
+                                        : 'bg-white border-gray-200 text-gray-600'
                                     }
                                 `}
                             >
@@ -93,14 +93,13 @@ const AboutUs = () => {
                                     animate={{ opacity: 1, scale: 1 }}
                                     transition={{ delay: index * 0.08, duration: 0.2 }}
                                     className="flex items-center space-x-4 p-5 sm:p-6 rounded-2xl bg-white border border-gray-100
-                                    shadow-sm hover:shadow-md hover:border-primary/30
+                                    shadow-sm
                                     group transition-all duration-200"
                                 >
-                                    <div className="flex-shrink-0 p-2.5 bg-primary/30 rounded-xl
-                                    transition-all duration-200 group-hover:bg-secondary/40 group-hover:scale-105">
-                                        <FaCheck className="w-4 h-4 text-header" />
-                                    </div>
-                                    <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
+                                                                         <div className="flex-shrink-0 p-2.5 bg-primary/30 rounded-xl
+                                                                        transition-all duration-200">
+                                                                            <FaCheck className="w-4 h-4 text-header" />
+                                                                        </div>                                    <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
                                         {point}
                                     </p>
                                 </motion.div>

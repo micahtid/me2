@@ -37,13 +37,13 @@ const QuickLinks: React.FC = () => {
     {
       label: "Chats",
       value: "chat",
-      icon: <BsChatFill className="w-5 h-5 max-lg:w-7 max-lg:h-7 max-md:w-6 max-md:h-6" />,
+      icon: <BsChatFill className="w-6 h-6 max-lg:w-7 max-lg:h-7 max-md:w-6 max-md:h-6" />,
       func: () => onChange("chat")
     },
     {
       label: "Find",
       value: "new people",
-      icon: <HiUsers className="w-5 h-5 max-lg:w-7 max-lg:h-7 max-md:w-6 max-md:h-6" />,
+      icon: <HiUsers className="w-6 h-6 max-lg:w-7 max-lg:h-7 max-md:w-6 max-md:h-6" />,
       func: () => onChange("new people")
     },
     {
@@ -60,7 +60,7 @@ const QuickLinks: React.FC = () => {
               ${currentPage !== "requests" ? "bg-primary" : "bg-[#9EB3CC]"}
             `}
           />
-          <IoMail className="w-5 h-5 max-lg:w-7 max-lg:h-7 max-md:w-6 max-md:h-6" />
+          <IoMail className="w-6 h-6 max-lg:w-7 max-lg:h-7 max-md:w-6 max-md:h-6" />
         </div>
       ),
       func: () => onChange("requests")
@@ -68,13 +68,13 @@ const QuickLinks: React.FC = () => {
     {
       label: "Rooms",
       value: "rooms",
-      icon: <FaVideo className="w-5 h-5 max-lg:w-7 max-lg:h-7 max-md:w-6 max-md:h-6" />,
+      icon: <FaVideo className="w-6 h-6 max-lg:w-7 max-lg:h-7 max-md:w-6 max-md:h-6" />,
       func: () => onChange("rooms")
     },
     {
       label: "Global Chat",
       value: "global",
-      icon: <AiOutlineGlobal className="w-5 h-5 max-lg:w-7 max-lg:h-7 max-md:w-6 max-md:h-6" />,
+      icon: <AiOutlineGlobal className="w-6 h-6 max-lg:w-7 max-lg:h-7 max-md:w-6 max-md:h-6" />,
       func: () => onChange("global")
     }
   ];
@@ -86,9 +86,9 @@ const QuickLinks: React.FC = () => {
       max-lg:overflow-x-scroll no-scrollbar max-lg:px-4
     ">
       <div className="
-        flex flex-col justify-start items-center gap-y-3
+        flex flex-col justify-start items-center
         max-lg:flex-row max-lg:gap-x-4
-        w-[64px] max-lg:w-auto
+        w-full max-lg:w-auto
       ">
         {/* Profile Picture */}
         <button
@@ -118,13 +118,13 @@ const QuickLinks: React.FC = () => {
             onClick={link.func}
             className={`
               flex justify-center items-center
-              py-2.5 w-full
+              py-4 w-full
               max-lg:gap-x-2 max-lg:px-6 max-lg:py-4
               max-md:px-4 max-md:py-3
               transition-all duration-200
               hover:bg-black/5
               ${currentPage === link.value ?
-                "bg-black/5 border-l-2 border-header max-lg:border-l-0 max-lg:border-b-2" :
+                "bg-black/5 border-l-2 border-header" :
                 "max-lg:hover:translate-y-1"}
             `}
           >
